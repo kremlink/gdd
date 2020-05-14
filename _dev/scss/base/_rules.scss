@@ -1,0 +1,62 @@
+@include exports("@path:base\_rules.scss"){/*@path:base\_rules.scss*/
+  @import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400,700&subset=cyrillic');
+
+  a{
+    color:getc(ref);
+    &:hover{
+      text-decoration:none;
+    }
+    &:focus{
+      outline:none;
+    }
+  }
+
+  .caller{
+    text-decoration:none;
+    border-bottom:1px dotted currentColor;
+    display:inline-block;
+    cursor:pointer;
+    &:hover,&.active{
+      border-bottom-color:transparent;
+    }
+  }
+
+  a.active,span.active{
+    cursor:default;
+    text-decoration:none;
+    border-bottom-color:transparent;
+  }
+
+  .safe-hide-svg{
+    @include abs($l:0,$t:-100px);
+    width:1px;
+    height:1px;
+    overflow:hidden;
+  }
+
+  //----------------------------
+
+  html{
+    height:100%;
+  }
+
+  body{
+    height:100%;
+    font:14px/18px font();;
+  }
+
+  #wrap{
+    height:100%;
+    min-height:600px;
+    position:relative;
+    min-width:$miw;
+  }
+
+  #wrap-wrap{
+    height:56.25vw; //h:w=9/16
+    max-height:100vh;
+    max-width:177.78vh; //16/9=1.778
+    margin:auto;
+    @include abs($t:0,$b:0,$l:0,$r:0);
+  }
+}
