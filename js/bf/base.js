@@ -127,19 +127,8 @@ class Base{
   }
  }
 
- init({mConfig,plugins,settings={}}){
+ init({plugins,settings={}}){
   Object.assign(this.settings,settings);
-
-  for(let [x,y] of Object.entries(mConfig))
-  {
-   this.extendData({
-    obj:this.get('data'),
-    field:x,
-    data:y
-   });
-  }
-
-  this.overrideData(config);
 
   plugins.forEach((name)=>{
    this.set({dest:'lib.'+name.name,object:name});
@@ -151,6 +140,21 @@ class Base{
     }
    });
   });
+ }
+
+ configure(data){
+  for(let [x,y] of Object.entries(data))
+  {
+   this.extendData({
+    obj:this.get('data'),
+    field:x,
+    data:y
+   });
+  }
+
+  this.overrideData(config);
+
+  return this.get('data');
  }
 
  extendData({field,obj,data,ignore=false}){

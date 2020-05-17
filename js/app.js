@@ -7,9 +7,6 @@ import {Toggle} from './bf/lib/toggle.js';
 const modules=app.get('helpers.html').data('app').split(',');
 //------------------------
 app.init({
- mConfig:{
-  index:index.data//settings are inserted into app.data and patched with config.js
- },
  plugins:[Toggle],
  settings:{}//app specific like impPath
 });
