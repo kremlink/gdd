@@ -1,9 +1,9 @@
-import {base as app} from '../../bf/base.js';
-//import {data as dat} from './data.js';
-import {data} from './data.js';
+import {app} from '../../bf/base.js';
+import {data as dat} from './data.js';
+//import {data} from './data.js';
 import {View as GameView} from '../game/view.js';
 
-//let data=app.configure({trash:dat}).trash;
+let data=app.configure({trash:dat}).trash;
 
 let events={};
 events[`click ${data.events.return}`]='toVideo';

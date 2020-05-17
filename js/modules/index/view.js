@@ -1,7 +1,8 @@
 import * as player from '../player/view.js';
 import * as trash from '../trash/view.js';
 
-export {data} from './data.js';
+//import {data as dat} from './data.js';
+//let data=app.configure({index:dat}).index;
 export function init(app,modules){
  if(!~modules.indexOf('index'))
   return;

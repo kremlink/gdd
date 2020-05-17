@@ -148,7 +148,8 @@ class Base{
    this.extendData({
     obj:this.get('data'),
     field:x,
-    data:y
+    data:y,
+    ignore:true
    });
   }
 
@@ -337,4 +338,4 @@ let events={
 
 Object.assign(Base.prototype,events);
 
-export const base=new Base();
+export const app=new Base();

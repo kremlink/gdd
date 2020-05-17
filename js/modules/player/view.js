@@ -1,4 +1,4 @@
-import {base as app} from '../../bf/base.js';
+import {app} from '../../bf/base.js';
 import {data} from './data.js';
 
 export let View=Backbone.View.extend({

@@ -1,4 +1,4 @@
-import {base as app} from './bf/base.js';
+import {app} from './bf/base.js';
 
 import * as index from './modules/index/view.js';
 
