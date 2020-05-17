@@ -1,21 +1,30 @@
+import {base as app} from '../../bf/base.js';
 import {data} from './data.js';
-export {data} from './data.js';
 
-export let view=Backbone.View.extend({
+export let View=Backbone.View.extend({
  initialize:function(){
   this.player=videojs($(data.view.el)[0],{},()=>{
    this.prepare();
-   //this.$el.append('<div class="test" style="width:100px;height:100px;position: absolute;left: 0;top: 0;background: #f00;" />');
   });
-  //this.listenTo(this.model,'change',this.render);
+  this.listenTo(app.get('aggregator'),'player:play',this.play);
  },
  prepare:function(){
   this.setElement(data.view.el);
+  app.get('aggregator').trigger('player:ready');
   this.player.on('pause',function(){
-   console.log('show overlay');
+   app.get('aggregator').trigger('trash:toggle',true);
   });
   this.player.on('play',function(){
-   console.log('hide overlay');
+   app.get('aggregator').trigger('trash:toggle',false);
   });
+ },
+ addTrash:function(el){
+  this.$el.append(el);
+
+  return this;
+ },
+ play:function(){
+  if(this.player.paused)
+   this.player.play();
  }
 });

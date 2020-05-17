@@ -455,6 +455,7 @@ body {
   max-height: 100vh;
   max-width: 177.78vh;
   margin: auto;
+  overflow: hidden;
   position: absolute;
   left: 0;
   top: 0;
@@ -464,12 +465,152 @@ body {
 
 /*@path:base\_exts.scss*/
 /*@path:components\_footer.scss*/
+/*@path:components\_game.scss*/
+.trash-pop {
+  position: absolute;
+  left: -1px;
+  top: 0;
+  right: -1px;
+  bottom: 0;
+  z-index: 1;
+  background: #ddd;
+  opacity: 0;
+  pointer-events: none;
+  text-align: center;
+  transition: opacity 0.3s ease-in-out;
+}
+.trash-pop.shown {
+  opacity: 1;
+  pointer-events: auto;
+}
+.trash-pop.game-active .game-btn {
+  background: #694482;
+}
+.trash-pop.game-active .game-btn .test {
+  color: #fff;
+}
+.trash-pop .row {
+  display: flex;
+  justify-content: space-between;
+  position: absolute;
+  left: 1%;
+  right: 1%;
+}
+.trash-pop .row.one {
+  top: 1.5%;
+  height: 77.5%;
+}
+.trash-pop .row.two {
+  top: 80.5%;
+  height: 18%;
+}
+.trash-pop .col {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: space-between;
+}
+.trash-pop .col.one {
+  width: 8%;
+}
+.trash-pop .col.two {
+  width: 12%;
+}
+.trash-pop .other {
+  width: 12%;
+  display: flex;
+  justify-content: space-between;
+}
+.trash-pop .main, .trash-pop .footer {
+  width: 78%;
+  background: #000;
+}
+.trash-pop .return-btn, .trash-pop .videos-btn, .trash-pop .map-btn, .trash-pop .book-btn, .trash-pop .chat-btn, .trash-pop .game-btn, .trash-pop .null-btn {
+  background: #aaa;
+  cursor: pointer;
+  position: relative;
+}
+.trash-pop .return-btn {
+  height: 12%;
+}
+.trash-pop .videos-btn {
+  height: 9%;
+}
+.trash-pop .map-btn {
+  height: 9%;
+}
+.trash-pop .book-btn {
+  height: 9%;
+}
+.trash-pop .chat-btn {
+  height: 9%;
+}
+.trash-pop .game-btn {
+  height: 14%;
+}
+.trash-pop .null-btn {
+  background: #999;
+  cursor: pointer;
+  height: 20%;
+}
+.trash-pop .prog1, .trash-pop .prog2, .trash-pop .prog3 {
+  height: 3%;
+  position: relative;
+  background: #eee;
+}
+.trash-pop .prog1 .test, .trash-pop .prog2 .test, .trash-pop .prog3 .test {
+  color: #000;
+}
+.trash-pop .prog-u {
+  height: 3%;
+  background: #eee;
+}
+.trash-pop .space {
+  height: 26%;
+}
+.trash-pop .game-btn {
+  background: #aaa;
+  height: 100%;
+  cursor: pointer;
+}
+.trash-pop .menu-btn, .trash-pop .load-save-btn {
+  width: 46%;
+  position: relative;
+  background: #aaa;
+  cursor: pointer;
+}
+.trash-pop .game {
+  background: #3f6a99;
+  height: 100%;
+  opacity: 0;
+  pointer-events: none;
+  position: relative;
+  transition: opacity 0.3s ease-in-out;
+}
+.trash-pop .game.shown {
+  opacity: 1;
+  pointer-events: auto;
+}
+.trash-pop .test {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 14px;
+  color: #fff;
+}
+
 /*@path:components\_header.scss*/
 /*@path:components\_shared.scss*/
-/*@path:partials\_index.scss*/
+/*@path:components\_video.scss*/
 .video-js {
   width: 100%;
   height: 100%;
 }
+
+.video-js .vjs-big-play-button {
+  display: none;
+}
+
+/*@path:partials\_index.scss*/
 
 /*# sourceMappingURL=../../css/style.css.map */

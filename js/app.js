@@ -1,12 +1,12 @@
-import {base} from './bf/base.js';
+import {base as app} from './bf/base.js';
 
 import * as index from './modules/index/view.js';
 
 import {Toggle} from './bf/lib/toggle.js';
 //------------------------
-const modules=base.get('helpers.html').data('app').split(',');
+const modules=app.get('helpers.html').data('app').split(',');
 //------------------------
-base.init({
+app.init({
  mConfig:{
   index:index.data//settings are inserted into app.data and patched with config.js
  },
@@ -14,6 +14,8 @@ base.init({
  settings:{}//app specific like impPath
 });
 //------------------------
+app.set({dest:'objects.aggregator',object:_.extend({},Backbone.Events)});
+
 $(()=>{
- index.init(base,modules);
+ index.init(app,modules);
 });

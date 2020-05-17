@@ -1,0 +1,130 @@
+@include exports("@path:components\_game.scss"){/*@path:components\_game.scss*/
+  .trash-pop{
+    @include abs($l:-1px,$r:-1px,$t:0,$b:0);
+    z-index:1;
+    background:#ddd;
+    opacity:0;
+    pointer-events:none;
+    text-align:center;
+    @include trs('opacity #{$anim} ease-in-out');
+    &.shown{
+      opacity:1;
+      pointer-events:auto;
+    }
+    &.game-active .game-btn{
+      background:#694482;
+      .test{
+        color:#fff;
+      }
+    }
+    .row{
+      @include flx(display,flex);
+      @include flx(justify-content,space-between);
+      @include abs($l:1%,$r:1%);
+      &.one{
+        top:1.5%;
+        height:77.5%;
+      }
+      &.two{
+        top:80.5%;
+        height:18%;
+      }
+    }
+    .col{
+      @include flx(display,flex);
+      @include flx(flex-flow,'column nowrap');
+      @include flx(justify-content,space-between);
+      &.one{
+        width:8%;
+      }
+      &.two{
+        width:12%;
+      }
+    }
+    .other{
+      width:12%;
+      @include flx(display,flex);
+      @include flx(justify-content,space-between);
+    }
+    .main,.footer{
+      width:78%;
+      background:#000;
+    }
+    .return-btn,.videos-btn,.map-btn,.book-btn,.chat-btn,.game-btn,.null-btn{
+      background:#aaa;
+      cursor:pointer;
+      position:relative;
+    }
+    .return-btn{
+      height:12%;
+    }
+    .videos-btn{
+      height:9%;
+    }
+    .map-btn{
+      height:9%;
+    }
+    .book-btn{
+      height:9%;
+    }
+    .chat-btn{
+      height:9%;
+    }
+    .game-btn{
+      height:14%;
+    }
+    .null-btn{
+      background:#999;
+      cursor:pointer;
+      height:20%;
+    }
+    .prog1,.prog2,.prog3{
+      height:3%;
+      position:relative;
+      background:#eee;
+      .test{
+        color:#000;
+      }
+    }
+    .prog-u{
+      height:3%;
+      background:#eee;
+    }
+    .space{
+      height:26%;
+    }
+    .game-btn{
+      background:#aaa;
+      height:100%;
+      cursor:pointer;
+    }
+    .footer{
+
+    }
+    .menu-btn,.load-save-btn{
+      width:46%;
+      position:relative;
+      background:#aaa;
+      cursor:pointer;
+    }
+    //game
+    .game{
+      background:#3f6a99;
+      height:100%;
+      opacity:0;
+      pointer-events:none;
+      position:relative;
+      @include trs('opacity #{$anim} ease-in-out');
+      &.shown{
+        opacity:1;
+        pointer-events:auto;
+      }
+    }
+    //end game
+    .test{
+      @include center();
+      font-size:14px;
+      color:#fff;
+    }
+  }
+}

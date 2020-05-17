@@ -1,4 +1,5 @@
 import * as player from '../player/view.js';
+import * as trash from '../trash/view.js';
 
 export {data} from './data.js';
 export function init(app,modules){
@@ -8,12 +9,13 @@ export function init(app,modules){
  app.set({data:'index.main',object:new (Backbone.View.extend({
    el:'#wrap',
    initialize:function(){
-    //console.log(app.data);
-    //console.log(app.get('main.player.View'));
-    this.playerView=new player.view;
-    //this.listenTo(this.model,'change',this.render);
+    this.playerView=new player.View;
+    this.listenTo(app.get('aggregator'),'player:ready',this.addTrash);
+   },
+   addTrash:function(){
+    let trashView=new trash.View;
+
+    this.playerView.addTrash(trashView.el);
    }
   })),lib:false});
- //app.set({data:'index.toggle',object:'Toggle'});
- //console.log(app.get('index.toggle'));
 }
