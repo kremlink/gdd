@@ -451,10 +451,6 @@ body {
 }
 
 #wrap-wrap {
-  height: 56.25vw;
-  max-height: 100vh;
-  max-width: 177.78vh;
-  margin: auto;
   overflow: hidden;
   position: absolute;
   left: 0;
@@ -464,6 +460,13 @@ body {
 }
 
 /*@path:base\_exts.scss*/
+.trash-pop.fs .trash-wrap, #wrap-wrap {
+  height: 56.25vw;
+  max-height: 100vh;
+  max-width: 177.78vh;
+  margin: auto;
+}
+
 /*@path:components\_footer.scss*/
 /*@path:components\_game.scss*/
 .trash-pop {
@@ -479,6 +482,20 @@ body {
   text-align: center;
   transition: opacity 0.3s ease-in-out;
 }
+.trash-pop .trash-wrap {
+  height: 100%;
+}
+.trash-pop.fs {
+  left: 0;
+  right: 0;
+}
+.trash-pop.fs .trash-wrap {
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+}
 .trash-pop.shown {
   opacity: 1;
   pointer-events: auto;
@@ -489,38 +506,38 @@ body {
 .trash-pop.game-active .game-btn .test {
   color: #fff;
 }
-.trash-pop .row {
+.trash-pop .trash-row {
   display: flex;
   justify-content: space-between;
   position: absolute;
   left: 1%;
   right: 1%;
 }
-.trash-pop .row.one {
+.trash-pop .trash-row.one {
   top: 1.5%;
   height: 77.5%;
 }
-.trash-pop .row.two {
+.trash-pop .trash-row.two {
   top: 80.5%;
   height: 18%;
 }
-.trash-pop .col {
+.trash-pop .trash-col {
   display: flex;
   flex-flow: column nowrap;
   justify-content: space-between;
 }
-.trash-pop .col.one {
+.trash-pop .trash-col.one {
   width: 8%;
 }
-.trash-pop .col.two {
+.trash-pop .trash-col.two {
   width: 12%;
 }
-.trash-pop .other {
+.trash-pop .trash-other {
   width: 12%;
   display: flex;
   justify-content: space-between;
 }
-.trash-pop .main, .trash-pop .footer {
+.trash-pop .trash-main, .trash-pop .trash-footer {
   width: 78%;
   background: #000;
 }
@@ -578,7 +595,7 @@ body {
   background: #aaa;
   cursor: pointer;
 }
-.trash-pop .game {
+.trash-pop .trash-game {
   background: #3f6a99;
   height: 100%;
   opacity: 0;
@@ -586,9 +603,32 @@ body {
   position: relative;
   transition: opacity 0.3s ease-in-out;
 }
-.trash-pop .game.shown {
+.trash-pop .trash-game.shown {
   opacity: 1;
   pointer-events: auto;
+}
+.trash-pop .bins {
+  position: absolute;
+  left: 3%;
+  top: 0;
+  right: 3%;
+  bottom: 5%;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+.trash-pop .bin {
+  width: 10%;
+  height: 20%;
+  background: #ddd;
+  position: relative;
+}
+.trash-pop .bin span {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  color: #000;
 }
 .trash-pop .test {
   position: absolute;

@@ -17,6 +17,7 @@ export function init(app,modules){
     let trashView=new trash.View;
 
     this.playerView.addTrash(trashView.el);
+    trashView.ready();
    }
   })),lib:false});
 }

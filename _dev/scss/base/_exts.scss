@@ -1,3 +1,8 @@
 @include exports("@path:base\_exts.scss"){/*@path:base\_exts.scss*/
-
+  %scaler{
+    height:56.25vw; //h:w=9/16
+    max-height:100vh;
+    max-width:177.78vh; //16/9=1.778
+    margin:auto;
+  }
 }

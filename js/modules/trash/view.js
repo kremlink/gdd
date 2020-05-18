@@ -15,19 +15,22 @@ export let View=Backbone.View.extend({
  template:_.template($(data.view.template).html()),
  initialize:function(){
   this.listenTo(app.get('aggregator'),'trash:toggle',this.toggle);
+  this.listenTo(app.get('aggregator'),'trash:fs',this.fs);
   this.render();
-
-  this.$main=this.$(data.view.main);
-  this.gameView=new GameView;
-  this.$main.append(this.gameView.el);
  },
  render:function(){
   this.$el.html(this.template());
 
   return this;
  },
+ ready:function(){
+  this.gameView=new GameView;
+ },
  toggle:function(f){
   this.$el.toggleClass(data.view.shownCls,f);
+ },
+ fs:function(f){
+  this.$el.toggleClass(data.view.fsCls,f);
  },
  toVideo:function(){
   app.get('aggregator').trigger('player:play');

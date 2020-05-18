@@ -7,6 +7,17 @@
     pointer-events:none;
     text-align:center;
     @include trs('opacity #{$anim} ease-in-out');
+    .trash-wrap{
+      height:100%;
+    }
+    &.fs{
+      left:0;
+      right:0;
+      .trash-wrap{
+        @include abs($l:0,$r:0,$t:0,$b:0);
+        @extend %scaler;
+      }
+    }
     &.shown{
       opacity:1;
       pointer-events:auto;
@@ -17,7 +28,7 @@
         color:#fff;
       }
     }
-    .row{
+    .trash-row{
       @include flx(display,flex);
       @include flx(justify-content,space-between);
       @include abs($l:1%,$r:1%);
@@ -30,7 +41,7 @@
         height:18%;
       }
     }
-    .col{
+    .trash-col{
       @include flx(display,flex);
       @include flx(flex-flow,'column nowrap');
       @include flx(justify-content,space-between);
@@ -41,12 +52,12 @@
         width:12%;
       }
     }
-    .other{
+    .trash-other{
       width:12%;
       @include flx(display,flex);
       @include flx(justify-content,space-between);
     }
-    .main,.footer{
+    .trash-main,.trash-footer{
       width:78%;
       background:#000;
     }
@@ -98,7 +109,7 @@
       height:100%;
       cursor:pointer;
     }
-    .footer{
+    .trash-footer{
 
     }
     .menu-btn,.load-save-btn{
@@ -108,7 +119,7 @@
       cursor:pointer;
     }
     //game
-    .game{
+    .trash-game{
       background:#3f6a99;
       height:100%;
       opacity:0;
@@ -118,6 +129,22 @@
       &.shown{
         opacity:1;
         pointer-events:auto;
+      }
+    }
+    .bins{
+      @include abs($l:3%,$r:3%,$b:5%,$t:0);
+      @include flx(display,flex);
+      @include flx(justify-content,space-between);
+      @include flx(align-items,flex-end);
+    }
+    .bin{
+      width:10%;
+      height:20%;
+      background:#ddd;
+      position:relative;
+      span{
+        @include center();
+        color:#000;
       }
     }
     //end game

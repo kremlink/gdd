@@ -7,7 +7,7 @@ export const data={
   className:'trash-pop',
   template:'#trash-template',
   shownCls:'shown',
-  gameActiveCls:'game-active',
-  main:'.main'
+  fsCls:'fs',
+  gameActiveCls:'game-active'
  }
 };

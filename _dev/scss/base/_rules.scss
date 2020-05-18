@@ -53,11 +53,8 @@
   }
 
   #wrap-wrap{
-    height:56.25vw; //h:w=9/16
-    max-height:100vh;
-    max-width:177.78vh; //16/9=1.778
-    margin:auto;
     overflow:hidden;
     @include abs($t:0,$b:0,$l:0,$r:0);
+    @extend %scaler;
   }
 }
