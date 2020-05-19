@@ -10,8 +10,7 @@
                 <video
                         class="video-js"
                         controls
-                        preload="auto"
-                        poster="//vjs.zencdn.net/v/oceans.png"> <!--data-setup='{}'-->
+                        preload="auto"> <!--poster="//vjs.zencdn.net/v/oceans.png" data-setup='{}'-->
                 <!--<source src="//vjs.zencdn.net/v/oceans.mp4" type="video/mp4"></source>
                 <source src="//vjs.zencdn.net/v/oceans.webm" type="video/webm"></source>
                 <source src="//vjs.zencdn.net/v/oceans.ogv" type="video/ogg"></source>-->
@@ -64,6 +63,9 @@
         </script>
         <script type="text/template" id="game-bin-template">
             <span><%= type %></span>
+        </script>
+        <script type="text/template" id="game-trash-template">
+            <span><%= text %></span>
         </script>
 	</body>
 </html>

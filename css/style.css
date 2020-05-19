@@ -601,6 +601,7 @@ body {
   opacity: 0;
   pointer-events: none;
   position: relative;
+  overflow: hidden;
   transition: opacity 0.3s ease-in-out;
 }
 .trash-pop .trash-game.shown {
@@ -629,6 +630,19 @@ body {
   top: 50%;
   transform: translate(-50%, -50%);
   color: #000;
+}
+.trash-pop .trash {
+  width: 7%;
+  height: 14%;
+  background: #999;
+  position: absolute;
+  top: 0;
+}
+.trash-pop .trash span {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
 }
 .trash-pop .test {
   position: absolute;

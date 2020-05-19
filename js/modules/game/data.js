@@ -10,5 +10,12 @@ export const data={
    template:'#game-bin-template'
   },
   data:[{type:1},{type:2},{type:3},{type:4},{type:5}]
+ },
+ trash:{
+  view:{
+   className:'trash',
+   template:'#game-trash-template'
+  },
+  data:[{type:1,text:11},{type:2,text:22},{type:2,text:33},{type:3,text:33}]
  }
 };

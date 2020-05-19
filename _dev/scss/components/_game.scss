@@ -125,6 +125,7 @@
       opacity:0;
       pointer-events:none;
       position:relative;
+      overflow:hidden;
       @include trs('opacity #{$anim} ease-in-out');
       &.shown{
         opacity:1;
@@ -145,6 +146,15 @@
       span{
         @include center();
         color:#000;
+      }
+    }
+    .trash{
+      width:7%;
+      height:14%;
+      background:#999;
+      @include abs($t:0);
+      span{
+        @include center();
       }
     }
     //end game
