@@ -608,6 +608,12 @@ body {
   opacity: 1;
   pointer-events: auto;
 }
+.trash-pop .trash-game.drag {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
 .trash-pop .bins {
   position: absolute;
   left: 3%;
