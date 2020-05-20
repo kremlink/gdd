@@ -631,12 +631,23 @@ body {
   transform: translate(-50%, -50%);
   color: #000;
 }
+.trash-pop .fail {
+  position: absolute;
+  left: 0;
+  right: 0;
+  border-top: 2px solid rgba(255, 0, 0, 0.4);
+}
 .trash-pop .trash {
   width: 7%;
   height: 14%;
   background: #999;
   position: absolute;
-  top: 0;
+  bottom: 100%;
+}
+.trash-pop .trash.fail {
+  transition: opacity 0.3s ease-in-out;
+  opacity: 0;
+  pointer-events: none;
 }
 .trash-pop .trash span {
   position: absolute;

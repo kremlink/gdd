@@ -55,6 +55,7 @@
                     </div>
                     <div class="trash-main">
                         <div class="trash-game">
+                            <div class="fail"></div>
                             <div class="bins"></div>
                         </div>
                     </div>
@@ -80,10 +81,13 @@
             </div>
         </script>
         <script type="text/template" id="game-bin-template">
-            <span><%= type %></span>
+            <span>Type: <%= type %></span>
         </script>
         <script type="text/template" id="game-trash-template">
-            <span><%= text %></span>
+            <span>
+                Type: <%= type %><br/>
+                Subtype: <%= subtype %>
+            </span>
         </script>
 	</body>
 </html>

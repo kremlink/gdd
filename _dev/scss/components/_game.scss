@@ -148,11 +148,20 @@
         color:#000;
       }
     }
+    .fail{
+      @include abs($l:0,$r:0);
+      border-top:2px solid rgba(#f00,0.4);
+    }
     .trash{
       width:7%;
       height:14%;
       background:#999;
-      @include abs($t:0);
+      @include abs($b:100%);
+      &.fail{
+        @include trs('opacity #{$anim} ease-in-out');
+        opacity:0;
+        pointer-events:none;
+      }
       span{
         @include center();
       }

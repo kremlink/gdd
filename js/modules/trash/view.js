@@ -36,7 +36,7 @@ export let View=Backbone.View.extend({
   app.get('aggregator').trigger('player:play');
  },
  game:function(){
-  this.$el.toggleClass(data.view.gameActiveCls);
-  this.gameView.toggle(this.$el.hasClass(data.view.gameActiveCls));
+  this.$el.addClass(data.view.gameActiveCls);
+  this.gameView.play();
  }
 });
