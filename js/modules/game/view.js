@@ -6,7 +6,7 @@ export let View=Backbone.View.extend({
  el:data.view.el,
  initialize:function(){
   this.binViews=[];
-  this.bins=new Backbone.Collection({model:BinModel});
+  this.bins=new (Backbone.Collection.extend({model:BinModel}));
   this.listenTo(this.bins,'reset',this.addBins);
   this.bins.reset(data.bin.data);
   this.trash=[];
@@ -27,7 +27,6 @@ export let View=Backbone.View.extend({
     this.dragging=true;
     this.draggingTrash=_.filter(this.trash,t=>{return $(opts.e[0].target).closest(t.$el).length;})[0];
     this.draggingTrash.drag({start:true});
-    //console.log(this.draggingTrash.data);
    },
    dragCallback:(opts)=>{
     let delta={dx:0,dy:0};
@@ -40,10 +39,28 @@ export let View=Backbone.View.extend({
   $(document).on('mouseup',()=>{// touchend
    if(this.dragging)
    {
+    let dOffs=this.draggingTrash.$drop.offset(),
+     dW=this.draggingTrash.$drop.width(),
+     dH=this.draggingTrash.$drop.height(),
+     bin=_.filter(this.binViews,t=>{
+      let offs=t.$drop.offset(),
+       w=t.$drop.width(),
+       h=t.$drop.height();
+
+      return offs.left<dOffs.left&&offs.left+w>dOffs.left+dW&&offs.top<dOffs.top&&offs.top+h>dOffs.top+dH;
+     });
+
     this.draggingTrash.drag({up:true});
     this.$el.removeClass(data.view.dragCls);
     this.dragging=false;
-    //this.bins.where({type:this.draggingTrash.data.type})[0].addTrash();
+    if(bin.length)
+    {
+     this.bins.where({type:this.draggingTrash.data.type})[0].addTrash();
+     this.draggingTrash.caught();
+    }else
+    {
+     this.draggingTrash.failed();
+    }
    }
   });
  },
@@ -83,6 +100,7 @@ let BinView=Backbone.View.extend({
  template:_.template($(data.bin.view.template).html()),
  initialize:function(){
   this.$el.html(this.template(this.model.toJSON()));
+  this.$drop=this.$(data.bin.view.drop);
  }
 });
 
@@ -122,7 +140,7 @@ let TrashView=Backbone.View.extend({
   setTimeout(()=>{this.remove()},2000);
  },
  caught:function(){
-
+  this.$el.addClass(data.trash.view.caughtCls);
  },
  drag:function(opts){
   if(opts.start||this.dragging)

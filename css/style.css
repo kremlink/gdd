@@ -630,14 +630,23 @@ body {
   background: #ddd;
   position: relative;
 }
-.trash-pop .bin span {
+.trash-pop .b-text {
   position: absolute;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
   color: #000;
 }
-.trash-pop .fail {
+.trash-pop .b-drop {
+  background: rgba(255, 0, 0, 0.2);
+  width: 80%;
+  height: 80%;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+.trash-pop .fail-line {
   position: absolute;
   left: 0;
   right: 0;
@@ -653,6 +662,11 @@ body {
 .trash-pop .trash.fail {
   transition: opacity 0.3s ease-in-out;
   opacity: 0;
+  pointer-events: none;
+}
+.trash-pop .trash.caught {
+  transition: transform 0.3s ease-in-out;
+  transform: scale(0);
   pointer-events: none;
 }
 .trash-pop .t-text {

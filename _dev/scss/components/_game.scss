@@ -146,12 +146,18 @@
       height:20%;
       background:#ddd;
       position:relative;
-      span{
-        @include center();
-        color:#000;
-      }
     }
-    .fail{
+    .b-text{
+      @include center();
+      color:#000;
+    }
+    .b-drop{
+      background:rgba(#f00,0.2);
+      width:80%;
+      height:80%;
+      @include center();
+    }
+    .fail-line{
       @include abs($l:0,$r:0);
       border-top:2px solid rgba(#f00,0.4);
     }
@@ -163,6 +169,11 @@
       &.fail{
         @include trs('opacity #{$anim} ease-in-out');
         opacity:0;
+        pointer-events:none;
+      }
+      &.caught{
+        @include trs('transform #{$anim} ease-in-out');
+        transform:scale(0);
         pointer-events:none;
       }
     }
