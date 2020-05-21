@@ -655,7 +655,16 @@ body {
   opacity: 0;
   pointer-events: none;
 }
-.trash-pop .trash span {
+.trash-pop .t-text {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+.trash-pop .t-drop {
+  background: rgba(255, 0, 0, 0.2);
+  width: 50%;
+  height: 50%;
   position: absolute;
   left: 50%;
   top: 50%;

@@ -87,12 +87,12 @@ $.extend(Drag.prototype,{
    eventjs.add(this,'drag',touch.dragFn[i]);
   });
 
-  eventjs.add(document,'mouseup',function(){
+  eventjs.add(document,'mouseup',function(e){
    if(self.props.dragging)
    {
     self.props.dragging=false;
     self.props.dragStart=false;
-    self.options.upCallback();
+    self.options.upCallback(e);
    }
   });
  },
