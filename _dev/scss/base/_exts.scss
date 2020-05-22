@@ -5,4 +5,15 @@
     max-width:177.78vh; //16/9=1.778
     margin:auto;
   }
+  %svg-click{
+    &:active svg{
+      opacity:0;
+      &+svg{
+        opacity:1;
+      }
+    }
+    svg+svg{
+      opacity:0;
+    }
+  }
 }

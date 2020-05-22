@@ -26,8 +26,8 @@ export const data={
    caughtCls:'caught',
    drop:'.t-drop',
    fail:{
-    el:'.fail',
-    bottom:'15%'
+    el:'.fail-line',
+    bottom:'10%'
    }
   }
  }

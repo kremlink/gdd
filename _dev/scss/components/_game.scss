@@ -6,10 +6,8 @@
     opacity:0;
     pointer-events:none;
     text-align:center;
+    @include no-sel();
     @include trs('opacity #{$anim} ease-in-out');
-    .trash-wrap{
-      height:100%;
-    }
     &.fs{
       left:0;
       right:0;
@@ -22,105 +20,158 @@
       opacity:1;
       pointer-events:auto;
     }
-    &.game-active .game-btn{
-      background:#694482;
-      .test{
-        color:#fff;
+    &.game-active{
+      .return-btn{
+        pointer-events:none;
+        opacity:0.2;
+      }
+      .game-btn{
+
       }
     }
-    .trash-row{
-      @include flx(display,flex);
-      @include flx(justify-content,space-between);
-      @include abs($l:1%,$r:1%);
-      &.one{
-        top:1.5%;
-        height:77.5%;
-      }
-      &.two{
-        top:80.5%;
-        height:18%;
-      }
+    svg{
+      @include abs($l:0,$t:0);
+      width:100%;
+      height:100%;
     }
-    .trash-col{
-      @include flx(display,flex);
-      @include flx(flex-flow,'column nowrap');
-      @include flx(justify-content,space-between);
-      &.one{
-        width:8%;
-      }
-      &.two{
-        width:12%;
-      }
-    }
-    .trash-other{
-      width:12%;
-      @include flx(display,flex);
-      @include flx(justify-content,space-between);
-    }
-    .trash-main,.trash-footer{
-      width:78%;
-      background:#000;
-    }
-    .return-btn,.videos-btn,.map-btn,.book-btn,.chat-btn,.game-btn,.null-btn{
-      background:#aaa;
-      cursor:pointer;
+    .trash-wrap{
+      height:100%;
       position:relative;
+    }
+    .trash-bg{
+      @include abs($l:0,$t:0);
+      width:100%;
+      height:100%;
+    }
+    .trash-main{
+      @include abs($l:13.1%,$t:4.4%);
+      width:68.7%;
+      height:68.2%;//15.9%,8.9%
+      $bg:'';
+      @for $x from 0 through 5
+      {
+       $bg:'linear-gradient(90deg,#{rgba(#fff,0.2)} 3px,transparent 3px,transparent 3px) left '+(10.7+15.9*$x)+'%/6px 1px repeat-x,'+$bg;
+      }
+      @for $x from 0 through 11
+      {
+        $bg:'linear-gradient(0deg,#{rgba(#fff,0.2)} 3px,transparent 3px,transparent 3px) '+(1.1+8.9*$x)+'% top/1px 6px repeat-y,'+$bg;
+      }
+      $bg:str-slice($bg,1,str-length($bg)-1)+';';
+      background:unquote($bg);
+    }
+    .return-btn,.videos-btn,.map-btn,.book-btn,.chat-btn,.game-btn{
+      cursor:pointer;
+      @include abs($l:2.3%);
+      width:8.9%;
+      height:9.7%;
+      @extend %svg-click;
     }
     .return-btn{
-      height:12%;
+      top:4.2%;
+      height:16.4%;
     }
     .videos-btn{
-      height:9%;
+      top:22.2%;
+      width:8.9%;
     }
     .map-btn{
-      height:9%;
+      top:32.8%;
+      width:8.9%;
     }
     .book-btn{
-      height:9%;
+      top:43.4%;
+      width:8.9%;
     }
     .chat-btn{
-      height:9%;
+      top:54%;
+      width:8.9%;
     }
     .game-btn{
-      height:14%;
+      bottom:3.1%;
+      width:8.9%;
+      height:19.7%;
     }
     .null-btn{
-      background:#999;
-      cursor:pointer;
-      height:20%;
+      @include abs($r:4.1%,$t:11.1%);
+      width:9.7%;
+      height:18.9%;
+      @extend %svg-click;
     }
     .prog1,.prog2,.prog3{
-      height:3%;
-      position:relative;
-      background:#eee;
-      .test{
+      @include abs($r:4.2%);
+      width:9%;
+      height:4.2%;
+      span{
+        @include abs($l:-13%,$t:22%);
+        font-size:14px;
+        font-weight:700;
         color:#000;
       }
     }
+    .prog1{
+      top:39.2%;
+    }
+    .prog2{
+      top:44.7%;
+    }
+    .prog3{
+      top:50.2%;
+    }
     .prog-u{
-      height:3%;
-      background:#eee;
+      @include abs($r:4.8%,$t:56.7%);
+      width:8.1%;
+      height:1.7%;
+      @include flx(display,flex);
+      @include flx(justify-content,space-between);
+      div{
+        position:relative;
+        width:12%;
+      }
+      svg{
+        @include abs($l:0,$t:0);
+        &+svg{
+          opacity:0.5;
+        }
+      }
     }
-    .space{
-      height:26%;
-    }
-    .game-btn{
-      background:#aaa;
-      height:100%;
-      cursor:pointer;
+    .t-f-under{
+      @include abs($l:12.9%,$b:4.2%);
+      width:69.1%;
+      height:18.6%;//15.9%,8.9%
+      background:#000;
+      border-radius:1%/5%;
     }
     .trash-footer{
+      @include abs($l:13.1%,$b:4.2%);
+      width:68.7%;
+      height:18.6%;
 
+      $bg:'';
+      @for $x from 0 through 1
+      {
+        $bg:'linear-gradient(90deg,#{rgba(#fff,0.2)} 3px,transparent 3px,transparent 3px) left '+(20.9+58.2*$x)+'%/6px 1px repeat-x,'+$bg;
+      }
+      @for $x from 0 through 11
+      {
+        $bg:'linear-gradient(0deg,#{rgba(#fff,0.2)} 3px,transparent 3px,transparent 3px) '+(1.1+8.9*$x)+'% top/1px 6px repeat-y,'+$bg;
+      }
+      $bg:str-slice($bg,1,str-length($bg)-1)+';';
+      background:unquote($bg);
     }
     .menu-btn,.load-save-btn{
-      width:46%;
-      position:relative;
-      background:#aaa;
+      @include abs($r:9.9%,$b:6.4%);
+      width:6.3%;
+      height:16.4%;
       cursor:pointer;
+      @extend %svg-click;
+    }
+    .load-save-btn{
+      right:1.5%;
     }
     //game
     .trash-game{
       background:#3f6a99;
+      border-radius:1%;
       height:100%;
       opacity:0;
       pointer-events:none;
@@ -130,9 +181,6 @@
       &.shown{
         opacity:1;
         pointer-events:auto;
-      }
-      &.drag{
-        @include no-sel();
       }
     }
     .bins{
@@ -187,10 +235,5 @@
       @include center();
     }
     //end game
-    .test{
-      @include center();
-      font-size:14px;
-      color:#fff;
-    }
   }
 }

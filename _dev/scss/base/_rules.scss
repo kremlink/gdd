@@ -47,7 +47,7 @@
 
   #wrap{
     height:100%;
-    min-height:600px;
+    min-height:500px;
     position:relative;
     min-width:$miw;
   }
@@ -56,5 +56,10 @@
     overflow:hidden;
     @include abs($t:0,$b:0,$l:0,$r:0);
     @extend %scaler;
+  }
+
+  .safe-hide-svg{
+    height:0;
+    overflow:hidden;
   }
 }
