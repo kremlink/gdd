@@ -1,8 +1,8 @@
 import {data} from './data.js';
 import {utils} from '../../bf/lib/utils.js';
-import {app} from '../../bf/base.js';
+import {GameTrashView} from './trash/view.js';
 
-export let View=Backbone.View.extend({
+export let GameView=Backbone.View.extend({
  el:data.view.el,
  initialize:function(){
   this.binViews=[];
@@ -26,18 +26,20 @@ export let View=Backbone.View.extend({
     this.$el.addClass(data.view.dragCls);
     this.dragging=true;
     this.draggingTrash=_.filter(this.trash,t=>{return $(opts.e[0].target).closest(t.$el).length;})[0];
-    this.draggingTrash.drag({start:true});
+    if(this.draggingTrash)
+     this.draggingTrash.drag({start:true});
    },
    dragCallback:(opts)=>{
     let delta={dx:0,dy:0};
 
     delta.dx=opts.e[0].pageX-this.coords.x;
     delta.dy=opts.e[0].pageY-this.coords.y;
+    if(this.draggingTrash)
     this.draggingTrash.drag({drag:delta});
    }
   });
-  $(document).on('mouseup',()=>{// touchend
-   if(this.dragging)
+  $(document).on('mouseup touchend',()=>{// touchend
+   if(this.dragging&&this.draggingTrash)
    {
     let dOffs=this.draggingTrash.$drop.offset(),
      dW=this.draggingTrash.$drop.width(),
@@ -77,11 +79,11 @@ export let View=Backbone.View.extend({
    this.binViews.push(bin);
   });
  },
- generateTrash:function(){//with re-generation logic that is to be removed
+ generateTrash:function(){//TODO: re-generation logic is to be removed
   if(!this.trash.length)
   {
-   data.trash.data.forEach(t=>{
-    let trash=new TrashView(t);
+   data.trashData.forEach(t=>{
+    let trash=new GameTrashView(t);
 
     this.$el.append(trash.el);
     this.trash.push(trash);
@@ -110,57 +112,5 @@ let BinModel=Backbone.Model.extend({
  },
  addTrash:function(){
   this.set('amount',this.get('amount')+1);
- }
-});
-
-let TrashView=Backbone.View.extend({
- className:data.trash.view.className,
- template:_.template($(data.trash.view.template).html()),
- initialize:function(opts){
-  this.data=opts;
-  $(data.trash.view.fail.el).css('bottom',data.trash.view.fail.bottom);
-  this.$el.html(this.template(opts))
-   .css({left:opts.left,transition:`bottom ${opts.trs}`})
-   .on('transitionend',()=>{
-    this.$el.off('transitionend');
-    this.failed();
-   });
-  _.debounce(()=>{
-   this.$el.css('bottom',data.trash.view.fail.bottom);
-  },0)();
-
-  this.dragging=false;
-  this.coords={x:0,y:0};
-  this.$drop=this.$(data.trash.view.drop);
-  this.listenTo(app.get('aggregator'),'game:drag',this.drag);
- },
- failed:function(){
-  console.log('failed');
-  this.$el.css('transition','').addClass(data.trash.view.failCls);
-  setTimeout(()=>{this.remove()},2000);
- },
- caught:function(){
-  this.$el.addClass(data.trash.view.caughtCls);
- },
- drag:function(opts){
-  if(opts.start||this.dragging)
-  {
-   if(opts.start)
-   {
-    this.dragging=true;
-    this.coords={x:parseInt(this.$el.css('left')),y:parseInt(this.$el.css('top'))};
-    this.$el.css({transition:'',bottom:'auto',left:this.coords.x,top:this.coords.y,zIndex:1});
-    this.$el.off('transitionend');
-   }
-   if(opts.up)
-   {
-    this.dragging=false;
-    this.$el.css({zIndex:'auto'});
-   }
-   if(opts.drag&&this.dragging)
-   {
-    this.$el.css({left:this.coords.x+opts.drag.dx,top:this.coords.y+opts.drag.dy});
-   }
-  }
  }
 });

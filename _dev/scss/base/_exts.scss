@@ -6,14 +6,34 @@
     margin:auto;
   }
   %svg-click{
-    &:active svg{
+    svg{
       opacity:0;
-      &+svg{
+    }
+    &.active{
+      &:active svg{
+        &:nth-child(3){
+          opacity:0;
+        }
+        &:nth-child(4){
+          opacity:1;
+        }
+      }
+      svg:nth-child(3){
         opacity:1;
       }
     }
-    svg+svg{
-      opacity:0;
+    &:not(.active){
+      &:active svg{
+        &:nth-child(1){
+          opacity:0;
+        }
+        &:nth-child(2){
+          opacity:1;
+        }
+      }
+      svg:nth-child(1){
+        opacity:1;
+      }
     }
   }
 }

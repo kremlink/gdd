@@ -47,6 +47,9 @@
       @include abs($l:13.1%,$t:4.4%);
       width:68.7%;
       height:68.2%;//15.9%,8.9%
+      /*@include abs($l:12.95%,$t:4.1%);
+      width:69%;
+      height:69%;*/
       $bg:'';
       @for $x from 0 through 5
       {
@@ -235,5 +238,28 @@
       @include center();
     }
     //end game
+  }
+  //orientation
+  .loader-pop{
+    @include abs($l:0,$r:0,$t:0,$b:0);
+    @include trs('opacity #{$anim} ease-in-out');
+    @extend %loader;
+    background-color:#eee;
+    .ready &{
+      opacity:0;
+      pointer-events:none;
+    }
+  }
+  .orientation-pop{
+    @include abs($l:0,$r:0,$t:0,$b:0);
+    display:none;
+    background:#fff;
+    font-size:30px;
+    line-height:30px;
+    @include flx(justify-content,center);
+    @include flx(align-items,center);
+    .too-small &{
+      @include flx(display,flex);
+    }
   }
 }

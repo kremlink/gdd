@@ -1,7 +1,7 @@
 import {app} from '../../bf/base.js';
 import {data} from './data.js';
 
-export let View=Backbone.View.extend({
+export let PlayerView=Backbone.View.extend({
  initialize:function(){
   this.player=videojs($(data.view.el)[0],{},()=>{
    this.prepare();

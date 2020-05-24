@@ -3,6 +3,10 @@
 /*@path:core\_mixins.scss*/
 /*@path:core\_exts.scss*/
 @import url("https://fonts.googleapis.com/css?family=Open+Sans:300,400,700&subset=cyrillic");
+.loader-pop {
+  background: url(../images/loader.gif) center no-repeat;
+}
+
 /*@path:base\_vars.scss*/
 /*@path:base\_normalize.scss*/
 /*! normalize.css v2.1.3 | MIT License | git.io/normalize */
@@ -472,14 +476,26 @@ body {
   margin: auto;
 }
 
-.trash-pop .menu-btn:active svg, .trash-pop .load-save-btn:active svg, .trash-pop .null-btn:active svg, .trash-pop .return-btn:active svg, .trash-pop .videos-btn:active svg, .trash-pop .map-btn:active svg, .trash-pop .book-btn:active svg, .trash-pop .chat-btn:active svg, .trash-pop .game-btn:active svg {
+.trash-pop .menu-btn svg, .trash-pop .load-save-btn svg, .trash-pop .null-btn svg, .trash-pop .return-btn svg, .trash-pop .videos-btn svg, .trash-pop .map-btn svg, .trash-pop .book-btn svg, .trash-pop .chat-btn svg, .trash-pop .game-btn svg {
   opacity: 0;
 }
-.trash-pop .menu-btn:active svg + svg, .trash-pop .load-save-btn:active svg + svg, .trash-pop .null-btn:active svg + svg, .trash-pop .return-btn:active svg + svg, .trash-pop .videos-btn:active svg + svg, .trash-pop .map-btn:active svg + svg, .trash-pop .book-btn:active svg + svg, .trash-pop .chat-btn:active svg + svg, .trash-pop .game-btn:active svg + svg {
+.trash-pop .active.menu-btn:active svg:nth-child(3), .trash-pop .active.load-save-btn:active svg:nth-child(3), .trash-pop .active.null-btn:active svg:nth-child(3), .trash-pop .active.return-btn:active svg:nth-child(3), .trash-pop .active.videos-btn:active svg:nth-child(3), .trash-pop .active.map-btn:active svg:nth-child(3), .trash-pop .active.book-btn:active svg:nth-child(3), .trash-pop .active.chat-btn:active svg:nth-child(3), .trash-pop .active.game-btn:active svg:nth-child(3) {
+  opacity: 0;
+}
+.trash-pop .active.menu-btn:active svg:nth-child(4), .trash-pop .active.load-save-btn:active svg:nth-child(4), .trash-pop .active.null-btn:active svg:nth-child(4), .trash-pop .active.return-btn:active svg:nth-child(4), .trash-pop .active.videos-btn:active svg:nth-child(4), .trash-pop .active.map-btn:active svg:nth-child(4), .trash-pop .active.book-btn:active svg:nth-child(4), .trash-pop .active.chat-btn:active svg:nth-child(4), .trash-pop .active.game-btn:active svg:nth-child(4) {
   opacity: 1;
 }
-.trash-pop .menu-btn svg + svg, .trash-pop .load-save-btn svg + svg, .trash-pop .null-btn svg + svg, .trash-pop .return-btn svg + svg, .trash-pop .videos-btn svg + svg, .trash-pop .map-btn svg + svg, .trash-pop .book-btn svg + svg, .trash-pop .chat-btn svg + svg, .trash-pop .game-btn svg + svg {
+.trash-pop .active.menu-btn svg:nth-child(3), .trash-pop .active.load-save-btn svg:nth-child(3), .trash-pop .active.null-btn svg:nth-child(3), .trash-pop .active.return-btn svg:nth-child(3), .trash-pop .active.videos-btn svg:nth-child(3), .trash-pop .active.map-btn svg:nth-child(3), .trash-pop .active.book-btn svg:nth-child(3), .trash-pop .active.chat-btn svg:nth-child(3), .trash-pop .active.game-btn svg:nth-child(3) {
+  opacity: 1;
+}
+.trash-pop .menu-btn:not(.active):active svg:nth-child(1), .trash-pop .load-save-btn:not(.active):active svg:nth-child(1), .trash-pop .null-btn:not(.active):active svg:nth-child(1), .trash-pop .return-btn:not(.active):active svg:nth-child(1), .trash-pop .videos-btn:not(.active):active svg:nth-child(1), .trash-pop .map-btn:not(.active):active svg:nth-child(1), .trash-pop .book-btn:not(.active):active svg:nth-child(1), .trash-pop .chat-btn:not(.active):active svg:nth-child(1), .trash-pop .game-btn:not(.active):active svg:nth-child(1) {
   opacity: 0;
+}
+.trash-pop .menu-btn:not(.active):active svg:nth-child(2), .trash-pop .load-save-btn:not(.active):active svg:nth-child(2), .trash-pop .null-btn:not(.active):active svg:nth-child(2), .trash-pop .return-btn:not(.active):active svg:nth-child(2), .trash-pop .videos-btn:not(.active):active svg:nth-child(2), .trash-pop .map-btn:not(.active):active svg:nth-child(2), .trash-pop .book-btn:not(.active):active svg:nth-child(2), .trash-pop .chat-btn:not(.active):active svg:nth-child(2), .trash-pop .game-btn:not(.active):active svg:nth-child(2) {
+  opacity: 1;
+}
+.trash-pop .menu-btn:not(.active) svg:nth-child(1), .trash-pop .load-save-btn:not(.active) svg:nth-child(1), .trash-pop .null-btn:not(.active) svg:nth-child(1), .trash-pop .return-btn:not(.active) svg:nth-child(1), .trash-pop .videos-btn:not(.active) svg:nth-child(1), .trash-pop .map-btn:not(.active) svg:nth-child(1), .trash-pop .book-btn:not(.active) svg:nth-child(1), .trash-pop .chat-btn:not(.active) svg:nth-child(1), .trash-pop .game-btn:not(.active) svg:nth-child(1) {
+  opacity: 1;
 }
 
 /*@path:components\_footer.scss*/
@@ -544,6 +560,9 @@ body {
   top: 4.4%;
   width: 68.7%;
   height: 68.2%;
+  /*@include abs($l:12.95%,$t:4.1%);
+  width:69%;
+  height:69%;*/
   background: linear-gradient(0deg,rgba(255, 255, 255, 0.2) 3px,transparent 3px,transparent 3px) 99% top/1px 6px repeat-y,linear-gradient(0deg,rgba(255, 255, 255, 0.2) 3px,transparent 3px,transparent 3px) 90.1% top/1px 6px repeat-y,linear-gradient(0deg,rgba(255, 255, 255, 0.2) 3px,transparent 3px,transparent 3px) 81.2% top/1px 6px repeat-y,linear-gradient(0deg,rgba(255, 255, 255, 0.2) 3px,transparent 3px,transparent 3px) 72.3% top/1px 6px repeat-y,linear-gradient(0deg,rgba(255, 255, 255, 0.2) 3px,transparent 3px,transparent 3px) 63.4% top/1px 6px repeat-y,linear-gradient(0deg,rgba(255, 255, 255, 0.2) 3px,transparent 3px,transparent 3px) 54.5% top/1px 6px repeat-y,linear-gradient(0deg,rgba(255, 255, 255, 0.2) 3px,transparent 3px,transparent 3px) 45.6% top/1px 6px repeat-y,linear-gradient(0deg,rgba(255, 255, 255, 0.2) 3px,transparent 3px,transparent 3px) 36.7% top/1px 6px repeat-y,linear-gradient(0deg,rgba(255, 255, 255, 0.2) 3px,transparent 3px,transparent 3px) 27.8% top/1px 6px repeat-y,linear-gradient(0deg,rgba(255, 255, 255, 0.2) 3px,transparent 3px,transparent 3px) 18.9% top/1px 6px repeat-y,linear-gradient(0deg,rgba(255, 255, 255, 0.2) 3px,transparent 3px,transparent 3px) 10% top/1px 6px repeat-y,linear-gradient(0deg,rgba(255, 255, 255, 0.2) 3px,transparent 3px,transparent 3px) 1.1% top/1px 6px repeat-y,linear-gradient(90deg,rgba(255, 255, 255, 0.2) 3px,transparent 3px,transparent 3px) left 90.2%/6px 1px repeat-x,linear-gradient(90deg,rgba(255, 255, 255, 0.2) 3px,transparent 3px,transparent 3px) left 74.3%/6px 1px repeat-x,linear-gradient(90deg,rgba(255, 255, 255, 0.2) 3px,transparent 3px,transparent 3px) left 58.4%/6px 1px repeat-x,linear-gradient(90deg,rgba(255, 255, 255, 0.2) 3px,transparent 3px,transparent 3px) left 42.5%/6px 1px repeat-x,linear-gradient(90deg,rgba(255, 255, 255, 0.2) 3px,transparent 3px,transparent 3px) left 26.6%/6px 1px repeat-x,linear-gradient(90deg,rgba(255, 255, 255, 0.2) 3px,transparent 3px,transparent 3px) left 10.7%/6px 1px repeat-x;;
 }
 .trash-pop .return-btn, .trash-pop .videos-btn, .trash-pop .map-btn, .trash-pop .book-btn, .trash-pop .chat-btn, .trash-pop .game-btn {
@@ -740,6 +759,37 @@ body {
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
+}
+
+.loader-pop {
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  transition: opacity 0.3s ease-in-out;
+  background-color: #eee;
+}
+.ready .loader-pop {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.orientation-pop {
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  display: none;
+  background: #fff;
+  font-size: 30px;
+  line-height: 30px;
+  justify-content: center;
+  align-items: center;
+}
+.too-small .orientation-pop {
+  display: flex;
 }
 
 /*@path:components\_header.scss*/

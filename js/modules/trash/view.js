@@ -1,7 +1,7 @@
 import {app} from '../../bf/base.js';
 //import {data as dat} from './data.js';
 import {data} from './data.js';
-import {View as GameView} from '../game/view.js';
+import {GameView} from '../game/view.js';
 
 //let data=app.configure({trash:dat}).trash;
 
@@ -9,7 +9,7 @@ let events={};
 events[`click ${data.events.return}`]='toVideo';
 events[`click ${data.events.game}`]='game';
 
-export let View=Backbone.View.extend({
+export let TrashView=Backbone.View.extend({
  events:events,
  className:data.view.className,
  template:_.template($(data.view.template).html()),
