@@ -15,19 +15,25 @@ export let GameTrashView=Backbone.View.extend({
    });
   _.debounce(()=>{
    this.$el.css('bottom',data.view.fail.bottom);
-  },0)();
+  },100)();
 
   this.dragging=false;
   this.coords={x:0,y:0};
   this.$drop=this.$(data.view.drop);
   this.listenTo(app.get('aggregator'),'game:drag',this.drag);
  },
+ get:function(v){
+  return this[v];
+ },
  failed:function(){
   this.$el.css('transition','').addClass(data.view.failCls);
-  setTimeout(()=>{this.remove()},2000);
+  setTimeout(()=>{this.remove()},1000);
+  app.get('aggregator').trigger('game:trash-failed');
  },
  caught:function(){
   this.$el.addClass(data.view.caughtCls);
+  setTimeout(()=>{this.remove()},1000);
+  app.get('aggregator').trigger('game:trash-caught');
  },
  drag:function(opts){
   if(opts.start||this.dragging)

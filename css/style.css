@@ -621,6 +621,9 @@ body {
 .trash-pop .prog1 {
   top: 39.2%;
 }
+.trash-pop .prog1 svg {
+  clip-path: polygon(33% 0, 74% 0, 74% 100%, 32% 100%);
+}
 .trash-pop .prog2 {
   top: 44.7%;
 }
@@ -681,14 +684,14 @@ body {
   border-radius: 1%;
   height: 100%;
   opacity: 0;
-  pointer-events: none;
+  visibility: hidden;
   position: relative;
   overflow: hidden;
   transition: opacity 0.3s ease-in-out;
 }
 .trash-pop .trash-game.shown {
   opacity: 1;
-  pointer-events: auto;
+  visibility: visible;
 }
 .trash-pop .bins {
   position: absolute;
@@ -801,7 +804,10 @@ body {
 }
 
 .video-js .vjs-big-play-button {
-  display: none;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
 }
 
 /*@path:partials\_index.scss*/

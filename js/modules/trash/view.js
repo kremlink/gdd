@@ -7,7 +7,7 @@ import {GameView} from '../game/view.js';
 
 let events={};
 events[`click ${data.events.return}`]='toVideo';
-events[`click ${data.events.game}`]='game';
+events[`click ${data.events.game}`]='gameStart';
 
 export let TrashView=Backbone.View.extend({
  events:events,
@@ -16,6 +16,7 @@ export let TrashView=Backbone.View.extend({
  initialize:function(){
   this.listenTo(app.get('aggregator'),'trash:toggle',this.toggle);
   this.listenTo(app.get('aggregator'),'trash:fs',this.fs);
+  this.listenTo(app.get('aggregator'),'game:end',this.gameEnd);
   this.render();
  },
  render:function(){
@@ -35,8 +36,11 @@ export let TrashView=Backbone.View.extend({
  toVideo:function(){
   app.get('aggregator').trigger('player:play');
  },
- game:function(){
+ gameStart:function(){
   this.$el.addClass(data.view.gameActiveCls);
   this.gameView.play();
+ },
+ gameEnd:function(){
+  this.$el.removeClass(data.view.gameActiveCls);
  }
 });

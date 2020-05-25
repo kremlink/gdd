@@ -1,3 +1,4 @@
+/*by Alexander Kremlev*/
 export let utils;
 
 function Drag(opts){

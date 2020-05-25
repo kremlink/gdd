@@ -113,6 +113,9 @@
     }
     .prog1{
       top:39.2%;
+      svg{
+        clip-path: polygon(33% 0, 74% 0, 74% 100%, 32% 100%);
+      }
     }
     .prog2{
       top:44.7%;
@@ -177,13 +180,13 @@
       border-radius:1%;
       height:100%;
       opacity:0;
-      pointer-events:none;
+      visibility:hidden;
       position:relative;
       overflow:hidden;
       @include trs('opacity #{$anim} ease-in-out');
       &.shown{
         opacity:1;
-        pointer-events:auto;
+        visibility:visible;
       }
     }
     .bins{

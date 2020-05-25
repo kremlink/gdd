@@ -1,6 +1,7 @@
 import {data} from './data.js';
 import {utils} from '../../bf/lib/utils.js';
 import {GameTrashView} from './trash/view.js';
+import {app} from '../../bf/base.js';
 
 export let GameView=Backbone.View.extend({
  el:data.view.el,
@@ -8,11 +9,23 @@ export let GameView=Backbone.View.extend({
   this.binViews=[];
   this.bins=new (Backbone.Collection.extend({model:BinModel}));
   this.listenTo(this.bins,'reset',this.addBins);
+  this.listenTo(this.bins,'change:amount',this.trashPut);
   this.bins.reset(data.bin.data);
   this.trash=[];
   this.coords={x:0,y:0};
   this.dragging=false;
   this.draggingTrash=null;
+  this.trashDone=0;
+  this.listenTo(app.get('aggregator'),'game:trash-failed game:trash-caught',this.trashCount);
+  this.progress=0;
+ },
+ trashCount:function(){
+  this.trashDone++;
+  if(this.trashDone===data.trashData.length)
+  {
+   app.get('aggregator').trigger('game:end');
+   this.trashDone=0;
+  }
  },
  ctrls:function(){
   new utils.drag({
@@ -23,7 +36,6 @@ export let GameView=Backbone.View.extend({
    downCallback:(opts)=>{
     this.coords.x=opts.e[0].pageX;
     this.coords.y=opts.e[0].pageY;
-    this.$el.addClass(data.view.dragCls);
     this.dragging=true;
     this.draggingTrash=_.filter(this.trash,t=>{return $(opts.e[0].target).closest(t.$el).length;})[0];
     if(this.draggingTrash)
@@ -41,9 +53,10 @@ export let GameView=Backbone.View.extend({
   $(document).on('mouseup touchend',()=>{// touchend
    if(this.dragging&&this.draggingTrash)
    {
-    let dOffs=this.draggingTrash.$drop.offset(),
-     dW=this.draggingTrash.$drop.width(),
-     dH=this.draggingTrash.$drop.height(),
+    let $drop=this.draggingTrash.get('$drop'),
+     dOffs=$drop.offset(),
+     dW=$drop.width(),
+     dH=$drop.height(),
      bin=_.filter(this.binViews,t=>{
       let offs=t.$drop.offset(),
        w=t.$drop.width(),
@@ -53,11 +66,10 @@ export let GameView=Backbone.View.extend({
      });
 
     this.draggingTrash.drag({up:true});
-    this.$el.removeClass(data.view.dragCls);
     this.dragging=false;
     if(bin.length)
     {
-     this.bins.where({type:this.draggingTrash.data.type})[0].addTrash();
+     bin[0].model.addTrash(this.draggingTrash.get('data').type);
      this.draggingTrash.caught();
     }else
     {
@@ -70,6 +82,11 @@ export let GameView=Backbone.View.extend({
   this.$el.addClass(data.view.shownCls);
   this.ctrls();
   this.generateTrash();
+ },
+ trashPut:function(m,v){
+  if(v>m.previousAttributes().amount)
+   this.progress++;
+  console.log(++this.progress);
  },
  addBins:function(){
   this.bins.each(model=>{
@@ -96,7 +113,8 @@ export let GameView=Backbone.View.extend({
   }
  }
 });
-
+//--------------------
+//--------------------
 let BinView=Backbone.View.extend({
  className:data.bin.view.className,
  template:_.template($(data.bin.view.template).html()),
@@ -110,7 +128,7 @@ let BinModel=Backbone.Model.extend({
  defaults:{
   amount:0
  },
- addTrash:function(){
-  this.set('amount',this.get('amount')+1);
+ addTrash:function(type){
+  this.set({amount:this.get('amount')+(this.get('type')===type?1:-1)});
  }
 });
