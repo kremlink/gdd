@@ -17,7 +17,10 @@ export let TrashView=Backbone.View.extend({
   this.listenTo(app.get('aggregator'),'trash:toggle',this.toggle);
   this.listenTo(app.get('aggregator'),'trash:fs',this.fs);
   this.listenTo(app.get('aggregator'),'game:end',this.gameEnd);
+  this.listenTo(app.get('aggregator'),'game:progress',this.gameProgress);
   this.render();
+
+  this.$gameProgress=this.$(data.gameProgress.el);
  },
  render:function(){
   this.$el.html(this.template());
@@ -39,8 +42,12 @@ export let TrashView=Backbone.View.extend({
  gameStart:function(){
   this.$el.addClass(data.view.gameActiveCls);
   this.gameView.play();
+  this.$gameProgress.css('clip-path',`polygon(0 0,0 0,0 100%,0 100%)`);
  },
  gameEnd:function(){
   this.$el.removeClass(data.view.gameActiveCls);
+ },
+ gameProgress:function(p){
+  this.$gameProgress.css('clip-path',`polygon(0 0,${p}% 0,${p}% 100%,0 100%)`);
  }
 });

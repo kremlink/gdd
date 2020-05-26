@@ -110,18 +110,26 @@
         font-weight:700;
         color:#000;
       }
+      svg+svg{
+        clip-path:polygon(0 0,0 0,0 100%,0 100%);
+      }
+      &.disabled{
+        .prog-inac{
+          clip-path:polygon(0 0,100% 0,100% 100%,0 100%);
+        }
+      }
     }
     .prog1{
       top:39.2%;
-      svg{
-        clip-path: polygon(33% 0, 74% 0, 74% 100%, 32% 100%);
-      }
     }
     .prog2{
       top:44.7%;
     }
     .prog3{
       top:50.2%;
+    }
+    .prog-ini{
+
     }
     .prog-u{
       @include abs($r:4.8%,$t:56.7%);

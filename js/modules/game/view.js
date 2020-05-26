@@ -85,8 +85,11 @@ export let GameView=Backbone.View.extend({
  },
  trashPut:function(m,v){
   if(v>m.previousAttributes().amount)
+  {
    this.progress++;
-  console.log(++this.progress);
+   app.get('aggregator').trigger('game:progress',Math.round(100*this.progress/data.trashData.length));
+  }
+  //console.log(++this.progress);
  },
  addBins:function(){
   this.bins.each(model=>{
@@ -109,6 +112,7 @@ export let GameView=Backbone.View.extend({
   {
    this.trash.forEach(t=>{t.remove();});
    this.trash=[];
+   this.progress=0;
    this.generateTrash();
   }
  }

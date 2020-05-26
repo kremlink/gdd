@@ -9,5 +9,8 @@ export const data={
   shownCls:'shown',
   fsCls:'fs',
   gameActiveCls:'game-active'
+ },
+ gameProgress:{
+  el:'.prog2 .prog-ac'
  }
 };

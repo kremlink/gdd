@@ -618,11 +618,14 @@ body {
   font-weight: 700;
   color: #000;
 }
+.trash-pop .prog1 svg + svg, .trash-pop .prog2 svg + svg, .trash-pop .prog3 svg + svg {
+  clip-path: polygon(0 0, 0 0, 0 100%, 0 100%);
+}
+.trash-pop .prog1.disabled .prog-inac, .trash-pop .prog2.disabled .prog-inac, .trash-pop .prog3.disabled .prog-inac {
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+}
 .trash-pop .prog1 {
   top: 39.2%;
-}
-.trash-pop .prog1 svg {
-  clip-path: polygon(33% 0, 74% 0, 74% 100%, 32% 100%);
 }
 .trash-pop .prog2 {
   top: 44.7%;
