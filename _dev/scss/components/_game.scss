@@ -182,7 +182,6 @@
 
     .trash-game,.trash-flow{
       @include abs($l:0,$r:0,$t:0,$b:0);
-      background:#3f6a99;
       border-radius:1%;
       height:100%;
       opacity:0;
@@ -195,6 +194,9 @@
       }
     }
     //game
+    .trash-game{
+      background: url(#{$path}game-bg.jpg) center/cover no-repeat;
+    }
     .bins{
       @include abs($l:3%,$r:3%,$b:5%,$t:0);
       @include flx(display,flex);
@@ -204,7 +206,6 @@
     .bin{
       width:10%;
       height:20%;
-      background:#ddd;
       position:relative;
     }
     .b-text{
@@ -214,8 +215,8 @@
     }
     .b-drop{
       background:rgba(#f00,0.2);
-      width:80%;
-      height:80%;
+      width:100%;
+      height:100%;
       @include center();
     }
     .fail-line{
@@ -226,6 +227,7 @@
       width:7%;
       height:14%;
       background:#999;
+      border-radius:20%;
       @include abs($b:100%);
       &.fail{
         @include trs('opacity #{$anim} ease-in-out');
@@ -243,9 +245,9 @@
       font-size:20px;
     }
     .t-drop{
-      background:rgba(#f00,0.2);
-      width:50%;
-      height:50%;
+      //background:rgba(#f00,0.2);
+      width:100%;
+      height:100%;
       @include center();
     }
     //end game

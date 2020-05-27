@@ -29,7 +29,7 @@
                         class="video-js"
                         controls
                         preload="auto"
-                        poster="../oceans.png"> <!--poster="//vjs.zencdn.net/v/oceans.png" data-setup='{}'-->
+                        poster="../poster.jpg"> <!--poster="//vjs.zencdn.net/v/oceans.png" data-setup='{}'-->
                 <!--<source src="//vjs.zencdn.net/v/oceans.mp4" type="video/mp4"></source>
                 <source src="//vjs.zencdn.net/v/oceans.webm" type="video/webm"></source>
                 <source src="//vjs.zencdn.net/v/oceans.ogv" type="video/ogg"></source>-->
@@ -275,11 +275,11 @@
             </div>
         </script>
         <script type="text/template" id="game-bin-template">
-            <div class="b-drop"></div>
+            <div class="b-drop" style="background:<%= color %>;"></div>
             <span class="b-text"><%= type %></span>
         </script>
         <script type="text/template" id="game-trash-template">
-            <div class="t-drop"></div>
+            <div class="t-drop" style="background: #ccc;"></div>
             <span class="t-text">
                <%= type %> <!--Type: <%= type %><br/>Subtype: <%= subtype %>-->
             </span>

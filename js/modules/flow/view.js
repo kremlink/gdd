@@ -5,7 +5,6 @@ export let FlowView=Backbone.View.extend({
  template:_.template($(data.view.template).html()),
  initialize:function(){
   this.$el.html(this.template({episodes:data.amount}));
-  console.log(data);
  },
  show:function(){
   this.$el.addClass(data.view.shownCls);

@@ -16,7 +16,7 @@ export let PlayerView=Backbone.View.extend({
   });
   this.player.on('play',()=>{
    app.get('aggregator').trigger('trash:toggle',false);
-   //this.player.requestFullscreen();//TODO: uncomment
+   this.player.requestFullscreen();//TODO: uncomment
   });
   this.player.on('fullscreenchange',()=>{app.get('aggregator').trigger('trash:fs',this.player.isFullscreen());});
   this.player.on('touchstart',e=>{

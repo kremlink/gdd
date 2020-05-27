@@ -685,7 +685,6 @@ body {
   top: 0;
   right: 0;
   bottom: 0;
-  background: #3f6a99;
   border-radius: 1%;
   height: 100%;
   opacity: 0;
@@ -696,6 +695,9 @@ body {
 .trash-pop .trash-game.shown, .trash-pop .trash-flow.shown {
   opacity: 1;
   visibility: visible;
+}
+.trash-pop .trash-game {
+  background: url(../images/game-bg.jpg) center/cover no-repeat;
 }
 .trash-pop .bins {
   position: absolute;
@@ -710,7 +712,6 @@ body {
 .trash-pop .bin {
   width: 10%;
   height: 20%;
-  background: #ddd;
   position: relative;
 }
 .trash-pop .b-text {
@@ -723,8 +724,8 @@ body {
 }
 .trash-pop .b-drop {
   background: rgba(255, 0, 0, 0.2);
-  width: 80%;
-  height: 80%;
+  width: 100%;
+  height: 100%;
   position: absolute;
   left: 50%;
   top: 50%;
@@ -740,6 +741,7 @@ body {
   width: 7%;
   height: 14%;
   background: #999;
+  border-radius: 20%;
   position: absolute;
   bottom: 100%;
 }
@@ -761,9 +763,8 @@ body {
   font-size: 20px;
 }
 .trash-pop .t-drop {
-  background: rgba(255, 0, 0, 0.2);
-  width: 50%;
-  height: 50%;
+  width: 100%;
+  height: 100%;
   position: absolute;
   left: 50%;
   top: 50%;
