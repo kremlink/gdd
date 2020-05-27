@@ -1,16 +1,18 @@
 import {data} from './data.js';
 import {utils} from '../../bf/lib/utils.js';
 import {GameTrashView} from './trash/view.js';
+import {GameBinView} from './bin/view.js';
+import {GameBinModel} from './bin/model.js';
 import {app} from '../../bf/base.js';
 
 export let GameView=Backbone.View.extend({
  el:data.view.el,
  initialize:function(){
   this.binViews=[];
-  this.bins=new (Backbone.Collection.extend({model:BinModel}));
+  this.bins=new (Backbone.Collection.extend({model:GameBinModel}));
   this.listenTo(this.bins,'reset',this.addBins);
   this.listenTo(this.bins,'change:amount',this.trashPut);
-  this.bins.reset(data.bin.data);
+  this.bins.reset(data.binData);
   this.trash=[];
   this.coords={x:0,y:0};
   this.dragging=false;
@@ -83,6 +85,9 @@ export let GameView=Backbone.View.extend({
   this.ctrls();
   this.generateTrash();
  },
+ hide:function(){
+  this.$el.removeClass(data.view.shownCls);
+ },
  trashPut:function(m,v){
   if(v>m.previousAttributes().amount)
   {
@@ -93,7 +98,7 @@ export let GameView=Backbone.View.extend({
  },
  addBins:function(){
   this.bins.each(model=>{
-   let bin=new BinView({model:model});
+   let bin=new GameBinView({model:model});
 
    this.$(data.view.bins).append(bin.el);
    this.binViews.push(bin);
@@ -115,24 +120,5 @@ export let GameView=Backbone.View.extend({
    this.progress=0;
    this.generateTrash();
   }
- }
-});
-//--------------------
-//--------------------
-let BinView=Backbone.View.extend({
- className:data.bin.view.className,
- template:_.template($(data.bin.view.template).html()),
- initialize:function(){
-  this.$el.html(this.template(this.model.toJSON()));
-  this.$drop=this.$(data.bin.view.drop);
- }
-});
-
-let BinModel=Backbone.Model.extend({
- defaults:{
-  amount:0
- },
- addTrash:function(type){
-  this.set({amount:this.get('amount')+(this.get('type')===type?1:-1)});
  }
 });

@@ -2,12 +2,14 @@ import {app} from '../../bf/base.js';
 //import {data as dat} from './data.js';
 import {data} from './data.js';
 import {GameView} from '../game/view.js';
+import {FlowView} from '../flow/view.js';
 
 //let data=app.configure({trash:dat}).trash;
 
 let events={};
 events[`click ${data.events.return}`]='toVideo';
 events[`click ${data.events.game}`]='gameStart';
+events[`click ${data.events.flow}`]='episodes';
 
 export let TrashView=Backbone.View.extend({
  events:events,
@@ -29,6 +31,7 @@ export let TrashView=Backbone.View.extend({
  },
  ready:function(){
   this.gameView=new GameView;
+  this.flowView=new FlowView;
  },
  toggle:function(f){
   this.$el.toggleClass(data.view.shownCls,f);
@@ -40,8 +43,11 @@ export let TrashView=Backbone.View.extend({
   app.get('aggregator').trigger('player:play');
  },
  gameStart:function(){
+  if(this.activeTab)
+   this.activeTab.hide();
   this.$el.addClass(data.view.gameActiveCls);
   this.gameView.play();
+  this.activeTab=this.gameView;
   this.$gameProgress.css('clip-path',`polygon(0 0,0 0,0 100%,0 100%)`);
  },
  gameEnd:function(){
@@ -49,5 +55,11 @@ export let TrashView=Backbone.View.extend({
  },
  gameProgress:function(p){
   this.$gameProgress.css('clip-path',`polygon(0 0,${p}% 0,${p}% 100%,0 100%)`);
+ },
+ episodes:function(){
+  if(this.activeTab)
+   this.activeTab.hide();
+  this.flowView.show();
+  this.activeTab=this.flowView;
  }
 });

@@ -532,7 +532,7 @@ body {
   opacity: 1;
   pointer-events: auto;
 }
-.trash-pop.game-active .return-btn {
+.trash-pop.game-active .return-btn, .trash-pop.game-active .videos-btn, .trash-pop.game-active .map-btn, .trash-pop.game-active .book-btn, .trash-pop.game-active .chat-btn, .trash-pop.game-active .null-btn, .trash-pop.game-active .menu-btn, .trash-pop.game-active .load-save-btn {
   pointer-events: none;
   opacity: 0.2;
 }
@@ -556,13 +556,10 @@ body {
 }
 .trash-pop .trash-main {
   position: absolute;
-  left: 13.1%;
-  top: 4.4%;
-  width: 68.7%;
-  height: 68.2%;
-  /*@include abs($l:12.95%,$t:4.1%);
-  width:69%;
-  height:69%;*/
+  left: 12.95%;
+  top: 4.1%;
+  width: 69%;
+  height: 69%;
   background: linear-gradient(0deg,rgba(255, 255, 255, 0.2) 3px,transparent 3px,transparent 3px) 99% top/1px 6px repeat-y,linear-gradient(0deg,rgba(255, 255, 255, 0.2) 3px,transparent 3px,transparent 3px) 90.1% top/1px 6px repeat-y,linear-gradient(0deg,rgba(255, 255, 255, 0.2) 3px,transparent 3px,transparent 3px) 81.2% top/1px 6px repeat-y,linear-gradient(0deg,rgba(255, 255, 255, 0.2) 3px,transparent 3px,transparent 3px) 72.3% top/1px 6px repeat-y,linear-gradient(0deg,rgba(255, 255, 255, 0.2) 3px,transparent 3px,transparent 3px) 63.4% top/1px 6px repeat-y,linear-gradient(0deg,rgba(255, 255, 255, 0.2) 3px,transparent 3px,transparent 3px) 54.5% top/1px 6px repeat-y,linear-gradient(0deg,rgba(255, 255, 255, 0.2) 3px,transparent 3px,transparent 3px) 45.6% top/1px 6px repeat-y,linear-gradient(0deg,rgba(255, 255, 255, 0.2) 3px,transparent 3px,transparent 3px) 36.7% top/1px 6px repeat-y,linear-gradient(0deg,rgba(255, 255, 255, 0.2) 3px,transparent 3px,transparent 3px) 27.8% top/1px 6px repeat-y,linear-gradient(0deg,rgba(255, 255, 255, 0.2) 3px,transparent 3px,transparent 3px) 18.9% top/1px 6px repeat-y,linear-gradient(0deg,rgba(255, 255, 255, 0.2) 3px,transparent 3px,transparent 3px) 10% top/1px 6px repeat-y,linear-gradient(0deg,rgba(255, 255, 255, 0.2) 3px,transparent 3px,transparent 3px) 1.1% top/1px 6px repeat-y,linear-gradient(90deg,rgba(255, 255, 255, 0.2) 3px,transparent 3px,transparent 3px) left 90.2%/6px 1px repeat-x,linear-gradient(90deg,rgba(255, 255, 255, 0.2) 3px,transparent 3px,transparent 3px) left 74.3%/6px 1px repeat-x,linear-gradient(90deg,rgba(255, 255, 255, 0.2) 3px,transparent 3px,transparent 3px) left 58.4%/6px 1px repeat-x,linear-gradient(90deg,rgba(255, 255, 255, 0.2) 3px,transparent 3px,transparent 3px) left 42.5%/6px 1px repeat-x,linear-gradient(90deg,rgba(255, 255, 255, 0.2) 3px,transparent 3px,transparent 3px) left 26.6%/6px 1px repeat-x,linear-gradient(90deg,rgba(255, 255, 255, 0.2) 3px,transparent 3px,transparent 3px) left 10.7%/6px 1px repeat-x;;
 }
 .trash-pop .return-btn, .trash-pop .videos-btn, .trash-pop .map-btn, .trash-pop .book-btn, .trash-pop .chat-btn, .trash-pop .game-btn {
@@ -682,17 +679,21 @@ body {
 .trash-pop .load-save-btn {
   right: 1.5%;
 }
-.trash-pop .trash-game {
+.trash-pop .trash-game, .trash-pop .trash-flow {
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
   background: #3f6a99;
   border-radius: 1%;
   height: 100%;
   opacity: 0;
   visibility: hidden;
-  position: relative;
   overflow: hidden;
   transition: opacity 0.3s ease-in-out;
 }
-.trash-pop .trash-game.shown {
+.trash-pop .trash-game.shown, .trash-pop .trash-flow.shown {
   opacity: 1;
   visibility: visible;
 }
@@ -718,6 +719,7 @@ body {
   top: 50%;
   transform: translate(-50%, -50%);
   color: #000;
+  font-size: 20px;
 }
 .trash-pop .b-drop {
   background: rgba(255, 0, 0, 0.2);
@@ -756,11 +758,48 @@ body {
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
+  font-size: 20px;
 }
 .trash-pop .t-drop {
   background: rgba(255, 0, 0, 0.2);
   width: 50%;
   height: 50%;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+.trash-pop .trash-flow {
+  background: #555;
+  display: flex;
+  justify-content: space-between;
+  flex-flow: row wrap;
+}
+.trash-pop .f-vid {
+  width: 20%;
+  height: 50%;
+  text-decoration: none;
+  font-size: 30px;
+  color: #fff;
+  display: flex;
+}
+@media (min-width: 900px) {
+  .trash-pop .f-vid:hover {
+    color: #000;
+  }
+  .trash-pop .f-vid:hover .f-vid-wrap {
+    background: #ddd;
+  }
+}
+.trash-pop .f-vid-wrap {
+  height: 96%;
+  width: 95%;
+  margin: auto;
+  background: #888;
+  position: relative;
+  border-radius: 5%;
+}
+.trash-pop .f-vid-wrap span {
   position: absolute;
   left: 50%;
   top: 50%;

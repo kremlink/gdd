@@ -119,6 +119,9 @@
                         <div class="fail-line"></div>
                         <div class="bins"></div>
                     </div>
+                    <div class="trash-flow">
+                    
+                    </div>
                 </div>
                 <div class="null-btn">
                     <svg>
@@ -255,14 +258,20 @@
         </script>
         <script type="text/template" id="game-bin-template">
             <div class="b-drop"></div>
-            <span class="b-text">Type: <%= type %></span>
+            <span class="b-text"><%= type %></span>
         </script>
         <script type="text/template" id="game-trash-template">
             <div class="t-drop"></div>
             <span class="t-text">
-                Type: <%= type %><br/>
-                Subtype: <%= subtype %>
+               <%= type %> <!--Type: <%= type %><br/>Subtype: <%= subtype %>-->
             </span>
+        </script>
+        <script type="text/template" id="episodes-template">
+            <% for(let i=1;i<episodes+1;i++) { %>
+            <a class="f-vid" href="episodes/episode<%= i %>.html">
+                <div class="f-vid-wrap"><span><%= i %></span></div>
+            </a>
+            <% } %>
         </script>
         <div class="safe-hide-svg">
             @@include('components/shared-sprite.svg')

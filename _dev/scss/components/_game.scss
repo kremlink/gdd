@@ -21,12 +21,9 @@
       pointer-events:auto;
     }
     &.game-active{
-      .return-btn{
+      .return-btn,.videos-btn,.map-btn,.book-btn,.chat-btn,.null-btn,.menu-btn,.load-save-btn{
         pointer-events:none;
         opacity:0.2;
-      }
-      .game-btn{
-
       }
     }
     svg{
@@ -44,12 +41,12 @@
       height:100%;
     }
     .trash-main{
-      @include abs($l:13.1%,$t:4.4%);
-      width:68.7%;
-      height:68.2%;//15.9%,8.9%
-      /*@include abs($l:12.95%,$t:4.1%);
+      //@include abs($l:13.1%,$t:4.4%);
+      //width:68.7%;
+      //height:68.2%;//15.9%,8.9%
+      @include abs($l:12.95%,$t:4.1%);
       width:69%;
-      height:69%;*/
+      height:69%;
       $bg:'';
       @for $x from 0 through 5
       {
@@ -182,14 +179,14 @@
     .load-save-btn{
       right:1.5%;
     }
-    //game
-    .trash-game{
+
+    .trash-game,.trash-flow{
+      @include abs($l:0,$r:0,$t:0,$b:0);
       background:#3f6a99;
       border-radius:1%;
       height:100%;
       opacity:0;
       visibility:hidden;
-      position:relative;
       overflow:hidden;
       @include trs('opacity #{$anim} ease-in-out');
       &.shown{
@@ -197,6 +194,7 @@
         visibility:visible;
       }
     }
+    //game
     .bins{
       @include abs($l:3%,$r:3%,$b:5%,$t:0);
       @include flx(display,flex);
@@ -212,6 +210,7 @@
     .b-text{
       @include center();
       color:#000;
+      font-size:20px;
     }
     .b-drop{
       background:rgba(#f00,0.2);
@@ -241,6 +240,7 @@
     }
     .t-text{
       @include center();
+      font-size:20px;
     }
     .t-drop{
       background:rgba(#f00,0.2);
@@ -249,6 +249,41 @@
       @include center();
     }
     //end game
+    //flow
+    .trash-flow{
+      background:#555;
+      @include flx(display,flex);
+      @include flx(justify-content,space-between);
+      @include flx(flex-flow,'row wrap');
+    }
+    .f-vid{
+      width:20%;
+      height:50%;
+      text-decoration:none;
+      font-size:30px;
+      color:#fff;
+      @include flx(display,flex);
+      @include med(){
+        &:hover{
+          color:#000;
+          .f-vid-wrap{
+            background:#ddd;
+          }
+        }
+      }
+    }
+    .f-vid-wrap{
+      height:96%;
+      width:95%;
+      margin:auto;
+      background:#888;
+      position:relative;
+      border-radius:5%;
+      span{
+        @include center();
+      }
+    }
+    //end flow
   }
   //orientation
   .loader-pop{
