@@ -3,6 +3,10 @@
 /*@path:core\_mixins.scss*/
 /*@path:core\_exts.scss*/
 @import url("https://fonts.googleapis.com/css?family=Open+Sans:300,400,700&subset=cyrillic");
+.loader-pop {
+  background: url(../images/loader.gif) center no-repeat;
+}
+
 /*@path:base\_vars.scss*/
 /*@path:base\_normalize.scss*/
 /*! normalize.css v2.1.3 | MIT License | git.io/normalize */
@@ -445,16 +449,12 @@ body {
 
 #wrap {
   height: 100%;
-  min-height: 600px;
+  min-height: 500px;
   position: relative;
   min-width: 360px;
 }
 
 #wrap-wrap {
-  height: 56.25vw;
-  max-height: 100vh;
-  max-width: 177.78vh;
-  margin: auto;
   overflow: hidden;
   position: absolute;
   left: 0;
@@ -463,7 +463,41 @@ body {
   bottom: 0;
 }
 
+.safe-hide-svg {
+  height: 0;
+  overflow: hidden;
+}
+
 /*@path:base\_exts.scss*/
+.trash-pop.fs .trash-wrap, #wrap-wrap {
+  height: 56.25vw;
+  max-height: 100vh;
+  max-width: 177.78vh;
+  margin: auto;
+}
+
+.trash-pop .menu-btn svg, .trash-pop .load-save-btn svg, .trash-pop .null-btn svg, .trash-pop .return-btn svg, .trash-pop .videos-btn svg, .trash-pop .map-btn svg, .trash-pop .book-btn svg, .trash-pop .chat-btn svg, .trash-pop .game-btn svg {
+  opacity: 0;
+}
+.trash-pop .active.menu-btn:active svg:nth-child(3), .trash-pop .active.load-save-btn:active svg:nth-child(3), .trash-pop .active.null-btn:active svg:nth-child(3), .trash-pop .active.return-btn:active svg:nth-child(3), .trash-pop .active.videos-btn:active svg:nth-child(3), .trash-pop .active.map-btn:active svg:nth-child(3), .trash-pop .active.book-btn:active svg:nth-child(3), .trash-pop .active.chat-btn:active svg:nth-child(3), .trash-pop .active.game-btn:active svg:nth-child(3) {
+  opacity: 0;
+}
+.trash-pop .active.menu-btn:active svg:nth-child(4), .trash-pop .active.load-save-btn:active svg:nth-child(4), .trash-pop .active.null-btn:active svg:nth-child(4), .trash-pop .active.return-btn:active svg:nth-child(4), .trash-pop .active.videos-btn:active svg:nth-child(4), .trash-pop .active.map-btn:active svg:nth-child(4), .trash-pop .active.book-btn:active svg:nth-child(4), .trash-pop .active.chat-btn:active svg:nth-child(4), .trash-pop .active.game-btn:active svg:nth-child(4) {
+  opacity: 1;
+}
+.trash-pop .active.menu-btn svg:nth-child(3), .trash-pop .active.load-save-btn svg:nth-child(3), .trash-pop .active.null-btn svg:nth-child(3), .trash-pop .active.return-btn svg:nth-child(3), .trash-pop .active.videos-btn svg:nth-child(3), .trash-pop .active.map-btn svg:nth-child(3), .trash-pop .active.book-btn svg:nth-child(3), .trash-pop .active.chat-btn svg:nth-child(3), .trash-pop .active.game-btn svg:nth-child(3) {
+  opacity: 1;
+}
+.trash-pop .menu-btn:not(.active):active svg:nth-child(1), .trash-pop .load-save-btn:not(.active):active svg:nth-child(1), .trash-pop .null-btn:not(.active):active svg:nth-child(1), .trash-pop .return-btn:not(.active):active svg:nth-child(1), .trash-pop .videos-btn:not(.active):active svg:nth-child(1), .trash-pop .map-btn:not(.active):active svg:nth-child(1), .trash-pop .book-btn:not(.active):active svg:nth-child(1), .trash-pop .chat-btn:not(.active):active svg:nth-child(1), .trash-pop .game-btn:not(.active):active svg:nth-child(1) {
+  opacity: 0;
+}
+.trash-pop .menu-btn:not(.active):active svg:nth-child(2), .trash-pop .load-save-btn:not(.active):active svg:nth-child(2), .trash-pop .null-btn:not(.active):active svg:nth-child(2), .trash-pop .return-btn:not(.active):active svg:nth-child(2), .trash-pop .videos-btn:not(.active):active svg:nth-child(2), .trash-pop .map-btn:not(.active):active svg:nth-child(2), .trash-pop .book-btn:not(.active):active svg:nth-child(2), .trash-pop .chat-btn:not(.active):active svg:nth-child(2), .trash-pop .game-btn:not(.active):active svg:nth-child(2) {
+  opacity: 1;
+}
+.trash-pop .menu-btn:not(.active) svg:nth-child(1), .trash-pop .load-save-btn:not(.active) svg:nth-child(1), .trash-pop .null-btn:not(.active) svg:nth-child(1), .trash-pop .return-btn:not(.active) svg:nth-child(1), .trash-pop .videos-btn:not(.active) svg:nth-child(1), .trash-pop .map-btn:not(.active) svg:nth-child(1), .trash-pop .book-btn:not(.active) svg:nth-child(1), .trash-pop .chat-btn:not(.active) svg:nth-child(1), .trash-pop .game-btn:not(.active) svg:nth-child(1) {
+  opacity: 1;
+}
+
 /*@path:components\_footer.scss*/
 /*@path:components\_game.scss*/
 .trash-pop {
@@ -477,126 +511,330 @@ body {
   opacity: 0;
   pointer-events: none;
   text-align: center;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
   transition: opacity 0.3s ease-in-out;
+}
+.trash-pop.fs {
+  left: 0;
+  right: 0;
+}
+.trash-pop.fs .trash-wrap {
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
 }
 .trash-pop.shown {
   opacity: 1;
   pointer-events: auto;
 }
-.trash-pop.game-active .game-btn {
-  background: #694482;
+.trash-pop.game-active .return-btn, .trash-pop.game-active .videos-btn, .trash-pop.game-active .map-btn, .trash-pop.game-active .book-btn, .trash-pop.game-active .chat-btn, .trash-pop.game-active .null-btn, .trash-pop.game-active .menu-btn, .trash-pop.game-active .load-save-btn {
+  pointer-events: none;
+  opacity: 0.2;
 }
-.trash-pop.game-active .game-btn .test {
-  color: #fff;
-}
-.trash-pop .row {
-  display: flex;
-  justify-content: space-between;
+.trash-pop svg {
   position: absolute;
-  left: 1%;
-  right: 1%;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
 }
-.trash-pop .row.one {
-  top: 1.5%;
-  height: 77.5%;
-}
-.trash-pop .row.two {
-  top: 80.5%;
-  height: 18%;
-}
-.trash-pop .col {
-  display: flex;
-  flex-flow: column nowrap;
-  justify-content: space-between;
-}
-.trash-pop .col.one {
-  width: 8%;
-}
-.trash-pop .col.two {
-  width: 12%;
-}
-.trash-pop .other {
-  width: 12%;
-  display: flex;
-  justify-content: space-between;
-}
-.trash-pop .main, .trash-pop .footer {
-  width: 78%;
-  background: #000;
-}
-.trash-pop .return-btn, .trash-pop .videos-btn, .trash-pop .map-btn, .trash-pop .book-btn, .trash-pop .chat-btn, .trash-pop .game-btn, .trash-pop .null-btn {
-  background: #aaa;
-  cursor: pointer;
+.trash-pop .trash-wrap {
+  height: 100%;
   position: relative;
+}
+.trash-pop .trash-bg {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+}
+.trash-pop .trash-main {
+  position: absolute;
+  left: 12.95%;
+  top: 4.1%;
+  width: 69%;
+  height: 69%;
+  background: linear-gradient(0deg,rgba(255, 255, 255, 0.2) 3px,transparent 3px,transparent 3px) 99% top/1px 6px repeat-y,linear-gradient(0deg,rgba(255, 255, 255, 0.2) 3px,transparent 3px,transparent 3px) 90.1% top/1px 6px repeat-y,linear-gradient(0deg,rgba(255, 255, 255, 0.2) 3px,transparent 3px,transparent 3px) 81.2% top/1px 6px repeat-y,linear-gradient(0deg,rgba(255, 255, 255, 0.2) 3px,transparent 3px,transparent 3px) 72.3% top/1px 6px repeat-y,linear-gradient(0deg,rgba(255, 255, 255, 0.2) 3px,transparent 3px,transparent 3px) 63.4% top/1px 6px repeat-y,linear-gradient(0deg,rgba(255, 255, 255, 0.2) 3px,transparent 3px,transparent 3px) 54.5% top/1px 6px repeat-y,linear-gradient(0deg,rgba(255, 255, 255, 0.2) 3px,transparent 3px,transparent 3px) 45.6% top/1px 6px repeat-y,linear-gradient(0deg,rgba(255, 255, 255, 0.2) 3px,transparent 3px,transparent 3px) 36.7% top/1px 6px repeat-y,linear-gradient(0deg,rgba(255, 255, 255, 0.2) 3px,transparent 3px,transparent 3px) 27.8% top/1px 6px repeat-y,linear-gradient(0deg,rgba(255, 255, 255, 0.2) 3px,transparent 3px,transparent 3px) 18.9% top/1px 6px repeat-y,linear-gradient(0deg,rgba(255, 255, 255, 0.2) 3px,transparent 3px,transparent 3px) 10% top/1px 6px repeat-y,linear-gradient(0deg,rgba(255, 255, 255, 0.2) 3px,transparent 3px,transparent 3px) 1.1% top/1px 6px repeat-y,linear-gradient(90deg,rgba(255, 255, 255, 0.2) 3px,transparent 3px,transparent 3px) left 90.2%/6px 1px repeat-x,linear-gradient(90deg,rgba(255, 255, 255, 0.2) 3px,transparent 3px,transparent 3px) left 74.3%/6px 1px repeat-x,linear-gradient(90deg,rgba(255, 255, 255, 0.2) 3px,transparent 3px,transparent 3px) left 58.4%/6px 1px repeat-x,linear-gradient(90deg,rgba(255, 255, 255, 0.2) 3px,transparent 3px,transparent 3px) left 42.5%/6px 1px repeat-x,linear-gradient(90deg,rgba(255, 255, 255, 0.2) 3px,transparent 3px,transparent 3px) left 26.6%/6px 1px repeat-x,linear-gradient(90deg,rgba(255, 255, 255, 0.2) 3px,transparent 3px,transparent 3px) left 10.7%/6px 1px repeat-x;;
+}
+.trash-pop .return-btn, .trash-pop .videos-btn, .trash-pop .map-btn, .trash-pop .book-btn, .trash-pop .chat-btn, .trash-pop .game-btn {
+  cursor: pointer;
+  position: absolute;
+  left: 2.3%;
+  width: 8.9%;
+  height: 9.7%;
 }
 .trash-pop .return-btn {
-  height: 12%;
+  top: 4.2%;
+  height: 16.4%;
 }
 .trash-pop .videos-btn {
-  height: 9%;
+  top: 22.2%;
+  width: 8.9%;
 }
 .trash-pop .map-btn {
-  height: 9%;
+  top: 32.8%;
+  width: 8.9%;
 }
 .trash-pop .book-btn {
-  height: 9%;
+  top: 43.4%;
+  width: 8.9%;
 }
 .trash-pop .chat-btn {
-  height: 9%;
+  top: 54%;
+  width: 8.9%;
 }
 .trash-pop .game-btn {
-  height: 14%;
+  bottom: 3.1%;
+  width: 8.9%;
+  height: 19.7%;
 }
 .trash-pop .null-btn {
-  background: #999;
-  cursor: pointer;
-  height: 20%;
+  position: absolute;
+  top: 11.1%;
+  right: 4.1%;
+  width: 9.7%;
+  height: 18.9%;
 }
 .trash-pop .prog1, .trash-pop .prog2, .trash-pop .prog3 {
-  height: 3%;
-  position: relative;
-  background: #eee;
+  position: absolute;
+  right: 4.2%;
+  width: 9%;
+  height: 4.2%;
 }
-.trash-pop .prog1 .test, .trash-pop .prog2 .test, .trash-pop .prog3 .test {
+.trash-pop .prog1 span, .trash-pop .prog2 span, .trash-pop .prog3 span {
+  position: absolute;
+  left: -13%;
+  top: 22%;
+  font-size: 14px;
+  font-weight: 700;
   color: #000;
 }
+.trash-pop .prog1 svg + svg, .trash-pop .prog2 svg + svg, .trash-pop .prog3 svg + svg {
+  clip-path: polygon(0 0, 0 0, 0 100%, 0 100%);
+}
+.trash-pop .prog1.disabled .prog-inac, .trash-pop .prog2.disabled .prog-inac, .trash-pop .prog3.disabled .prog-inac {
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+}
+.trash-pop .prog1 {
+  top: 39.2%;
+}
+.trash-pop .prog2 {
+  top: 44.7%;
+}
+.trash-pop .prog3 {
+  top: 50.2%;
+}
 .trash-pop .prog-u {
-  height: 3%;
-  background: #eee;
+  position: absolute;
+  top: 56.7%;
+  right: 4.8%;
+  width: 8.1%;
+  height: 1.7%;
+  display: flex;
+  justify-content: space-between;
 }
-.trash-pop .space {
-  height: 26%;
+.trash-pop .prog-u div {
+  position: relative;
+  width: 12%;
 }
-.trash-pop .game-btn {
-  background: #aaa;
-  height: 100%;
-  cursor: pointer;
+.trash-pop .prog-u svg {
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+.trash-pop .prog-u svg + svg {
+  opacity: 0.5;
+}
+.trash-pop .t-f-under {
+  position: absolute;
+  left: 12.9%;
+  bottom: 4.2%;
+  width: 69.1%;
+  height: 18.6%;
+  background: #000;
+  border-radius: 1%/5%;
+}
+.trash-pop .trash-footer {
+  position: absolute;
+  left: 13.1%;
+  bottom: 4.2%;
+  width: 68.7%;
+  height: 18.6%;
+  background: linear-gradient(0deg,rgba(255, 255, 255, 0.2) 3px,transparent 3px,transparent 3px) 99% top/1px 6px repeat-y,linear-gradient(0deg,rgba(255, 255, 255, 0.2) 3px,transparent 3px,transparent 3px) 90.1% top/1px 6px repeat-y,linear-gradient(0deg,rgba(255, 255, 255, 0.2) 3px,transparent 3px,transparent 3px) 81.2% top/1px 6px repeat-y,linear-gradient(0deg,rgba(255, 255, 255, 0.2) 3px,transparent 3px,transparent 3px) 72.3% top/1px 6px repeat-y,linear-gradient(0deg,rgba(255, 255, 255, 0.2) 3px,transparent 3px,transparent 3px) 63.4% top/1px 6px repeat-y,linear-gradient(0deg,rgba(255, 255, 255, 0.2) 3px,transparent 3px,transparent 3px) 54.5% top/1px 6px repeat-y,linear-gradient(0deg,rgba(255, 255, 255, 0.2) 3px,transparent 3px,transparent 3px) 45.6% top/1px 6px repeat-y,linear-gradient(0deg,rgba(255, 255, 255, 0.2) 3px,transparent 3px,transparent 3px) 36.7% top/1px 6px repeat-y,linear-gradient(0deg,rgba(255, 255, 255, 0.2) 3px,transparent 3px,transparent 3px) 27.8% top/1px 6px repeat-y,linear-gradient(0deg,rgba(255, 255, 255, 0.2) 3px,transparent 3px,transparent 3px) 18.9% top/1px 6px repeat-y,linear-gradient(0deg,rgba(255, 255, 255, 0.2) 3px,transparent 3px,transparent 3px) 10% top/1px 6px repeat-y,linear-gradient(0deg,rgba(255, 255, 255, 0.2) 3px,transparent 3px,transparent 3px) 1.1% top/1px 6px repeat-y,linear-gradient(90deg,rgba(255, 255, 255, 0.2) 3px,transparent 3px,transparent 3px) left 79.1%/6px 1px repeat-x,linear-gradient(90deg,rgba(255, 255, 255, 0.2) 3px,transparent 3px,transparent 3px) left 20.9%/6px 1px repeat-x;;
 }
 .trash-pop .menu-btn, .trash-pop .load-save-btn {
-  width: 46%;
-  position: relative;
-  background: #aaa;
+  position: absolute;
+  right: 9.9%;
+  bottom: 6.4%;
+  width: 6.3%;
+  height: 16.4%;
   cursor: pointer;
 }
-.trash-pop .game {
+.trash-pop .load-save-btn {
+  right: 1.5%;
+}
+.trash-pop .trash-game, .trash-pop .trash-flow {
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
   background: #3f6a99;
+  border-radius: 1%;
   height: 100%;
   opacity: 0;
-  pointer-events: none;
-  position: relative;
+  visibility: hidden;
+  overflow: hidden;
   transition: opacity 0.3s ease-in-out;
 }
-.trash-pop .game.shown {
+.trash-pop .trash-game.shown, .trash-pop .trash-flow.shown {
   opacity: 1;
-  pointer-events: auto;
+  visibility: visible;
 }
-.trash-pop .test {
+.trash-pop .bins {
+  position: absolute;
+  left: 3%;
+  top: 0;
+  right: 3%;
+  bottom: 5%;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+.trash-pop .bin {
+  width: 10%;
+  height: 20%;
+  background: #ddd;
+  position: relative;
+}
+.trash-pop .b-text {
   position: absolute;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
-  font-size: 14px;
+  color: #000;
+  font-size: 20px;
+}
+.trash-pop .b-drop {
+  background: rgba(255, 0, 0, 0.2);
+  width: 80%;
+  height: 80%;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+.trash-pop .fail-line {
+  position: absolute;
+  left: 0;
+  right: 0;
+  border-top: 2px solid rgba(255, 0, 0, 0.4);
+}
+.trash-pop .trash {
+  width: 7%;
+  height: 14%;
+  background: #999;
+  position: absolute;
+  bottom: 100%;
+}
+.trash-pop .trash.fail {
+  transition: opacity 0.3s ease-in-out;
+  opacity: 0;
+  pointer-events: none;
+}
+.trash-pop .trash.caught {
+  transition: transform 0.3s ease-in-out;
+  transform: scale(0);
+  pointer-events: none;
+}
+.trash-pop .t-text {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 20px;
+}
+.trash-pop .t-drop {
+  background: rgba(255, 0, 0, 0.2);
+  width: 50%;
+  height: 50%;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+.trash-pop .trash-flow {
+  background: #555;
+  display: flex;
+  justify-content: space-between;
+  flex-flow: row wrap;
+}
+.trash-pop .f-vid {
+  width: 20%;
+  height: 50%;
+  text-decoration: none;
+  font-size: 30px;
   color: #fff;
+  display: flex;
+}
+@media (min-width: 900px) {
+  .trash-pop .f-vid:hover {
+    color: #000;
+  }
+  .trash-pop .f-vid:hover .f-vid-wrap {
+    background: #ddd;
+  }
+}
+.trash-pop .f-vid-wrap {
+  height: 96%;
+  width: 95%;
+  margin: auto;
+  background: #888;
+  position: relative;
+  border-radius: 5%;
+}
+.trash-pop .f-vid-wrap span {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.loader-pop {
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  transition: opacity 0.3s ease-in-out;
+  background-color: #eee;
+}
+.ready .loader-pop {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.orientation-pop {
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  display: none;
+  background: #fff;
+  font-size: 30px;
+  line-height: 30px;
+  justify-content: center;
+  align-items: center;
+}
+.too-small .orientation-pop {
+  display: flex;
 }
 
 /*@path:components\_header.scss*/
@@ -608,7 +846,10 @@ body {
 }
 
 .video-js .vjs-big-play-button {
-  display: none;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
 }
 
 /*@path:partials\_index.scss*/

@@ -11,7 +11,7 @@
                         class="video-js"
                         controls
                         preload="auto"
-                        poster="//vjs.zencdn.net/v/oceans.png"> <!--data-setup='{}'-->
+                        poster="../oceans.png"> <!--poster="//vjs.zencdn.net/v/oceans.png" data-setup='{}'-->
                 <!--<source src="//vjs.zencdn.net/v/oceans.mp4" type="video/mp4"></source>
                 <source src="//vjs.zencdn.net/v/oceans.webm" type="video/webm"></source>
                 <source src="//vjs.zencdn.net/v/oceans.ogv" type="video/ogg"></source>-->
@@ -25,39 +25,256 @@
                 </p>
                 </video>
             </div>
+            <div class="loader-pop"></div>
+            <div class="orientation-pop">
+                Экран слишком мал :(<br/>
+                Возможно, вам поможет поворот девайса.
+            </div>
 		</div>
         <script type="text/template" id="trash-template">
-            <div class="row one">
-                <div class="col one">
-                    <div class="return-btn"><span class="test">Плей</span></div>
-                    <div class="videos-btn"><span class="test">Поток</span></div>
-                    <div class="map-btn"><span class="test">Карта</span></div>
-                    <div class="book-btn"><span class="test">Библия</span></div>
-                    <div class="chat-btn"><span class="test">Чат</span></div>
+            <div class="trash-wrap">
+                <svg class="trash-bg">
+                    <use xlink:href="#icon-shared-bg"></use>
+                </svg>
+                <div class="return-btn">
+                    <svg>
+                        <use xlink:href="#icon-shared-btn-play"></use>
+                    </svg>
+                    <svg>
+                        <use xlink:href="#icon-shared-btn-play-click"></use>
+                    </svg>
                 </div>
-                <div class="main"></div>
-                <div class="col two">
-                    <div class="null-btn"><span class="test">Обнулятор</span></div>
-                    <div class="prog1"><span class="test">Прогресс1</span></div>
-                    <div class="prog2"><span class="test">Прогресс2</span></div>
-                    <div class="prog3"><span class="test">Прогресс3</span></div>
-                    <div class="prog-u"></div>
-                    <div class="space"></div>
+                <div class="videos-btn active">
+                    <svg>
+                        <use xlink:href="#icon-shared-btn-potok-passive"></use>
+                    </svg>
+                    <svg>
+                        <use xlink:href="#icon-shared-btn-potok-passive-click"></use>
+                    </svg>
+                    <svg>
+                        <use xlink:href="#icon-shared-btn-potok-active"></use>
+                    </svg>
+                    <svg>
+                        <use xlink:href="#icon-shared-btn-potok-active-click"></use>
+                    </svg>
                 </div>
-            </div>
-            <div class="row two">
-                <div class="col one">
-                    <div class="game-btn"><span class="test">Трэш</span></div>
+                <div class="map-btn">
+                    <svg>
+                        <use xlink:href="#icon-shared-btn-karta-passive"></use>
+                    </svg>
+                    <svg>
+                        <use xlink:href="#icon-shared-btn-karta-passive-click"></use>
+                    </svg>
+                    <svg>
+                        <use xlink:href="#icon-shared-btn-karta-active"></use>
+                    </svg>
+                    <svg>
+                        <use xlink:href="#icon-shared-btn-karta-active-click"></use>
+                    </svg>
                 </div>
-                <div class="footer"></div>
-                <div class="other">
-                    <div class="menu-btn"><span class="test">Меню</span></div>
-                    <div class="load-save-btn"><span class="test">Сохр / Загр</span></div>
+                <div class="book-btn">
+                    <svg>
+                        <use xlink:href="#icon-shared-btn-biblia-passive"></use>
+                    </svg>
+                    <svg>
+                        <use xlink:href="#icon-shared-btn-biblia-passive-click"></use>
+                    </svg>
+                    <svg>
+                        <use xlink:href="#icon-shared-btn-biblia-active"></use>
+                    </svg>
+                    <svg>
+                        <use xlink:href="#icon-shared-btn-biblia-active-click"></use>
+                    </svg>
+                </div>
+                <div class="chat-btn">
+                    <svg>
+                        <use xlink:href="#icon-shared-btn-chat-passive"></use>
+                    </svg>
+                    <svg>
+                        <use xlink:href="#icon-shared-btn-chat-passive-click"></use>
+                    </svg>
+                    <svg>
+                        <use xlink:href="#icon-shared-btn-chat-active"></use>
+                    </svg>
+                    <svg>
+                        <use xlink:href="#icon-shared-btn-chat-active-click"></use>
+                    </svg>
+                </div>
+                <div class="game-btn active">
+                    <svg>
+                        <use xlink:href="#icon-shared-btn-tresh-passive"></use>
+                    </svg>
+                    <svg>
+                        <use xlink:href="#icon-shared-btn-tresh-passive-click"></use>
+                    </svg>
+                    <svg>
+                        <use xlink:href="#icon-shared-btn-tresh-active"></use>
+                    </svg>
+                    <svg>
+                        <use xlink:href="#icon-shared-btn-tresh-active-click"></use>
+                    </svg>
+                </div>
+                <div class="trash-main">
+                    <div class="trash-game">
+                        <div class="fail-line"></div>
+                        <div class="bins"></div>
+                    </div>
+                    <div class="trash-flow">
+                    
+                    </div>
+                </div>
+                <div class="null-btn">
+                    <svg>
+                        <use xlink:href="#icon-shared-obnul"></use>
+                    </svg>
+                    <svg>
+                        <use xlink:href="#icon-shared-obnul-click"></use>
+                    </svg>
+                </div>
+               <div class="prog1 disabled">
+                   <span>T</span>
+                   <svg class="prog-ini">
+                       <use xlink:href="#icon-shared-prog"></use>
+                   </svg>
+                   <svg class="prog-inac">
+                       <use xlink:href="#icon-shared-prog-gray"></use>
+                   </svg>
+                   <svg class="prog-ac">
+                       <use xlink:href="#icon-shared-prog-green"></use>
+                   </svg>
+                   <svg class="prog-fail">
+                       <use xlink:href="#icon-shared-prog-red"></use>
+                   </svg>
+               </div>
+                <div class="prog2">
+                    <span>E</span>
+                    <svg class="prog-ini">
+                        <use xlink:href="#icon-shared-prog"></use>
+                    </svg>
+                    <svg class="prog-inac">
+                        <use xlink:href="#icon-shared-prog-gray"></use>
+                    </svg>
+                    <svg class="prog-ac">
+                        <use xlink:href="#icon-shared-prog-green"></use>
+                    </svg>
+                    <svg class="prog-fail">
+                        <use xlink:href="#icon-shared-prog-red"></use>
+                    </svg>
+                </div>
+                <div class="prog3">
+                    <span>S</span>
+                    <svg class="prog-ini">
+                        <use xlink:href="#icon-shared-prog"></use>
+                    </svg>
+                    <svg class="prog-inac">
+                        <use xlink:href="#icon-shared-prog-gray"></use>
+                    </svg>
+                    <svg class="prog-ac">
+                        <use xlink:href="#icon-shared-prog-green"></use>
+                    </svg>
+                    <svg class="prog-fail">
+                        <use xlink:href="#icon-shared-prog-red"></use>
+                    </svg>
+                </div>
+                <div class="prog-u">
+                    <div>
+                        <svg>
+                            <use xlink:href="#icon-shared-loader-gray"></use>
+                        </svg>
+                        <svg>
+                            <use xlink:href="#icon-shared-loader-green"></use>
+                        </svg>
+                    </div>
+                    <div>
+                        <svg>
+                            <use xlink:href="#icon-shared-loader-gray"></use>
+                        </svg>
+                        <svg>
+                            <use xlink:href="#icon-shared-loader-green"></use>
+                        </svg>
+                    </div>
+                    <div>
+                        <svg>
+                            <use xlink:href="#icon-shared-loader-gray"></use>
+                        </svg>
+                        <svg>
+                            <use xlink:href="#icon-shared-loader-green"></use>
+                        </svg>
+                    </div>
+                    <div>
+                        <svg>
+                            <use xlink:href="#icon-shared-loader-gray"></use>
+                        </svg>
+                        <svg>
+                            <use xlink:href="#icon-shared-loader-green"></use>
+                        </svg>
+                    </div>
+                    <div>
+                        <svg>
+                            <use xlink:href="#icon-shared-loader-gray"></use>
+                        </svg>
+                        <svg>
+                            <use xlink:href="#icon-shared-loader-green"></use>
+                        </svg>
+                    </div>
+                    <div>
+                        <svg>
+                            <use xlink:href="#icon-shared-loader-gray"></use>
+                        </svg>
+                        <svg>
+                            <use xlink:href="#icon-shared-loader-green"></use>
+                        </svg>
+                    </div>
+                    <div>
+                        <svg>
+                            <use xlink:href="#icon-shared-loader-gray"></use>
+                        </svg>
+                        <svg>
+                            <use xlink:href="#icon-shared-loader-green"></use>
+                        </svg>
+                    </div>
+                </div>
+                <div class="t-f-under"></div>
+                <div class="trash-footer">
+                
+                </div>
+                <div class="menu-btn">
+                    <svg>
+                        <use xlink:href="#icon-shared-btn-menu"></use>
+                    </svg>
+                    <svg>
+                        <use xlink:href="#icon-shared-btn-menu-click"></use>
+                    </svg>
+                </div>
+                <div class="load-save-btn">
+                    <svg>
+                        <use xlink:href="#icon-shared-btn-save"></use>
+                    </svg>
+                    <svg>
+                        <use xlink:href="#icon-shared-btn-save-click"></use>
+                    </svg>
                 </div>
             </div>
         </script>
-        <script type="text/template" id="game-template">
-            <span></span>
+        <script type="text/template" id="game-bin-template">
+            <div class="b-drop"></div>
+            <span class="b-text"><%= type %></span>
         </script>
+        <script type="text/template" id="game-trash-template">
+            <div class="t-drop"></div>
+            <span class="t-text">
+               <%= type %> <!--Type: <%= type %><br/>Subtype: <%= subtype %>-->
+            </span>
+        </script>
+        <script type="text/template" id="episodes-template">
+            <% for(let i=1;i<episodes+1;i++) { %>
+            <a class="f-vid" href="episodes/episode<%= i %>.html">
+                <div class="f-vid-wrap"><span><%= i %></span></div>
+            </a>
+            <% } %>
+        </script>
+        <div class="safe-hide-svg">
+            @@include('components/shared-sprite.svg')
+        </div>
 	</body>
 </html>
