@@ -8,11 +8,11 @@ import {app} from '../../bf/base.js';
 export let GameView=Backbone.View.extend({
  el:data.view.el,
  initialize:function(){
-  this.binViews=[];
+  //this.binViews=[];
   this.bins=new (Backbone.Collection.extend({model:GameBinModel}));
   this.listenTo(this.bins,'reset',this.addBins);
   this.listenTo(this.bins,'change:amount',this.trashPut);
-  this.bins.reset(data.binData);
+  //this.bins.reset(data.data[this.diff].binData);
   this.trash=[];
   this.coords={x:0,y:0};
   this.dragging=false;
@@ -20,10 +20,31 @@ export let GameView=Backbone.View.extend({
   this.trashDone=0;
   this.listenTo(app.get('aggregator'),'game:trash-failed game:trash-caught',this.trashCount);
   this.progress=0;
+
+  this.diff='';
+  this.$diffChoose=$('.tmp-choose div');
+  this.$diffChoose.each(i=>{
+   this.$diffChoose.eq(i).on('click',()=>{
+    switch (i)
+    {
+     case 0:this.diff='easy';
+     break;
+     case 1:this.diff='normal';
+      break;
+     case 2:this.diff='hard';
+    }
+    this.binViews=[];
+    app.get('aggregator').trigger('game:progress',0);
+    _.invoke(this.bins.toArray(),'destroy');
+    this.$diffChoose.removeClass('active').eq(i).addClass('active');
+    this.bins.reset(data.data[this.diff].binData);
+    this.generateTrash();
+   });
+  });
  },
  trashCount:function(){
   this.trashDone++;
-  if(this.trashDone===data.trashData.length)
+  if(this.trashDone===data.data[this.diff].trashData.length)
   {
    app.get('aggregator').trigger('game:end');
    this.trashDone=0;
@@ -83,7 +104,7 @@ export let GameView=Backbone.View.extend({
  play:function(){
   this.$el.addClass(data.view.shownCls);
   this.ctrls();
-  this.generateTrash();
+  //this.generateTrash();
  },
  hide:function(){
   this.$el.removeClass(data.view.shownCls);
@@ -92,9 +113,8 @@ export let GameView=Backbone.View.extend({
   if(v>m.previousAttributes().amount)
   {
    this.progress++;
-   app.get('aggregator').trigger('game:progress',Math.round(100*this.progress/data.trashData.length));
+   app.get('aggregator').trigger('game:progress',Math.round(100*this.progress/data.data[this.diff].trashData.length));//Math.ceil((n+1)/10)*10
   }
-  //console.log(++this.progress);
  },
  addBins:function(){
   this.bins.each(model=>{
@@ -107,7 +127,7 @@ export let GameView=Backbone.View.extend({
  generateTrash:function(){//TODO: re-generation logic is to be removed
   if(!this.trash.length)
   {
-   data.trashData.forEach(t=>{
+   data.data[this.diff].trashData.forEach(t=>{
     let trash=new GameTrashView(t);
 
     this.$el.append(trash.el);
@@ -115,7 +135,7 @@ export let GameView=Backbone.View.extend({
    });
   }else
   {
-   this.trash.forEach(t=>{t.remove();});
+   _.invoke(this.trash,'remove');
    this.trash=[];
    this.progress=0;
    this.generateTrash();

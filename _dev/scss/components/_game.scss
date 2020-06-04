@@ -39,14 +39,15 @@
       @include abs($l:0,$t:0);
       width:100%;
       height:100%;
+      pointer-events:none;
     }
     .trash-main{
-      //@include abs($l:13.1%,$t:4.4%);
-      //width:68.7%;
-      //height:68.2%;//15.9%,8.9%
-      @include abs($l:12.95%,$t:4.1%);
-      width:69%;
-      height:69%;
+      @include abs($l:13.1%,$t:4.4%);
+      width:68.7%;
+      height:68.3%;//15.9%,8.9%
+      //@include abs($l:12.95%,$t:4.1%);
+      //width:69%;
+      //height:69%;
       $bg:'';
       @for $x from 0 through 5
       {
@@ -145,13 +146,13 @@
         }
       }
     }
-    .t-f-under{
+    /*.t-f-under{
       @include abs($l:12.9%,$b:4.2%);
       width:69.1%;
       height:18.6%;//15.9%,8.9%
       background:#000;
       border-radius:1%/5%;
-    }
+    }*/
     .trash-footer{
       @include abs($l:13.1%,$b:4.2%);
       width:68.7%;
@@ -180,7 +181,7 @@
       right:1.5%;
     }
 
-    .trash-game,.trash-flow{
+    .trash-block{
       @include abs($l:0,$r:0,$t:0,$b:0);
       border-radius:1%;
       height:100%;
@@ -192,11 +193,20 @@
         opacity:1;
         visibility:visible;
       }
+      &.game{
+        background: url(#{$path}game-bg.jpg) center/cover no-repeat;
+      }
+      &.flow{
+        background:#555;
+        @include flx(display,flex);
+        @include flx(justify-content,space-between);
+        @include flx(flex-flow,'row wrap');
+      }
+      &.map{
+        background: url(#{$path}game-bg.jpg) center/cover no-repeat;
+      }
     }
     //game
-    .trash-game{
-      background: url(#{$path}game-bg.jpg) center/cover no-repeat;
-    }
     .bins{
       @include abs($l:3%,$r:3%,$b:5%,$t:0);
       @include flx(display,flex);
@@ -220,7 +230,7 @@
       @include center();
     }
     .fail-line{
-      @include abs($l:0,$r:0);
+      @include abs($l:0,$r:0,$b:-5%);
       border-top:2px solid rgba(#f00,0.4);
     }
     .trash{
@@ -250,14 +260,22 @@
       height:100%;
       @include center();
     }
+
+    .tmp-choose{
+      @include abs($l:0,$t:0);
+      width:10%;
+      height:20%;
+      div{
+        height:33%;
+        cursor:pointer;
+        @extend %bxz;
+        &.active{
+          border:2px solid #fff;
+        }
+      }
+    }
     //end game
     //flow
-    .trash-flow{
-      background:#555;
-      @include flx(display,flex);
-      @include flx(justify-content,space-between);
-      @include flx(flex-flow,'row wrap');
-    }
     .f-vid{
       width:20%;
       height:50%;
@@ -286,6 +304,9 @@
       }
     }
     //end flow
+    //map
+
+    //end map
   }
   //orientation
   .loader-pop{

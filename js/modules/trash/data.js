@@ -2,7 +2,8 @@ export const data={
  events:{
   'return':'.return-btn',
   'game':'.game-btn',
-  'flow':'.videos-btn'
+  'flow':'.videos-btn',
+  'map':'.map-btn'
  },
  view:{
   className:'trash-pop',

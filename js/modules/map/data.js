@@ -1,8 +1,8 @@
 export const data={
  amount:10,
  view:{
-  el:'.trash-block.flow',
-  template:'#episodes-template',
+  el:'.trash-block.map',
+  template:'#map-template',
   shownCls:'shown'
  }
 };

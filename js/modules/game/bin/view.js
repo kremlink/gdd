@@ -6,5 +6,6 @@ export let GameBinView=Backbone.View.extend({
  initialize:function(){
   this.$el.html(this.template(this.model.toJSON()));
   this.$drop=this.$(data.view.drop);
+  this.listenTo(this.model,'destroy',this.remove);
  }
 });

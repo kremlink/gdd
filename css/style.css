@@ -7,6 +7,10 @@
   background: url(../images/loader.gif) center no-repeat;
 }
 
+.trash-pop .tmp-choose div {
+  box-sizing: border-box;
+}
+
 /*@path:base\_vars.scss*/
 /*@path:base\_normalize.scss*/
 /*! normalize.css v2.1.3 | MIT License | git.io/normalize */
@@ -516,6 +520,13 @@ body {
   -ms-user-select: none;
   user-select: none;
   transition: opacity 0.3s ease-in-out;
+  /*.t-f-under{
+    @include abs($l:12.9%,$b:4.2%);
+    width:69.1%;
+    height:18.6%;//15.9%,8.9%
+    background:#000;
+    border-radius:1%/5%;
+  }*/
 }
 .trash-pop.fs {
   left: 0;
@@ -553,13 +564,14 @@ body {
   top: 0;
   width: 100%;
   height: 100%;
+  pointer-events: none;
 }
 .trash-pop .trash-main {
   position: absolute;
-  left: 12.95%;
-  top: 4.1%;
-  width: 69%;
-  height: 69%;
+  left: 13.1%;
+  top: 4.4%;
+  width: 68.7%;
+  height: 68.3%;
   background: linear-gradient(0deg,rgba(255, 255, 255, 0.2) 3px,transparent 3px,transparent 3px) 99% top/1px 6px repeat-y,linear-gradient(0deg,rgba(255, 255, 255, 0.2) 3px,transparent 3px,transparent 3px) 90.1% top/1px 6px repeat-y,linear-gradient(0deg,rgba(255, 255, 255, 0.2) 3px,transparent 3px,transparent 3px) 81.2% top/1px 6px repeat-y,linear-gradient(0deg,rgba(255, 255, 255, 0.2) 3px,transparent 3px,transparent 3px) 72.3% top/1px 6px repeat-y,linear-gradient(0deg,rgba(255, 255, 255, 0.2) 3px,transparent 3px,transparent 3px) 63.4% top/1px 6px repeat-y,linear-gradient(0deg,rgba(255, 255, 255, 0.2) 3px,transparent 3px,transparent 3px) 54.5% top/1px 6px repeat-y,linear-gradient(0deg,rgba(255, 255, 255, 0.2) 3px,transparent 3px,transparent 3px) 45.6% top/1px 6px repeat-y,linear-gradient(0deg,rgba(255, 255, 255, 0.2) 3px,transparent 3px,transparent 3px) 36.7% top/1px 6px repeat-y,linear-gradient(0deg,rgba(255, 255, 255, 0.2) 3px,transparent 3px,transparent 3px) 27.8% top/1px 6px repeat-y,linear-gradient(0deg,rgba(255, 255, 255, 0.2) 3px,transparent 3px,transparent 3px) 18.9% top/1px 6px repeat-y,linear-gradient(0deg,rgba(255, 255, 255, 0.2) 3px,transparent 3px,transparent 3px) 10% top/1px 6px repeat-y,linear-gradient(0deg,rgba(255, 255, 255, 0.2) 3px,transparent 3px,transparent 3px) 1.1% top/1px 6px repeat-y,linear-gradient(90deg,rgba(255, 255, 255, 0.2) 3px,transparent 3px,transparent 3px) left 90.2%/6px 1px repeat-x,linear-gradient(90deg,rgba(255, 255, 255, 0.2) 3px,transparent 3px,transparent 3px) left 74.3%/6px 1px repeat-x,linear-gradient(90deg,rgba(255, 255, 255, 0.2) 3px,transparent 3px,transparent 3px) left 58.4%/6px 1px repeat-x,linear-gradient(90deg,rgba(255, 255, 255, 0.2) 3px,transparent 3px,transparent 3px) left 42.5%/6px 1px repeat-x,linear-gradient(90deg,rgba(255, 255, 255, 0.2) 3px,transparent 3px,transparent 3px) left 26.6%/6px 1px repeat-x,linear-gradient(90deg,rgba(255, 255, 255, 0.2) 3px,transparent 3px,transparent 3px) left 10.7%/6px 1px repeat-x;;
 }
 .trash-pop .return-btn, .trash-pop .videos-btn, .trash-pop .map-btn, .trash-pop .book-btn, .trash-pop .chat-btn, .trash-pop .game-btn {
@@ -651,15 +663,6 @@ body {
 .trash-pop .prog-u svg + svg {
   opacity: 0.5;
 }
-.trash-pop .t-f-under {
-  position: absolute;
-  left: 12.9%;
-  bottom: 4.2%;
-  width: 69.1%;
-  height: 18.6%;
-  background: #000;
-  border-radius: 1%/5%;
-}
 .trash-pop .trash-footer {
   position: absolute;
   left: 13.1%;
@@ -679,7 +682,7 @@ body {
 .trash-pop .load-save-btn {
   right: 1.5%;
 }
-.trash-pop .trash-game, .trash-pop .trash-flow {
+.trash-pop .trash-block {
   position: absolute;
   left: 0;
   top: 0;
@@ -692,11 +695,20 @@ body {
   overflow: hidden;
   transition: opacity 0.3s ease-in-out;
 }
-.trash-pop .trash-game.shown, .trash-pop .trash-flow.shown {
+.trash-pop .trash-block.shown {
   opacity: 1;
   visibility: visible;
 }
-.trash-pop .trash-game {
+.trash-pop .trash-block.game {
+  background: url(../images/game-bg.jpg) center/cover no-repeat;
+}
+.trash-pop .trash-block.flow {
+  background: #555;
+  display: flex;
+  justify-content: space-between;
+  flex-flow: row wrap;
+}
+.trash-pop .trash-block.map {
   background: url(../images/game-bg.jpg) center/cover no-repeat;
 }
 .trash-pop .bins {
@@ -735,6 +747,7 @@ body {
   position: absolute;
   left: 0;
   right: 0;
+  bottom: -5%;
   border-top: 2px solid rgba(255, 0, 0, 0.4);
 }
 .trash-pop .trash {
@@ -770,11 +783,19 @@ body {
   top: 50%;
   transform: translate(-50%, -50%);
 }
-.trash-pop .trash-flow {
-  background: #555;
-  display: flex;
-  justify-content: space-between;
-  flex-flow: row wrap;
+.trash-pop .tmp-choose {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 10%;
+  height: 20%;
+}
+.trash-pop .tmp-choose div {
+  height: 33%;
+  cursor: pointer;
+}
+.trash-pop .tmp-choose div.active {
+  border: 2px solid #fff;
 }
 .trash-pop .f-vid {
   width: 20%;

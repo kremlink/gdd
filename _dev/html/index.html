@@ -58,7 +58,7 @@
                         <use xlink:href="#icon-shared-btn-potok-active-click"></use>
                     </svg>
                 </div>
-                <div class="map-btn">
+                <div class="map-btn active">
                     <svg>
                         <use xlink:href="#icon-shared-btn-karta-passive"></use>
                     </svg>
@@ -115,12 +115,22 @@
                     </svg>
                 </div>
                 <div class="trash-main">
-                    <div class="trash-game">
+                    <div class="trash-block game">
                         <div class="fail-line"></div>
                         <div class="bins"></div>
+                        <div class="tmp-choose">
+                            <div style="background: #f00;"></div>
+                            <div style="background: #0f0;"></div>
+                            <div style="background: #00f;"></div>
+                        </div>
                     </div>
-                    <div class="trash-flow">
+                    <div class="trash-block flow">
                     
+                    </div>
+                    <div class="trash-block map">
+                        <svg class="trash-bg">
+                            <use xlink:href="#icon-shared-bg"></use>
+                        </svg>
                     </div>
                 </div>
                 <div class="null-btn">
@@ -234,7 +244,6 @@
                         </svg>
                     </div>
                 </div>
-                <div class="t-f-under"></div>
                 <div class="trash-footer">
                 
                 </div>
@@ -254,6 +263,9 @@
                         <use xlink:href="#icon-shared-btn-save-click"></use>
                     </svg>
                 </div>
+                <svg class="trash-bg">
+                    <use xlink:href="#icon-shared-bg-shadow"></use>
+                </svg>
             </div>
         </script>
         <script type="text/template" id="game-bin-template">
@@ -272,6 +284,9 @@
                 <div class="f-vid-wrap"><span><%= i %></span></div>
             </a>
             <% } %>
+        </script>
+        <script type="text/template" id="map-template">
+            123
         </script>
         <div class="safe-hide-svg">
             @@include('components/shared-sprite.svg')
