@@ -203,7 +203,13 @@
         @include flx(flex-flow,'row wrap');
       }
       &.map{
-        background: url(#{$path}game-bg.jpg) center/cover no-repeat;
+        background: url(#{$path}map-bg.jpg) center/cover no-repeat;
+      }
+      &.popShown{
+        .map-pop{
+          opacity:1;
+          visibility:visible;
+        }
       }
     }
     //game
@@ -305,7 +311,45 @@
     }
     //end flow
     //map
-
+    .map-mark{
+      position:absolute;
+      width:5%;
+      height:5%;
+    }
+    .map-pop{
+      opacity:0;
+      visibility:hidden;
+      @include trs('opacity #{$anim} ease-in-out');
+      @include abs($l:0,$t:0,$r:0,$b:0);
+    }
+    .map-pop-bg{
+      @include abs($l:0,$t:0);
+      width:100%;
+      height:100%;
+    }
+    .map-pop-big{
+      @include abs($l:5%,$t:5%);
+      width:20%;
+      height:20%;
+    }
+    .map-pop-react{
+      @include abs($b:5%);
+      width:30%;
+      height:20%;
+      &.done{
+        left:5%;
+      }
+      &.do{
+        right:5%;
+      }
+    }
+    .map-pop-close{
+      background:#eee;
+      width:2%;
+      height:2%;
+      cursor:pointer;
+      @include abs($r:5%,$t:5%);
+    }
     //end map
   }
   //orientation

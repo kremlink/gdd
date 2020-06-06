@@ -709,7 +709,11 @@ body {
   flex-flow: row wrap;
 }
 .trash-pop .trash-block.map {
-  background: url(../images/game-bg.jpg) center/cover no-repeat;
+  background: url(../images/map-bg.jpg) center/cover no-repeat;
+}
+.trash-pop .trash-block.popShown .map-pop {
+  opacity: 1;
+  visibility: visible;
 }
 .trash-pop .bins {
   position: absolute;
@@ -826,6 +830,56 @@ body {
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
+}
+.trash-pop .map-mark {
+  position: absolute;
+  width: 5%;
+  height: 5%;
+}
+.trash-pop .map-pop {
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease-in-out;
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+}
+.trash-pop .map-pop-bg {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+}
+.trash-pop .map-pop-big {
+  position: absolute;
+  left: 5%;
+  top: 5%;
+  width: 20%;
+  height: 20%;
+}
+.trash-pop .map-pop-react {
+  position: absolute;
+  bottom: 5%;
+  width: 30%;
+  height: 20%;
+}
+.trash-pop .map-pop-react.done {
+  left: 5%;
+}
+.trash-pop .map-pop-react.do {
+  right: 5%;
+}
+.trash-pop .map-pop-close {
+  background: #eee;
+  width: 2%;
+  height: 2%;
+  cursor: pointer;
+  position: absolute;
+  top: 5%;
+  right: 5%;
 }
 
 .loader-pop {

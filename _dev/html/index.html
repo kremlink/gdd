@@ -128,9 +128,7 @@
                     
                     </div>
                     <div class="trash-block map">
-                        <svg class="trash-bg">
-                            <use xlink:href="#icon-shared-bg"></use>
-                        </svg>
+                    
                     </div>
                 </div>
                 <div class="null-btn">
@@ -286,7 +284,82 @@
             <% } %>
         </script>
         <script type="text/template" id="map-template">
-            123
+           <div class="lol">dfd</div>
+            <% for(let i=1;i<data.length+1;i++) { %>
+            <div class="map-mark" data-index="<%= i-1 %>" style="left:<%= data[i-1].left %>%;top:<%= data[i-1].top %>%;">
+                <svg>
+                    <use xlink:href="#icon-shared-map-marker-<%= i %>"></use>
+                </svg>
+            </div>
+            <% } %>
+            <div class="map-pop">
+                <svg class="map-pop-bg">
+                    <use xlink:href="#icon-shared-map-pop-bg"></use>
+                </svg>
+                <div class="map-pop-close"></div>
+            </div>
+        </script>
+        <script type="text/template" id="map-pop-template">
+            <div class="map-pop-big">
+                <svg>
+                    <use xlink:href="#icon-shared-map-marker-<%= index %>"></use>
+                </svg>
+            </div>
+            <div class="map-pop-react done">
+                <div class="map-pop-done-item">
+                    <svg>
+                        <use xlink:href="#icon-shared-map-pop-icon-1"></use>
+                    </svg>
+                    <svg>
+                        <use xlink:href="#icon-shared-map-pop-icon-1-w"></use>
+                    </svg>
+                    <span class="map-pop-done-count"><%= alert %></span>
+                </div>
+                <div class="map-pop-done-item">
+                    <svg>
+                        <use xlink:href="#icon-shared-map-pop-icon-2"></use>
+                    </svg>
+                    <svg>
+                        <use xlink:href="#icon-shared-map-pop-icon-2-w"></use>
+                    </svg>
+                    <span class="map-pop-done-count"><%= like %></span>
+                </div>
+                <div class="map-pop-done-item">
+                    <svg>
+                        <use xlink:href="#icon-shared-map-pop-icon-2"></use>
+                    </svg>
+                    <svg>
+                        <use xlink:href="#icon-shared-map-pop-icon-2-w"></use>
+                    </svg>
+                    <span class="map-pop-done-count"><%= fire %></span>
+                </div>
+            </div>
+            <div class="map-pop-react do <%= react %>">
+                <div class="map-pop-done-item">
+                    <svg>
+                        <use xlink:href="#icon-shared-map-pop-icon-1"></use>
+                    </svg>
+                    <svg>
+                        <use xlink:href="#icon-shared-map-pop-icon-1-w"></use>
+                    </svg>
+                </div>
+                <div class="map-pop-done-item">
+                    <svg>
+                        <use xlink:href="#icon-shared-map-pop-icon-1"></use>
+                    </svg>
+                    <svg>
+                        <use xlink:href="#icon-shared-map-pop-icon-1-w"></use>
+                    </svg>
+                </div>
+                <div class="map-pop-done-item">
+                    <svg>
+                        <use xlink:href="#icon-shared-map-pop-icon-1"></use>
+                    </svg>
+                    <svg>
+                        <use xlink:href="#icon-shared-map-pop-icon-1-w"></use>
+                    </svg>
+                </div>
+            </div>
         </script>
         <div class="safe-hide-svg">
             @@include('components/shared-sprite.svg')
