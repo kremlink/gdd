@@ -2,7 +2,6 @@
 /*@path:core\_base.scss*/
 /*@path:core\_mixins.scss*/
 /*@path:core\_exts.scss*/
-@import url("https://fonts.googleapis.com/css?family=Open+Sans:300,400,700&subset=cyrillic");
 .loader-pop {
   background: url(../images/loader.gif) center no-repeat;
 }
@@ -855,24 +854,73 @@ body {
 }
 .trash-pop .map-pop-big {
   position: absolute;
-  left: 5%;
-  top: 5%;
-  width: 20%;
-  height: 20%;
+  left: 9%;
+  top: 16%;
+  width: 23%;
+  height: 45%;
+}
+.trash-pop .map-pop-text {
+  position: absolute;
+  left: 39%;
+  top: 16%;
+  width: 52%;
+  color: #000;
+  font-size: 14px;
+  line-height: 18px;
+  text-align: left;
 }
 .trash-pop .map-pop-react {
   position: absolute;
-  bottom: 5%;
-  width: 30%;
+  bottom: 10%;
+  width: 25%;
   height: 20%;
   display: flex;
   justify-content: space-between;
 }
 .trash-pop .map-pop-react.done {
-  left: 5%;
+  left: 8%;
+}
+.trash-pop .map-pop-react.done svg:nth-child(1) {
+  opacity: 1;
 }
 .trash-pop .map-pop-react.do {
-  right: 5%;
+  right: 8%;
+}
+.trash-pop .map-pop-react.do.reacted {
+  pointer-events: none;
+}
+.trash-pop .map-pop-react.do.alert .map-pop-react-item[data-type=alert] svg:nth-child(1) {
+  opacity: 1;
+}
+.trash-pop .map-pop-react.do.alert .map-pop-react-item[data-type=alert] svg:nth-child(2) {
+  opacity: 0;
+}
+.trash-pop .map-pop-react.do.like .map-pop-react-item[data-type=like] svg:nth-child(1) {
+  opacity: 1;
+}
+.trash-pop .map-pop-react.do.like .map-pop-react-item[data-type=like] svg:nth-child(2) {
+  opacity: 0;
+}
+.trash-pop .map-pop-react.do.fire .map-pop-react-item[data-type=fire] svg:nth-child(1) {
+  opacity: 1;
+}
+.trash-pop .map-pop-react.do.fire .map-pop-react-item[data-type=fire] svg:nth-child(2) {
+  opacity: 0;
+}
+.trash-pop .map-pop-react.do .map-pop-react-item {
+  cursor: pointer;
+}
+.trash-pop .map-pop-react.do .map-pop-react-item:hover svg:nth-child(1) {
+  opacity: 1;
+}
+.trash-pop .map-pop-react.do .map-pop-react-item:hover svg:nth-child(2) {
+  opacity: 0;
+}
+.trash-pop .map-pop-react.do svg:nth-child(2) {
+  opacity: 1;
+}
+.trash-pop .map-pop-react svg {
+  opacity: 0;
 }
 .trash-pop .map-pop-react-item {
   width: 25%;
@@ -880,21 +928,26 @@ body {
 }
 .trash-pop .map-pop-done-count {
   position: absolute;
-  top: 0;
+  top: 30%;
   right: 0;
-  width: 30%;
-  height: 30%;
+  width: 36%;
+  height: 20%;
   border-radius: 50%;
   background: #000;
 }
+.trash-pop .map-pop-done-count span {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
 .trash-pop .map-pop-close {
-  background: #eee;
-  width: 2%;
-  height: 2%;
+  width: 7.5%;
+  height: 13%;
   cursor: pointer;
   position: absolute;
-  top: 5%;
-  right: 5%;
+  top: 1.5%;
+  right: 1%;
 }
 
 .loader-pop {

@@ -11,16 +11,19 @@ export let MapView=Backbone.View.extend({
  events:events,
  template:_.template($(data.view.template).html()),
  popTemplate:_.template($(data.view.popTemplate).html()),
+ reactedTemplate:_.template($(data.view.reactedTemplate).html()),
  initialize:function(){
   this.$el.html(this.template({data:data.data}));
-  this.$pop=this.$(data.view.pop);
+  this.$pop=this.$(data.view.$pop);
   this.marks=new (Backbone.Collection.extend({model:MapMarkerModel}));
-  this.listenTo(this.bins,'reset',this.addMarks);
   this.marks.reset(data.data);
-  this.listenTo(this.marks,'change:react',this.reactDone);
+  this.addMarks();
+  this.current=null;
+  this.$popContent=null;
+  this.$reacted=null;
  },
  addMarks:function(){
-  this.bins.each((model,index)=>{
+  this.marks.each((model,index)=>{
    model.set('index',index);
   });
  },
@@ -30,19 +33,30 @@ export let MapView=Backbone.View.extend({
  hide:function(){
   this.$el.removeClass(data.view.shownCls);
  },
+ renderReacted:function(){
+  this.$reacted.html(this.reactedTemplate(this.current.toJSON()));
+ },
  pop:function(e){
   let index=+$(e.currentTarget).index(this.$(data.events.marker));
 
-  this.$pop.append(this.popTemplate(this.marks.at(index).toJSON()));
+  if(this.$popContent)
+   this.$popContent.remove();
+  this.current=this.marks.at(index);
+  this.$popContent=$(this.popTemplate(this.current.toJSON({all:true})));
+  this.$pop.append(this.$popContent);
   this.$el.addClass(data.view.popShownCls);
+  this.$reacted=this.$(data.view.$reacted);
+  this.renderReacted();
  },
  unpop:function(){
   this.$el.removeClass(data.view.popShownCls);
  },
- react:function(){
+ react:function(e){
+  let type=$(e.currentTarget).data(data.view.dataClick),
+  count=this.current.get(type);
 
- },
- reactDone:function(){
-
+  this.current.save({react:type,[type]:count+1});
+  this.$(data.view.$reactContainer).addClass(type+' '+data.view.reactedCls);
+  this.renderReacted();
  }
 });

@@ -328,21 +328,67 @@
       height:100%;
     }
     .map-pop-big{
-      @include abs($l:5%,$t:5%);
-      width:20%;
-      height:20%;
+      @include abs($l:9%,$t:16%);
+      width:23%;
+      height:45%;
+    }
+    .map-pop-text{
+      @include abs($l:39%,$t:16%);
+      width:52%;
+      color:#000;
+      font-size:14px;
+      line-height:18px;
+      text-align:left;
     }
     .map-pop-react{
-      @include abs($b:5%);
-      width:30%;
+      @include abs($b:10%);
+      width:25%;
       height:20%;
       @include flx(display,flex);
       @include flx(justify-content,space-between);
       &.done{
-        left:5%;
+        left:8%;
+        svg:nth-child(1){
+          opacity:1;
+        }
       }
       &.do{
-        right:5%;
+        right:8%;
+        &.reacted{
+          pointer-events:none;
+        }
+        @each $x in alert,like,fire
+        {
+          &.#{$x} .map-pop-react-item[data-type=#{$x}]{
+            svg{
+              &:nth-child(1){
+                opacity:1;
+              }
+              &:nth-child(2){
+                opacity:0;
+              }
+            }
+          }
+        }
+        .map-pop-react-item{
+          cursor:pointer;
+          &:hover{
+            svg{
+              &:nth-child(1){
+                opacity:1;
+              }
+              &:nth-child(2){
+                opacity:0;
+              }
+            }
+          }
+        }
+        svg:nth-child(2){
+          opacity:1;
+        }
+      }
+      svg{
+        opacity:0;
       }
     }
     .map-pop-react-item{
@@ -350,18 +396,20 @@
       position:relative;
     }
     .map-pop-done-count{
-      @include abs($r:0,$t:0);
-      width:30%;
-      height:30%;
+      @include abs($r:0,$t:30%);
+      width:36%;
+      height:20%;
       border-radius:50%;
       background:#000;
+      span{
+        @include center();
+      }
     }
     .map-pop-close{
-      background:#eee;
-      width:2%;
-      height:2%;
+      width:7.5%;
+      height:13%;
       cursor:pointer;
-      @include abs($r:5%,$t:5%);
+      @include abs($r:1%,$t:1.5%);
     }
     //end map
   }
