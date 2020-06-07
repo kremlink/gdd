@@ -865,12 +865,27 @@ body {
   bottom: 5%;
   width: 30%;
   height: 20%;
+  display: flex;
+  justify-content: space-between;
 }
 .trash-pop .map-pop-react.done {
   left: 5%;
 }
 .trash-pop .map-pop-react.do {
   right: 5%;
+}
+.trash-pop .map-pop-react-item {
+  width: 25%;
+  position: relative;
+}
+.trash-pop .map-pop-done-count {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 30%;
+  height: 30%;
+  border-radius: 50%;
+  background: #000;
 }
 .trash-pop .map-pop-close {
   background: #eee;

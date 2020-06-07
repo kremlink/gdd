@@ -286,7 +286,7 @@
         <script type="text/template" id="map-template">
            <div class="lol">dfd</div>
             <% for(let i=1;i<data.length+1;i++) { %>
-            <div class="map-mark" data-index="<%= i-1 %>" style="left:<%= data[i-1].left %>%;top:<%= data[i-1].top %>%;">
+            <div class="map-mark" style="left:<%= data[i-1].left %>%;top:<%= data[i-1].top %>%;">
                 <svg>
                     <use xlink:href="#icon-shared-map-marker-<%= i %>"></use>
                 </svg>
@@ -306,7 +306,7 @@
                 </svg>
             </div>
             <div class="map-pop-react done">
-                <div class="map-pop-done-item">
+                <div class="map-pop-react-item">
                     <svg>
                         <use xlink:href="#icon-shared-map-pop-icon-1"></use>
                     </svg>
@@ -315,7 +315,7 @@
                     </svg>
                     <span class="map-pop-done-count"><%= alert %></span>
                 </div>
-                <div class="map-pop-done-item">
+                <div class="map-pop-react-item">
                     <svg>
                         <use xlink:href="#icon-shared-map-pop-icon-2"></use>
                     </svg>
@@ -324,39 +324,39 @@
                     </svg>
                     <span class="map-pop-done-count"><%= like %></span>
                 </div>
-                <div class="map-pop-done-item">
+                <div class="map-pop-react-item">
+                    <svg>
+                        <use xlink:href="#icon-shared-map-pop-icon-3"></use>
+                    </svg>
+                    <svg>
+                        <use xlink:href="#icon-shared-map-pop-icon-3-w"></use>
+                    </svg>
+                    <span class="map-pop-done-count"><%= fire %></span>
+                </div>
+            </div>
+            <div class="map-pop-react do <%= react %>">
+                <div class="map-pop-react-item">
+                    <svg>
+                        <use xlink:href="#icon-shared-map-pop-icon-1"></use>
+                    </svg>
+                    <svg>
+                        <use xlink:href="#icon-shared-map-pop-icon-1-w"></use>
+                    </svg>
+                </div>
+                <div class="map-pop-react-item">
                     <svg>
                         <use xlink:href="#icon-shared-map-pop-icon-2"></use>
                     </svg>
                     <svg>
                         <use xlink:href="#icon-shared-map-pop-icon-2-w"></use>
                     </svg>
-                    <span class="map-pop-done-count"><%= fire %></span>
                 </div>
-            </div>
-            <div class="map-pop-react do <%= react %>">
-                <div class="map-pop-done-item">
+                <div class="map-pop-react-item">
                     <svg>
-                        <use xlink:href="#icon-shared-map-pop-icon-1"></use>
+                        <use xlink:href="#icon-shared-map-pop-icon-3"></use>
                     </svg>
                     <svg>
-                        <use xlink:href="#icon-shared-map-pop-icon-1-w"></use>
-                    </svg>
-                </div>
-                <div class="map-pop-done-item">
-                    <svg>
-                        <use xlink:href="#icon-shared-map-pop-icon-1"></use>
-                    </svg>
-                    <svg>
-                        <use xlink:href="#icon-shared-map-pop-icon-1-w"></use>
-                    </svg>
-                </div>
-                <div class="map-pop-done-item">
-                    <svg>
-                        <use xlink:href="#icon-shared-map-pop-icon-1"></use>
-                    </svg>
-                    <svg>
-                        <use xlink:href="#icon-shared-map-pop-icon-1-w"></use>
+                        <use xlink:href="#icon-shared-map-pop-icon-3-w"></use>
                     </svg>
                 </div>
             </div>

@@ -12,12 +12,17 @@ export let MapView=Backbone.View.extend({
  template:_.template($(data.view.template).html()),
  popTemplate:_.template($(data.view.popTemplate).html()),
  initialize:function(){
-  let d=this.template({data:data.data});
   this.$el.html(this.template({data:data.data}));
   this.$pop=this.$(data.view.pop);
   this.marks=new (Backbone.Collection.extend({model:MapMarkerModel}));
+  this.listenTo(this.bins,'reset',this.addMarks);
   this.marks.reset(data.data);
   this.listenTo(this.marks,'change:react',this.reactDone);
+ },
+ addMarks:function(){
+  this.bins.each((model,index)=>{
+   model.set('index',index);
+  });
  },
  show:function(){
   this.$el.addClass(data.view.shownCls);
@@ -26,9 +31,9 @@ export let MapView=Backbone.View.extend({
   this.$el.removeClass(data.view.shownCls);
  },
  pop:function(e){
-  let index=+$(e.currentTarget).data(data.view.markerData);
+  let index=+$(e.currentTarget).index(this.$(data.events.marker));
 
-  this.$pop.append(this.popTemplate(_.extend(this.marks.at(index).toJSON(),{index:index})));
+  this.$pop.append(this.popTemplate(this.marks.at(index).toJSON()));
   this.$el.addClass(data.view.popShownCls);
  },
  unpop:function(){

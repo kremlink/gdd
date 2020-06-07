@@ -336,12 +336,25 @@
       @include abs($b:5%);
       width:30%;
       height:20%;
+      @include flx(display,flex);
+      @include flx(justify-content,space-between);
       &.done{
         left:5%;
       }
       &.do{
         right:5%;
       }
+    }
+    .map-pop-react-item{
+      width:25%;
+      position:relative;
+    }
+    .map-pop-done-count{
+      @include abs($r:0,$t:0);
+      width:30%;
+      height:30%;
+      border-radius:50%;
+      background:#000;
     }
     .map-pop-close{
       background:#eee;

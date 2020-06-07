@@ -4,14 +4,13 @@ export const data={
  events:{
   'marker':'.map-mark',
   'close':'.map-pop-close',
-  'react':'.map-pop-done-item'
+  'react':'.map-pop-react-item'
  },
  view:{
   el:'.trash-block.map',
   template:'#map-template',
   popTemplate:'#map-pop-template',
   pop:'.map-pop',
-  markerData:'index',
   shownCls:'shown',
   popShownCls:'popShown'
  }
