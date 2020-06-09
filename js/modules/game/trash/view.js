@@ -6,15 +6,15 @@ export let GameTrashView=Backbone.View.extend({
  template:_.template($(data.view.template).html()),
  initialize:function(opts){
   this.data=opts;
-  $(data.view.failLine.el).css('bottom',data.view.failLine.bottom);
+  this.data.failLine.$el.css('bottom',this.data.failLine.bottom);
   this.$el.html(this.template(opts))
    .css({left:opts.left,transition:`bottom ${opts.trs}`})
    .on('transitionend',()=>{
     this.$el.off('transitionend');
-    this.failed({untouched:true});
+    this.dropped({untouched:true});
    });
   _.debounce(()=>{
-   this.$el.css('bottom',data.view.failLine.bottom);
+   this.$el.css('bottom',opts.failLine.bottom);
   },100)();
 
   this.dragging=false;
@@ -25,37 +25,48 @@ export let GameTrashView=Backbone.View.extend({
  get:function(v){
   return this[v];
  },
- failed:function({untouched=false}={}){
+ dropped:function({untouched=false,put=false}={}){
   if(untouched)
-   this.$el.css('transition','').addClass(data.view.failCls);else
-   this.$el.css({transition:`top ${data.view.fall}`,top:'100%'});
-
-  setTimeout(()=>{this.remove()},4000);
-  app.get('aggregator').trigger('game:trash-failed');
+  {
+   this.$el.css('transition','').on('transitionend',()=>{
+    this.remove();
+   }).addClass(data.view.failCls);
+   app.get('aggregator').trigger('game:trash-failed');
+  }else
+  {
+   this.$el.on('transitionend',()=>{
+    this.$el.off('transitionend');
+    if(put)
+     this.put({drop:true});
+   }).css({transition:`top ${data.view.fall}`,top:put?`calc(${100-parseInt(this.data.failLine.bottom)}% - ${this.$el.height()}px`:'100%'});
+  }
  },
- caught:function(){
-  this.$el.addClass(data.view.caughtCls);
-  setTimeout(()=>{this.remove()},1000);
+ put:function({drop=false}={}){
+  if(drop)
+   this.$el.css('transition','');
+  this.$el.on('transitionend',()=>{
+   this.remove();
+  }).addClass(data.view.putCls);
   app.get('aggregator').trigger('game:trash-caught');
  },
- drag:function(opts){
-  if(opts.start||this.dragging)
+ drag:function({start=false,up=false,drag=false}){
+  if(start||this.dragging)
   {
-   if(opts.start)
+   if(start)
    {
     this.dragging=true;
     this.coords={x:parseInt(this.$el.css('left')),y:parseInt(this.$el.css('top'))};
     this.$el.css({transition:'',bottom:'auto',left:this.coords.x,top:this.coords.y,zIndex:1});
     this.$el.off('transitionend');
    }
-   if(opts.up)
+   if(up)
    {
     this.dragging=false;
-    this.$el.css({zIndex:'auto'});
+    this.$el.css({zIndex:'auto'}).addClass(data.view.upCls);
    }
-   if(opts.drag&&this.dragging)
+   if(drag&&this.dragging)
    {
-    this.$el.css({left:this.coords.x+opts.drag.dx,top:this.coords.y+opts.drag.dy});
+    this.$el.css({left:this.coords.x+drag.dx,top:this.coords.y+drag.dy});
    }
   }
  }

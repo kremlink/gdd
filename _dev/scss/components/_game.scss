@@ -240,7 +240,7 @@
     }
     .fail-line{
       @include abs($l:0,$r:0,$b:-5%);
-      border-top:2px solid rgba(#f00,0.4);
+      //border-top:2px solid rgba(#f00,0.4);
     }
     .trash{
       width:7%;
@@ -253,9 +253,12 @@
         opacity:0;
         pointer-events:none;
       }
-      &.caught{
+      &.put{
         @include trs('transform #{$anim} ease-in-out');
         transform:scale(0);
+        pointer-events:none;
+      }
+      &.up{
         pointer-events:none;
       }
     }

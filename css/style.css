@@ -758,7 +758,6 @@ body {
   left: 0;
   right: 0;
   bottom: -5%;
-  border-top: 2px solid rgba(255, 0, 0, 0.4);
 }
 .trash-pop .trash {
   width: 7%;
@@ -773,9 +772,12 @@ body {
   opacity: 0;
   pointer-events: none;
 }
-.trash-pop .trash.caught {
+.trash-pop .trash.put {
   transition: transform 0.3s ease-in-out;
   transform: scale(0);
+  pointer-events: none;
+}
+.trash-pop .trash.up {
   pointer-events: none;
 }
 .trash-pop .t-text {

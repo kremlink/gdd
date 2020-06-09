@@ -21,6 +21,7 @@ export let GameView=Backbone.View.extend({
   this.listenTo(app.get('aggregator'),'game:trash-failed game:trash-caught',this.trashCount);
   this.progress=0;
 
+  this.$failLine=this.$(data.failLine.el);
   this.diff='';
   this.$diffChoose=$('.tmp-choose div');
   this.$diffChoose.each(i=>{
@@ -93,11 +94,18 @@ export let GameView=Backbone.View.extend({
     if(bin.length)
     {
      bin[0].model.addTrash(this.draggingTrash.get('data').type);
-     this.draggingTrash.caught();
+     this.draggingTrash.put();
     }else
     {
-     this.draggingTrash.failed();
-     //TODO: test if drops in bounds of some bins
+     bin=_.filter(this.binViews,t=>{
+      let offs=t.$drop.offset(),
+       w=t.$drop.width();
+
+      return offs.left<dOffs.left&&offs.left+w>dOffs.left+dW;
+     });
+     this.draggingTrash.dropped({put:bin.length});
+     if(bin.length)
+      bin[0].model.addTrash(this.draggingTrash.get('data').type);
     }
    }
   });
@@ -129,7 +137,7 @@ export let GameView=Backbone.View.extend({
   if(!this.trash.length)
   {
    data.data[this.diff].trashData.forEach(t=>{
-    let trash=new GameTrashView(t);
+    let trash=new GameTrashView(_.extend(t,{failLine:{$el:this.$failLine,bottom:data.failLine.bottom}}));
 
     this.$el.append(trash.el);
     this.trash.push(trash);

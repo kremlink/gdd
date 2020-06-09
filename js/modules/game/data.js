@@ -4,6 +4,10 @@ export const data={
   bins:'.bins',
   shownCls:'shown'
  },
+ failLine:{
+  el:'.fail-line',
+  bottom:'10%'
+ },
  data:{
   'easy':{
    trashData:[{type:2,subtype:1,left:'30%',trs:'3s linear 1s'},{type:2,subtype:2,left:'10%',trs:'5s linear 2s'},
