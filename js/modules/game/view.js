@@ -97,6 +97,7 @@ export let GameView=Backbone.View.extend({
     }else
     {
      this.draggingTrash.failed();
+     //TODO: test if drops in bounds of some bins
     }
    }
   });

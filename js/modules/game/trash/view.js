@@ -6,15 +6,15 @@ export let GameTrashView=Backbone.View.extend({
  template:_.template($(data.view.template).html()),
  initialize:function(opts){
   this.data=opts;
-  $(data.view.fail.el).css('bottom',data.view.fail.bottom);
+  $(data.view.failLine.el).css('bottom',data.view.failLine.bottom);
   this.$el.html(this.template(opts))
    .css({left:opts.left,transition:`bottom ${opts.trs}`})
    .on('transitionend',()=>{
     this.$el.off('transitionend');
-    this.failed();
+    this.failed({untouched:true});
    });
   _.debounce(()=>{
-   this.$el.css('bottom',data.view.fail.bottom);
+   this.$el.css('bottom',data.view.failLine.bottom);
   },100)();
 
   this.dragging=false;
@@ -25,9 +25,12 @@ export let GameTrashView=Backbone.View.extend({
  get:function(v){
   return this[v];
  },
- failed:function(){
-  this.$el.css('transition','').addClass(data.view.failCls);
-  setTimeout(()=>{this.remove()},1000);
+ failed:function({untouched=false}={}){
+  if(untouched)
+   this.$el.css('transition','').addClass(data.view.failCls);else
+   this.$el.css({transition:`top ${data.view.fall}`,top:'100%'});
+
+  setTimeout(()=>{this.remove()},4000);
   app.get('aggregator').trigger('game:trash-failed');
  },
  caught:function(){

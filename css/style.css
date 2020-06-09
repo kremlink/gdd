@@ -746,6 +746,13 @@ body {
   top: 50%;
   transform: translate(-50%, -50%);
 }
+.trash-pop .b-drop div {
+  position: absolute;
+  left: -20%;
+  top: -20%;
+  right: -20%;
+  bottom: -20%;
+}
 .trash-pop .fail-line {
   position: absolute;
   left: 0;

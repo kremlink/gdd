@@ -234,6 +234,9 @@
       width:100%;
       height:100%;
       @include center();
+      div{
+        @include abs($l:-20%,$r:-20%,$t:-20%,$b:-20%);
+      }
     }
     .fail-line{
       @include abs($l:0,$r:0,$b:-5%);

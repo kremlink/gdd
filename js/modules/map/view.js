@@ -18,6 +18,7 @@ export let MapView=Backbone.View.extend({
   this.marks=new (Backbone.Collection.extend({model:MapMarkerModel}));
   this.marks.reset(data.data);
   this.addMarks();
+  this.$marks=this.$(data.events.marker);
   this.current=null;
   this.$popContent=null;
   this.$reacted=null;
@@ -37,7 +38,7 @@ export let MapView=Backbone.View.extend({
   this.$reacted.html(this.reactedTemplate(this.current.toJSON()));
  },
  pop:function(e){
-  let index=+$(e.currentTarget).index(this.$(data.events.marker));
+  let index=this.$marks.index(e.currentTarget);
 
   if(this.$popContent)
    this.$popContent.remove();

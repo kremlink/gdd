@@ -36,8 +36,8 @@ export let TrashView=Backbone.View.extend({
   this.flowView=new FlowView;
   this.mapView=new MapView;
 
-  app.get('aggregator').trigger('trash:toggle',true);//TODO:remove
-  this.map();//TODO:remove
+  //app.get('aggregator').trigger('trash:toggle',true);//TODO:remove
+  //this.map();//TODO:remove
  },
  toggle:function(f){
   this.$el.toggleClass(data.view.shownCls,f);
