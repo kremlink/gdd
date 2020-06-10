@@ -9,7 +9,8 @@ import {MapView} from '../map/view.js';
 //let data=app.configure({trash:dat}).trash;
 
 let events={};
-events[`click ${data.events.return}`]='toVideo';
+//events[`click ${data.events.return}`]='toVideo';
+events[`click ${data.events.return}`]='videoStart';
 events[`click ${data.events.game}`]='gameStart';
 events[`click ${data.events.flow}`]='episodes';
 events[`click ${data.events.map}`]='map';
@@ -53,11 +54,10 @@ export let TrashView=Backbone.View.extend({
  },
  fs:function(f){
   this.$el.toggleClass(data.view.fsCls,f);
- },*/
- toVideo:function(){
-  this.playerView.play();
-  //app.get('aggregator').trigger('player:play');//--old
  },
+ toVideo:function(){
+  //app.get('aggregator').trigger('player:play');
+ },*/
  switchTab:function(tab){
   if(this.activeTab)
    this.activeTab.hide();
@@ -68,6 +68,7 @@ export let TrashView=Backbone.View.extend({
  videoStart:function(){
   this.switchTab(this.playerView);
   this.playerView.show();
+  this.playerView.play();
  },
  gameStart:function(){
   this.switchTab(this.gameView);
