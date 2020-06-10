@@ -1,6 +1,7 @@
 import {app} from '../../bf/base.js';
 //import {data as dat} from './data.js';
 import {data} from './data.js';
+import {PlayerView} from '../player/view.js';
 import {GameView} from '../game/view.js';
 import {FlowView} from '../flow/view.js';
 import {MapView} from '../map/view.js';
@@ -18,8 +19,9 @@ export let TrashView=Backbone.View.extend({
  className:data.view.className,
  template:_.template($(data.view.template).html()),
  initialize:function(){
-  this.listenTo(app.get('aggregator'),'trash:toggle',this.toggle);
-  this.listenTo(app.get('aggregator'),'trash:fs',this.fs);
+  this.$appendTo=$(data.appendTo);
+  /*this.listenTo(app.get('aggregator'),'trash:toggle',this.toggle);
+  this.listenTo(app.get('aggregator'),'trash:fs',this.fs);*///--old
   this.listenTo(app.get('aggregator'),'game:end',this.gameEnd);
   this.listenTo(app.get('aggregator'),'game:progress',this.gameProgress);
   this.render();
@@ -28,30 +30,44 @@ export let TrashView=Backbone.View.extend({
  },
  render:function(){
   this.$el.html(this.template());
+  this.$appendTo.append(this.$el);
+  this.ready();
+
+  //this.$el.html(this.template());--old
 
   return this;
  },
  ready:function(){
+  this.playerView=new PlayerView;
   this.gameView=new GameView;
   this.flowView=new FlowView;
   this.mapView=new MapView;
 
+  this.videoStart();
+
   //app.get('aggregator').trigger('trash:toggle',true);//TODO:remove
   //this.map();//TODO:remove
  },
- toggle:function(f){
+ /*toggle:function(f){//--old
   this.$el.toggleClass(data.view.shownCls,f);
  },
  fs:function(f){
   this.$el.toggleClass(data.view.fsCls,f);
- },
+ },*/
  toVideo:function(){
-  app.get('aggregator').trigger('player:play');
+  this.playerView.play();
+  //app.get('aggregator').trigger('player:play');//--old
  },
  switchTab:function(tab){
   if(this.activeTab)
    this.activeTab.hide();
   this.activeTab=tab;
+
+  this.playerView.pause();
+ },
+ videoStart:function(){
+  this.switchTab(this.playerView);
+  this.playerView.show();
  },
  gameStart:function(){
   this.switchTab(this.gameView);

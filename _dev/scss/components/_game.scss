@@ -3,10 +3,10 @@
     @include abs($l:-1px,$r:-1px,$t:0,$b:0);
     z-index:1;
     background:#ddd;
-    opacity:0;
-    pointer-events:none;
     text-align:center;
     @include no-sel();
+    /*opacity:0;//--old
+    pointer-events:none;
     @include trs('opacity #{$anim} ease-in-out');
     &.fs{
       left:0;
@@ -19,7 +19,7 @@
     &.shown{
       opacity:1;
       pointer-events:auto;
-    }
+    }*/
     &.game-active{
       .return-btn,.videos-btn,.map-btn,.book-btn,.chat-btn,.null-btn,.menu-btn,.load-save-btn{
         pointer-events:none;
@@ -425,7 +425,7 @@
     @include trs('opacity #{$anim} ease-in-out');
     @extend %loader;
     background-color:#eee;
-    .ready &{
+    .loaded &{
       opacity:0;
       pointer-events:none;
     }

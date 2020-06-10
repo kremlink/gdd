@@ -4,6 +4,7 @@
     height:100%;
   }
   .video-js .vjs-big-play-button{
+    display:none;//
     @include center();
   }
 }

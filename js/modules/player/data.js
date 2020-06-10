@@ -1,5 +1,7 @@
 export const data={
  view:{
-  el:'.video-js'
+  el:'.trash-block.video',
+  video:'.video-js',
+  shownCls:'shown'
  }
 };

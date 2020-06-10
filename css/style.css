@@ -472,7 +472,7 @@ body {
 }
 
 /*@path:base\_exts.scss*/
-.trash-pop.fs .trash-wrap, #wrap-wrap {
+#wrap-wrap {
   height: 56.25vw;
   max-height: 100vh;
   max-width: 177.78vh;
@@ -511,14 +511,26 @@ body {
   bottom: 0;
   z-index: 1;
   background: #ddd;
-  opacity: 0;
-  pointer-events: none;
   text-align: center;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
-  transition: opacity 0.3s ease-in-out;
+  /*opacity:0;//--old
+  pointer-events:none;
+  @include trs('opacity 0.3s ease-in-out');
+  &.fs{
+    left:0;
+    right:0;
+    .trash-wrap{
+      @include abs($l:0,$r:0,$t:0,$b:0);
+      @extend %scaler;
+    }
+  }
+  &.shown{
+    opacity:1;
+    pointer-events:auto;
+  }*/
   /*.t-f-under{
     @include abs($l:12.9%,$b:4.2%);
     width:69.1%;
@@ -526,21 +538,6 @@ body {
     background:#000;
     border-radius:1%/5%;
   }*/
-}
-.trash-pop.fs {
-  left: 0;
-  right: 0;
-}
-.trash-pop.fs .trash-wrap {
-  position: absolute;
-  left: 0;
-  top: 0;
-  right: 0;
-  bottom: 0;
-}
-.trash-pop.shown {
-  opacity: 1;
-  pointer-events: auto;
 }
 .trash-pop.game-active .return-btn, .trash-pop.game-active .videos-btn, .trash-pop.game-active .map-btn, .trash-pop.game-active .book-btn, .trash-pop.game-active .chat-btn, .trash-pop.game-active .null-btn, .trash-pop.game-active .menu-btn, .trash-pop.game-active .load-save-btn {
   pointer-events: none;
@@ -968,7 +965,7 @@ body {
   transition: opacity 0.3s ease-in-out;
   background-color: #eee;
 }
-.ready .loader-pop {
+.loaded .loader-pop {
   opacity: 0;
   pointer-events: none;
 }
@@ -999,6 +996,7 @@ body {
 }
 
 .video-js .vjs-big-play-button {
+  display: none;
   position: absolute;
   left: 50%;
   top: 50%;

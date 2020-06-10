@@ -1,4 +1,5 @@
 export const data={
+ appendTo:'#wrap-wrap',
  events:{
   'return':'.return-btn',
   'game':'.game-btn',
@@ -8,8 +9,8 @@ export const data={
  view:{
   className:'trash-pop',
   template:'#trash-template',
-  shownCls:'shown',
-  fsCls:'fs',
+  //shownCls:'shown',
+  //fsCls:'fs',
   gameActiveCls:'game-active'
  },
  gameProgress:{

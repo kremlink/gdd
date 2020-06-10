@@ -1,7 +1,7 @@
 export const data={
  view:{
   el:'#wrap',
-  readyCls:'ready',
+  loadedCls:'loaded',
   tooSmallCls:'too-small'
  },
  minViewport:'(min-width:600px)'
