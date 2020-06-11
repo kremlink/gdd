@@ -1,7 +1,7 @@
 @include exports("@path:components\_game.scss"){/*@path:components\_game.scss*/
   .trash-pop{
     @include abs($l:-1px,$r:-1px,$t:0,$b:0);
-    z-index:1;
+    //z-index:1;//--old
     background:#ddd;
     text-align:center;
     @include no-sel();
@@ -205,7 +205,7 @@
       &.map{
         background: url(#{$path}map-bg.jpg) center/cover no-repeat;
       }
-      &.popShown{
+      &.shown.popShown{
         .map-pop{
           opacity:1;
           visibility:visible;
@@ -235,7 +235,7 @@
       height:100%;
       @include center();
       div{
-        @include abs($l:-20%,$r:-20%,$t:-20%,$b:-20%);
+        @include abs($l:-30%,$r:-30%,$t:-30%,$b:-30%);
       }
     }
     .fail-line{
@@ -321,6 +321,7 @@
       position:absolute;
       width:5%;
       height:5%;
+      cursor:pointer;
     }
     .map-pop{
       opacity:0;
@@ -419,7 +420,7 @@
     }
     //end map
   }
-  //orientation
+  //other
   .loader-pop{
     @include abs($l:0,$r:0,$t:0,$b:0);
     @include trs('opacity #{$anim} ease-in-out');
@@ -440,6 +441,22 @@
     @include flx(align-items,center);
     .too-small &{
       @include flx(display,flex);
+    }
+  }
+  .start-pop{
+    @include abs($l:0,$r:0,$t:0,$b:0);
+    @include flx(display,flex);
+    background:#eee;
+    @include trs('opacity #{$anim} ease-in-out');
+    .start &{
+      opacity:0;
+      pointer-events:none;
+    }
+    svg{
+      margin:auto;
+      width:5%;
+      height:15%;
+      cursor:pointer;
     }
   }
 }

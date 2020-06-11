@@ -509,7 +509,6 @@ body {
   top: 0;
   right: -1px;
   bottom: 0;
-  z-index: 1;
   background: #ddd;
   text-align: center;
   -webkit-user-select: none;
@@ -707,7 +706,7 @@ body {
 .trash-pop .trash-block.map {
   background: url(../images/map-bg.jpg) center/cover no-repeat;
 }
-.trash-pop .trash-block.popShown .map-pop {
+.trash-pop .trash-block.shown.popShown .map-pop {
   opacity: 1;
   visibility: visible;
 }
@@ -745,10 +744,10 @@ body {
 }
 .trash-pop .b-drop div {
   position: absolute;
-  left: -20%;
-  top: -20%;
-  right: -20%;
-  bottom: -20%;
+  left: -30%;
+  top: -30%;
+  right: -30%;
+  bottom: -30%;
 }
 .trash-pop .fail-line {
   position: absolute;
@@ -840,6 +839,7 @@ body {
   position: absolute;
   width: 5%;
   height: 5%;
+  cursor: pointer;
 }
 .trash-pop .map-pop {
   opacity: 0;
@@ -985,6 +985,27 @@ body {
 }
 .too-small .orientation-pop {
   display: flex;
+}
+
+.start-pop {
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  background: #eee;
+  transition: opacity 0.3s ease-in-out;
+}
+.start .start-pop {
+  opacity: 0;
+  pointer-events: none;
+}
+.start-pop svg {
+  margin: auto;
+  width: 5%;
+  height: 15%;
+  cursor: pointer;
 }
 
 /*@path:components\_header.scss*/

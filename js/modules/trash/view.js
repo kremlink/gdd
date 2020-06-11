@@ -68,7 +68,6 @@ export let TrashView=Backbone.View.extend({
  videoStart:function(){
   this.switchTab(this.playerView);
   this.playerView.show();
-  this.playerView.play();
  },
  gameStart:function(){
   this.switchTab(this.gameView);

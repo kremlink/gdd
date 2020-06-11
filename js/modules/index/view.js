@@ -4,11 +4,16 @@ import {data} from './data.js';
 
 //import {data as dat} from './data.js';
 //let data=app.configure({index:dat}).index;
+
+let events={};
+events[`click ${data.events.start}`]='start';
+
 export function init(app,modules){
  if(!~modules.indexOf('index'))
   return;
 
  new (Backbone.View.extend({
+  events:events,
   el:data.view.el,
   initialize:function(){
    let trashView=new TrashView;
@@ -17,12 +22,18 @@ export function init(app,modules){
    if(!matchMedia(data.minViewport).matches)
     this.$el.addClass(data.view.tooSmallCls);
 
+
    /*this.playerView=new PlayerView;//--old
    this.listenTo(app.get('aggregator'),'player:ready',this.addTrash);*/
    $(window).on('resize',_.debounce(function(){
     //location.reload();TODO: uncomment
    },200));
-  }/*,
+  },
+  start:function(){
+   this.$el.addClass(data.view.startCls);
+   app.get('aggregator').trigger('player:play');
+  }
+  /*,
   addTrash:function(){//--old
    let trashView=new TrashView;
 

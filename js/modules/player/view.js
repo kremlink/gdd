@@ -7,7 +7,7 @@ export let PlayerView=Backbone.View.extend({
   this.player=videojs($(data.view.video)[0],{},()=>{
    this.prepare();
   });
-  //this.listenTo(app.get('aggregator'),'player:play',this.play);//--old
+  this.listenTo(app.get('aggregator'),'player:play',this.play);//--old
  },
  prepare:function(){
   //this.setElement(data.view.el);//--old

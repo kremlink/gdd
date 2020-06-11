@@ -45,6 +45,7 @@ export let GameView=Backbone.View.extend({
  },
  trashCount:function(){
   this.trashDone++;
+
   if(this.trashDone===data.data[this.diff].trashData.length)
   {
    app.get('aggregator').trigger('game:end');
