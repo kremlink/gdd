@@ -1,5 +1,9 @@
 import {MapMarkerModel} from './model.js';
+import {utils} from '../../bf/lib/utils.js';
+import {app} from '../../bf/base.js';
 import {data} from './data.js';
+
+app.configure({scroll:data.scroll});
 
 let events={};
 events[`click ${data.events.marker}`]='pop';
@@ -22,6 +26,42 @@ export let MapView=Backbone.View.extend({
   this.current=null;
   this.$popContent=null;
   this.$reacted=null;
+  this.scrollDim=utils.scrollDim();
+
+  this.scroll={
+     bar:{
+      init:function(){
+       var u=this.get('data').extra,
+        self=this,
+        d,
+        db=_.debounce(function(){
+         if(!self.get('getData').stopResize)
+         {
+          d=u.block.get('getData');
+          self.get('resize');
+          if(!d.hide)
+           self.get('setBarDim',[d.wrapDim/d.blockDim*self.get('getData').holderDim]);
+          self.get('getData').container[(d.hide?'add':'remove')+'Class'](u.cls);
+         }
+        },u.time);
+
+       app.helpers.win.on('resize',function(){
+        db();
+       });
+      },
+      change:function(e,opts){
+       var u=this.get('data').extra;
+
+       if(u.block&&!opts.external&&!opts.resize)
+       {
+        u.block.get('move',{
+         value:-opts.value*u.block.get('getData').dim/opts.bounds[1],
+         external:true
+        });
+       }
+      }
+     }
+    };
  },
  addMarks:function(){
   this.marks.each((model,index)=>{
@@ -43,11 +83,19 @@ export let MapView=Backbone.View.extend({
   if(this.$popContent)
    this.$popContent.remove();
   this.current=this.marks.at(index);
-  this.$popContent=$(this.popTemplate(this.current.toJSON({all:true})));
+  this.$popContent=$(this.popTemplate(_.extend({margin:this.scrollDim},this.current.toJSON({all:true}))));
   this.$pop.append(this.$popContent);
   this.$el.addClass(data.view.popShownCls);
   this.$reacted=this.$(data.view.$reacted);
   this.renderReacted();
+
+  let bar=app.set({
+   data:'scroll',
+   object:'Bar',
+   on:this.scroll.bar,
+   add:{options:{helpers:{drag:utils.drag}}},
+   set:false
+  });
  },
  unpop:function(){
   this.$el.removeClass(data.view.popShownCls);

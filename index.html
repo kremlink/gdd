@@ -330,10 +330,13 @@
                     <use xlink:href="#icon-shared-map-marker-<%= index+1 %>"></use>
                 </svg>
             </div>
-            <div class="map-pop-text">
-                <div class="map-pop-text-wrap">
-                    <%= text %>
+            <div class="t-scroll">
+                <div class="t-scroll-wrap" style="margin-right:<%= margin %>px;">
+                    <div class="t-scroll-inner">
+                        <%= text %>
+                    </div>
                 </div>
+                <div class="t-scroll-bar"><div></div></div>
             </div>
             <div class="map-pop-react done">
             

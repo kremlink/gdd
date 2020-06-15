@@ -22,6 +22,7 @@ export function init(app,modules){
    if(!matchMedia(data.minViewport).matches)
     this.$el.addClass(data.view.tooSmallCls);
 
+   this.start();//TODO: remove
 
    /*this.playerView=new PlayerView;//--old
    this.listenTo(app.get('aggregator'),'player:ready',this.addTrash);*/
@@ -31,7 +32,7 @@ export function init(app,modules){
   },
   start:function(){
    this.$el.addClass(data.view.startCls);
-   app.get('aggregator').trigger('player:play');
+   //app.get('aggregator').trigger('player:play');TODO: uncomment
   }
   /*,
   addTrash:function(){//--old

@@ -44,9 +44,10 @@ export let TrashView=Backbone.View.extend({
   this.flowView=new FlowView;
   this.mapView=new MapView;
 
-  this.videoStart();
+  //this.videoStart();
+  this.map();
 
-  //app.get('aggregator').trigger('trash:toggle',true);//TODO:remove
+  //app.get('aggregator').trigger('trash:toggle',true);//--old TODO:remove
   //this.map();//TODO:remove
  },
  /*toggle:function(f){//--old
