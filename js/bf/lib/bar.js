@@ -57,6 +57,13 @@ $.extend(Bar.prototype,{
   self.setIniValues();
   self.trigger('init',[{bounds:self.props.bounds}]);
  },
+ destroy:function(){
+  var self=this;
+
+  self.props.container.off('mousedown'+self.options.namespace);
+  $(document).off('mouseup'+self.options.namespace);
+  self.props.touch.disable();
+ },
  showHide:function(f){
   var self=this;
 
@@ -195,11 +202,11 @@ $.extend(Bar.prototype,{
 
   self.props.container=self.data.container?$(self.data.container):self.props.holder;
 
-  self.props.container.on('mousedown',function(e){
+  self.props.container.on('mousedown'+self.options.namespace,function(e){
    self.containerMouseDown(e);
   });
 
-  $(document).on('mouseup',function(){
+  $(document).on('mouseup'+self.options.namespace,function(){
    self.trigger('up');
   });
 

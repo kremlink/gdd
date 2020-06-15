@@ -26,42 +26,6 @@ export let MapView=Backbone.View.extend({
   this.current=null;
   this.$popContent=null;
   this.$reacted=null;
-  this.scrollDim=utils.scrollDim();
-
-  this.scroll={
-     bar:{
-      init:function(){
-       var u=this.get('data').extra,
-        self=this,
-        d,
-        db=_.debounce(function(){
-         if(!self.get('getData').stopResize)
-         {
-          d=u.block.get('getData');
-          self.get('resize');
-          if(!d.hide)
-           self.get('setBarDim',[d.wrapDim/d.blockDim*self.get('getData').holderDim]);
-          self.get('getData').container[(d.hide?'add':'remove')+'Class'](u.cls);
-         }
-        },u.time);
-
-       app.helpers.win.on('resize',function(){
-        db();
-       });
-      },
-      change:function(e,opts){
-       var u=this.get('data').extra;
-
-       if(u.block&&!opts.external&&!opts.resize)
-       {
-        u.block.get('move',{
-         value:-opts.value*u.block.get('getData').dim/opts.bounds[1],
-         external:true
-        });
-       }
-      }
-     }
-    };
  },
  addMarks:function(){
   this.marks.each((model,index)=>{
@@ -83,21 +47,22 @@ export let MapView=Backbone.View.extend({
   if(this.$popContent)
    this.$popContent.remove();
   this.current=this.marks.at(index);
-  this.$popContent=$(this.popTemplate(_.extend({margin:this.scrollDim},this.current.toJSON({all:true}))));
+  this.$popContent=$(this.popTemplate(_.extend({margin:app.get('scrollDim')},this.current.toJSON({all:true}))));
   this.$pop.append(this.$popContent);
   this.$el.addClass(data.view.popShownCls);
   this.$reacted=this.$(data.view.$reacted);
   this.renderReacted();
 
-  let bar=app.set({
+  this.popScroll=app.set({
    data:'scroll',
    object:'Bar',
-   on:this.scroll.bar,
+   on:scroll.events,
    add:{options:{helpers:{drag:utils.drag}}},
    set:false
   });
  },
  unpop:function(){
+  this.popScroll.destroy();
   this.$el.removeClass(data.view.popShownCls);
  },
  react:function(e){
@@ -109,3 +74,35 @@ export let MapView=Backbone.View.extend({
   this.renderReacted();
  }
 });
+//--------
+let scroll={
+ wrapDim:null,
+ blockDim:null,
+ events:{
+  init:function(){
+   let u=this.get('data').extra,
+    hide;
+
+   scroll.wrapDim=u.$wrap.height();
+   scroll.blockDim=u.$block.height();
+   hide=scroll.blockDim<=scroll.wrapDim;
+
+   if(!hide)
+    this.get('setBarDim',[scroll.wrapDim/scroll.blockDim*this.get('getData').holderDim]);
+   this.get('getData').container[(hide?'add':'remove')+'Class'](u.cls);
+
+   u.$wrap.on('scroll',()=>{
+    this.get('setPosition',{
+     value:[u.$wrap.scrollTop()*this.get('getData').bounds[1]/(scroll.blockDim-scroll.wrapDim)],
+     external:true
+    });
+   });
+  },
+  change:function(e,opts){
+   let u=this.get('data').extra;
+
+   if(!opts.external)
+    u.$wrap.scrollTop(opts.value[0]*(scroll.blockDim-scroll.wrapDim)/opts.bounds[1]);
+  }
+ }
+};

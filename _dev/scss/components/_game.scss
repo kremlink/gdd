@@ -339,35 +339,6 @@
       width:23%;
       height:45%;
     }
-    .t-scroll{
-      @include abs($l:39%,$r:6.5%,$t:16%,$b:37%);
-      color:#000;
-      font-size:14px;
-      line-height:18px;
-      text-align:left;
-      overflow:hidden;
-    }
-    .t-scroll-wrap{
-      height:100%;
-      overflow:auto;
-    }
-    .t-scroll-inner{
-
-    }
-    .t-scroll-bar{
-      @include abs($t:0,$b:0,$r:0);
-      width:5%;
-      background:#eee;
-      &.hidden{
-        display:none;
-      }
-      div{
-        background:#aaa;
-        width:100%;
-        height:10%;
-        position:absolute;
-      }
-    }
     .map-pop-react{
       @include abs($b:10%);
       width:25%;

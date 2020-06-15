@@ -26,7 +26,8 @@ function Drag(opts){
    coords:{pageX:0,pageY:0},
    start:{pageX:0,pageY:0},
    mousedownFn:[],
-   dragFn:[]
+   dragFn:[],
+   upFn:null
   }
  };
 
@@ -88,14 +89,16 @@ $.extend(Drag.prototype,{
    eventjs.add(this,'drag',touch.dragFn[i]);
   });
 
-  eventjs.add(document,'mouseup',function(e){
+  self.props.touch.upFn=function(e){
    if(self.props.dragging)
    {
     self.props.dragging=false;
     self.props.dragStart=false;
     self.options.upCallback(e);
    }
-  });
+  };
+
+  eventjs.add(document,'mouseup',self.props.touch.upFn);
  },
  disable:function(){
   var self=this;
@@ -103,6 +106,7 @@ $.extend(Drag.prototype,{
   self.props.container.each(function(i){
    eventjs.remove(this,'mousedown',self.props.touch.mousedownFn[i]);
    eventjs.remove(this,'drag',self.props.touch.dragFn[i]);
+   eventjs.remove(this,'mouseup',self.props.touch.upFn);
   });
  }
 });

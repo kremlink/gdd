@@ -865,39 +865,6 @@ body {
   width: 23%;
   height: 45%;
 }
-.trash-pop .t-scroll {
-  position: absolute;
-  left: 39%;
-  top: 16%;
-  right: 6.5%;
-  bottom: 37%;
-  color: #000;
-  font-size: 14px;
-  line-height: 18px;
-  text-align: left;
-  overflow: hidden;
-}
-.trash-pop .t-scroll-wrap {
-  height: 100%;
-  overflow: auto;
-}
-.trash-pop .t-scroll-bar {
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  width: 5%;
-  background: #eee;
-}
-.trash-pop .t-scroll-bar.hidden {
-  display: none;
-}
-.trash-pop .t-scroll-bar div {
-  background: #aaa;
-  width: 100%;
-  height: 10%;
-  position: absolute;
-}
 .trash-pop .map-pop-react {
   position: absolute;
   bottom: 10%;
@@ -1035,6 +1002,42 @@ body {
 
 /*@path:components\_header.scss*/
 /*@path:components\_shared.scss*/
+.t-scroll {
+  position: absolute;
+  left: 39%;
+  top: 16%;
+  right: 6.5%;
+  bottom: 37%;
+  color: #000;
+  font-size: 14px;
+  line-height: 18px;
+  text-align: left;
+  overflow: hidden;
+}
+
+.t-scroll-wrap {
+  height: 100%;
+  overflow: auto;
+}
+
+.t-scroll-bar {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 5%;
+  background: #eee;
+}
+.t-scroll-bar.hidden {
+  display: none;
+}
+.t-scroll-bar div {
+  background: #aaa;
+  width: 100%;
+  height: 10%;
+  position: absolute;
+}
+
 /*@path:components\_video.scss*/
 .video-js {
   width: 100%;
