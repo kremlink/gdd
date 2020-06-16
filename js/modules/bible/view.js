@@ -51,18 +51,28 @@ export let BibleView=Backbone.View.extend({
   });
  },
  tab:function(e){
+  let id;
+
   this.$currentTab=e?$(e.currentTarget):this.$tabs.eq(0);
 
   this.$tabs.removeClass(data.view.activeTabCls);
+  id=this.$currentTab.addClass(data.view.activeTabCls).data(data.view.dataClick);
+
   if(this.tabScroll)
    this.tabScroll.destroy();
-  this.$itemsContainer.html(this.tabTemplate({data:data.data[this.$currentTab.addClass(data.view.activeTabCls).data(data.view.dataClick)].items}));
+  this.$itemsContainer.html(this.tabTemplate({
+   data:{
+    id:id,
+    data:data.data[id].items
+   }
+  }));
   this.setScroll('tabScroll',this.$itemsWrap);
  },
  pop:function(e){
-  let id=$(e.currentTarget).data(data.view.dataId);
+  let id=$(e.currentTarget).data(data.view.dataId),
+  tid=this.$currentTab.data(data.view.dataClick);
 
-  this.$popContent=$(this.popTemplate(_.extend({margin:app.get('scrollDim')},data.data[this.$currentTab.data(data.view.dataClick)].items.filter(o=>o.id.toString()===id.toString())[0])));
+  this.$popContent=$(this.popTemplate(_.extend({margin:app.get('scrollDim'),tid:tid},data.data[this.$currentTab.data(data.view.dataClick)].items.filter(o=>o.id.toString()===id.toString())[0])));
   this.$pop.append(this.$popContent);
   this.$el.addClass(data.view.popShownCls);
 

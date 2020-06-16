@@ -1,25 +1,18 @@
 export const data={
  data:{
   '1':{
-   color:'gray',
    items:[{id:1,text:'Text text <br/><br/> text text text<br/>textText text <br/><br/> text text text<br/>textText text <br/><br/> text text text<br/>textText text <br/><br/> text text text<br/>textText text <br/><br/> text text text<br/>text'},
-    {id:2,text:'Text text <br/><br/> text text text<br/>text'},
-    {id:3,text:'Text3'},
-    {id:4,text:'Text4'},
-    {id:5,text:'Text5'},
-    {id:6,text:'Text6'}]
+    {id:2,text:'Text text <br/><br/> text text text<br/>text'}]
   },
   '2':{
-   color:'orange',
    items:[
-    {id:4,text:'Text4'},
-    {id:5,text:'Text5'},
-    {id:6,text:'Text6'}]
+    {id:1,text:'Text4'}]
   },
   '3':{
-   color:'green',
    items:[
-    {id:4,text:'Text text <br/><br/> text text text<br/>textText text <br/><br/> text text text<br/>textText text <br/><br/> text text text<br/>textText text <br/><br/> text text text<br/>textText text <br/><br/> text text text<br/>text'}]
+    {id:1,text:'Text5'},
+    {id:2,text:'Text6'},
+    {id:3,text:'Text text <br/><br/> text text text<br/>textText text <br/><br/> text text text<br/>textText text <br/><br/> text text text<br/>textText text <br/><br/> text text text<br/>textText text <br/><br/> text text text<br/>text'}]
   }
  },
  events:{

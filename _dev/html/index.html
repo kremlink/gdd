@@ -80,7 +80,7 @@
                         <use xlink:href="#icon-shared-btn-biblia-active-click"></use>
                     </svg>
                 </div>
-                <div class="chat-btn">
+                <div class="chat-btn active">
                     <svg>
                         <use xlink:href="#icon-shared-btn-chat-passive"></use>
                     </svg>
@@ -148,6 +148,39 @@
                     </div>
                     <div class="trash-block bible">
     
+                    </div>
+                    <div class="trash-block chat">
+                        <div class="chat-content">
+                            <div class="chat-wrap">
+                                <div class="chat-inner">
+                                    <div class="chat-msg bot">
+                                        <div class="chat-msg-date">12:15 01.02.20</div>
+                                        <div class="chat-msg-text">
+                                            <div>Эй, кто-нибудь!</div>
+                                        </div>
+                                    </div>
+                                    <div class="chat-msg me">
+                                        <div class="chat-msg-date">12:17 01.02.20</div>
+                                        <div class="chat-msg-text">
+                                            <div>Кто ты такой, что это вообще?</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="chat-top">
+                            <div class="chat-ava">
+                                <svg>
+                                    <use xlink:href="#icon-shared-chat-avatar"></use>
+                                </svg>
+                            </div>
+                            <div class="chat-name">Ичия Вандерлей Котобуки</div>
+                        </div>
+                        <div class="chat-ctrls">
+                            <div class="chat-choose">Это ты мне?</div>
+                            <div class="chat-choose chosen">Кто ты такой, что это вообще?</div>
+                            <div class="chat-choose">Мне не нужна ваша, что вы там рекламируете</div>
+                        </div>
                     </div>
                 </div>
                 <div class="null-btn">
@@ -393,8 +426,10 @@
             </div>
             <div class="bible-tabs">
                 <% for(let [x,y] of Object.entries(data)) { %>
-                <div data-type="<%= x %>" class="bible-tab" style="background-color:<%= y.color %>;">
-                
+                <div data-type="<%= x %>" class="bible-tab">
+                    <svg>
+                        <use xlink:href="#icon-shared-bible-trashcan-<%= x %>"></use>
+                    </svg>
                 </div>
                 <% } %>
             </div>
@@ -406,21 +441,22 @@
             </div>
         </script>
         <script type="text/template" id="bible-tab-template">
-            <% for(let i=0;i<data.length;i++) { %>
-            <div data-id="<%= data[i].id %>" class="bible-item">
-                <div>
+            <% for(let i=0;i<data.data.length;i++) { %>
+            <div data-id="<%= data.data[i].id %>" class="bible-item">
+                <div class="bible-item-bg">
                     <svg>
-                        <use xlink:href="#icon-shared-map-marker-<%= data[i].id %>"></use>
+                        <use xlink:href="#icon-shared-bible-item-under-<%= data.id %>"></use>
                     </svg>
+                </div>
+                <div class="bible-item-img">
+                    <img src="images/biblia-item-<%= data.id %>-<%= data.data[i].id %>.png" alt=""/>
                 </div>
             </div>
             <% } %>
         </script>
         <script type="text/template" id="bible-pop-template">
             <div class="bible-pop-big">
-                <svg>
-                    <use xlink:href="#icon-shared-map-marker-<%= id %>"></use>
-                </svg>
+                <img src="images/biblia-item-<%= tid %>-<%= id %>.png" alt=""/>
             </div>
             <div class="t-scroll">
                 <div class="t-scroll-wrap" style="margin-right:<%= margin %>px;">
