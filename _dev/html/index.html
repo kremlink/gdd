@@ -61,7 +61,7 @@
                         <use xlink:href="#icon-shared-btn-karta-active-click"></use>
                     </svg>
                 </div>
-                <div class="book-btn">
+                <div class="book-btn active">
                     <svg>
                         <use xlink:href="#icon-shared-btn-biblia-passive"></use>
                     </svg>
@@ -103,6 +103,9 @@
                         <use xlink:href="#icon-shared-btn-tresh-active-click"></use>
                     </svg>
                 </div>
+                <div class="trash-footer">
+    
+                </div>
                 <div class="trash-main">
                     <div class="trash-block video">
                         <video
@@ -137,6 +140,9 @@
                     </div>
                     <div class="trash-block map">
                     
+                    </div>
+                    <div class="trash-block bible">
+    
                     </div>
                 </div>
                 <div class="null-btn">
@@ -249,9 +255,6 @@
                             <use xlink:href="#icon-shared-loader-green"></use>
                         </svg>
                     </div>
-                </div>
-                <div class="trash-footer">
-                
                 </div>
                 <div class="menu-btn">
                     <svg>
@@ -377,6 +380,51 @@
                     <use xlink:href="#icon-shared-map-pop-icon-3-w"></use>
                 </svg>
                 <span class="map-pop-done-count"><span><%= like %></span></span>
+            </div>
+        </script>
+        <script type="text/template" id="bible-template">
+            <div class="bible-items">
+                <div class="bible-items-wrap t-scroll-wrap">
+                    <div class="bible-items-inner t-scroll-inner"></div>
+                </div>
+                <div class="t-scroll-bar"><div></div></div>
+            </div>
+            <div class="bible-tabs">
+                <% for(let [x,y] of Object.entries(data)) { %>
+                <div data-type="<%= x %>" class="bible-tab" style="background-color:<%= y.color %>;">
+                
+                </div>
+                <% } %>
+            </div>
+            <div class="bible-pop">
+                <svg class="bible-pop-bg">
+                    <use xlink:href="#icon-shared-map-pop-bg"></use>
+                </svg>
+                <div class="bible-pop-close"></div>
+            </div>
+        </script>
+        <script type="text/template" id="bible-tab-template">
+            <% for(let i=1;i<data.length+1;i++) { %>
+            <div class="bible-item">
+                <svg>
+                    <use xlink:href="#icon-shared-map-marker-<%= i %>"></use>
+                </svg>
+            </div>
+            <% } %>
+        </script>
+        <script type="text/template" id="bible-pop-template">
+            <div class="bible-pop-big">
+                <svg>
+                    <use xlink:href="#icon-shared-map-marker-<%= index+1 %>"></use>
+                </svg>
+            </div>
+            <div class="t-scroll">
+                <div class="t-scroll-wrap" style="margin-right:<%= margin %>px;">
+                    <div class="t-scroll-inner">
+                        <%= text %>
+                    </div>
+                </div>
+                <div class="t-scroll-bar"><div></div></div>
             </div>
         </script>
         <div class="safe-hide-svg">

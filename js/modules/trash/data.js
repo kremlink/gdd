@@ -4,7 +4,8 @@ export const data={
   'return':'.return-btn',
   'game':'.game-btn',
   'flow':'.videos-btn',
-  'map':'.map-btn'
+  'map':'.map-btn',
+  'bible':'.book-btn'
  },
  view:{
   className:'trash-pop',

@@ -5,6 +5,7 @@ import {PlayerView} from '../player/view.js';
 import {GameView} from '../game/view.js';
 import {FlowView} from '../flow/view.js';
 import {MapView} from '../map/view.js';
+import {BibleView} from '../bible/view.js';
 
 //let data=app.configure({trash:dat}).trash;
 
@@ -14,6 +15,7 @@ events[`click ${data.events.return}`]='videoStart';
 events[`click ${data.events.game}`]='gameStart';
 events[`click ${data.events.flow}`]='episodes';
 events[`click ${data.events.map}`]='map';
+events[`click ${data.events.bible}`]='bible';
 
 export let TrashView=Backbone.View.extend({
  events:events,
@@ -43,9 +45,10 @@ export let TrashView=Backbone.View.extend({
   this.gameView=new GameView;
   this.flowView=new FlowView;
   this.mapView=new MapView;
+  this.bibleView=new BibleView;
 
   //this.videoStart();
-  this.map();
+  this.bible();
 
   //app.get('aggregator').trigger('trash:toggle',true);//--old TODO:remove
   //this.map();//TODO:remove
@@ -89,5 +92,9 @@ export let TrashView=Backbone.View.extend({
  map:function(){
   this.switchTab(this.mapView);
   this.mapView.show();
+ },
+ bible:function(){
+  this.switchTab(this.bibleView);
+  this.bibleView.show();
  }
 });

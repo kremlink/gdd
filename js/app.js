@@ -17,5 +17,5 @@ app.set({dest:'objects.aggregator',object:_.extend({},Backbone.Events)});
 
 $(()=>{
  index.init(app,modules);
- app.set({dest:'objects.scrollDim',object:utils.scrollDim()});
+ app.set({dest:'objects.scrollDim',object:-Math.abs(utils.scrollDim())});
 });

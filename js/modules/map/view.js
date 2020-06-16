@@ -1,9 +1,13 @@
 import {MapMarkerModel} from './model.js';
 import {utils} from '../../bf/lib/utils.js';
 import {app} from '../../bf/base.js';
+import {Scroll} from '../scroll/scroll.js';
+import {data as scrollData} from '../scroll/data.js';
 import {data} from './data.js';
 
 app.configure({scroll:data.scroll});
+
+let scroll=Scroll();
 
 let events={};
 events[`click ${data.events.marker}`]='pop';
@@ -44,8 +48,6 @@ export let MapView=Backbone.View.extend({
  pop:function(e){
   let index=this.$marks.index(e.currentTarget);
 
-  if(this.$popContent)
-   this.$popContent.remove();
   this.current=this.marks.at(index);
   this.$popContent=$(this.popTemplate(_.extend({margin:app.get('scrollDim')},this.current.toJSON({all:true}))));
   this.$pop.append(this.$popContent);
@@ -54,15 +56,20 @@ export let MapView=Backbone.View.extend({
   this.renderReacted();
 
   this.popScroll=app.set({
-   data:'scroll',
    object:'Bar',
    on:scroll.events,
-   add:{options:{helpers:{drag:utils.drag}}},
+   add:$.extend(true,{},scrollData,{
+    holder:this.$pop.find(scrollData.holder),
+    bar:this.$pop.find(scrollData.bar),
+    options:{helpers:{drag:utils.drag}},
+    extra:{$wrap:this.$pop.find(scrollData.extra.$wrap),$block:this.$pop.find(scrollData.extra.$block)}
+   }),
    set:false
   });
  },
  unpop:function(){
   this.popScroll.destroy();
+  this.$popContent.remove();
   this.$el.removeClass(data.view.popShownCls);
  },
  react:function(e){
@@ -74,35 +81,3 @@ export let MapView=Backbone.View.extend({
   this.renderReacted();
  }
 });
-//--------
-let scroll={
- wrapDim:null,
- blockDim:null,
- events:{
-  init:function(){
-   let u=this.get('data').extra,
-    hide;
-
-   scroll.wrapDim=u.$wrap.height();
-   scroll.blockDim=u.$block.height();
-   hide=scroll.blockDim<=scroll.wrapDim;
-
-   if(!hide)
-    this.get('setBarDim',[scroll.wrapDim/scroll.blockDim*this.get('getData').holderDim]);
-   this.get('getData').container[(hide?'add':'remove')+'Class'](u.cls);
-
-   u.$wrap.on('scroll',()=>{
-    this.get('setPosition',{
-     value:[u.$wrap.scrollTop()*this.get('getData').bounds[1]/(scroll.blockDim-scroll.wrapDim)],
-     external:true
-    });
-   });
-  },
-  change:function(e,opts){
-   let u=this.get('data').extra;
-
-   if(!opts.external)
-    u.$wrap.scrollTop(opts.value[0]*(scroll.blockDim-scroll.wrapDim)/opts.bounds[1]);
-  }
- }
-};

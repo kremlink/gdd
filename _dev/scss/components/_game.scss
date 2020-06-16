@@ -187,7 +187,6 @@
       height:100%;
       opacity:0;
       visibility:hidden;
-      overflow:hidden;
       @include trs('opacity #{$anim} ease-in-out');
       &.shown{
         opacity:1;
@@ -204,11 +203,20 @@
       }
       &.map{
         background: url(#{$path}map-bg.jpg) center/cover no-repeat;
+        &.shown.popShown{
+          .map-pop{
+            opacity:1;
+            visibility:visible;
+          }
+        }
       }
-      &.shown.popShown{
-        .map-pop{
-          opacity:1;
-          visibility:visible;
+      &.bible{
+        background:#777;
+        &.shown.popShown{
+          .bible-pop{
+            opacity:1;
+            visibility:visible;
+          }
         }
       }
     }
@@ -329,11 +337,6 @@
       @include trs('opacity #{$anim} ease-in-out');
       @include abs($l:0,$t:0,$r:0,$b:0);
     }
-    .map-pop-bg{
-      @include abs($l:0,$t:0);
-      width:100%;
-      height:100%;
-    }
     .map-pop-big{
       @include abs($l:9%,$t:16%);
       width:23%;
@@ -413,6 +416,56 @@
       @include abs($r:1%,$t:1.5%);
     }
     //end map
+    //bible
+    .bible-items{
+      @include abs($l:0,$t:0,$r:0,$b:0);
+      overflow:hidden;
+    }
+    .bible-items-inner{
+      @include flx(display,flex);
+      @include flx(flex-flow,'row wrap');
+    }
+    .bible-item{
+      width:25%;
+      position:relative;
+      cursor:pointer;
+      svg{
+        position:relative;
+        width:60%;
+      }
+    }
+    .bible-tabs{
+      @include abs($l:5%,$t:110%,$r:5%);
+      height:20%;
+      @include flx(display,flex);
+      @include flx(justify-content,space-between);
+    }
+    .bible-tab{
+      width:10%;
+      cursor:pointer;
+      opacity:0.5;
+      &.active{
+        opacity:1;
+      }
+    }
+    .bible-pop{
+      opacity:0;
+      visibility:hidden;
+      @include trs('opacity #{$anim} ease-in-out');
+      @include abs($l:0,$t:0,$r:0,$b:0);
+    }
+    .bible-pop-big{
+      @include abs($l:9%,$t:16%);
+      width:23%;
+      height:45%;
+    }
+    .bible-pop-close{
+      width:7.5%;
+      height:13%;
+      cursor:pointer;
+      @include abs($r:1%,$t:1.5%);
+    }
+    //end bible
   }
   //other
   .loader-pop{

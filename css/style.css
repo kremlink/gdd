@@ -687,7 +687,6 @@ body {
   height: 100%;
   opacity: 0;
   visibility: hidden;
-  overflow: hidden;
   transition: opacity 0.3s ease-in-out;
 }
 .trash-pop .trash-block.shown {
@@ -706,7 +705,14 @@ body {
 .trash-pop .trash-block.map {
   background: url(../images/map-bg.jpg) center/cover no-repeat;
 }
-.trash-pop .trash-block.shown.popShown .map-pop {
+.trash-pop .trash-block.map.shown.popShown .map-pop {
+  opacity: 1;
+  visibility: visible;
+}
+.trash-pop .trash-block.bible {
+  background: #777;
+}
+.trash-pop .trash-block.bible.shown.popShown .bible-pop {
   opacity: 1;
   visibility: visible;
 }
@@ -851,13 +857,6 @@ body {
   right: 0;
   bottom: 0;
 }
-.trash-pop .map-pop-bg {
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-}
 .trash-pop .map-pop-big {
   position: absolute;
   left: 9%;
@@ -940,6 +939,69 @@ body {
   transform: translate(-50%, -50%);
 }
 .trash-pop .map-pop-close {
+  width: 7.5%;
+  height: 13%;
+  cursor: pointer;
+  position: absolute;
+  top: 1.5%;
+  right: 1%;
+}
+.trash-pop .bible-items {
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  overflow: hidden;
+}
+.trash-pop .bible-items-inner {
+  display: flex;
+  flex-flow: row wrap;
+}
+.trash-pop .bible-item {
+  width: 25%;
+  position: relative;
+  cursor: pointer;
+}
+.trash-pop .bible-item svg {
+  position: relative;
+  width: 60%;
+}
+.trash-pop .bible-tabs {
+  position: absolute;
+  left: 5%;
+  top: 110%;
+  right: 5%;
+  height: 20%;
+  display: flex;
+  justify-content: space-between;
+}
+.trash-pop .bible-tab {
+  width: 10%;
+  cursor: pointer;
+  opacity: 0.5;
+}
+.trash-pop .bible-tab.active {
+  opacity: 1;
+}
+.trash-pop .bible-pop {
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease-in-out;
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+}
+.trash-pop .bible-pop-big {
+  position: absolute;
+  left: 9%;
+  top: 16%;
+  width: 23%;
+  height: 45%;
+}
+.trash-pop .bible-pop-close {
   width: 7.5%;
   height: 13%;
   cursor: pointer;
