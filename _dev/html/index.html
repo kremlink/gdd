@@ -21,6 +21,11 @@
             </div>
 		</div>
         <script type="text/template" id="trash-template">
+            <div class="trash-bg-shad">
+                <svg class="trash-bg">
+                    <use xlink:href="#icon-shared-bg-pod-bg"></use>
+                </svg>
+            </div>
             <div class="trash-wrap">
                 <svg class="trash-bg">
                     <use xlink:href="#icon-shared-bg"></use>
@@ -154,7 +159,6 @@
                     </svg>
                 </div>
                <div class="prog1 disabled">
-                   <span>T</span>
                    <svg class="prog-ini">
                        <use xlink:href="#icon-shared-prog"></use>
                    </svg>
@@ -169,7 +173,6 @@
                    </svg>
                </div>
                 <div class="prog2">
-                    <span>E</span>
                     <svg class="prog-ini">
                         <use xlink:href="#icon-shared-prog"></use>
                     </svg>
@@ -184,7 +187,6 @@
                     </svg>
                 </div>
                 <div class="prog3">
-                    <span>S</span>
                     <svg class="prog-ini">
                         <use xlink:href="#icon-shared-prog"></use>
                     </svg>
@@ -295,10 +297,10 @@
             <% } %>
         </script>
         <script type="text/template" id="map-template">
-            <% for(let i=1;i<data.length+1;i++) { %>
-            <div class="map-mark" style="left:<%= data[i-1].left %>%;top:<%= data[i-1].top %>%;">
+            <% for(let i=0;i<data.length;i++) { %>
+            <div data-id="<%= data[i].id %>" class="map-mark" style="left:<%= data[i].left %>%;top:<%= data[i].top %>%;">
                 <svg>
-                    <use xlink:href="#icon-shared-map-marker-<%= i %>"></use>
+                    <use xlink:href="#icon-shared-map-marker-<%= data[i].id %>"></use>
                 </svg>
             </div>
             <% } %>
@@ -312,7 +314,7 @@
         <script type="text/template" id="map-pop-template">
             <div class="map-pop-big">
                 <svg>
-                    <use xlink:href="#icon-shared-map-marker-<%= index+1 %>"></use>
+                    <use xlink:href="#icon-shared-map-marker-<%= id %>"></use>
                 </svg>
             </div>
             <div class="t-scroll">
@@ -398,24 +400,26 @@
             </div>
             <div class="bible-pop">
                 <svg class="bible-pop-bg">
-                    <use xlink:href="#icon-shared-map-pop-bg"></use>
+                    <use xlink:href="#icon-shared-bible-pop-bg"></use>
                 </svg>
                 <div class="bible-pop-close"></div>
             </div>
         </script>
         <script type="text/template" id="bible-tab-template">
-            <% for(let i=1;i<data.length+1;i++) { %>
-            <div class="bible-item">
-                <svg>
-                    <use xlink:href="#icon-shared-map-marker-<%= i %>"></use>
-                </svg>
+            <% for(let i=0;i<data.length;i++) { %>
+            <div data-id="<%= data[i].id %>" class="bible-item">
+                <div>
+                    <svg>
+                        <use xlink:href="#icon-shared-map-marker-<%= data[i].id %>"></use>
+                    </svg>
+                </div>
             </div>
             <% } %>
         </script>
         <script type="text/template" id="bible-pop-template">
             <div class="bible-pop-big">
                 <svg>
-                    <use xlink:href="#icon-shared-map-marker-<%= index+1 %>"></use>
+                    <use xlink:href="#icon-shared-map-marker-<%= id %>"></use>
                 </svg>
             </div>
             <div class="t-scroll">

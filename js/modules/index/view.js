@@ -32,7 +32,7 @@ export function init(app,modules){
   },
   start:function(){
    this.$el.addClass(data.view.startCls);
-   //app.get('aggregator').trigger('player:play');TODO: uncomment
+   //app.get('aggregator').trigger('player:play');//TODO: uncomment
   }
   /*,
   addTrash:function(){//--old

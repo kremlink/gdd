@@ -47,7 +47,7 @@ export let TrashView=Backbone.View.extend({
   this.mapView=new MapView;
   this.bibleView=new BibleView;
 
-  //this.videoStart();
+  //this.videoStart(null);
   this.bible();
 
   //app.get('aggregator').trigger('trash:toggle',true);//--old TODO:remove
@@ -69,9 +69,11 @@ export let TrashView=Backbone.View.extend({
 
   this.playerView.pause();
  },
- videoStart:function(){
+ videoStart:function(e){
   this.switchTab(this.playerView);
   this.playerView.show();
+  if(e)
+   app.get('aggregator').trigger('player:play');
  },
  gameStart:function(){
   this.switchTab(this.gameView);

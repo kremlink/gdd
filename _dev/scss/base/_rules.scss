@@ -42,18 +42,18 @@
 
   body{
     height:100%;
-    font:14px/18px font();;
+    font:14px/18px font();
   }
 
   #wrap{
     height:100%;
-    min-height:500px;
     position:relative;
+    overflow:hidden;
     min-width:$miw;
+    background:#000;
   }
 
   #wrap-wrap{
-    overflow:hidden;
     @include abs($t:0,$b:0,$l:0,$r:0);
     @extend %scaler;
   }

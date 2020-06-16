@@ -452,13 +452,13 @@ body {
 
 #wrap {
   height: 100%;
-  min-height: 500px;
   position: relative;
+  overflow: hidden;
   min-width: 360px;
+  background: #000;
 }
 
 #wrap-wrap {
-  overflow: hidden;
   position: absolute;
   left: 0;
   top: 0;
@@ -553,6 +553,13 @@ body {
   height: 100%;
   position: relative;
 }
+.trash-pop .trash-bg-shad {
+  position: absolute;
+  left: -12.5%;
+  top: -12.5%;
+  right: -12.5%;
+  bottom: -12.5%;
+}
 .trash-pop .trash-bg {
   position: absolute;
   left: 0;
@@ -567,7 +574,17 @@ body {
   top: 4.4%;
   width: 68.7%;
   height: 68.3%;
-  background: linear-gradient(0deg,rgba(255, 255, 255, 0.2) 3px,transparent 3px,transparent 3px) 99% top/1px 6px repeat-y,linear-gradient(0deg,rgba(255, 255, 255, 0.2) 3px,transparent 3px,transparent 3px) 90.1% top/1px 6px repeat-y,linear-gradient(0deg,rgba(255, 255, 255, 0.2) 3px,transparent 3px,transparent 3px) 81.2% top/1px 6px repeat-y,linear-gradient(0deg,rgba(255, 255, 255, 0.2) 3px,transparent 3px,transparent 3px) 72.3% top/1px 6px repeat-y,linear-gradient(0deg,rgba(255, 255, 255, 0.2) 3px,transparent 3px,transparent 3px) 63.4% top/1px 6px repeat-y,linear-gradient(0deg,rgba(255, 255, 255, 0.2) 3px,transparent 3px,transparent 3px) 54.5% top/1px 6px repeat-y,linear-gradient(0deg,rgba(255, 255, 255, 0.2) 3px,transparent 3px,transparent 3px) 45.6% top/1px 6px repeat-y,linear-gradient(0deg,rgba(255, 255, 255, 0.2) 3px,transparent 3px,transparent 3px) 36.7% top/1px 6px repeat-y,linear-gradient(0deg,rgba(255, 255, 255, 0.2) 3px,transparent 3px,transparent 3px) 27.8% top/1px 6px repeat-y,linear-gradient(0deg,rgba(255, 255, 255, 0.2) 3px,transparent 3px,transparent 3px) 18.9% top/1px 6px repeat-y,linear-gradient(0deg,rgba(255, 255, 255, 0.2) 3px,transparent 3px,transparent 3px) 10% top/1px 6px repeat-y,linear-gradient(0deg,rgba(255, 255, 255, 0.2) 3px,transparent 3px,transparent 3px) 1.1% top/1px 6px repeat-y,linear-gradient(90deg,rgba(255, 255, 255, 0.2) 3px,transparent 3px,transparent 3px) left 90.2%/6px 1px repeat-x,linear-gradient(90deg,rgba(255, 255, 255, 0.2) 3px,transparent 3px,transparent 3px) left 74.3%/6px 1px repeat-x,linear-gradient(90deg,rgba(255, 255, 255, 0.2) 3px,transparent 3px,transparent 3px) left 58.4%/6px 1px repeat-x,linear-gradient(90deg,rgba(255, 255, 255, 0.2) 3px,transparent 3px,transparent 3px) left 42.5%/6px 1px repeat-x,linear-gradient(90deg,rgba(255, 255, 255, 0.2) 3px,transparent 3px,transparent 3px) left 26.6%/6px 1px repeat-x,linear-gradient(90deg,rgba(255, 255, 255, 0.2) 3px,transparent 3px,transparent 3px) left 10.7%/6px 1px repeat-x;;
+  /*$bg:'';
+  @for $x from 0 through 5
+  {
+   $bg:'linear-gradient(90deg,rgba(255, 255, 255, 0.2) 3px,transparent 3px,transparent 3px) left '+(10.7+15.9*$x)+'%/6px 1px repeat-x,'+$bg;
+  }
+  @for $x from 0 through 11
+  {
+    $bg:'linear-gradient(0deg,rgba(255, 255, 255, 0.2) 3px,transparent 3px,transparent 3px) '+(1.1+8.9*$x)+'% top/1px 6px repeat-y,'+$bg;
+  }
+  $bg:str-slice($bg,1,str-length($bg)-1)+';';
+  background:unquote($bg);*/
 }
 .trash-pop .return-btn, .trash-pop .videos-btn, .trash-pop .map-btn, .trash-pop .book-btn, .trash-pop .chat-btn, .trash-pop .game-btn {
   cursor: pointer;
@@ -610,17 +627,9 @@ body {
 }
 .trash-pop .prog1, .trash-pop .prog2, .trash-pop .prog3 {
   position: absolute;
-  right: 4.2%;
-  width: 9%;
+  right: 4%;
+  width: 9.5%;
   height: 4.2%;
-}
-.trash-pop .prog1 span, .trash-pop .prog2 span, .trash-pop .prog3 span {
-  position: absolute;
-  left: -13%;
-  top: 22%;
-  font-size: 14px;
-  font-weight: 700;
-  color: #000;
 }
 .trash-pop .prog1 svg + svg, .trash-pop .prog2 svg + svg, .trash-pop .prog3 svg + svg {
   clip-path: polygon(0 0, 0 0, 0 100%, 0 100%);
@@ -629,31 +638,32 @@ body {
   clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
 }
 .trash-pop .prog1 {
-  top: 39.2%;
+  top: 38.2%;
 }
 .trash-pop .prog2 {
-  top: 44.7%;
+  top: 43.7%;
 }
 .trash-pop .prog3 {
-  top: 50.2%;
+  top: 49.2%;
 }
 .trash-pop .prog-u {
   position: absolute;
   top: 56.7%;
-  right: 4.8%;
-  width: 8.1%;
-  height: 1.7%;
+  right: 4.5%;
+  width: 9%;
+  height: 3%;
   display: flex;
   justify-content: space-between;
 }
 .trash-pop .prog-u div {
   position: relative;
-  width: 12%;
+  width: 14%;
 }
 .trash-pop .prog-u svg {
   position: absolute;
-  left: 0;
+  left: -25%;
   top: 0;
+  width: 150%;
 }
 .trash-pop .prog-u svg + svg {
   opacity: 0.5;
@@ -664,7 +674,17 @@ body {
   bottom: 4.2%;
   width: 68.7%;
   height: 18.6%;
-  background: linear-gradient(0deg,rgba(255, 255, 255, 0.2) 3px,transparent 3px,transparent 3px) 99% top/1px 6px repeat-y,linear-gradient(0deg,rgba(255, 255, 255, 0.2) 3px,transparent 3px,transparent 3px) 90.1% top/1px 6px repeat-y,linear-gradient(0deg,rgba(255, 255, 255, 0.2) 3px,transparent 3px,transparent 3px) 81.2% top/1px 6px repeat-y,linear-gradient(0deg,rgba(255, 255, 255, 0.2) 3px,transparent 3px,transparent 3px) 72.3% top/1px 6px repeat-y,linear-gradient(0deg,rgba(255, 255, 255, 0.2) 3px,transparent 3px,transparent 3px) 63.4% top/1px 6px repeat-y,linear-gradient(0deg,rgba(255, 255, 255, 0.2) 3px,transparent 3px,transparent 3px) 54.5% top/1px 6px repeat-y,linear-gradient(0deg,rgba(255, 255, 255, 0.2) 3px,transparent 3px,transparent 3px) 45.6% top/1px 6px repeat-y,linear-gradient(0deg,rgba(255, 255, 255, 0.2) 3px,transparent 3px,transparent 3px) 36.7% top/1px 6px repeat-y,linear-gradient(0deg,rgba(255, 255, 255, 0.2) 3px,transparent 3px,transparent 3px) 27.8% top/1px 6px repeat-y,linear-gradient(0deg,rgba(255, 255, 255, 0.2) 3px,transparent 3px,transparent 3px) 18.9% top/1px 6px repeat-y,linear-gradient(0deg,rgba(255, 255, 255, 0.2) 3px,transparent 3px,transparent 3px) 10% top/1px 6px repeat-y,linear-gradient(0deg,rgba(255, 255, 255, 0.2) 3px,transparent 3px,transparent 3px) 1.1% top/1px 6px repeat-y,linear-gradient(90deg,rgba(255, 255, 255, 0.2) 3px,transparent 3px,transparent 3px) left 79.1%/6px 1px repeat-x,linear-gradient(90deg,rgba(255, 255, 255, 0.2) 3px,transparent 3px,transparent 3px) left 20.9%/6px 1px repeat-x;;
+  /*$bg:'';
+  @for $x from 0 through 1
+  {
+    $bg:'linear-gradient(90deg,rgba(255, 255, 255, 0.2) 3px,transparent 3px,transparent 3px) left '+(20.9+58.2*$x)+'%/6px 1px repeat-x,'+$bg;
+  }
+  @for $x from 0 through 11
+  {
+    $bg:'linear-gradient(0deg,rgba(255, 255, 255, 0.2) 3px,transparent 3px,transparent 3px) '+(1.1+8.9*$x)+'% top/1px 6px repeat-y,'+$bg;
+  }
+  $bg:str-slice($bg,1,str-length($bg)-1)+';';
+  background:unquote($bg);*/
 }
 .trash-pop .menu-btn, .trash-pop .load-save-btn {
   position: absolute;
@@ -695,9 +715,9 @@ body {
 }
 .trash-pop .trash-block.game {
   background: url(../images/game-bg.jpg) center/cover no-repeat;
+  overflow: hidden;
 }
 .trash-pop .trash-block.flow {
-  background: #555;
   display: flex;
   justify-content: space-between;
   flex-flow: row wrap;
@@ -708,9 +728,6 @@ body {
 .trash-pop .trash-block.map.shown.popShown .map-pop {
   opacity: 1;
   visibility: visible;
-}
-.trash-pop .trash-block.bible {
-  background: #777;
 }
 .trash-pop .trash-block.bible.shown.popShown .bible-pop {
   opacity: 1;
@@ -960,12 +977,17 @@ body {
 }
 .trash-pop .bible-item {
   width: 25%;
+  padding-bottom: 25%;
   position: relative;
   cursor: pointer;
 }
-.trash-pop .bible-item svg {
-  position: relative;
+.trash-pop .bible-item div {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
   width: 60%;
+  height: 60%;
 }
 .trash-pop .bible-tabs {
   position: absolute;
@@ -994,6 +1016,9 @@ body {
   right: 0;
   bottom: 0;
 }
+.trash-pop .bible-pop .t-scroll {
+  bottom: 15%;
+}
 .trash-pop .bible-pop-big {
   position: absolute;
   left: 9%;
@@ -1006,7 +1031,7 @@ body {
   height: 13%;
   cursor: pointer;
   position: absolute;
-  top: 1.5%;
+  top: 9%;
   right: 1%;
 }
 
@@ -1068,7 +1093,7 @@ body {
   position: absolute;
   left: 39%;
   top: 16%;
-  right: 6.5%;
+  right: 10%;
   bottom: 37%;
   color: #000;
   font-size: 14px;

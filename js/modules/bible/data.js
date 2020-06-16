@@ -38,6 +38,7 @@ export const data={
   shownCls:'shown',
   activeTabCls:'active',
   popShownCls:'popShown',
-  dataClick:'type'
+  dataClick:'type',
+  dataId:'id'
  }
 };

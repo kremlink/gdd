@@ -1,6 +1,6 @@
 @include exports("@path:components\_shared.scss"){/*@path:components\_shared.scss*/
   .t-scroll{
-    @include abs($l:39%,$r:6.5%,$t:16%,$b:37%);
+    @include abs($l:39%,$r:10%,$t:16%,$b:37%);
     color:#000;
     font-size:14px;
     line-height:18px;

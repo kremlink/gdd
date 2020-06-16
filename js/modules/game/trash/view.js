@@ -37,8 +37,13 @@ export let GameTrashView=Backbone.View.extend({
    this.$el.on('transitionend',()=>{
     this.$el.off('transitionend');
     if(put)
-     this.put({drop:true});else
+    {
+     this.put({drop:true});
+    }else
+    {
+     this.remove();
      app.get('aggregator').trigger('game:trash-failed');
+    }
    }).css({transition:`top ${data.view.fall}`,top:put?`calc(${100-parseInt(this.data.failLine.bottom)}% - ${this.$el.height()}px`:'100%'});
   }
  },

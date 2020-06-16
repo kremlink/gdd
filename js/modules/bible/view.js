@@ -60,9 +60,9 @@ export let BibleView=Backbone.View.extend({
   this.setScroll('tabScroll',this.$itemsWrap);
  },
  pop:function(e){
-  let index=this.$(data.events.item).index(e.currentTarget);
+  let id=$(e.currentTarget).data(data.view.dataId);
 
-  this.$popContent=$(this.popTemplate(_.extend({margin:app.get('scrollDim'),index:index},data.data[this.$currentTab.data(data.view.dataClick)].items[index])));
+  this.$popContent=$(this.popTemplate(_.extend({margin:app.get('scrollDim')},data.data[this.$currentTab.data(data.view.dataClick)].items.filter(o=>o.id.toString()===id.toString())[0])));
   this.$pop.append(this.$popContent);
   this.$el.addClass(data.view.popShownCls);
 

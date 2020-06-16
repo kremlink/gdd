@@ -6,7 +6,7 @@ export const data={
   {id:4,left:60,top:30,alert:5,like:5,fire:5,text:'Text4'},
   {id:5,left:30,top:70,alert:1,like:1,fire:1,text:'Text5'},
   {id:6,left:50,top:50,alert:3,like:0,fire:12,text:'Text6'}],
- omit:['left','top','index','text'],
+ omit:['left','top','text'],
  events:{
   'marker':'.map-mark',
   'close':'.map-pop-close',
@@ -23,6 +23,7 @@ export const data={
   reactedCls:'reacted',
   shownCls:'shown',
   popShownCls:'popShown',
-  dataClick:'type'
+  dataClick:'type',
+  dataId:'id'
  }
 };

@@ -25,16 +25,10 @@ export let MapView=Backbone.View.extend({
   this.$pop=this.$(data.view.$pop);
   this.marks=new (Backbone.Collection.extend({model:MapMarkerModel}));
   this.marks.reset(data.data);
-  this.addMarks();
   this.$marks=this.$(data.events.marker);
   this.current=null;
   this.$popContent=null;
   this.$reacted=null;
- },
- addMarks:function(){
-  this.marks.each((model,index)=>{
-   model.set('index',index);
-  });
  },
  show:function(){
   this.$el.addClass(data.view.shownCls);
@@ -46,9 +40,9 @@ export let MapView=Backbone.View.extend({
   this.$reacted.html(this.reactedTemplate(this.current.toJSON()));
  },
  pop:function(e){
-  let index=this.$marks.index(e.currentTarget);
+  let id=$(e.currentTarget).data(data.view.dataId);
 
-  this.current=this.marks.at(index);
+  this.current=this.marks.where({id:id})[0];
   this.$popContent=$(this.popTemplate(_.extend({margin:app.get('scrollDim')},this.current.toJSON({all:true}))));
   this.$pop.append(this.$popContent);
   this.$el.addClass(data.view.popShownCls);

@@ -35,6 +35,9 @@
       height:100%;
       position:relative;
     }
+    .trash-bg-shad{
+      @include abs($l:-12.5%,$t:-12.5%,$r:-12.5%,$b:-12.5%);
+    }
     .trash-bg{
       @include abs($l:0,$t:0);
       width:100%;
@@ -48,7 +51,7 @@
       //@include abs($l:12.95%,$t:4.1%);
       //width:69%;
       //height:69%;
-      $bg:'';
+      /*$bg:'';
       @for $x from 0 through 5
       {
        $bg:'linear-gradient(90deg,#{rgba(#fff,0.2)} 3px,transparent 3px,transparent 3px) left '+(10.7+15.9*$x)+'%/6px 1px repeat-x,'+$bg;
@@ -58,7 +61,7 @@
         $bg:'linear-gradient(0deg,#{rgba(#fff,0.2)} 3px,transparent 3px,transparent 3px) '+(1.1+8.9*$x)+'% top/1px 6px repeat-y,'+$bg;
       }
       $bg:str-slice($bg,1,str-length($bg)-1)+';';
-      background:unquote($bg);
+      background:unquote($bg);*/
     }
     .return-btn,.videos-btn,.map-btn,.book-btn,.chat-btn,.game-btn{
       cursor:pointer;
@@ -99,15 +102,9 @@
       @extend %svg-click;
     }
     .prog1,.prog2,.prog3{
-      @include abs($r:4.2%);
-      width:9%;
+      @include abs($r:4%);
+      width:9.5%;
       height:4.2%;
-      span{
-        @include abs($l:-13%,$t:22%);
-        font-size:14px;
-        font-weight:700;
-        color:#000;
-      }
       svg+svg{
         clip-path:polygon(0 0,0 0,0 100%,0 100%);
       }
@@ -118,29 +115,30 @@
       }
     }
     .prog1{
-      top:39.2%;
+      top:38.2%;
     }
     .prog2{
-      top:44.7%;
+      top:43.7%;
     }
     .prog3{
-      top:50.2%;
+      top:49.2%;
     }
     .prog-ini{
 
     }
     .prog-u{
-      @include abs($r:4.8%,$t:56.7%);
-      width:8.1%;
-      height:1.7%;
+      @include abs($r:4.5%,$t:56.7%);
+      width:9%;
+      height:3%;
       @include flx(display,flex);
       @include flx(justify-content,space-between);
       div{
         position:relative;
-        width:12%;
+        width:14%;
       }
       svg{
-        @include abs($l:0,$t:0);
+        @include abs($l:-25%,$t:0);
+        width:150%;
         &+svg{
           opacity:0.5;
         }
@@ -158,7 +156,7 @@
       width:68.7%;
       height:18.6%;
 
-      $bg:'';
+      /*$bg:'';
       @for $x from 0 through 1
       {
         $bg:'linear-gradient(90deg,#{rgba(#fff,0.2)} 3px,transparent 3px,transparent 3px) left '+(20.9+58.2*$x)+'%/6px 1px repeat-x,'+$bg;
@@ -168,7 +166,7 @@
         $bg:'linear-gradient(0deg,#{rgba(#fff,0.2)} 3px,transparent 3px,transparent 3px) '+(1.1+8.9*$x)+'% top/1px 6px repeat-y,'+$bg;
       }
       $bg:str-slice($bg,1,str-length($bg)-1)+';';
-      background:unquote($bg);
+      background:unquote($bg);*/
     }
     .menu-btn,.load-save-btn{
       @include abs($r:9.9%,$b:6.4%);
@@ -194,9 +192,9 @@
       }
       &.game{
         background: url(#{$path}game-bg.jpg) center/cover no-repeat;
+        overflow:hidden;
       }
       &.flow{
-        background:#555;
         @include flx(display,flex);
         @include flx(justify-content,space-between);
         @include flx(flex-flow,'row wrap');
@@ -211,7 +209,6 @@
         }
       }
       &.bible{
-        background:#777;
         &.shown.popShown{
           .bible-pop{
             opacity:1;
@@ -427,11 +424,13 @@
     }
     .bible-item{
       width:25%;
+      padding-bottom:25%;
       position:relative;
       cursor:pointer;
-      svg{
-        position:relative;
+      div{
+        @include center();
         width:60%;
+        height:60%;
       }
     }
     .bible-tabs{
@@ -453,6 +452,9 @@
       visibility:hidden;
       @include trs('opacity #{$anim} ease-in-out');
       @include abs($l:0,$t:0,$r:0,$b:0);
+      .t-scroll{
+        bottom:15%;
+      }
     }
     .bible-pop-big{
       @include abs($l:9%,$t:16%);
@@ -463,7 +465,7 @@
       width:7.5%;
       height:13%;
       cursor:pointer;
-      @include abs($r:1%,$t:1.5%);
+      @include abs($r:1%,$t:9%);
     }
     //end bible
   }
