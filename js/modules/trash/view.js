@@ -50,11 +50,10 @@ export let TrashView=Backbone.View.extend({
   this.bibleView=new BibleView;
   this.chatView=new ChatView;
 
-  //this.videoStart(null);
-  this.bible();
+  this.videoStart(null);
+  //this.chat();//TODO:remove
 
   //app.get('aggregator').trigger('trash:toggle',true);//--old TODO:remove
-  //this.map();//TODO:remove
  },
  /*toggle:function(f){//--old
   this.$el.toggleClass(data.view.shownCls,f);

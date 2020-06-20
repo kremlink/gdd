@@ -19,3 +19,27 @@ $(()=>{
  index.init(app,modules);
  app.set({dest:'objects.scrollDim',object:-Math.abs(utils.scrollDim())});
 });
+
+/*
+$(()=>{
+ let wobble=$('.w-wrap'),
+  x=0,
+  y=0,
+  rand=()=>Math.floor(Math.random()*60)-30,
+  wTrs=()=>{
+   let oX=x,oY=y;
+
+   x=rand();
+   y=rand();
+
+   if(x===oX&&y===oY)
+    wTrs();
+   wobble.css('transform',`translate(${x}px,${y}px)`);
+  };
+
+ $('.w-p div').css({transitionDuration:'5s',width:'100%'});
+ wobble.on('transitionend',function(){
+  wTrs();
+ });
+ wTrs();
+});*/

@@ -217,8 +217,11 @@
         }
       }
       &.chat{
-        font-size:18px;
         color:#000;
+        font-size:1.125vw;
+        @media (min-aspect-ratio:16/9) {
+          font-size:2vh;
+        }
       }
     }
     //game
@@ -356,7 +359,7 @@
         }
       }
       &.do{
-        right:8%;
+        right:12%;
         &.reacted{
           pointer-events:none;
         }
@@ -414,7 +417,7 @@
       width:7.5%;
       height:13%;
       cursor:pointer;
-      @include abs($r:1%,$t:1.5%);
+      @include abs($r:1%,$t:9%);
     }
     //end map
     //bible
@@ -569,12 +572,13 @@
       height:20%;
       text-align:left;
       color:#fff;
+      @include flx(display,flex);
+      @include flx(flex-flow,'column nowrap');
+      @include flx(justify-content,space-between);
     }
     .chat-choose{
       cursor:pointer;
-      &:nth-child(n+2){
-        margin-top:1.1em;
-      }
+      width:100%;
       &.chosen{
         color:green;
       }
@@ -586,6 +590,7 @@
     @include abs($l:0,$r:0,$t:0,$b:0);
     @include trs('opacity #{$anim} ease-in-out');
     @extend %loader;
+    z-index:1;
     background-color:#eee;
     .loaded &{
       opacity:0;
@@ -598,6 +603,7 @@
     background:#fff;
     font-size:30px;
     line-height:30px;
+    z-index:1;
     @include flx(justify-content,center);
     @include flx(align-items,center);
     .too-small &{
@@ -619,5 +625,55 @@
       height:15%;
       cursor:pointer;
     }
+  }
+}
+//--TODO: remove this
+@include kfs(rotate){
+  50%{
+    @include trf('rotateY(30deg)');
+    perspective:200px;
+  }
+};
+@include kfs(move){
+  50%{
+    @include trf(translate(-20px,0));
+  }
+};
+
+.wobble{
+  @include flx(display,flex);
+  .w-outer{
+    margin:auto;
+    @include anim('rotate 6s infinite');
+  }
+  .w-wrap{
+    position:relative;
+    padding:16px 30px;
+    background:rgba(#fff,0.5);
+    @include trs('transform #{$anim} linear');
+  }
+  .w-cont{
+    @include anim('move 6s infinite');
+    background:#ddd;
+  }
+  .w-p{
+    @include abs($l:0,$r:0,$t:-1px);
+    div{
+      border-top:1px solid orange;
+      width:0;
+      @include trs('width linear');
+    }
+  }
+  .w-p-text{
+    @include abs($l:0,$t:-17px);
+    font-size:14px;
+    color:orange;
+  }
+  .w-text{
+    font-size:26px;
+    line-height:1;
+    color:#fff;
+    text-transform:uppercase;
+    text-align:center;
   }
 }

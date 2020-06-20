@@ -7,4 +7,7 @@
     display:none;//
     @include center();
   }
+  .vjs-error .vjs-error-display .vjs-modal-dialog-content{
+    color:#000;
+  }
 }

@@ -734,8 +734,13 @@ body {
   visibility: visible;
 }
 .trash-pop .trash-block.chat {
-  font-size: 18px;
   color: #000;
+  font-size: 1.125vw;
+}
+@media (min-aspect-ratio: 16/9) {
+  .trash-pop .trash-block.chat {
+    font-size: 2vh;
+  }
 }
 .trash-pop .bins {
   position: absolute;
@@ -900,7 +905,7 @@ body {
   opacity: 1;
 }
 .trash-pop .map-pop-react.do {
-  right: 8%;
+  right: 12%;
 }
 .trash-pop .map-pop-react.do.reacted {
   pointer-events: none;
@@ -964,7 +969,7 @@ body {
   height: 13%;
   cursor: pointer;
   position: absolute;
-  top: 1.5%;
+  top: 9%;
   right: 1%;
 }
 .trash-pop .bible-items {
@@ -1145,12 +1150,13 @@ body {
   height: 20%;
   text-align: left;
   color: #fff;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: space-between;
 }
 .trash-pop .chat-choose {
   cursor: pointer;
-}
-.trash-pop .chat-choose:nth-child(n+2) {
-  margin-top: 1.1em;
+  width: 100%;
 }
 .trash-pop .chat-choose.chosen {
   color: green;
@@ -1163,6 +1169,7 @@ body {
   right: 0;
   bottom: 0;
   transition: opacity 0.3s ease-in-out;
+  z-index: 1;
   background-color: #eee;
 }
 .loaded .loader-pop {
@@ -1180,6 +1187,7 @@ body {
   background: #fff;
   font-size: 30px;
   line-height: 30px;
+  z-index: 1;
   justify-content: center;
   align-items: center;
 }
@@ -1206,6 +1214,60 @@ body {
   width: 5%;
   height: 15%;
   cursor: pointer;
+}
+
+@keyframes rotate {
+  50% {
+    transform: rotateY(30deg);
+    perspective: 200px;
+  }
+}
+@keyframes move {
+  50% {
+    transform: translate(-20px, 0);
+  }
+}
+.wobble {
+  display: flex;
+}
+.wobble .w-outer {
+  margin: auto;
+  animation: rotate 6s infinite;
+}
+.wobble .w-wrap {
+  position: relative;
+  padding: 16px 30px;
+  background: rgba(255, 255, 255, 0.5);
+  transition: transform 0.3s linear;
+}
+.wobble .w-cont {
+  animation: move 6s infinite;
+  background: #ddd;
+}
+.wobble .w-p {
+  position: absolute;
+  left: 0;
+  top: -1px;
+  right: 0;
+}
+.wobble .w-p div {
+  border-top: 1px solid orange;
+  width: 0;
+  transition: width linear;
+}
+.wobble .w-p-text {
+  position: absolute;
+  left: 0;
+  top: -17px;
+  font-size: 14px;
+  color: orange;
+}
+.wobble .w-text {
+  font-size: 26px;
+  line-height: 1;
+  color: #fff;
+  text-transform: uppercase;
+  text-align: center;
 }
 
 /*@path:components\_header.scss*/
@@ -1258,6 +1320,10 @@ body {
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
+}
+
+.vjs-error .vjs-error-display .vjs-modal-dialog-content {
+  color: #000;
 }
 
 /*@path:partials\_index.scss*/
