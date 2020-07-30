@@ -971,9 +971,23 @@ body {
   width: 100%;
   height: 100%;
 }
-.trash-pop .bible-tabs {
+.trash-pop .bible-bg {
+  position: absolute;
+  left: 0;
+  top: 105.5%;
+  right: 0;
+  height: 30%;
+}
+.trash-pop .bible-tab-name {
   position: absolute;
   left: 5%;
+  top: 50%;
+  transform: translate(0, -50%);
+  color: #fff;
+}
+.trash-pop .bible-tabs {
+  position: absolute;
+  left: 50%;
   top: 110%;
   right: 5%;
   height: 20%;
@@ -1194,7 +1208,7 @@ body {
   overflow: hidden;
   position: absolute;
   left: 0;
-  top: 10%;
+  top: 5em;
   right: 0;
   bottom: 0;
 }
@@ -1202,12 +1216,12 @@ body {
 .t-scroll-wrap {
   height: 100%;
   overflow: auto;
-  padding-right: 10%;
+  padding-right: 2.5em;
 }
 
 .t-hdr {
   font-size: 1.5em;
-  margin-bottom: 1em;
+  margin: 0 1.5em 1em 0;
 }
 
 .t-scroll-bar {
@@ -1215,9 +1229,9 @@ body {
   top: 0;
   right: 0;
   bottom: 0;
-  width: 5%;
+  width: 1.5em;
   background: #d6d6d6;
-  border-radius: 45%/4%;
+  border-radius: 0.75em;
 }
 .t-scroll-bar.hidden {
   display: none;
@@ -1227,7 +1241,7 @@ body {
   width: 100%;
   height: 10%;
   position: absolute;
-  border-radius: 50%/4%;
+  border-radius: 0.75em;
 }
 
 .uni-pop {
@@ -1266,10 +1280,10 @@ body {
 
 .uni-pop-text {
   position: absolute;
-  left: 39%;
-  top: 16%;
-  right: 10%;
-  bottom: 16%;
+  left: 22em;
+  top: 1em;
+  right: 1.5em;
+  height: 22em;
 }
 
 /*@path:components\_video.scss*/

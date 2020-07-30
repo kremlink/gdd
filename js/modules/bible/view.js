@@ -31,6 +31,7 @@ export let BibleView=BaseBlockView.extend({
   this.$itemsWrap=this.$(data.view.$itemsWrap);
   this.$pop=this.$(data.view.$pop);
   this.$tabs=this.$(data.events.tab);
+  this.$name=this.$(data.view.$name);
   this.$currentTab=null;
   this.$popContent=null;
   this.popScroll=null;
@@ -64,6 +65,7 @@ export let BibleView=BaseBlockView.extend({
    id:id,
    data:data.data[id].items
   }));
+  this.$name.text(data.data[id].name);
   this.setScroll('tabScroll',this.$itemsWrap);
  },
  pop:function(e){

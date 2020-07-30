@@ -440,8 +440,16 @@
         height:100%;
       }
     }
+    .bible-bg{
+      @include abs($l:0,$t:105.5%,$r:0);
+      height:30%;
+    }
+    .bible-tab-name{
+      @include center($l:5%);
+      color:#fff;
+    }
     .bible-tabs{
-      @include abs($l:5%,$t:110%,$r:5%);
+      @include abs($l:50%,$t:110%,$r:5%);
       height:20%;
       @include flx(display,flex);
       @include flx(justify-content,space-between);
