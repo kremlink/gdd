@@ -1,41 +1,41 @@
 
 export class Bar{
- "use strict";
+ constructor(){
+  this.options={
+   clickable:null,
+   horizontal:false,
+   steps:0,
+   hideClass:'hidden',
+   namespace:'.bar',
+   value:[],
+   touch:{
+    mult:2,
+    threshold:5
+   },
+   helpers:{
+    drag:null//drag detection function
+   }
+  };
 
- options={
-  clickable:null,
-  horizontal:false,
-  steps:0,
-  hideClass:'hidden',
-  namespace:'.bar',
-  value:[],
-  touch:{
-   mult:2,
-   threshold:5
-  },
-  helpers:{
-   drag:null//drag detection function
-  }
- };
-
- props={
-  container:null,
-  bar:null,//init
-  holder:null,//init
-  prop:null,//init
-  coord:null,//init
-  holderDim:null,
-  barDim:null,
-  bounds:null,
-  start:null,
-  value:[],
-  steps:0,
-  active:0,
-  stepsValues:[],
-  body:$('body'),
-  stopResize:false,
-  drag:null
- };
+  this.props={
+   container:null,
+   bar:null,//init
+   holder:null,//init
+   prop:null,//init
+   coord:null,//init
+   holderDim:null,
+   barDim:null,
+   bounds:null,
+   start:null,
+   value:[],
+   steps:0,
+   active:0,
+   stepsValues:[],
+   body:$('body'),
+   stopResize:false,
+   drag:null
+  };
+ }
 }
 //-----------------
 $.extend(Bar.prototype,{

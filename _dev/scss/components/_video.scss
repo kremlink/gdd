@@ -2,12 +2,21 @@
   .video-js{
     width:100%;
     height:100%;
-  }
-  .video-js .vjs-big-play-button{
-    display:none;//
-    @include center();
-  }
-  .vjs-error .vjs-error-display .vjs-modal-dialog-content{
-    color:#000;
+    overflow:hidden;
+    border-radius:0.73125%/1.3%;
+    .vjs-tech{
+      outline:none;
+      height:101%;
+    }
+    .vjs-big-play-button{
+      display:none;//
+      @include center();
+    }
+    .vjs-error .vjs-error-display .vjs-modal-dialog-content{
+      color:#000;
+    }
+    .vjs-fullscreen-control{
+      display:none;
+    }
   }
 }

@@ -118,11 +118,9 @@
                                 controls
                                 preload="auto"
                                 poster="../poster.jpg"> <!--poster="//vjs.zencdn.net/v/oceans.png" data-setup='{}'-->
-                            <!--<source src="//vjs.zencdn.net/v/oceans.mp4" type="video/mp4"></source>
-                            <source src="//vjs.zencdn.net/v/oceans.webm" type="video/webm"></source>
-                            <source src="//vjs.zencdn.net/v/oceans.ogv" type="video/ogg"></source>-->
+                            <!--<source src="http://igoninlab.com:8080/hls/stream.m3u8" type="video/mp4" />
+                            <source src="../episode1.mp4" type="video/mp4" />-->
                             <source src="../oceans.mp4" type="video/mp4" />
-                            <!--<source src="../episode1.mp4" type="video/mp4" />-->
                             <p class="vjs-no-js">
                                 To view this video please enable JavaScript, and consider upgrading to a
                                 web browser that
@@ -154,18 +152,21 @@
                         <div class="chat-content">
                             <div class="chat-wrap">
                                 <div class="chat-inner">
+                                    <!--<div class="chat-msg bot">
+                                        <div class="chat-msg-text">
+                                            <div>Эй, кто-нибудь!</div>
+                                        </div>
+                                    </div>
                                     <div class="chat-msg bot">
-                                        <div class="chat-msg-date">12:15 01.02.20</div>
                                         <div class="chat-msg-text">
                                             <div>Эй, кто-нибудь!</div>
                                         </div>
                                     </div>
                                     <div class="chat-msg me">
-                                        <div class="chat-msg-date">12:17 01.02.20</div>
                                         <div class="chat-msg-text">
-                                            <div>Кто ты такой, что это вообще?</div>
+                                            <div>Кто ты такой, что это вообще?<br/>Вторая строка</div>
                                         </div>
-                                    </div>
+                                    </div>-->
                                 </div>
                             </div>
                         </div>
@@ -178,9 +179,9 @@
                             <div class="chat-name">Ичия Вандерлей Котобуки</div>
                         </div>
                         <div class="chat-ctrls">
-                            <div class="chat-choose">Это ты мне?</div>
+                            <!--<div class="chat-choose">Это ты мне?</div>
                             <div class="chat-choose chosen">Кто ты такой, что это вообще?</div>
-                            <div class="chat-choose">Мне не нужна ваша, что вы там рекламируете</div>
+                            <div class="chat-choose">Мне не нужна ваша, что вы там рекламируете</div>-->
                         </div>
                     </div>
                 </div>
@@ -314,14 +315,15 @@
             </div>
         </script>
         <script type="text/template" id="game-bin-template">
-            <div class="b-drop" style="background:<%= color %>;"><div></div></div>
-            <span class="b-text"><%= type %></span>
+            <div class="b-drop"><div></div></div>
+            <img src="images/trash_tanks/trashcan-<%= type %>.png" />
+            <!--<svg>
+                <use xlink:href="#icon-shared-bible-trashcan-<%= type %>"></use>
+            </svg>-->
         </script>
         <script type="text/template" id="game-trash-template">
-            <div class="t-drop" style="background: #ccc;"></div>
-            <span class="t-text">
-               <%= type %> <!--Type: <%= type %><br/>Subtype: <%= subtype %>-->
-            </span>
+            <div class="t-drop"></div>
+            <img src="images/trash_items/trash-<%= type %>-<%= subtype %>.png" />
         </script>
         <script type="text/template" id="episodes-template">
             <% for(let i=1;i<episodes+1;i++) { %>
@@ -418,9 +420,21 @@
                 <span class="map-pop-done-count"><span><%= like %></span></span>
             </div>
         </script>
+        <script type="text/template" id="chat-msg-template">
+            <div class="chat-msg <%= bot?'bot':'me' %>">
+                <div class="chat-msg-text">
+                    <div><%= bot %></div>
+                </div>
+            </div>
+        </script>
+        <script type="text/template" id="chat-choose-template">
+            <% for(let i=0;i<user.length;i++) { %>
+            <div class="chat-choose"><%= user[i].text %></div>
+            <% } %>
+        </script>
         <script type="text/template" id="bible-template">
             <div class="bible-items">
-                <div class="bible-items-wrap t-scroll-wrap">
+                <div class="bible-items-wrap t-scroll-wrap" style="margin-right:<%= margin %>px;">
                     <div class="bible-items-inner t-scroll-inner"></div>
                 </div>
                 <div class="t-scroll-bar"><div></div></div>
@@ -442,26 +456,31 @@
             </div>
         </script>
         <script type="text/template" id="bible-tab-template">
-            <% for(let i=0;i<data.data.length;i++) { %>
-            <div data-id="<%= data.data[i].id %>" class="bible-item">
+            <% for(let i=0;i<data.length;i++) { %>
+            <div data-id="<%= data[i].id %>" class="bible-item<%= data[i].no?' no':'' %>">
                 <div class="bible-item-bg">
                     <svg>
-                        <use xlink:href="#icon-shared-bible-item-under-<%= data.id %>"></use>
+                        <use xlink:href="#icon-shared-bible-item-under<%= (data[i].no?'-empty-':'-')+id %>"></use>
                     </svg>
                 </div>
+                <% if(!data[i].no) { %>
                 <div class="bible-item-img">
-                    <img src="images/biblia-item-<%= data.id %>-<%= data.data[i].id %>.png" alt=""/>
+                    <img src="images/trash_items/trash-<%= id %>-<%= data[i].id %>.png" alt=""/>
                 </div>
+                <% } %>
             </div>
             <% } %>
         </script>
         <script type="text/template" id="bible-pop-template">
             <div class="bible-pop-big">
-                <img src="images/biblia-item-<%= tid %>-<%= id %>.png" alt=""/>
+                <img src="images/trash_items/trash-<%= tid %>-<%= id %>.png" alt=""/>
             </div>
             <div class="t-scroll">
                 <div class="t-scroll-wrap" style="margin-right:<%= margin %>px;">
                     <div class="t-scroll-inner">
+                        <% if(h) { %>
+                        <div class="t-hdr"><%= h %></div>
+                        <% } %>
                         <%= text %>
                     </div>
                 </div>

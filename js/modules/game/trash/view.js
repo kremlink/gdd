@@ -44,7 +44,7 @@ export let GameTrashView=Backbone.View.extend({
      this.remove();
      app.get('aggregator').trigger('game:trash-failed');
     }
-   }).css({transition:`top ${data.view.fall}`,top:put?`calc(${100-parseInt(this.data.failLine.bottom)}% - ${this.$el.height()}px`:'100%'});
+   }).css({transition:`top ${data.view.fall}`,top:put?`calc(${100-parseInt(data.put)}% - ${this.$el.height()}px`:'100%'});
   }
  },
  put:function({drop=false}={}){

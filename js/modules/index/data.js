@@ -8,5 +8,6 @@ export const data={
   tooSmallCls:'too-small',
   startCls:'start'
  },
- minViewport:'(min-width:600px)'
+ minViewport:'(min-width:600px)',
+ mobViewport:'(max-width:1023px)'
 };

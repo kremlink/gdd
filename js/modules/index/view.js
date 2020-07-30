@@ -1,6 +1,8 @@
 //import {PlayerView} from '../player/view.js';//--old
-import {TrashView} from '../trash/view.js';
+import {MainView} from '../main/view.js';
 import {data} from './data.js';
+
+export {data} from './data.js';
 
 //import {data as dat} from './data.js';
 //let data=app.configure({index:dat}).index;
@@ -16,7 +18,7 @@ export function init(app,modules){
   events:events,
   el:data.view.el,
   initialize:function(){
-   let trashView=new TrashView;
+   new MainView;
 
    this.$el.addClass(data.view.loadedCls);
    if(!matchMedia(data.minViewport).matches)
@@ -44,5 +46,5 @@ export function init(app,modules){
    if(!matchMedia(data.minViewport).matches)
     this.$el.addClass(data.view.tooSmallCls);
   }*/
- }))
+ }));
 }

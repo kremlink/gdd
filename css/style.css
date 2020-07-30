@@ -2,6 +2,7 @@
 /*@path:core\_base.scss*/
 /*@path:core\_mixins.scss*/
 /*@path:core\_exts.scss*/
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@500;700&display=swap");
 .loader-pop {
   background: url(../images/loader.gif) center no-repeat;
 }
@@ -406,32 +407,6 @@ table {
 
 /*@path:base\_mixins.scss*/
 /*@path:base\_rules.scss*/
-a {
-  color: #f00;
-}
-a:hover {
-  text-decoration: none;
-}
-a:focus {
-  outline: none;
-}
-
-.caller {
-  text-decoration: none;
-  border-bottom: 1px dotted currentColor;
-  display: inline-block;
-  cursor: pointer;
-}
-.caller:hover, .caller.active {
-  border-bottom-color: transparent;
-}
-
-a.active, span.active {
-  cursor: default;
-  text-decoration: none;
-  border-bottom-color: transparent;
-}
-
 .safe-hide-svg {
   position: absolute;
   left: 0;
@@ -447,7 +422,7 @@ html {
 
 body {
   height: 100%;
-  font: 14px/18px "Open Sans", sans-serif;
+  font: 500 14px/18px "IBM Plex Sans", sans-serif;
 }
 
 #wrap {
@@ -455,7 +430,7 @@ body {
   position: relative;
   overflow: hidden;
   min-width: 360px;
-  background: #000;
+  background: #d6d6d6;
 }
 
 #wrap-wrap {
@@ -475,7 +450,7 @@ body {
 #wrap-wrap {
   height: 56.25vw;
   max-height: 100vh;
-  max-width: 177.78vh;
+  max-width: 177.7777vh;
   margin: auto;
 }
 
@@ -505,16 +480,12 @@ body {
 /*@path:components\_game.scss*/
 .trash-pop {
   position: absolute;
-  left: -1px;
+  left: 0;
   top: 0;
-  right: -1px;
+  right: 0;
   bottom: 0;
   background: #ddd;
   text-align: center;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
   /*opacity:0;//--old
   pointer-events:none;
   @include trs('opacity 0.3s ease-in-out');
@@ -537,6 +508,18 @@ body {
     background:#000;
     border-radius:1%/5%;
   }*/
+}
+.trash-pop.fs .video-js {
+  border-radius: 0;
+}
+.trash-pop.mfs .video-js {
+  border-radius: 0;
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1;
 }
 .trash-pop.game-active .return-btn, .trash-pop.game-active .videos-btn, .trash-pop.game-active .map-btn, .trash-pop.game-active .book-btn, .trash-pop.game-active .chat-btn, .trash-pop.game-active .null-btn, .trash-pop.game-active .menu-btn, .trash-pop.game-active .load-save-btn {
   pointer-events: none;
@@ -570,10 +553,10 @@ body {
 }
 .trash-pop .trash-main {
   position: absolute;
-  left: 13.1%;
-  top: 4.4%;
-  width: 68.7%;
-  height: 68.3%;
+  left: 13.095%;
+  top: 4.6%;
+  width: 68.67%;
+  height: 68%;
   /*$bg:'';
   @for $x from 0 through 5
   {
@@ -707,7 +690,14 @@ body {
   height: 100%;
   opacity: 0;
   visibility: hidden;
+  font-size: 1.575vw;
+  line-height: 1.25;
   transition: opacity 0.3s ease-in-out;
+}
+@media (min-aspect-ratio: 16/9) {
+  .trash-pop .trash-block {
+    font-size: 2.8vh;
+  }
 }
 .trash-pop .trash-block.shown {
   opacity: 1;
@@ -735,12 +725,6 @@ body {
 }
 .trash-pop .trash-block.chat {
   color: #000;
-  font-size: 1.125vw;
-}
-@media (min-aspect-ratio: 16/9) {
-  .trash-pop .trash-block.chat {
-    font-size: 2vh;
-  }
 }
 .trash-pop .bins {
   position: absolute;
@@ -757,16 +741,11 @@ body {
   height: 20%;
   position: relative;
 }
-.trash-pop .b-text {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  color: #000;
-  font-size: 20px;
+.trash-pop .bin img {
+  width: 100%;
+  height: 100%;
 }
 .trash-pop .b-drop {
-  background: rgba(255, 0, 0, 0.2);
   width: 100%;
   height: 100%;
   position: absolute;
@@ -790,8 +769,6 @@ body {
 .trash-pop .trash {
   width: 7%;
   height: 14%;
-  background: #999;
-  border-radius: 20%;
   position: absolute;
   bottom: 100%;
 }
@@ -808,12 +785,9 @@ body {
 .trash-pop .trash.up {
   pointer-events: none;
 }
-.trash-pop .t-text {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  font-size: 20px;
+.trash-pop .trash img {
+  width: 100%;
+  height: 100%;
 }
 .trash-pop .t-drop {
   width: 100%;
@@ -980,6 +954,13 @@ body {
   bottom: 0;
   overflow: hidden;
 }
+.trash-pop .bible-items .t-scroll-wrap {
+  padding-right: 5%;
+}
+.trash-pop .bible-items .t-scroll-bar {
+  width: 2.5%;
+  border-radius: 45%/2.5%;
+}
 .trash-pop .bible-items-inner {
   display: flex;
   flex-flow: row wrap;
@@ -989,6 +970,9 @@ body {
   padding-bottom: 40%;
   position: relative;
   cursor: pointer;
+}
+.trash-pop .bible-item.no {
+  pointer-events: none;
 }
 .trash-pop .bible-item-bg {
   position: absolute;
@@ -1078,13 +1062,13 @@ body {
   position: absolute;
   left: 0;
   right: 0;
-  height: 17%;
+  height: 15%;
   color: #fff;
   border-bottom: 1px solid rgba(255, 255, 255, 0.3);
 }
 .trash-pop .chat-ava {
   position: absolute;
-  left: 2%;
+  left: 1.5%;
   top: 50%;
   transform: translate(0, -50%);
   width: 10%;
@@ -1092,24 +1076,24 @@ body {
 }
 .trash-pop .chat-name {
   position: absolute;
-  left: 13%;
+  left: 11%;
   top: 50%;
   transform: translate(0, -50%);
 }
 .trash-pop .chat-msg {
-  margin-top: 1em;
+  margin-top: 1.2em;
 }
 .trash-pop .chat-msg.bot {
   text-align: left;
   margin-left: 4%;
 }
 .trash-pop .chat-msg.bot .chat-msg-text div {
-  background: yellow;
+  background: #FFE97D;
   border-radius: 0 0.3em 0.3em 0.3em;
 }
 .trash-pop .chat-msg.bot .chat-msg-text div:before {
   left: -0.3em;
-  border-top: 0.5em solid yellow;
+  border-top: 0.5em solid #FFE97D;
   border-left: 0.3em solid transparent;
 }
 .trash-pop .chat-msg.me {
@@ -1117,12 +1101,12 @@ body {
   text-align: right;
 }
 .trash-pop .chat-msg.me .chat-msg-text div {
-  background: green;
+  background: #91FF7A;
   border-radius: 0.3em 0 0.3em 0.3em;
 }
 .trash-pop .chat-msg.me .chat-msg-text div:before {
   right: -0.3em;
-  border-top: 0.5em solid green;
+  border-top: 0.5em solid #91FF7A;
   border-right: 0.3em solid transparent;
 }
 .trash-pop .chat-msg-date {
@@ -1134,7 +1118,7 @@ body {
 .trash-pop .chat-msg-text div {
   display: inline-block;
   text-align: left;
-  padding: 0.3em 0.7em;
+  padding: 0.6em 0.7em;
   position: relative;
 }
 .trash-pop .chat-msg-text div:before {
@@ -1144,22 +1128,19 @@ body {
 }
 .trash-pop .chat-ctrls {
   position: absolute;
-  left: 5%;
-  top: 110%;
+  left: 3%;
+  top: 110.5%;
   right: 5%;
   height: 20%;
   text-align: left;
   color: #fff;
-  display: flex;
-  flex-flow: column nowrap;
-  justify-content: space-between;
 }
 .trash-pop .chat-choose {
   cursor: pointer;
-  width: 100%;
+  margin-bottom: 0.5em;
 }
-.trash-pop .chat-choose.chosen {
-  color: green;
+.trash-pop .chat-choose:hover {
+  color: #91FF7A;
 }
 
 .loader-pop {
@@ -1216,60 +1197,6 @@ body {
   cursor: pointer;
 }
 
-@keyframes rotate {
-  50% {
-    transform: rotateY(30deg);
-    perspective: 200px;
-  }
-}
-@keyframes move {
-  50% {
-    transform: translate(-20px, 0);
-  }
-}
-.wobble {
-  display: flex;
-}
-.wobble .w-outer {
-  margin: auto;
-  animation: rotate 6s infinite;
-}
-.wobble .w-wrap {
-  position: relative;
-  padding: 16px 30px;
-  background: rgba(255, 255, 255, 0.5);
-  transition: transform 0.3s linear;
-}
-.wobble .w-cont {
-  animation: move 6s infinite;
-  background: #ddd;
-}
-.wobble .w-p {
-  position: absolute;
-  left: 0;
-  top: -1px;
-  right: 0;
-}
-.wobble .w-p div {
-  border-top: 1px solid orange;
-  width: 0;
-  transition: width linear;
-}
-.wobble .w-p-text {
-  position: absolute;
-  left: 0;
-  top: -17px;
-  font-size: 14px;
-  color: orange;
-}
-.wobble .w-text {
-  font-size: 26px;
-  line-height: 1;
-  color: #fff;
-  text-transform: uppercase;
-  text-align: center;
-}
-
 /*@path:components\_header.scss*/
 /*@path:components\_shared.scss*/
 .t-scroll {
@@ -1279,8 +1206,6 @@ body {
   right: 10%;
   bottom: 37%;
   color: #000;
-  font-size: 14px;
-  line-height: 18px;
   text-align: left;
   overflow: hidden;
 }
@@ -1288,6 +1213,12 @@ body {
 .t-scroll-wrap {
   height: 100%;
   overflow: auto;
+  padding-right: 10%;
+}
+
+.t-hdr {
+  font-size: 1.5em;
+  margin-bottom: 1em;
 }
 
 .t-scroll-bar {
@@ -1296,24 +1227,31 @@ body {
   right: 0;
   bottom: 0;
   width: 5%;
-  background: #eee;
+  background: #d6d6d6;
+  border-radius: 45%/4%;
 }
 .t-scroll-bar.hidden {
   display: none;
 }
 .t-scroll-bar div {
-  background: #aaa;
+  background: #000;
   width: 100%;
   height: 10%;
   position: absolute;
+  border-radius: 50%/4%;
 }
 
 /*@path:components\_video.scss*/
 .video-js {
   width: 100%;
   height: 100%;
+  overflow: hidden;
+  border-radius: 0.73125%/1.3%;
 }
-
+.video-js .vjs-tech {
+  outline: none;
+  height: 101%;
+}
 .video-js .vjs-big-play-button {
   display: none;
   position: absolute;
@@ -1321,9 +1259,11 @@ body {
   top: 50%;
   transform: translate(-50%, -50%);
 }
-
-.vjs-error .vjs-error-display .vjs-modal-dialog-content {
+.video-js .vjs-error .vjs-error-display .vjs-modal-dialog-content {
   color: #000;
+}
+.video-js .vjs-fullscreen-control {
+  display: none;
 }
 
 /*@path:partials\_index.scss*/

@@ -3,6 +3,7 @@ import {app} from '../../bf/base.js';
 import {data} from './data.js';
 import {Scroll} from '../scroll/scroll.js';
 import {data as scrollData} from '../scroll/data.js';
+import {BaseBlockView} from '../baseBlock/view.js';
 
 app.configure({scroll:data.scroll});
 
@@ -13,14 +14,19 @@ events[`click ${data.events.tab}`]='tab';
 events[`click ${data.events.item}`]='pop';
 events[`click ${data.events.close}`]='unpop';
 
-export let BibleView=Backbone.View.extend({
+export let BibleView=BaseBlockView.extend({
  el:data.view.el,
  events:events,
  template:_.template($(data.view.template).html()),
  tabTemplate:_.template($(data.view.tabTemplate).html()),
  popTemplate:_.template($(data.view.popTemplate).html()),
  initialize:function(){
-  this.$el.html(this.template({data:data.data}));
+  BaseBlockView.prototype.initialize.apply(this,[{
+   data:data
+  }]);
+
+  this.scrollDim=app.get('scrollDim');
+  this.$el.html(this.template({margin:this.scrollDim,data:data.data}));
   this.$itemsContainer=this.$(data.view.$itemsContainer);
   this.$itemsWrap=this.$(data.view.$itemsWrap);
   this.$pop=this.$(data.view.$pop);
@@ -30,12 +36,6 @@ export let BibleView=Backbone.View.extend({
   this.popScroll=null;
   this.tabScroll=null;
   this.tab(null);
- },
- show:function(){
-  this.$el.addClass(data.view.shownCls);
- },
- hide:function(){
-  this.$el.removeClass(data.view.shownCls);
  },
  setScroll:function(what,container){
   this[what]=app.set({
@@ -61,10 +61,8 @@ export let BibleView=Backbone.View.extend({
   if(this.tabScroll)
    this.tabScroll.destroy();
   this.$itemsContainer.html(this.tabTemplate({
-   data:{
-    id:id,
-    data:data.data[id].items
-   }
+   id:id,
+   data:data.data[id].items
   }));
   this.setScroll('tabScroll',this.$itemsWrap);
  },
@@ -72,7 +70,7 @@ export let BibleView=Backbone.View.extend({
   let id=$(e.currentTarget).data(data.view.dataId),
   tid=this.$currentTab.data(data.view.dataClick);
 
-  this.$popContent=$(this.popTemplate(_.extend({margin:app.get('scrollDim'),tid:tid},data.data[this.$currentTab.data(data.view.dataClick)].items.filter(o=>o.id.toString()===id.toString())[0])));
+  this.$popContent=$(this.popTemplate(_.extend({margin:this.scrollDim,tid:tid},data.data[this.$currentTab.data(data.view.dataClick)].items.filter(o=>o.id.toString()===id.toString())[0])));
   this.$pop.append(this.$popContent);
   this.$el.addClass(data.view.popShownCls);
 

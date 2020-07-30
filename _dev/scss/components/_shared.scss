@@ -2,30 +2,35 @@
   .t-scroll{
     @include abs($l:39%,$r:10%,$t:16%,$b:37%);
     color:#000;
-    font-size:14px;
-    line-height:18px;
     text-align:left;
     overflow:hidden;
   }
   .t-scroll-wrap{
     height:100%;
     overflow:auto;
+    padding-right:10%;
   }
   .t-scroll-inner{
 
   }
+  .t-hdr{
+    font-size:1.5em;
+    margin-bottom:1em;
+  }
   .t-scroll-bar{
     @include abs($t:0,$b:0,$r:0);
     width:5%;
-    background:#eee;
+    background:#d6d6d6;
+    border-radius:45%/4%;
     &.hidden{
       display:none;
     }
     div{
-      background:#aaa;
+      background:#000;
       width:100%;
       height:10%;
       position:absolute;
+      border-radius:50%/4%;
     }
   }
 }

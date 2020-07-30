@@ -1,4 +1,5 @@
 export const data={
+ put:'6%',
  view:{
   className:'trash',
   template:'#game-trash-template',

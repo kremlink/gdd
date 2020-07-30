@@ -4,10 +4,14 @@ import {GameTrashView} from './trash/view.js';
 import {GameBinView} from './bin/view.js';
 import {GameBinModel} from './bin/model.js';
 import {app} from '../../bf/base.js';
+import {BaseBlockView} from '../baseBlock/view.js';
 
-export let GameView=Backbone.View.extend({
+export let GameView=BaseBlockView.extend({
  el:data.view.el,
  initialize:function(){
+  BaseBlockView.prototype.initialize.apply(this,[{
+   data:data
+  }]);
   //this.binViews=[];
   this.bins=new (Backbone.Collection.extend({model:GameBinModel}));
   this.listenTo(this.bins,'reset',this.addBins);
@@ -42,6 +46,8 @@ export let GameView=Backbone.View.extend({
     this.generateTrash();
    });
   });
+
+  this.ctrls();
  },
  trashCount:function(){
   this.trashDone++;
@@ -110,14 +116,6 @@ export let GameView=Backbone.View.extend({
     }
    }
   });
- },
- play:function(){
-  this.$el.addClass(data.view.shownCls);
-  this.ctrls();
-  //this.generateTrash();
- },
- hide:function(){
-  this.$el.removeClass(data.view.shownCls);
  },
  trashPut:function(m,v){
   if(v>m.previousAttributes().amount)

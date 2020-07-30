@@ -1,16 +1,15 @@
 import {data} from './data.js';
+import {BaseBlockView} from '../baseBlock/view.js';
 
-export let FlowView=Backbone.View.extend({
+export let FlowView=BaseBlockView.extend({
  el:data.view.el,
  template:_.template($(data.view.template).html()),
  initialize:function(){
+  BaseBlockView.prototype.initialize.apply(this,[{
+   data:data
+  }]);
+
   this.$el.html(this.template({episodes:data.amount}));
   this.$('.f-vid').on('click',(e)=>{location.reload();e.preventDefault();});//TODO: remove after
- },
- show:function(){
-  this.$el.addClass(data.view.shownCls);
- },
- hide:function(){
-  this.$el.removeClass(data.view.shownCls);
  }
 });

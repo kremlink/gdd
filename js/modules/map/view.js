@@ -4,6 +4,7 @@ import {app} from '../../bf/base.js';
 import {Scroll} from '../scroll/scroll.js';
 import {data as scrollData} from '../scroll/data.js';
 import {data} from './data.js';
+import {BaseBlockView} from '../baseBlock/view.js';
 
 app.configure({scroll:data.scroll});
 
@@ -14,13 +15,17 @@ events[`click ${data.events.marker}`]='pop';
 events[`click ${data.events.close}`]='unpop';
 events[`click ${data.events.react}`]='react';
 
-export let MapView=Backbone.View.extend({
+export let MapView=BaseBlockView.extend({
  el:data.view.el,
  events:events,
  template:_.template($(data.view.template).html()),
  popTemplate:_.template($(data.view.popTemplate).html()),
  reactedTemplate:_.template($(data.view.reactedTemplate).html()),
  initialize:function(){
+  BaseBlockView.prototype.initialize.apply(this,[{
+   data:data
+  }]);
+
   this.$el.html(this.template({data:data.data}));
   this.$pop=this.$(data.view.$pop);
   this.marks=new (Backbone.Collection.extend({model:MapMarkerModel}));
@@ -29,12 +34,6 @@ export let MapView=Backbone.View.extend({
   this.current=null;
   this.$popContent=null;
   this.$reacted=null;
- },
- show:function(){
-  this.$el.addClass(data.view.shownCls);
- },
- hide:function(){
-  this.$el.removeClass(data.view.shownCls);
  },
  renderReacted:function(){
   this.$reacted.html(this.reactedTemplate(this.current.toJSON()));

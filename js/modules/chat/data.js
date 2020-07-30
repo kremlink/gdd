@@ -1,13 +1,38 @@
 export const data={
- data:{
-
- },
+ dataStart:'choose0',
+ data:[
+  {
+   'choose0':{bot:'1',user:[{what:'choose1',text:'a'},{what:'choose2',text:'b'},{what:'choose3',text:'c'}]}
+  },
+  {
+   'choose1':{bot:'1-1',user:[{what:'choose1-1',text:'a-1'}]},
+   'choose2':{bot:'1-2',user:[{what:'choose2-1',text:'b-1'},{what:'choose2-2',text:'b-2'}]},
+   'choose3':{bot:'1-3',user:[{what:'choose3-1',text:'c-1'}]}
+  },
+  {
+   'choose1-1':{bot:'1-1-1',user:[{what:'choose1-1-1',text:'a-1-1'},{what:'choose1-1-2',text:'a-1-2'}]},
+   'choose2-1':{bot:'1-2-1',user:[{what:'choose2-1-1',text:'b-1-1'},{what:'choose2-1-2',text:'b-1-2'},{what:'choose2-1-3',text:'b-1-3'}]},
+   'choose2-2':{bot:'1-2-2',user:[{what:'choose2-2-2',text:'b-2-1'}]},
+   'choose3-1':{bot:'1-3-1',user:[{what:'choose3-1-1',text:'c-1-1'}]}
+  },
+  {
+   'choose1-1-1':{bot:'1-1-1-1',user:[{what:'',text:'stop-1-1-1'}]},
+   'choose1-1-2':{bot:'1-1-1-2',user:[{what:'',text:'stop-1-1-2'}]},
+   'choose2-1-1':{bot:'1-2-1-1',user:[{what:'',text:'stop-2-1-1'}]},
+   'choose2-1-2':{bot:'1-2-1-2',user:[{what:'',text:'stop-2-1-2'}]},
+   'choose2-1-3':{bot:'1-2-1-3',user:[{what:'',text:'stop-2-1-3'}]},
+   'choose2-2-2':{bot:'1-2-2-2',user:[{what:'',text:'stop-2-2-2'}]},
+   'choose3-1-1':{bot:'1-3-1-1',user:[{what:'',text:'stop-3-1-1'}]}
+  }],
  events:{
   'choose':'.chat-choose'
  },
  view:{
   el:'.trash-block.chat',
-  //template:'#bible-template',
+  msgInto:'.chat-inner',
+  chInto:'.chat-ctrls',
+  msgTemplate:'#chat-msg-template',
+  chTemplate:'#chat-choose-template',
   //$pop:'.bible-pop',
   shownCls:'shown'
  }

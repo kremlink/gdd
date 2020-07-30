@@ -20,7 +20,7 @@ $colors:(
 }
 
 @function font(){
-  @return 'Open Sans',sans-serif;
+  @return 'IBM Plex Sans',sans-serif;
 }
 
 @function m-prop($arg,$p:12){

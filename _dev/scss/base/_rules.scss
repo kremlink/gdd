@@ -1,31 +1,5 @@
 @include exports("@path:base\_rules.scss"){/*@path:base\_rules.scss*/
-  //@import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400,700&subset=cyrillic');
-
-  a{
-    color:getc(ref);
-    &:hover{
-      text-decoration:none;
-    }
-    &:focus{
-      outline:none;
-    }
-  }
-
-  .caller{
-    text-decoration:none;
-    border-bottom:1px dotted currentColor;
-    display:inline-block;
-    cursor:pointer;
-    &:hover,&.active{
-      border-bottom-color:transparent;
-    }
-  }
-
-  a.active,span.active{
-    cursor:default;
-    text-decoration:none;
-    border-bottom-color:transparent;
-  }
+  @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@500;700&display=swap');
 
   .safe-hide-svg{
     @include abs($l:0,$t:-100px);
@@ -42,7 +16,7 @@
 
   body{
     height:100%;
-    font:14px/18px font();
+    font:500 14px/18px font();
   }
 
   #wrap{
@@ -50,7 +24,7 @@
     position:relative;
     overflow:hidden;
     min-width:$miw;
-    background:#000;
+    background:#d6d6d6;
   }
 
   #wrap-wrap{

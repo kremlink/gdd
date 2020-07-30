@@ -1,24 +1,27 @@
 import {app} from '../../bf/base.js';
 import {data} from './data.js';
+import {BaseBlockView} from '../baseBlock/view.js';
 
-app.configure({scroll:data.scroll});
+//app.configure({scroll:data.scroll});
 
 let events={};
 events[`click ${data.events.choose}`]='choose';
 
-export let ChatView=Backbone.View.extend({
+export let ChatView=BaseBlockView.extend({
  el:data.view.el,
  events:events,
- //template:_.template($(data.view.template).html()),
+ chosen:data.dataStart,
+ msgTemplate:_.template($(data.view.msgTemplate).html()),
+ chTemplate:_.template($(data.view.chTemplate).html()),
  initialize:function(){
-  //this.$el.html(this.template({data:data.data}));
-  //this.$pop=this.$(data.view.$pop);
- },
- show:function(){
-  this.$el.addClass(data.view.shownCls);
- },
- hide:function(){
-  this.$el.removeClass(data.view.shownCls);
+  BaseBlockView.prototype.initialize.apply(this,[{
+   data:data
+  }]);
+
+  this.$msgInto=this.$(data.view.msgInto);
+  this.$chInto=this.$(data.view.chInto);
+  this.$msgInto.append(this.msgTemplate(data.data[0][this.chosen]));
+  this.$chInto.append(this.chTemplate(data.data[0][this.chosen]));
  },
  choose:function(e){
 
