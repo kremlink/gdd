@@ -422,7 +422,16 @@ html {
 
 body {
   height: 100%;
-  font: 500 14px/18px "IBM Plex Sans", sans-serif;
+  font: 500 1.575vw/1.25 "IBM Plex Sans", sans-serif;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+@media (min-aspect-ratio: 16/9) {
+  body {
+    font-size: 2.8vh;
+  }
 }
 
 #wrap {
@@ -690,14 +699,7 @@ body {
   height: 100%;
   opacity: 0;
   visibility: hidden;
-  font-size: 1.575vw;
-  line-height: 1.25;
   transition: opacity 0.3s ease-in-out;
-}
-@media (min-aspect-ratio: 16/9) {
-  .trash-pop .trash-block {
-    font-size: 2.8vh;
-  }
 }
 .trash-pop .trash-block.shown {
   opacity: 1;
@@ -715,14 +717,6 @@ body {
 .trash-pop .trash-block.map {
   background: url(../images/map-bg.jpg) center/cover no-repeat;
 }
-.trash-pop .trash-block.map.shown.popShown .map-pop {
-  opacity: 1;
-  visibility: visible;
-}
-.trash-pop .trash-block.bible.shown.popShown .bible-pop {
-  opacity: 1;
-  visibility: visible;
-}
 .trash-pop .trash-block.chat {
   color: #000;
 }
@@ -731,7 +725,7 @@ body {
   left: 3%;
   top: 0;
   right: 3%;
-  bottom: 5%;
+  bottom: 0;
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
@@ -847,16 +841,6 @@ body {
   height: 5%;
   cursor: pointer;
 }
-.trash-pop .map-pop {
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.3s ease-in-out;
-  position: absolute;
-  left: 0;
-  top: 0;
-  right: 0;
-  bottom: 0;
-}
 .trash-pop .map-pop-big {
   position: absolute;
   left: 9%;
@@ -938,14 +922,6 @@ body {
   top: 50%;
   transform: translate(-50%, -50%);
 }
-.trash-pop .map-pop-close {
-  width: 7.5%;
-  height: 13%;
-  cursor: pointer;
-  position: absolute;
-  top: 9%;
-  right: 1%;
-}
 .trash-pop .bible-items {
   position: absolute;
   left: 0;
@@ -1013,19 +989,6 @@ body {
 .trash-pop .bible-tab.active {
   opacity: 1;
 }
-.trash-pop .bible-pop {
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.3s ease-in-out;
-  position: absolute;
-  left: 0;
-  top: 0;
-  right: 0;
-  bottom: 0;
-}
-.trash-pop .bible-pop .t-scroll {
-  bottom: 15%;
-}
 .trash-pop .bible-pop-big {
   position: absolute;
   left: 9%;
@@ -1038,14 +1001,6 @@ body {
   width: 100%;
   height: 100%;
 }
-.trash-pop .bible-pop-close {
-  width: 7.5%;
-  height: 13%;
-  cursor: pointer;
-  position: absolute;
-  top: 9%;
-  right: 1%;
-}
 .trash-pop .chat-content {
   position: absolute;
   left: 0;
@@ -1056,15 +1011,21 @@ body {
 }
 .trash-pop .chat-wrap {
   height: 100%;
-  overflow: auto;
+  overflow-y: scroll;
+}
+.trash-pop .chat-inner {
+  padding-bottom: 2em;
 }
 .trash-pop .chat-top {
   position: absolute;
   left: 0;
   right: 0;
   height: 15%;
-  color: #fff;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+  color: #A0D7F6;
+}
+.trash-pop .chat-top-bd {
+  height: 2px;
+  top: 100%;
 }
 .trash-pop .chat-ava {
   position: absolute;
@@ -1081,33 +1042,39 @@ body {
   transform: translate(0, -50%);
 }
 .trash-pop .chat-msg {
-  margin-top: 1.2em;
+  margin: 1.2em 1.7em 0 1.68em;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
 }
 .trash-pop .chat-msg.bot {
   text-align: left;
-  margin-left: 4%;
+}
+.trash-pop .chat-msg.bot.shown {
+  transition-delay: 0.6s;
 }
 .trash-pop .chat-msg.bot .chat-msg-text div {
-  background: #FFE97D;
-  border-radius: 0 0.3em 0.3em 0.3em;
-}
-.trash-pop .chat-msg.bot .chat-msg-text div:before {
-  left: -0.3em;
-  border-top: 0.5em solid #FFE97D;
-  border-left: 0.3em solid transparent;
+  border-color: #A0D7F6;
+  color: #A0D7F6;
+  /*&:before{
+    left:-0.3em;
+    border-top:0.5em solid #FFE97D;
+    border-left:0.3em solid transparent;
+  }*/
 }
 .trash-pop .chat-msg.me {
-  margin-right: 4%;
   text-align: right;
 }
 .trash-pop .chat-msg.me .chat-msg-text div {
-  background: #91FF7A;
-  border-radius: 0.3em 0 0.3em 0.3em;
+  border-color: #67BFF1;
+  color: #67BFF1;
+  /*&:before{
+    right:-0.3em;
+    border-top:0.5em solid #91FF7A;
+    border-right:0.3em solid transparent;
+  }*/
 }
-.trash-pop .chat-msg.me .chat-msg-text div:before {
-  right: -0.3em;
-  border-top: 0.5em solid #91FF7A;
-  border-right: 0.3em solid transparent;
+.trash-pop .chat-msg.shown {
+  opacity: 1;
 }
 .trash-pop .chat-msg-date {
   color: #fff;
@@ -1120,27 +1087,50 @@ body {
   text-align: left;
   padding: 0.6em 0.7em;
   position: relative;
-}
-.trash-pop .chat-msg-text div:before {
-  content: "";
-  position: absolute;
-  top: 0;
+  border-radius: 0.7em;
+  border: 2px solid #000;
+  /*&:before{
+    content:'';
+    @include abs($t:0);
+  }*/
 }
 .trash-pop .chat-ctrls {
   position: absolute;
-  left: 3%;
-  top: 110.5%;
-  right: 5%;
-  height: 20%;
+  left: 0;
+  top: 105.5%;
+  right: 0;
+  padding: 0 1em;
+  height: 30%;
   text-align: left;
-  color: #fff;
+  color: #67BFF1;
+  text-shadow: 0 0 11px rgba(103, 191, 241, 0.66), 0 0 20px rgba(103, 191, 241, 0.5);
+  display: flex;
+  align-items: center;
+}
+.trash-pop .chat-ctrls-bg {
+  pointer-events: none;
 }
 .trash-pop .chat-choose {
   cursor: pointer;
-  margin-bottom: 0.5em;
+  opacity: 0;
+  height: 50%;
+  margin: 0 0.7em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1 0 auto;
+  transition: opacity 0.3s ease-in-out;
 }
-.trash-pop .chat-choose:hover {
-  color: #91FF7A;
+.trash-pop .chat-choose:hover .chat-choose-h {
+  opacity: 1;
+}
+.trash-pop .chat-choose.shown {
+  opacity: 1;
+}
+.trash-pop .chat-choose-h {
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
 }
 
 .loader-pop {
@@ -1166,8 +1156,8 @@ body {
   bottom: 0;
   display: none;
   background: #fff;
-  font-size: 30px;
-  line-height: 30px;
+  font-size: 2em;
+  line-height: 2em;
   z-index: 1;
   justify-content: center;
   align-items: center;
@@ -1200,14 +1190,13 @@ body {
 /*@path:components\_header.scss*/
 /*@path:components\_shared.scss*/
 .t-scroll {
-  position: absolute;
-  left: 39%;
-  top: 16%;
-  right: 10%;
-  bottom: 37%;
-  color: #000;
   text-align: left;
   overflow: hidden;
+  position: absolute;
+  left: 0;
+  top: 10%;
+  right: 0;
+  bottom: 0;
 }
 
 .t-scroll-wrap {
@@ -1239,6 +1228,48 @@ body {
   height: 10%;
   position: absolute;
   border-radius: 50%/4%;
+}
+
+.uni-pop {
+  color: #fff;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease-in-out;
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+}
+.shown.popShown .uni-pop {
+  opacity: 1;
+  visibility: visible;
+}
+
+.uni-pop-close {
+  width: 2.3em;
+  height: 2.3em;
+  cursor: pointer;
+  z-index: 1;
+  position: absolute;
+  top: 1%;
+  right: 1%;
+}
+.uni-pop-close:hover ~ .uni-pop-bg:nth-child(4) {
+  opacity: 1;
+}
+
+.uni-pop-bg:nth-child(4) {
+  transition: opacity 0.3s ease-in-out;
+  opacity: 0;
+}
+
+.uni-pop-text {
+  position: absolute;
+  left: 39%;
+  top: 16%;
+  right: 10%;
+  bottom: 16%;
 }
 
 /*@path:components\_video.scss*/

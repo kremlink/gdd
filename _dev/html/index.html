@@ -171,12 +171,15 @@
                             </div>
                         </div>
                         <div class="chat-top">
+                            <svg class="chat-top-bd">
+                                <use xlink:href="#icon-shared-chat-header-line"></use>
+                            </svg>
                             <div class="chat-ava">
                                 <svg>
                                     <use xlink:href="#icon-shared-chat-avatar"></use>
                                 </svg>
                             </div>
-                            <div class="chat-name">Ичия Вандерлей Котобуки</div>
+                            <div class="chat-name">НОУНЕЙМ</div>
                         </div>
                         <div class="chat-ctrls">
                             <!--<div class="chat-choose">Это ты мне?</div>
@@ -340,11 +343,17 @@
                 </svg>
             </div>
             <% } %>
-            <div class="map-pop">
-                <svg class="map-pop-bg">
-                    <use xlink:href="#icon-shared-map-pop-bg"></use>
+            <div class="uni-pop">
+                <div class="uni-pop-close"></div>
+                <svg class="uni-pop-bg">
+                    <use xlink:href="#icon-shared-bible-pop-bg"></use>
                 </svg>
-                <div class="map-pop-close"></div>
+                <svg class="uni-pop-bg">
+                    <use xlink:href="#icon-shared-map-pop-close"></use>
+                </svg>
+                <svg class="uni-pop-bg">
+                    <use xlink:href="#icon-shared-map-pop-close-h"></use>
+                </svg>
             </div>
         </script>
         <script type="text/template" id="map-pop-template">
@@ -353,13 +362,16 @@
                     <use xlink:href="#icon-shared-map-marker-<%= id %>"></use>
                 </svg>
             </div>
-            <div class="t-scroll">
-                <div class="t-scroll-wrap" style="margin-right:<%= margin %>px;">
-                    <div class="t-scroll-inner">
-                        <%= text %>
+            <div class="uni-pop-text">
+                <div class="t-hdr"><%= h %></div>
+                <div class="t-scroll">
+                    <div class="t-scroll-wrap" style="margin-right:<%= margin %>px;">
+                        <div class="t-scroll-inner">
+                            <%= text %>
+                        </div>
                     </div>
+                    <div class="t-scroll-bar"><div></div></div>
                 </div>
-                <div class="t-scroll-bar"><div></div></div>
             </div>
             <div class="map-pop-react done">
             
@@ -421,15 +433,25 @@
             </div>
         </script>
         <script type="text/template" id="chat-msg-template">
-            <div class="chat-msg <%= bot?'bot':'me' %>">
+            <div class="chat-msg <%= isBot?'bot':'me' %>">
                 <div class="chat-msg-text">
-                    <div><%= bot %></div>
+                    <div><%= text %></div>
                 </div>
             </div>
         </script>
         <script type="text/template" id="chat-choose-template">
             <% for(let i=0;i<user.length;i++) { %>
-            <div class="chat-choose"><%= user[i].text %></div>
+            <div class="chat-choose">
+                <%= user[i].text %>
+                <% if(i===0) { %>
+                <svg class="chat-ctrls-bg">
+                    <use xlink:href="#icon-shared-chat-ans-<%= user.length %>"></use>
+                </svg>
+                <% } %>
+                <svg class="chat-choose-h">
+                    <use xlink:href="#icon-shared-chat-ans-<%= user.length %>-<%= i+1 %>"></use>
+                </svg>
+            </div>
             <% } %>
         </script>
         <script type="text/template" id="bible-template">
@@ -448,11 +470,17 @@
                 </div>
                 <% } %>
             </div>
-            <div class="bible-pop">
-                <svg class="bible-pop-bg">
+            <div class="uni-pop">
+                <div class="uni-pop-close"></div>
+                <svg class="uni-pop-bg">
                     <use xlink:href="#icon-shared-bible-pop-bg"></use>
                 </svg>
-                <div class="bible-pop-close"></div>
+                <svg class="uni-pop-bg">
+                    <use xlink:href="#icon-shared-map-pop-close"></use>
+                </svg>
+                <svg class="uni-pop-bg">
+                    <use xlink:href="#icon-shared-map-pop-close-h"></use>
+                </svg>
             </div>
         </script>
         <script type="text/template" id="bible-tab-template">
@@ -475,16 +503,16 @@
             <div class="bible-pop-big">
                 <img src="images/trash_items/trash-<%= tid %>-<%= id %>.png" alt=""/>
             </div>
-            <div class="t-scroll">
-                <div class="t-scroll-wrap" style="margin-right:<%= margin %>px;">
-                    <div class="t-scroll-inner">
-                        <% if(h) { %>
-                        <div class="t-hdr"><%= h %></div>
-                        <% } %>
-                        <%= text %>
+            <div class="uni-pop-text">
+                <div class="t-hdr"><%= h %></div>
+                <div class="t-scroll">
+                    <div class="t-scroll-wrap" style="margin-right:<%= margin %>px;">
+                        <div class="t-scroll-inner">
+                            <%= text %>
+                        </div>
                     </div>
+                    <div class="t-scroll-bar"><div></div></div>
                 </div>
-                <div class="t-scroll-bar"><div></div></div>
             </div>
         </script>
         <div class="safe-hide-svg">

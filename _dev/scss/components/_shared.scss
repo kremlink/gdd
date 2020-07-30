@@ -1,9 +1,8 @@
 @include exports("@path:components\_shared.scss"){/*@path:components\_shared.scss*/
   .t-scroll{
-    @include abs($l:39%,$r:10%,$t:16%,$b:37%);
-    color:#000;
     text-align:left;
     overflow:hidden;
+    @include abs($l:0,$r:0,$t:10%,$b:0);
   }
   .t-scroll-wrap{
     height:100%;
@@ -32,5 +31,34 @@
       position:absolute;
       border-radius:50%/4%;
     }
+  }
+  //---
+  .uni-pop{
+    color:#fff;
+    opacity:0;
+    visibility:hidden;
+    @include trs('opacity #{$anim} ease-in-out');
+    @include abs($l:0,$t:0,$r:0,$b:0);
+    .shown.popShown &{
+      opacity:1;
+      visibility:visible;
+    }
+  }
+  .uni-pop-close{
+    width:2.3em;
+    height:2.3em;
+    cursor:pointer;
+    z-index:1;
+    @include abs($r:1%,$t:1%);
+    &:hover~.uni-pop-bg:nth-child(4){
+      opacity:1;
+    }
+  }
+  .uni-pop-bg:nth-child(4){
+    @include trs('opacity #{$anim} ease-in-out');
+    opacity:0;
+  }
+  .uni-pop-text{
+    @include abs($l:39%,$r:10%,$t:16%,$b:16%);
   }
 }

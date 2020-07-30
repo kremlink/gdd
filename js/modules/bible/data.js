@@ -34,7 +34,7 @@ export const data={
  events:{
   'tab':'.bible-tab',
   'item':'.bible-item',
-  'close':'.bible-pop-close'
+  'close':'.uni-pop-close'
  },
  view:{
   el:'.trash-block.bible',
@@ -43,7 +43,7 @@ export const data={
   popTemplate:'#bible-pop-template',
   $itemsWrap:'.bible-items',
   $itemsContainer:'.bible-items-inner',
-  $pop:'.bible-pop',
+  $pop:'.uni-pop',
   shownCls:'shown',
   activeTabCls:'active',
   popShownCls:'popShown',

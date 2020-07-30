@@ -8,7 +8,8 @@ $pd:34px;
 $anim:.3s;
 
 $colors:(
-  ref:#f00
+        chatB:#A0D7F6,
+        chatM:#67BFF1
 );
 
 @function getc($arg,$c:$colors){

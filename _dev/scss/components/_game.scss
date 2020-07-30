@@ -197,11 +197,6 @@
       height:100%;
       opacity:0;
       visibility:hidden;
-      font-size:1.575vw;
-      line-height:1.25;
-      @media (min-aspect-ratio:16/9){
-        font-size:2.8vh;
-      }
       @include trs('opacity #{$anim} ease-in-out');
       &.shown{
         opacity:1;
@@ -218,20 +213,9 @@
       }
       &.map{
         background: url(#{$path}map-bg.jpg) center/cover no-repeat;
-        &.shown.popShown{
-          .map-pop{
-            opacity:1;
-            visibility:visible;
-          }
-        }
       }
       &.bible{
-        &.shown.popShown{
-          .bible-pop{
-            opacity:1;
-            visibility:visible;
-          }
-        }
+
       }
       &.chat{
         color:#000;
@@ -239,7 +223,7 @@
     }
     //game
     .bins{
-      @include abs($l:3%,$r:3%,$b:5%,$t:0);
+      @include abs($l:3%,$r:3%,$b:0,$t:0);
       @include flx(display,flex);
       @include flx(justify-content,space-between);
       @include flx(align-items,flex-end);
@@ -343,12 +327,6 @@
       height:5%;
       cursor:pointer;
     }
-    .map-pop{
-      opacity:0;
-      visibility:hidden;
-      @include trs('opacity #{$anim} ease-in-out');
-      @include abs($l:0,$t:0,$r:0,$b:0);
-    }
     .map-pop-big{
       @include abs($l:9%,$t:16%);
       width:23%;
@@ -421,12 +399,6 @@
         @include center();
       }
     }
-    .map-pop-close{
-      width:7.5%;
-      height:13%;
-      cursor:pointer;
-      @include abs($r:1%,$t:9%);
-    }
     //end map
     //bible
     .bible-items{
@@ -483,15 +455,6 @@
         opacity:1;
       }
     }
-    .bible-pop{
-      opacity:0;
-      visibility:hidden;
-      @include trs('opacity #{$anim} ease-in-out');
-      @include abs($l:0,$t:0,$r:0,$b:0);
-      .t-scroll{
-        bottom:15%;
-      }
-    }
     .bible-pop-big{
       @include abs($l:9%,$t:16%,$b:16%);
       width:23%;
@@ -501,12 +464,6 @@
         height:100%;
       }
     }
-    .bible-pop-close{
-      width:7.5%;
-      height:13%;
-      cursor:pointer;
-      @include abs($r:1%,$t:9%);
-    }
     //end bible
     //chat
     .chat-content{
@@ -515,16 +472,19 @@
     }
     .chat-wrap{
       height:100%;
-      overflow:auto;
+      overflow-y:scroll;
     }
     .chat-inner{
-
+      padding-bottom:2em;
     }
     .chat-top{
       @include abs($l:0,$r:0);
       height:15%;
-      color:#fff;
-      border-bottom:1px solid rgba(#fff, 0.3);
+      color:getc(chatB);
+    }
+    .chat-top-bd{
+      height:2px;
+      top:100%;
     }
     .chat-ava{
       @include center($l:1.5%);
@@ -535,36 +495,42 @@
       @include center($l:11%);
     }
     .chat-msg{
-      margin-top:1.2em;
+      margin:1.2em 1.7em 0 1.68em;
+      opacity:0;
+      @include trs('opacity #{$anim} ease-in-out');
       &.bot{
         text-align:left;
-        margin-left:4%;
+        &.shown{
+          transition-delay:$anim*2;
+        }
         .chat-msg-text{
           div{
-            background:#FFE97D;
-            border-radius:0 0.3em 0.3em 0.3em;
-            &:before{
+            border-color:getc(chatB);
+            color:getc(chatB);
+            /*&:before{
               left:-0.3em;
               border-top:0.5em solid #FFE97D;
               border-left:0.3em solid transparent;
-            }
+            }*/
           }
         }
       }
       &.me{
-        margin-right:4%;
         text-align:right;
         .chat-msg-text{
           div{
-            background:#91FF7A;
-            border-radius:0.3em 0 0.3em 0.3em;
-            &:before{
+            border-color:getc(chatM);
+            color:getc(chatM);
+            /*&:before{
               right:-0.3em;
               border-top:0.5em solid #91FF7A;
               border-right:0.3em solid transparent;
-            }
+            }*/
           }
         }
+      }
+      &.shown{
+        opacity:1;
       }
     }
     .chat-msg-date{
@@ -579,24 +545,48 @@
         text-align:left;
         padding:0.6em 0.7em;
         position:relative;
-        &:before{
+        border-radius:0.7em;
+        border:2px solid #000;
+        /*&:before{
           content:'';
           @include abs($t:0);
-        }
+        }*/
       }
     }
     .chat-ctrls{
-      @include abs($l:3%,$t:110.5%,$r:5%);
-      height:20%;
+      @include abs($l:0,$t:105.5%,$r:0);
+      padding:0 1em;
+      height:30%;
       text-align:left;
-      color:#fff;
+      color:getc(chatM);
+      text-shadow:0 0 11px rgba(103,191,241,0.66),0 0 20px rgba(103,191,241,0.5);
+      @include flx(display,flex);
+      @include flx(align-items,center);
+    }
+    .chat-ctrls-bg{
+      pointer-events:none;
     }
     .chat-choose{
       cursor:pointer;
-      margin-bottom:0.5em;
-      &:hover{
-        color:#91FF7A;
+      opacity:0;
+      height:50%;
+      margin:0 0.7em;
+      @include flx(display,flex);
+      @include flx(align-items,center);
+      @include flx(justify-content,center);
+      @include flx(flex,'1 0 auto');
+      @include trs('opacity #{$anim} ease-in-out');
+      &:hover .chat-choose-h{
+        opacity:1;
       }
+      &.shown{
+        opacity:1;
+      }
+    }
+    .chat-choose-h{
+      pointer-events:none;
+      opacity:0;
+      @include trs('opacity #{$anim} ease-in-out');
     }
     //end chat
   }
@@ -616,8 +606,8 @@
     @include abs($l:0,$r:0,$t:0,$b:0);
     display:none;
     background:#fff;
-    font-size:30px;
-    line-height:30px;
+    font-size:2em;
+    line-height:2em;
     z-index:1;
     @include flx(justify-content,center);
     @include flx(align-items,center);

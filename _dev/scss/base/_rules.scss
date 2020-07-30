@@ -16,7 +16,11 @@
 
   body{
     height:100%;
-    font:500 14px/18px font();
+    font:500 1.575vw/1.25 font();
+    @include no-sel();
+    @media (min-aspect-ratio:16/9){
+      font-size:2.8vh;
+    }
   }
 
   #wrap{
