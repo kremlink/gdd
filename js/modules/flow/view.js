@@ -10,6 +10,6 @@ export let FlowView=BaseBlockView.extend({
   }]);
 
   this.$el.html(this.template({episodes:data.amount}));
-  this.$('.f-vid').on('click',(e)=>{location.reload();e.preventDefault();});//TODO: remove after
+  //this.$('.f-vid').on('click',(e)=>{location.reload();e.preventDefault();});//TODO: remove after
  }
 });

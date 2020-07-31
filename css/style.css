@@ -837,90 +837,69 @@ body {
 }
 .trash-pop .map-mark {
   position: absolute;
-  width: 5%;
-  height: 5%;
+  width: 2em;
+  height: 2em;
   cursor: pointer;
 }
 .trash-pop .map-pop-big {
   position: absolute;
   left: 9%;
-  top: 16%;
-  width: 23%;
-  height: 45%;
+  top: 12%;
+  width: 30%;
+  height: 40%;
 }
 .trash-pop .map-pop-react {
   position: absolute;
-  bottom: 10%;
-  width: 25%;
-  height: 20%;
-  display: flex;
-  justify-content: space-between;
-}
-.trash-pop .map-pop-react.done {
   left: 8%;
+  bottom: 4.5%;
+  width: 14em;
+  height: 6.48em;
 }
-.trash-pop .map-pop-react.done svg:nth-child(1) {
-  opacity: 1;
-}
-.trash-pop .map-pop-react.do {
-  right: 12%;
-}
-.trash-pop .map-pop-react.do.reacted {
+.trash-pop .map-pop-react.reacted {
   pointer-events: none;
 }
-.trash-pop .map-pop-react.do.alert .map-pop-react-item[data-type=alert] svg:nth-child(1) {
-  opacity: 1;
+.trash-pop .map-pop-react.reacted > svg {
+  display: none;
 }
-.trash-pop .map-pop-react.do.alert .map-pop-react-item[data-type=alert] svg:nth-child(2) {
-  opacity: 0;
+.trash-pop .map-pop-react.alert .map-pop-react-item[data-type=alert] svg {
+  display: block;
 }
-.trash-pop .map-pop-react.do.like .map-pop-react-item[data-type=like] svg:nth-child(1) {
-  opacity: 1;
+.trash-pop .map-pop-react.like .map-pop-react-item[data-type=like] svg {
+  display: block;
 }
-.trash-pop .map-pop-react.do.like .map-pop-react-item[data-type=like] svg:nth-child(2) {
-  opacity: 0;
+.trash-pop .map-pop-react.fire .map-pop-react-item[data-type=fire] svg {
+  display: block;
 }
-.trash-pop .map-pop-react.do.fire .map-pop-react-item[data-type=fire] svg:nth-child(1) {
-  opacity: 1;
-}
-.trash-pop .map-pop-react.do.fire .map-pop-react-item[data-type=fire] svg:nth-child(2) {
-  opacity: 0;
-}
-.trash-pop .map-pop-react.do .map-pop-react-item {
+.trash-pop .map-pop-react .map-pop-react-item {
   cursor: pointer;
 }
-.trash-pop .map-pop-react.do .map-pop-react-item:hover svg:nth-child(1) {
-  opacity: 1;
-}
-.trash-pop .map-pop-react.do .map-pop-react-item:hover svg:nth-child(2) {
-  opacity: 0;
-}
-.trash-pop .map-pop-react.do svg:nth-child(2) {
-  opacity: 1;
-}
-.trash-pop .map-pop-react svg {
-  opacity: 0;
+.trash-pop .map-pop-react-wrap {
+  display: flex;
+  justify-content: space-around;
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
 }
 .trash-pop .map-pop-react-item {
-  width: 25%;
-  position: relative;
+  margin-top: 1em;
+  width: 4em;
+  height: 3em;
+}
+.trash-pop .map-pop-react-item svg {
+  display: none;
 }
 .trash-pop .map-pop-done-count {
-  position: absolute;
-  top: 30%;
-  right: 0;
-  width: 36%;
-  height: 20%;
-  border-radius: 50%;
-  background: #000;
-  color: #fff;
-  font-size: 10px;
+  display: block;
+  position: relative;
+  top: 3.5em;
+  pointer-events: none;
 }
-.trash-pop .map-pop-done-count span {
+.trash-pop .map-pop-forget {
   position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
+  right: 6%;
+  bottom: 6%;
 }
 .trash-pop .bible-items {
   position: absolute;
@@ -930,20 +909,13 @@ body {
   bottom: 0;
   overflow: hidden;
 }
-.trash-pop .bible-items .t-scroll-wrap {
-  padding-right: 5%;
-}
-.trash-pop .bible-items .t-scroll-bar {
-  width: 2.5%;
-  border-radius: 45%/2.5%;
-}
 .trash-pop .bible-items-inner {
   display: flex;
   flex-flow: row wrap;
 }
 .trash-pop .bible-item {
-  width: 33.333%;
-  padding-bottom: 40%;
+  /*width:9.75em;
+  height:12em;*/
   position: relative;
   cursor: pointer;
 }
@@ -952,24 +924,27 @@ body {
 }
 .trash-pop .bible-item-bg {
   position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  width: 90%;
-  height: 90%;
+  width: 100%;
+  height: 100%;
 }
 .trash-pop .bible-item-img {
   position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  width: 70%;
-  height: 70%;
+  width: 100%;
+  height: 100%;
 }
 .trash-pop .bible-item-img img {
   object-fit: contain;
   width: 100%;
   height: 100%;
+}
+.trash-pop .bible-item-h {
+  position: absolute;
+  left: 50%;
+  bottom: 0.9em;
+  transform: translate(-50%, 0);
+  width: 100%;
+  text-align: center;
+  color: #A0D7F6;
 }
 .trash-pop .bible-bg {
   position: absolute;
@@ -983,29 +958,47 @@ body {
   left: 5%;
   top: 50%;
   transform: translate(0, -50%);
-  color: #fff;
+  color: #A0D7F6;
+  text-align: center;
+  width: 18.4em;
 }
 .trash-pop .bible-tabs {
   position: absolute;
-  left: 50%;
-  top: 110%;
+  left: 52%;
+  top: 105.5%;
   right: 5%;
-  height: 20%;
+  height: 30%;
   display: flex;
   justify-content: space-between;
+  align-items: flex-start;
 }
 .trash-pop .bible-tab {
-  width: 10%;
+  width: 3.2em;
+  height: 3.5em;
   cursor: pointer;
-  opacity: 0.5;
   position: relative;
+  top: 1.7em;
 }
 .trash-pop .bible-tab.active {
   opacity: 1;
 }
+.trash-pop .bible-tab.active img:nth-child(1) {
+  opacity: 0;
+}
+.trash-pop .bible-tab.active img:nth-child(2) {
+  opacity: 1;
+}
+.trash-pop .bible-tab img {
+  position: absolute;
+  left: 0;
+  width: 100%;
+}
+.trash-pop .bible-tab img:nth-child(2) {
+  opacity: 0;
+}
 .trash-pop .bible-pop-big {
   position: absolute;
-  left: 9%;
+  left: 13%;
   top: 16%;
   bottom: 16%;
   width: 23%;
@@ -1216,7 +1209,14 @@ body {
 .t-scroll-wrap {
   height: 100%;
   overflow: auto;
-  padding-right: 2.5em;
+  padding-right: 0.75em;
+}
+.t-scroll-wrap.hidden {
+  padding: 0;
+}
+.t-scroll-wrap.hidden .bible-item {
+  width: 10.9em;
+  height: 12em;
 }
 
 .t-hdr {
@@ -1229,9 +1229,9 @@ body {
   top: 0;
   right: 0;
   bottom: 0;
-  width: 1.5em;
+  width: 0.6em;
   background: #d6d6d6;
-  border-radius: 0.75em;
+  border-radius: 0.3em;
 }
 .t-scroll-bar.hidden {
   display: none;
@@ -1241,11 +1241,11 @@ body {
   width: 100%;
   height: 10%;
   position: absolute;
-  border-radius: 0.75em;
+  border-radius: 0.3em;
 }
 
 .uni-pop {
-  color: #fff;
+  color: #A0D7F6;
   opacity: 0;
   visibility: hidden;
   transition: opacity 0.3s ease-in-out;
@@ -1283,7 +1283,14 @@ body {
   left: 22em;
   top: 1em;
   right: 1.5em;
-  height: 22em;
+  height: 18em;
+}
+.uni-pop-text .t-scroll-wrap {
+  padding-right: 2em;
+}
+.uni-pop-text .t-scroll-bar {
+  top: 2em;
+  bottom: -4em;
 }
 
 /*@path:components\_video.scss*/

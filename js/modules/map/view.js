@@ -70,7 +70,7 @@ export let MapView=BaseBlockView.extend({
   count=this.current.get(type);
 
   this.current.save({react:type,[type]:count+1});
-  this.$(data.view.$reactContainer).addClass(type+' '+data.view.reactedCls);
+  this.$reacted.addClass(type+' '+data.view.reactedCls);
   this.renderReacted();
  }
 });

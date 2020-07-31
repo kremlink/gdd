@@ -14,6 +14,7 @@ export let Scroll=function(){
     if(!hide)
      this.get('setBarDim',[scroll.wrapDim/scroll.blockDim*this.get('getData').holderDim]);
     this.get('getData').container[(hide?'add':'remove')+'Class'](u.cls);
+    u.$wrap[(hide?'add':'remove')+'Class'](u.cls);
 
     u.$wrap.on('scroll',()=>{
      this.get('setPosition',{

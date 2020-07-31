@@ -323,102 +323,72 @@
     //map
     .map-mark{
       position:absolute;
-      width:5%;
-      height:5%;
+      width:2em;
+      height:2em;
       cursor:pointer;
     }
     .map-pop-big{
-      @include abs($l:9%,$t:16%);
-      width:23%;
-      height:45%;
+      @include abs($l:9%,$t:12%);
+      width:30%;
+      height:40%;
     }
     .map-pop-react{
-      @include abs($b:10%);
-      width:25%;
-      height:20%;
+      @include abs($b:4.5%,$l:8%);
+      width:14em;
+      height:6.48em;
+      &.reacted{
+        pointer-events:none;
+        >svg{
+          display:none;
+        }
+      }
+      @each $x in alert,like,fire
+      {
+        &.#{$x} .map-pop-react-item[data-type=#{$x}]{
+          svg{
+            display:block;
+          }
+        }
+      }
+      .map-pop-react-item{
+        cursor:pointer;
+      }
+    }
+    .map-pop-react-wrap{
       @include flx(display,flex);
-      @include flx(justify-content,space-between);
-      &.done{
-        left:8%;
-        svg:nth-child(1){
-          opacity:1;
-        }
-      }
-      &.do{
-        right:12%;
-        &.reacted{
-          pointer-events:none;
-        }
-        @each $x in alert,like,fire
-        {
-          &.#{$x} .map-pop-react-item[data-type=#{$x}]{
-            svg{
-              &:nth-child(1){
-                opacity:1;
-              }
-              &:nth-child(2){
-                opacity:0;
-              }
-            }
-          }
-        }
-        .map-pop-react-item{
-          cursor:pointer;
-          &:hover{
-            svg{
-              &:nth-child(1){
-                opacity:1;
-              }
-              &:nth-child(2){
-                opacity:0;
-              }
-            }
-          }
-        }
-        svg:nth-child(2){
-          opacity:1;
-        }
-      }
-      svg{
-        opacity:0;
-      }
+      @include flx(justify-content,space-around);
+      @include abs($l:0,$r:0,$t:0,$b:0);
     }
     .map-pop-react-item{
-      width:25%;
-      position:relative;
+      margin-top:1em;
+      width:4em;
+      height:3em;
+      svg{
+        display:none;
+      }
     }
     .map-pop-done-count{
-      @include abs($r:0,$t:30%);
-      width:36%;
-      height:20%;
-      border-radius:50%;
-      background:#000;
-      color:#fff;
-      font-size:10px;
-      span{
-        @include center();
-      }
+      display:block;
+      position:relative;
+      top:3.5em;
+      pointer-events:none;
+    }
+    .map-pop-forget{
+      @include abs($b:6%,$r:6%);
     }
     //end map
     //bible
     .bible-items{
       @include abs($l:0,$t:0,$r:0,$b:0);
       overflow:hidden;
-      .t-scroll-wrap{
-        padding-right:5%;
-      }
-      .t-scroll-bar{
-        width:2.5%;
-        border-radius:45%/2.5%;
-      }
     }
     .bible-items-inner{
       @include flx(display,flex);
       @include flx(flex-flow,'row wrap');
     }
     .bible-item{
-      width:33.333%;
-      padding-bottom:40%;
+      /*width:9.75em;
+      height:12em;*///always .hidden for now and set in shared
       position:relative;
       cursor:pointer;
       &.no{
@@ -426,19 +396,25 @@
       }
     }
     .bible-item-bg{
-      @include center();
-      width:90%;
-      height:90%;
+      position:absolute;
+      width:100%;
+      height:100%;
     }
     .bible-item-img{
-      @include center();
-      width:70%;
-      height:70%;
+      position:absolute;
+      width:100%;
+      height:100%;
       img{
         object-fit:contain;
         width:100%;
         height:100%;
       }
+    }
+    .bible-item-h{
+      @include center($b:0.9em);
+      width:100%;
+      text-align:center;
+      color:getc(blue);
     }
     .bible-bg{
       @include abs($l:0,$t:105.5%,$r:0);
@@ -446,25 +422,44 @@
     }
     .bible-tab-name{
       @include center($l:5%);
-      color:#fff;
+      color:getc(blue);
+      text-align:center;
+      width:18.4em;
     }
     .bible-tabs{
-      @include abs($l:50%,$t:110%,$r:5%);
-      height:20%;
+      @include abs($l:52%,$t:105.5%,$r:5%);
+      height:30%;
       @include flx(display,flex);
       @include flx(justify-content,space-between);
+      @include flx(align-items,flex-start);
     }
     .bible-tab{
-      width:10%;
+      width:3.2em;
+      height:3.5em;
       cursor:pointer;
-      opacity:0.5;
       position:relative;
+      top:1.7em;
       &.active{
         opacity:1;
+        img{
+          &:nth-child(1){
+            opacity:0;
+          }
+          &:nth-child(2){
+            opacity:1;
+          }
+        }
+      }
+      img{
+        @include abs($l:0);
+        width:100%;
+        &:nth-child(2){
+          opacity:0;
+        }
       }
     }
     .bible-pop-big{
-      @include abs($l:9%,$t:16%,$b:16%);
+      @include abs($l:13%,$t:16%,$b:16%);
       width:23%;
       img{
         object-fit:contain;
@@ -488,7 +483,7 @@
     .chat-top{
       @include abs($l:0,$r:0);
       height:15%;
-      color:getc(chatB);
+      color:getc(blue);
     }
     .chat-top-bd{
       height:2px;
@@ -513,8 +508,8 @@
         }
         .chat-msg-text{
           div{
-            border-color:getc(chatB);
-            color:getc(chatB);
+            border-color:getc(blue);
+            color:getc(blue);
             /*&:before{
               left:-0.3em;
               border-top:0.5em solid #FFE97D;

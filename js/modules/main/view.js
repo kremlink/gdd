@@ -50,8 +50,8 @@ export let MainView=Backbone.View.extend({
   this.bibleView=new BibleView;
   this.chatView=new ChatView;
 
-  //this.videoStart(null);
-  this.chat();//TODO:remove
+  this.videoStart(null);
+  //this.chat();//TODO:remove
 
   //app.get('aggregator').trigger('trash:toggle',true);//--old TODO:remove
  },

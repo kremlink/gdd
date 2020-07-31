@@ -6,11 +6,11 @@ export const data={
   {id:4,left:60,top:30,alert:5,like:5,fire:5,h:'Заголовок4',text:'Text4'},
   {id:5,left:30,top:70,alert:1,like:1,fire:1,h:'Заголовок5',text:'Text5'},
   {id:6,left:50,top:50,alert:3,like:0,fire:12,h:'Заголовок6',text:'Text6'}],
- omit:['left','top','text'],
+ omit:['left','top','text','h'],
  events:{
   'marker':'.map-mark',
   'close':'.uni-pop-close',
-  'react':'.map-pop-react.do .map-pop-react-item'
+  'react':'.map-pop-react .map-pop-react-item'
  },
  view:{
   el:'.trash-block.map',
@@ -18,8 +18,7 @@ export const data={
   popTemplate:'#map-pop-template',
   reactedTemplate:'#map-pop-reacted-template',
   $pop:'.uni-pop',
-  $reactContainer:'.map-pop-react.do',
-  $reacted:'.map-pop-react.done',
+  $reacted:'.map-pop-react',
   reactedCls:'reacted',
   shownCls:'shown',
   popShownCls:'popShown',

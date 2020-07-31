@@ -113,13 +113,13 @@
                 </div>
                 <div class="trash-main">
                     <div class="trash-block video">
-                        <video
+                        <video muted
                                 class="video-js"
                                 controls
                                 preload="auto"
                                 poster="../poster.jpg"> <!--poster="//vjs.zencdn.net/v/oceans.png" data-setup='{}'-->
-                            <!--<source src="http://igoninlab.com:8080/hls/stream.m3u8" type="video/mp4" />
-                            <source src="../episode1.mp4" type="video/mp4" />-->
+                            <!--<source src="http://igoninlab.com:8080/hls/stream.m3u8" type="video/mp4" />-->
+                            <!--<source src="../mp4/episode1.mp4" type="video/mp4" />-->
                             <source src="../oceans.mp4" type="video/mp4" />
                             <p class="vjs-no-js">
                                 To view this video please enable JavaScript, and consider upgrading to a
@@ -330,23 +330,24 @@
         </script>
         <script type="text/template" id="episodes-template">
             <% for(let i=1;i<episodes+1;i++) { %>
-            <a class="f-vid" href="episodes/episode<%= i %>.html">
+            <a class="f-vid" href="episode<%= i %>.html">
                 <div class="f-vid-wrap"><span><%= i %></span></div>
             </a>
             <% } %>
         </script>
+        <!--#icon-shared-map-marker-<%= data[i].id %>-->
         <script type="text/template" id="map-template">
             <% for(let i=0;i<data.length;i++) { %>
             <div data-id="<%= data[i].id %>" class="map-mark" style="left:<%= data[i].left %>%;top:<%= data[i].top %>%;">
                 <svg>
-                    <use xlink:href="#icon-shared-map-marker-<%= data[i].id %>"></use>
+                    <use xlink:href="#icon-shared-map-marker"></use>
                 </svg>
             </div>
             <% } %>
             <div class="uni-pop">
                 <div class="uni-pop-close"></div>
                 <svg class="uni-pop-bg">
-                    <use xlink:href="#icon-shared-bible-pop-bg"></use>
+                    <use xlink:href="#icon-shared-map-pop-bg"></use>
                 </svg>
                 <svg class="uni-pop-bg">
                     <use xlink:href="#icon-shared-map-pop-close"></use>
@@ -370,66 +371,40 @@
                             <%= text %>
                         </div>
                     </div>
-                    <div class="t-scroll-bar"><div></div></div>
                 </div>
+                <div class="t-scroll-bar"><div></div></div>
             </div>
-            <div class="map-pop-react done">
+            <div class="map-pop-forget">Не забудь отреагировать!</div>
+            <!--<div class="map-pop-react done"> do
             
-            </div>
-            <div class="map-pop-react do <%= react?react+' reacted':'' %>">
-                <div class="map-pop-react-item" data-type="fire">
-                    <svg>
-                        <use xlink:href="#icon-shared-map-pop-icon-1"></use>
-                    </svg>
-                    <svg>
-                        <use xlink:href="#icon-shared-map-pop-icon-1-w"></use>
-                    </svg>
-                </div>
-                <div class="map-pop-react-item" data-type="alert">
-                    <svg>
-                        <use xlink:href="#icon-shared-map-pop-icon-2"></use>
-                    </svg>
-                    <svg>
-                        <use xlink:href="#icon-shared-map-pop-icon-2-w"></use>
-                    </svg>
-                </div>
-                <div class="map-pop-react-item" data-type="like">
-                    <svg>
-                        <use xlink:href="#icon-shared-map-pop-icon-3"></use>
-                    </svg>
-                    <svg>
-                        <use xlink:href="#icon-shared-map-pop-icon-3-w"></use>
-                    </svg>
-                </div>
+            </div>-->
+            <div class="map-pop-react <%= react?react+' reacted':'' %>">
+            
             </div>
         </script>
         <script type="text/template" id="map-pop-reacted-template">
-            <div class="map-pop-react-item">
-                <svg>
-                    <use xlink:href="#icon-shared-map-pop-icon-1"></use>
-                </svg>
-                <svg>
-                    <use xlink:href="#icon-shared-map-pop-icon-1-w"></use>
-                </svg>
-                <span class="map-pop-done-count"><span><%= fire %></span></span>
-            </div>
-            <div class="map-pop-react-item">
-                <svg>
-                    <use xlink:href="#icon-shared-map-pop-icon-2"></use>
-                </svg>
-                <svg>
-                    <use xlink:href="#icon-shared-map-pop-icon-2-w"></use>
-                </svg>
-                <span class="map-pop-done-count"><span><%= alert %></span></span>
-            </div>
-            <div class="map-pop-react-item">
-                <svg>
-                    <use xlink:href="#icon-shared-map-pop-icon-3"></use>
-                </svg>
-                <svg>
-                    <use xlink:href="#icon-shared-map-pop-icon-3-w"></use>
-                </svg>
-                <span class="map-pop-done-count"><span><%= like %></span></span>
+            <svg>
+                <use xlink:href="#icon-shared-map-pop-icons-0"></use>
+            </svg>
+            <div class="map-pop-react-wrap">
+                <div class="map-pop-react-item" data-type="fire">
+                    <svg>
+                        <use xlink:href="#icon-shared-map-pop-icons-1"></use>
+                    </svg>
+                    <span class="map-pop-done-count"><span><%= fire %></span></span>
+                </div>
+                <div class="map-pop-react-item" data-type="alert">
+                    <svg>
+                        <use xlink:href="#icon-shared-map-pop-icons-2"></use>
+                    </svg>
+                    <span class="map-pop-done-count"><span><%= alert %></span></span>
+                </div>
+                <div class="map-pop-react-item" data-type="like">
+                    <svg>
+                        <use xlink:href="#icon-shared-map-pop-icons-3"></use>
+                    </svg>
+                    <span class="map-pop-done-count"><span><%= like %></span></span>
+                </div>
             </div>
         </script>
         <script type="text/template" id="chat-msg-template">
@@ -463,16 +438,21 @@
             </div>
             <div class="bible-bg">
                 <svg>
-                    <use xlink:href="#icon-shared-chat-ans-1"></use>
+                    <use xlink:href="#icon-shared-bible-smallscreen-bg"></use>
                 </svg>
                 <div class="bible-tab-name"></div>
             </div>
             <div class="bible-tabs">
                 <% for(let [x,y] of Object.entries(data)) { %>
                 <div data-type="<%= x %>" class="bible-tab">
-                    <svg>
-                        <use xlink:href="#icon-shared-bible-trashcan-<%= x %>"></use>
+                    <img src="images/bible_under_items/bible-<%= x %>.svg" alt=""/>
+                    <img src="images/bible_under_items/bible-<%= x %>-a.svg" alt=""/>
+                    <!--<svg>
+                        <use xlink:href="#bible-smallscreen-item-<%= x %>"></use>
                     </svg>
+                    <svg>
+                        <use xlink:href="#bible-smallscreen-item-<%= x %>-a"></use>
+                    </svg>-->
                 </div>
                 <% } %>
             </div>
@@ -494,20 +474,21 @@
             <div data-id="<%= data[i].id %>" class="bible-item<%= data[i].no?' no':'' %>">
                 <div class="bible-item-bg">
                     <svg>
-                        <use xlink:href="#icon-shared-bible-item-under<%= (data[i].no?'-empty-':'-')+id %>"></use>
+                        <use xlink:href="#icon-shared-bible-item-under<%= (data[i].no?'-blank':'-'+id) %>"></use>
                     </svg>
                 </div>
                 <% if(!data[i].no) { %>
                 <div class="bible-item-img">
-                    <img src="images/trash_items/trash-<%= id %>-<%= data[i].id %>.png" alt=""/>
+                    <img src="images/bible_items/bible-<%= id %>-<%= data[i].id %>.png" alt=""/>
                 </div>
+                <div class="bible-item-h"><%= data[i].h %></div>
                 <% } %>
             </div>
             <% } %>
         </script>
         <script type="text/template" id="bible-pop-template">
             <div class="bible-pop-big">
-                <img src="images/trash_items/trash-<%= tid %>-<%= id %>.png" alt=""/>
+                <img src="images/bible_items/bible-<%= tid %>-<%= id %>.png" alt=""/>
             </div>
             <div class="uni-pop-text">
                 <div class="t-hdr"><%= h %></div>
@@ -517,8 +498,8 @@
                             <%= text %>
                         </div>
                     </div>
-                    <div class="t-scroll-bar"><div></div></div>
                 </div>
+                <div class="t-scroll-bar"><div></div></div>
             </div>
         </script>
         <div class="safe-hide-svg">

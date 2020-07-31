@@ -52,21 +52,25 @@ export let BibleView=BaseBlockView.extend({
   });
  },
  tab:function(e){
-  let id;
+  let id,
+  tab=e?$(e.currentTarget):this.$tabs.eq(0);
 
-  this.$currentTab=e?$(e.currentTarget):this.$tabs.eq(0);
+  if(!tab.hasClass(data.view.activeTabCls))
+  {
+   this.$currentTab=tab;
 
-  this.$tabs.removeClass(data.view.activeTabCls);
-  id=this.$currentTab.addClass(data.view.activeTabCls).data(data.view.dataClick);
+   this.$tabs.removeClass(data.view.activeTabCls);
+   id=this.$currentTab.addClass(data.view.activeTabCls).data(data.view.dataClick);
 
-  if(this.tabScroll)
-   this.tabScroll.destroy();
-  this.$itemsContainer.html(this.tabTemplate({
-   id:id,
-   data:data.data[id].items
-  }));
-  this.$name.text(data.data[id].name);
-  this.setScroll('tabScroll',this.$itemsWrap);
+   if(this.tabScroll)
+    this.tabScroll.destroy();
+   this.$itemsContainer.html(this.tabTemplate({
+    id:id,
+    data:data.data[id].items
+   }));
+   this.$name.text(data.data[id].name);
+   this.setScroll('tabScroll',this.$itemsWrap);
+  }
  },
  pop:function(e){
   let id=$(e.currentTarget).data(data.view.dataId),
