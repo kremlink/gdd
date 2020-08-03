@@ -33,7 +33,7 @@
       }
     }
     &.game-active{
-      .return-btn,.videos-btn,.map-btn,.book-btn,.chat-btn,.null-btn,.menu-btn,.load-save-btn{
+      .videos-btn,.map-btn,.book-btn,.chat-btn,.null-btn,.menu-btn,.load-save-btn{
         pointer-events:none;
         opacity:0.2;
       }
@@ -210,6 +210,9 @@
         @include flx(display,flex);
         @include flx(justify-content,space-between);
         @include flx(flex-flow,'row wrap');
+        .bottom-panel{
+          overflow:hidden;
+        }
       }
       &.map{
         background: url(#{$path}map-bg.jpg) center/cover no-repeat;
@@ -220,6 +223,11 @@
       &.chat{
         color:#000;
       }
+    }
+    //---
+    .bottom-panel{
+      @include abs($l:0,$t:105.5%,$r:0);
+      height:30%;
     }
     //game
     .bins{
@@ -292,32 +300,98 @@
     }
     //end game
     //flow
-    .f-vid{
-      width:20%;
-      height:50%;
-      text-decoration:none;
-      font-size:30px;
-      color:#fff;
+    .vid-initial{
+      @include abs($l:0,$r:0,$t:0,$b:0);
+      background: url(#{$path}potok-bg.jpg) center/cover no-repeat;
+      color:getc(blue);
+      font-size:1.5em;
+      line-height:1.2em;
+      text-transform:uppercase;
+      font-weight:700;
+      pointer-events:none;
       @include flx(display,flex);
-      @include med(){
-        &:hover{
-          color:#000;
-          .f-vid-wrap{
-            background:#ddd;
-          }
-        }
+      @include flx(align-items,center);
+      @include flx(justify-content,center);
+      .vidStartedOnce &{
+        display:none;
       }
     }
-    .f-vid-wrap{
-      height:96%;
-      width:95%;
-      margin:auto;
-      background:#888;
-      position:relative;
-      border-radius:5%;
-      span{
-        @include center();
+    .vid-overlay{
+      @include abs($l:0,$r:0,$t:0,$b:0);
+      background: url(#{$path}flow-pause.png) center/cover no-repeat;
+      pointer-events:none;
+      color:#fff;
+      font-size:2.5em;
+      font-weight:700;
+      display:none;
+      .paused &{
+        display:block;
       }
+    }
+    .vid-name{
+      text-align:center;
+      margin-top:1em;
+      text-transform:uppercase;
+    }
+    .episodes{
+      position:relative;
+      height:100%;
+      @include flx(display,flex);
+      @include flx(align-items,center);
+    }
+    .ep-item{
+      --size:5.5em;
+      width:calc(var(--size)*2);
+      height:var(--size);
+      position:relative;
+      left:-.5em;
+      pointer-events:none;
+      @include flx(flex,'0 0 auto');
+      &.active{
+        svg{
+          &:nth-child(1){
+            display:none;
+          }
+          &:nth-child(2){
+            display:block;
+          }
+        }
+        span{
+          color:#fff;
+          pointer-events:none;
+        }
+      }
+      &.inav{
+        svg{
+          &:nth-child(1){
+            display:none;
+          }
+          &:nth-child(3){
+            display:block;
+          }
+        }
+        span{
+          opacity:0.3;
+          pointer-events:none;
+        }
+      }
+      svg{
+        &:nth-child(n+2){
+          display:none;
+        }
+      }
+      span{
+        pointer-events:auto;
+        @include center();
+        padding:.5em;
+        font-size:3em;
+        color:getc(blue);
+        font-weight:700;
+        text-shadow:0 0 11px rgba(103,191,241,0.66),0 0 20px rgba(103,191,241,0.5);
+      }
+    }
+    .ep-wrap{
+      height:100%;
     }
     //end flow
     //map
@@ -415,10 +489,6 @@
       width:100%;
       text-align:center;
       color:getc(blue);
-    }
-    .bible-bg{
-      @include abs($l:0,$t:105.5%,$r:0);
-      height:30%;
     }
     .bible-tab-name{
       @include center($l:5%);
@@ -557,9 +627,7 @@
       }
     }
     .chat-ctrls{
-      @include abs($l:0,$t:105.5%,$r:0);
       padding:0 1em;
-      height:30%;
       text-align:left;
       color:getc(chatM);
       text-shadow:0 0 11px rgba(103,191,241,0.66),0 0 20px rgba(103,191,241,0.5);

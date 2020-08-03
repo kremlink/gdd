@@ -31,10 +31,20 @@ export function init(app,modules){
    $(window).on('resize',_.debounce(function(){
     //location.reload();TODO: uncomment
    },200));
+   this.listenTo(app.get('aggregator'),'player:pause',()=>this.playPause(true));
+   this.listenTo(app.get('aggregator'),'player:play',()=>this.playPause(false));
+   this.listenTo(app.get('aggregator'),'player:ready',this.addOverlay);
   },
   start:function(){
    this.$el.addClass(data.view.startCls);
-   app.get('aggregator').trigger('player:play');//TODO: uncomment
+   //app.get('aggregator').trigger('player:play');//TODO: uncomment
+  },
+  playPause:function(f){
+   this.$el.addClass(data.view.vidStartedOnce);
+   this.$el.toggleClass(data.view.pauseCls,f);
+  },
+  addOverlay:function(el){
+   $(el).find('video').after($(data.view.$overlay));
   }
   /*,
   addTrash:function(){//--old

@@ -9,7 +9,10 @@ export let FlowView=BaseBlockView.extend({
    data:data
   }]);
 
-  this.$el.html(this.template({episodes:data.amount}));
-  //this.$('.f-vid').on('click',(e)=>{location.reload();e.preventDefault();});//TODO: remove after
+  this.$episodes=this.$(data.view.$episodes).html(this.template(data.epis));
+  this.$vName=this.$(data.view.$vName);
+  if(data.fromEpisode)
+   this.$el.addClass(data.view.fromEpCls);
+  this.$vName.text('Test');
  }
 });

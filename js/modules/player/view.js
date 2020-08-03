@@ -1,15 +1,10 @@
 import {app} from '../../bf/base.js';
 import {data} from './data.js';
-import {BaseBlockView} from '../baseBlock/view.js';
 
-export let PlayerView=BaseBlockView.extend({
+export let PlayerView=Backbone.View.extend({
  el:data.view.el,
  initialize:function(){
-  BaseBlockView.prototype.initialize.apply(this,[{
-   data:data
-  }]);
-
-  this.player=videojs($(data.view.video)[0],{},()=>{
+  this.player=videojs(this.el,{},()=>{
    this.prepare();
   });
   this.listenTo(app.get('aggregator'),'player:play',this.play);//--old
@@ -17,8 +12,9 @@ export let PlayerView=BaseBlockView.extend({
  prepare:function(){
   let touched={};
   //this.setElement(data.view.el);//--old
-  app.get('aggregator').trigger('player:ready');
+  app.get('aggregator').trigger('player:ready',this.player.el());
   this.player.on('pause',()=>{
+   app.get('aggregator').trigger('player:pause');
    if(app.get('isMobile'))
    {
     app.get('aggregator').trigger('trash:fs',false);

@@ -6,7 +6,10 @@ export const data={
   el:'#wrap',
   loadedCls:'loaded',
   tooSmallCls:'too-small',
-  startCls:'start'
+  $overlay:'.vid-overlay',
+  startCls:'start',
+  pauseCls:'paused',
+  vidStartedOnce:'vidStartedOnce'
  },
  minViewport:'(min-width:500px)',
  mobViewport:'(max-width:1023px)'

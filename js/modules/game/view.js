@@ -8,6 +8,7 @@ import {BaseBlockView} from '../baseBlock/view.js';
 
 export let GameView=BaseBlockView.extend({
  el:data.view.el,
+ activeDiff:-1,
  initialize:function(){
   BaseBlockView.prototype.initialize.apply(this,[{
    data:data
@@ -30,24 +31,31 @@ export let GameView=BaseBlockView.extend({
   this.$diffChoose=$('.tmp-choose div');
   this.$diffChoose.each(i=>{
    this.$diffChoose.eq(i).on('click',()=>{
-    switch (i)
-    {
-     case 0:this.diff='easy';
-     break;
-     case 1:this.diff='normal';
-      break;
-     case 2:this.diff='hard';
-    }
-    this.binViews=[];
-    app.get('aggregator').trigger('game:progress',0);
-    _.invoke(this.bins.toArray(),'destroy');
-    this.$diffChoose.removeClass('active').eq(i).addClass('active');
-    this.bins.reset(data.data[this.diff].binData);
-    this.generateTrash();
+    this.activeDiff=i;
+    this.play();
    });
   });
 
   this.ctrls();
+ },
+ play:function(){
+  if(!~this.activeDiff)
+   this.activeDiff=0;
+
+  switch(this.activeDiff)
+  {
+   case 0:this.diff='easy';
+    break;
+   case 1:this.diff='normal';
+    break;
+   case 2:this.diff='hard';
+  }
+  this.binViews=[];
+  app.get('aggregator').trigger('game:progress',0);
+  _.invoke(this.bins.toArray(),'destroy');
+  this.$diffChoose.removeClass('active').eq(this.activeDiff).addClass('active');
+  this.bins.reset(data.data[this.diff].binData);
+  this.generateTrash();
  },
  trashCount:function(){
   this.trashDone++;

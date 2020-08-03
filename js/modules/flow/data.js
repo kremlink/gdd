@@ -1,8 +1,11 @@
 export const data={
- amount:10,
+ epis:{amount:10,active:2,avail:3},
  view:{
   el:'.trash-block.flow',
+  $vName:'.vid-name',
   template:'#episodes-template',
-  shownCls:'shown'
+  $episodes:'.episodes',
+  shownCls:'shown',
+  onceCls:'vidStartedOnce'
  }
 };

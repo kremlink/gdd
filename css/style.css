@@ -530,7 +530,7 @@ body {
   bottom: 0;
   z-index: 1;
 }
-.trash-pop.game-active .return-btn, .trash-pop.game-active .videos-btn, .trash-pop.game-active .map-btn, .trash-pop.game-active .book-btn, .trash-pop.game-active .chat-btn, .trash-pop.game-active .null-btn, .trash-pop.game-active .menu-btn, .trash-pop.game-active .load-save-btn {
+.trash-pop.game-active .videos-btn, .trash-pop.game-active .map-btn, .trash-pop.game-active .book-btn, .trash-pop.game-active .chat-btn, .trash-pop.game-active .null-btn, .trash-pop.game-active .menu-btn, .trash-pop.game-active .load-save-btn {
   pointer-events: none;
   opacity: 0.2;
 }
@@ -714,11 +714,21 @@ body {
   justify-content: space-between;
   flex-flow: row wrap;
 }
+.trash-pop .trash-block.flow .bottom-panel {
+  overflow: hidden;
+}
 .trash-pop .trash-block.map {
   background: url(../images/map-bg.jpg) center/cover no-repeat;
 }
 .trash-pop .trash-block.chat {
   color: #000;
+}
+.trash-pop .bottom-panel {
+  position: absolute;
+  left: 0;
+  top: 105.5%;
+  right: 0;
+  height: 30%;
 }
 .trash-pop .bins {
   position: absolute;
@@ -805,35 +815,99 @@ body {
 .trash-pop .tmp-choose div.active {
   border: 2px solid #fff;
 }
-.trash-pop .f-vid {
-  width: 20%;
-  height: 50%;
-  text-decoration: none;
-  font-size: 30px;
-  color: #fff;
+.trash-pop .vid-initial {
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background: url(../images/potok-bg.jpg) center/cover no-repeat;
+  color: #A0D7F6;
+  font-size: 1.5em;
+  line-height: 1.2em;
+  text-transform: uppercase;
+  font-weight: 700;
+  pointer-events: none;
   display: flex;
+  align-items: center;
+  justify-content: center;
 }
-@media (min-width: 900px) {
-  .trash-pop .f-vid:hover {
-    color: #000;
-  }
-  .trash-pop .f-vid:hover .f-vid-wrap {
-    background: #ddd;
-  }
+.vidStartedOnce .trash-pop .vid-initial {
+  display: none;
 }
-.trash-pop .f-vid-wrap {
-  height: 96%;
-  width: 95%;
-  margin: auto;
-  background: #888;
+.trash-pop .vid-overlay {
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background: url(../images/flow-pause.png) center/cover no-repeat;
+  pointer-events: none;
+  color: #fff;
+  font-size: 2.5em;
+  font-weight: 700;
+  display: none;
+}
+.paused .trash-pop .vid-overlay {
+  display: block;
+}
+.trash-pop .vid-name {
+  text-align: center;
+  margin-top: 1em;
+  text-transform: uppercase;
+}
+.trash-pop .episodes {
   position: relative;
-  border-radius: 5%;
+  height: 100%;
+  display: flex;
+  align-items: center;
 }
-.trash-pop .f-vid-wrap span {
+.trash-pop .ep-item {
+  --size:5.5em;
+  width: calc(var(--size)*2);
+  height: var(--size);
+  position: relative;
+  left: -0.5em;
+  pointer-events: none;
+  flex: 0 0 auto;
+}
+.trash-pop .ep-item.active svg:nth-child(1) {
+  display: none;
+}
+.trash-pop .ep-item.active svg:nth-child(2) {
+  display: block;
+}
+.trash-pop .ep-item.active span {
+  color: #fff;
+  pointer-events: none;
+}
+.trash-pop .ep-item.inav svg:nth-child(1) {
+  display: none;
+}
+.trash-pop .ep-item.inav svg:nth-child(3) {
+  display: block;
+}
+.trash-pop .ep-item.inav span {
+  opacity: 0.3;
+  pointer-events: none;
+}
+.trash-pop .ep-item svg:nth-child(n+2) {
+  display: none;
+}
+.trash-pop .ep-item span {
+  pointer-events: auto;
   position: absolute;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
+  padding: 0.5em;
+  font-size: 3em;
+  color: #A0D7F6;
+  font-weight: 700;
+  text-shadow: 0 0 11px rgba(103, 191, 241, 0.66), 0 0 20px rgba(103, 191, 241, 0.5);
+}
+.trash-pop .ep-wrap {
+  height: 100%;
 }
 .trash-pop .map-mark {
   position: absolute;
@@ -945,13 +1019,6 @@ body {
   width: 100%;
   text-align: center;
   color: #A0D7F6;
-}
-.trash-pop .bible-bg {
-  position: absolute;
-  left: 0;
-  top: 105.5%;
-  right: 0;
-  height: 30%;
 }
 .trash-pop .bible-tab-name {
   position: absolute;
@@ -1102,12 +1169,7 @@ body {
   }*/
 }
 .trash-pop .chat-ctrls {
-  position: absolute;
-  left: 0;
-  top: 105.5%;
-  right: 0;
   padding: 0 1em;
-  height: 30%;
   text-align: left;
   color: #67BFF1;
   text-shadow: 0 0 11px rgba(103, 191, 241, 0.66), 0 0 20px rgba(103, 191, 241, 0.5);
