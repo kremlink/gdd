@@ -1,10 +1,10 @@
 export const data={
- epis:{amount:10,active:2,avail:3},
+ gParam:'episode',
+ epis:{amount:10,active:4,avail:6},
  view:{
   el:'.trash-block.flow',
-  $vName:'.vid-name',
   template:'#episodes-template',
-  $episodes:'.episodes',
+  $episodes:'.bottom-panel',
   shownCls:'shown',
   onceCls:'vidStartedOnce'
  }

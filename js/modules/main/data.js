@@ -12,8 +12,8 @@ export const data={
   template:'#trash-template',
   //shownCls:'shown',
   fsCls:'fs',
-  mfsCls:'mfs'//,
-  //gameActiveCls:'game-active'
+  mfsCls:'mfs',
+  gamePlayingCls:'game-playing'
  },
  gameProgress:{
   el:'.prog2 .prog-ac'

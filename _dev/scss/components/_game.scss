@@ -32,8 +32,8 @@
         z-index:1;
       }
     }
-    &.game-active{
-      .videos-btn,.map-btn,.book-btn,.chat-btn,.null-btn,.menu-btn,.load-save-btn{
+    &.game-playing{
+      .return-btn,.game-btn,.videos-btn,.map-btn,.book-btn,.chat-btn,.null-btn,.menu-btn,.load-save-btn{
         pointer-events:none;
         opacity:0.2;
       }
@@ -204,7 +204,35 @@
       }
       &.game{
         background: url(#{$path}game-bg.jpg) center/cover no-repeat;
-        overflow:hidden;
+        &.game-play{
+          .the-game{
+            display:block;
+          }
+          .game-start{
+            display:none;
+          }
+          .g-play{
+            display:block;
+          }
+        }
+        &.game-end1{
+          background:none;
+          .game-start{
+            display:none;
+          }
+          .game-end{
+            display:block;
+          }
+        }
+        &.game-end2{
+          background:none;
+          .game-start{
+            display:none;
+          }
+          .game-end{
+            display:block;
+          }
+        }
       }
       &.flow{
         @include flx(display,flex);
@@ -228,8 +256,26 @@
     .bottom-panel{
       @include abs($l:0,$t:105.5%,$r:0);
       height:30%;
+      &.g-start{
+        @include flx(display,flex);
+        @include flx(justify-content,space-between);
+        @include flx(align-items,center);
+      }
+      &.g-play{
+        display:none;
+        color:getc(blue);
+        font-size:0.7em;
+      }
+      &.g-end{
+
+      }
     }
     //game
+    .the-game{
+      display:none;
+      overflow:hidden;
+      @include abs($l:0,$r:0,$t:0,$b:0);
+    }
     .bins{
       @include abs($l:3%,$r:3%,$b:0,$t:0);
       @include flx(display,flex);
@@ -284,18 +330,82 @@
       height:100%;
       @include center();
     }
-
-    .tmp-choose{
-      @include abs($l:0,$t:0);
-      width:10%;
-      height:20%;
+    .game-sorted{
+      @include abs($t:0.8em,$l:2.2em);
+      width:33.4em;
+    }
+    .game-remaining{
+      @include abs($t:0.8em,$l:38em);
+      width:21.2em;
+    }
+    .game-sorted-p{
+      @include center($l:2.45em);
+      width:33em;
+      height:2.4em;
       div{
-        height:33%;
-        cursor:pointer;
-        @extend %bxz;
-        &.active{
-          border:2px solid #fff;
-        }
+        background: url(#{$path}trash-progress.png) center/100% 100% no-repeat;
+        height:100%;
+        width:0;
+        border-radius:1.2em;
+        @include trs('width #{$anim*2} ease-in-out');
+      }
+    }
+    .game-remaining-p{
+      @include center($l:38em);
+      width:21.2em;
+      div{
+        font-size:2em;
+      }
+    }
+    .game-start{
+      @include abs($l:0,$r:0,$t:0,$b:0);
+    }
+    .game-text{
+      @include abs($l:1.5em,$t:1em);
+      width:20em;
+      height:3.3em;
+      color:getc(blue);
+      @include flx(display,flex);
+      @include flx(align-items,center);
+      &+.game-text{
+        top:5em;
+        height:6.4em;
+      }
+    }
+    .game-diff-h{
+      width:10.2em;
+      color:getc(blue);
+      position:relative;
+      margin-left:6.2em;
+    }
+    .game-diff-wrap{
+      position:relative;
+      width:19.2em;
+      margin-right:1.8em;
+      @include flx(display,flex);
+      @include flx(justify-content,space-between);
+      @include flx(align-items,center);
+    }
+    .game-diff-ctrl{
+      width:2em;
+      height:2em;
+      cursor:pointer;
+    }
+    .game-diff{
+      width:6em;
+      text-align:center;
+      color:getc(dblue);
+    }
+    .game-end{
+      display:none;
+      @include abs($l:0,$r:0,$t:0,$b:0);
+    }
+    .win-tab{
+      &.active svg{
+        display:block;
+      }
+      svg{
+        display:none;
       }
     }
     //end game
@@ -340,9 +450,9 @@
       @include flx(align-items,center);
     }
     .ep-item{
-      --size:5.5em;
-      width:calc(var(--size)*2);
-      height:var(--size);
+      --size:11.025em;
+      width:var(--size);
+      height:calc(var(--size)/2);
       position:relative;
       left:-.5em;
       pointer-events:none;
@@ -357,13 +467,15 @@
           }
         }
         span{
-          color:#fff;
           pointer-events:none;
         }
       }
       &.inav{
         svg{
           &:nth-child(1){
+            display:none;
+          }
+          &:nth-child(2){
             display:none;
           }
           &:nth-child(3){
@@ -373,6 +485,7 @@
         span{
           opacity:0.3;
           pointer-events:none;
+          color:getc(blue);
         }
       }
       svg{
@@ -592,8 +705,8 @@
         text-align:right;
         .chat-msg-text{
           div{
-            border-color:getc(chatM);
-            color:getc(chatM);
+            border-color:getc(dblue);
+            color:getc(dblue);
             /*&:before{
               right:-0.3em;
               border-top:0.5em solid #91FF7A;
@@ -629,7 +742,7 @@
     .chat-ctrls{
       padding:0 1em;
       text-align:left;
-      color:getc(chatM);
+      color:getc(dblue);
       text-shadow:0 0 11px rgba(103,191,241,0.66),0 0 20px rgba(103,191,241,0.5);
       @include flx(display,flex);
       @include flx(align-items,center);

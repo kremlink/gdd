@@ -1,7 +1,6 @@
 import {app} from '../../bf/base.js';
 //import {data as dat} from './data.js';
 import {data} from './data.js';
-import {PlayerView} from '../player/view.js';
 import {GameView} from '../game/view.js';
 import {FlowView} from '../flow/view.js';
 import {MapView} from '../map/view.js';
@@ -27,19 +26,18 @@ export let MainView=Backbone.View.extend({
   this.listenTo(app.get('aggregator'),'trash:fs',this.fs);
   this.listenTo(app.get('aggregator'),'game:end',this.gameEnd);
   this.listenTo(app.get('aggregator'),'game:progress',this.gameProgress);
-  this.ready();
 
   this.$gameProgress=this.$(data.gameProgress.el);
+  this.ready();
  },
  ready:function(){
-  this.playerView=new PlayerView;
   this.gameView=new GameView;
   this.flowView=new FlowView;
   this.mapView=new MapView;
   this.bibleView=new BibleView;
   this.chatView=new ChatView;
 
-  this.episodes(null);
+  this.gameStart();
   //this.chat();//TODO:remove
 
   //app.get('aggregator').trigger('trash:toggle',true);//--old TODO:remove
@@ -58,13 +56,13 @@ export let MainView=Backbone.View.extend({
    this.activeTab.toggle(false);
   this.activeTab=tab;
 
-  this.playerView.pause();
+  app.get('aggregator').trigger('player:playPause',false);
  },
  topBtn:function(){
   //this.switchTab(this.playerView);
   //this.playerView.toggle(true);
   if(this.activeTab===this.flowView)
-   app.get('aggregator').trigger('player:play');
+   app.get('aggregator').trigger('player:playPause',true);
   if(this.activeTab===this.gameView)
    this.gameView.play();
  },
@@ -75,9 +73,10 @@ export let MainView=Backbone.View.extend({
   this.$gameProgress.css('clip-path',`polygon(0 0,0 0,0 100%,0 100%)`);
  },
  gameEnd:function(){
-  //this.$el.removeClass(data.view.gameActiveCls);
+  this.$el.removeClass(data.view.gamePlayingCls);
  },
  gameProgress:function(p){
+  this.$el.addClass(data.view.gamePlayingCls);
   this.$gameProgress.css('clip-path',`polygon(0 0,${p}% 0,${p}% 100%,0 100%)`);
  },
  episodes:function(){

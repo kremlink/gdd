@@ -1,4 +1,5 @@
 import {data} from './data.js';
+import {utils} from '../../bf/lib/utils.js';
 import {BaseBlockView} from '../baseBlock/view.js';
 
 export let FlowView=BaseBlockView.extend({
@@ -9,10 +10,7 @@ export let FlowView=BaseBlockView.extend({
    data:data
   }]);
 
-  this.$episodes=this.$(data.view.$episodes).html(this.template(data.epis));
-  this.$vName=this.$(data.view.$vName);
-  if(data.fromEpisode)
-   this.$el.addClass(data.view.fromEpCls);
-  this.$vName.text('Test');
+
+  this.$(data.view.$episodes).html(this.template($.extend({},data.epis,{active:+utils.getParam({what:'?',name:data.gParam})||1})));
  }
 });

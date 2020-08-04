@@ -7,14 +7,15 @@ export let PlayerView=Backbone.View.extend({
   this.player=videojs(this.el,{},()=>{
    this.prepare();
   });
-  this.listenTo(app.get('aggregator'),'player:play',this.play);//--old
+  //this.listenTo(app.get('aggregator'),'player:play',this.play);//--old
+  this.listenTo(app.get('aggregator'),'player:playPause',this.playPause);
  },
  prepare:function(){
   let touched={};
   //this.setElement(data.view.el);//--old
   app.get('aggregator').trigger('player:ready',this.player.el());
   this.player.on('pause',()=>{
-   app.get('aggregator').trigger('player:pause');
+   app.get('aggregator').trigger('player:playPause',false);
    if(app.get('isMobile'))
    {
     app.get('aggregator').trigger('trash:fs',false);
@@ -26,6 +27,7 @@ export let PlayerView=Backbone.View.extend({
    //app.get('aggregator').trigger('trash:toggle',true);//--old
   });
   this.player.on('play',()=>{
+   app.get('aggregator').trigger('player:playPause',true);
    //app.get('aggregator').trigger('trash:toggle',false);//--old
    if(app.get('isMobile'))
    {
@@ -71,11 +73,7 @@ export let PlayerView=Backbone.View.extend({
 
   return this;
  },*/
- play:function(){
-  if(this.player.paused)
-   this.player.play();
- },
- pause:function(){
-  this.player.pause();
+ playPause:function(f){
+  this.player[f?'play':'pause']();
  }
 });

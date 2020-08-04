@@ -9,64 +9,88 @@ import {BaseBlockView} from '../baseBlock/view.js';
 export let GameView=BaseBlockView.extend({
  el:data.view.el,
  activeDiff:-1,
+ diffs:(()=>Object.keys(data.data))(),
+ diffIndex:0,
+ progress:0,
+ trash:[],
+ coords:{x:0,y:0},
+ dragging:false,
+ draggingTrash:null,
+ trashDone:0,
+ ended:false,
  initialize:function(){
   BaseBlockView.prototype.initialize.apply(this,[{
    data:data
   }]);
   //this.binViews=[];
+  this.$bins=this.$(data.view.bins);
+  this.$game=this.$(data.view.game);
+  this.$diff=this.$(data.view.diff);
+  this.$diffCh=this.$(data.view.diffCh);
+  this.$pDone=this.$(data.view.pDone);
+  this.$pRem=this.$(data.view.pRem);
   this.bins=new (Backbone.Collection.extend({model:GameBinModel}));
   this.listenTo(this.bins,'reset',this.addBins);
   this.listenTo(this.bins,'change:amount',this.trashPut);
   //this.bins.reset(data.data[this.diff].binData);
-  this.trash=[];
-  this.coords={x:0,y:0};
-  this.dragging=false;
-  this.draggingTrash=null;
-  this.trashDone=0;
   this.listenTo(app.get('aggregator'),'game:trash-failed game:trash-caught',this.trashCount);
-  this.progress=0;
 
   this.$failLine=this.$(data.failLine.el);
-  this.diff='';
-  this.$diffChoose=$('.tmp-choose div');
-  this.$diffChoose.each(i=>{
-   this.$diffChoose.eq(i).on('click',()=>{
-    this.activeDiff=i;
-    this.play();
-   });
+
+  this.setDiff();
+  this.gameCtrls();
+ },
+ setDiff:function(){
+  let self=this;
+
+  this.$diffCh.on('click',function(){
+   let ind=$(this).index();
+
+   if(ind===0&&self.diffIndex>0)
+    self.diffIndex--;
+   if(ind!==0&&self.diffIndex<self.diffs.length-1)
+    self.diffIndex++;
+   self.$diff.text(data.data[self.diffs[self.diffIndex]].text);
   });
 
-  this.ctrls();
+  this.$diff.text(data.data[this.diffs[this.diffIndex]].text);
  },
  play:function(){
-  if(!~this.activeDiff)
-   this.activeDiff=0;
-
-  switch(this.activeDiff)
+  if(this.ended)
   {
-   case 0:this.diff='easy';
-    break;
-   case 1:this.diff='normal';
-    break;
-   case 2:this.diff='hard';
+   this.$el.removeClass(data.view.gEnd1Cls+' '+data.view.gEnd2Cls);
+   this.ended=false;
+  }else
+  {
+   this.$el.addClass(data.view.gPlayCls);
+   this.binViews=[];
+   app.get('aggregator').trigger('game:progress',0);
+   this.$pDone.css('width',0+'%');
+   this.$pRem.text(100);
+   _.invoke(this.bins.toArray(),'destroy');
+   this.bins.reset(data.data[this.diffs[this.diffIndex]].binData);
+   this.generateTrash();
   }
-  this.binViews=[];
-  app.get('aggregator').trigger('game:progress',0);
-  _.invoke(this.bins.toArray(),'destroy');
-  this.$diffChoose.removeClass('active').eq(this.activeDiff).addClass('active');
-  this.bins.reset(data.data[this.diff].binData);
-  this.generateTrash();
  },
  trashCount:function(){
   this.trashDone++;
-
-  if(this.trashDone===data.data[this.diff].trashData.length)
+  this.$pRem.text(100-Math.round(100*this.trashDone/data.data[this.diffs[this.diffIndex]].trashData.length));
+  if(this.trashDone===data.data[this.diffs[this.diffIndex]].trashData.length)
   {
-   app.get('aggregator').trigger('game:end');
-   this.trashDone=0;
+   setTimeout(()=>{
+    app.get('aggregator').trigger('game:end');
+    this.$el.removeClass(data.view.gPlayCls).addClass(data.view.gEnd1Cls);
+    this.trashDone=0;
+    this.ended=true;
+   },data.waitWin);
   }
  },
- ctrls:function(){
+ toggle:function(f){
+  BaseBlockView.prototype.toggle.apply(this,[f]);
+  this.$el.removeClass(data.view.gEnd1Cls+' '+data.view.gEnd2Cls);
+  this.ended=false;
+ },
+ gameCtrls:function(){
   new utils.drag({
    both:true,
    mouse:true,
@@ -126,27 +150,31 @@ export let GameView=BaseBlockView.extend({
   });
  },
  trashPut:function(m,v){
+  let p;
+
   if(v>m.previousAttributes().amount)
   {
    this.progress++;
-   app.get('aggregator').trigger('game:progress',Math.round(100*this.progress/data.data[this.diff].trashData.length));//Math.ceil((n+1)/10)*10
+   p=Math.round(100*this.progress/data.data[this.diffs[this.diffIndex]].trashData.length);
+   this.$pDone.css('width',p+'%');
+   app.get('aggregator').trigger('game:progress',p);//Math.ceil((n+1)/10)*10
   }
  },
  addBins:function(){
   this.bins.each(model=>{
    let bin=new GameBinView({model:model});
 
-   this.$(data.view.bins).append(bin.el);
+   this.$bins.append(bin.el);
    this.binViews.push(bin);
   });
  },
  generateTrash:function(){//TODO: re-generation logic is to be removed
   if(!this.trash.length)
   {
-   data.data[this.diff].trashData.forEach(t=>{
+   data.data[this.diffs[this.diffIndex]].trashData.forEach(t=>{
     let trash=new GameTrashView(_.extend(t,{failLine:{$el:this.$failLine,bottom:data.failLine.bottom}}));
 
-    this.$el.append(trash.el);
+    this.$game.append(trash.el);
     this.trash.push(trash);
    });
   }else

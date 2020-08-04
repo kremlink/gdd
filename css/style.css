@@ -7,10 +7,6 @@
   background: url(../images/loader.gif) center no-repeat;
 }
 
-.trash-pop .tmp-choose div {
-  box-sizing: border-box;
-}
-
 /*@path:base\_vars.scss*/
 /*@path:base\_normalize.scss*/
 /*! normalize.css v2.1.3 | MIT License | git.io/normalize */
@@ -530,7 +526,7 @@ body {
   bottom: 0;
   z-index: 1;
 }
-.trash-pop.game-active .videos-btn, .trash-pop.game-active .map-btn, .trash-pop.game-active .book-btn, .trash-pop.game-active .chat-btn, .trash-pop.game-active .null-btn, .trash-pop.game-active .menu-btn, .trash-pop.game-active .load-save-btn {
+.trash-pop.game-playing .return-btn, .trash-pop.game-playing .game-btn, .trash-pop.game-playing .videos-btn, .trash-pop.game-playing .map-btn, .trash-pop.game-playing .book-btn, .trash-pop.game-playing .chat-btn, .trash-pop.game-playing .null-btn, .trash-pop.game-playing .menu-btn, .trash-pop.game-playing .load-save-btn {
   pointer-events: none;
   opacity: 0.2;
 }
@@ -707,7 +703,33 @@ body {
 }
 .trash-pop .trash-block.game {
   background: url(../images/game-bg.jpg) center/cover no-repeat;
-  overflow: hidden;
+}
+.trash-pop .trash-block.game.game-play .the-game {
+  display: block;
+}
+.trash-pop .trash-block.game.game-play .game-start {
+  display: none;
+}
+.trash-pop .trash-block.game.game-play .g-play {
+  display: block;
+}
+.trash-pop .trash-block.game.game-end1 {
+  background: none;
+}
+.trash-pop .trash-block.game.game-end1 .game-start {
+  display: none;
+}
+.trash-pop .trash-block.game.game-end1 .game-end {
+  display: block;
+}
+.trash-pop .trash-block.game.game-end2 {
+  background: none;
+}
+.trash-pop .trash-block.game.game-end2 .game-start {
+  display: none;
+}
+.trash-pop .trash-block.game.game-end2 .game-end {
+  display: block;
 }
 .trash-pop .trash-block.flow {
   display: flex;
@@ -729,6 +751,25 @@ body {
   top: 105.5%;
   right: 0;
   height: 30%;
+}
+.trash-pop .bottom-panel.g-start {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.trash-pop .bottom-panel.g-play {
+  display: none;
+  color: #A0D7F6;
+  font-size: 0.7em;
+}
+.trash-pop .the-game {
+  display: none;
+  overflow: hidden;
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
 }
 .trash-pop .bins {
   position: absolute;
@@ -801,19 +842,101 @@ body {
   top: 50%;
   transform: translate(-50%, -50%);
 }
-.trash-pop .tmp-choose {
+.trash-pop .game-sorted {
+  position: absolute;
+  left: 2.2em;
+  top: 0.8em;
+  width: 33.4em;
+}
+.trash-pop .game-remaining {
+  position: absolute;
+  left: 38em;
+  top: 0.8em;
+  width: 21.2em;
+}
+.trash-pop .game-sorted-p {
+  position: absolute;
+  left: 2.45em;
+  top: 50%;
+  transform: translate(0, -50%);
+  width: 33em;
+  height: 2.4em;
+}
+.trash-pop .game-sorted-p div {
+  background: url(../images/trash-progress.png) center/100% 100% no-repeat;
+  height: 100%;
+  width: 0;
+  border-radius: 1.2em;
+  transition: width 0.6s ease-in-out;
+}
+.trash-pop .game-remaining-p {
+  position: absolute;
+  left: 38em;
+  top: 50%;
+  transform: translate(0, -50%);
+  width: 21.2em;
+}
+.trash-pop .game-remaining-p div {
+  font-size: 2em;
+}
+.trash-pop .game-start {
   position: absolute;
   left: 0;
   top: 0;
-  width: 10%;
-  height: 20%;
+  right: 0;
+  bottom: 0;
 }
-.trash-pop .tmp-choose div {
-  height: 33%;
+.trash-pop .game-text {
+  position: absolute;
+  left: 1.5em;
+  top: 1em;
+  width: 20em;
+  height: 3.3em;
+  color: #A0D7F6;
+  display: flex;
+  align-items: center;
+}
+.trash-pop .game-text + .game-text {
+  top: 5em;
+  height: 6.4em;
+}
+.trash-pop .game-diff-h {
+  width: 10.2em;
+  color: #A0D7F6;
+  position: relative;
+  margin-left: 6.2em;
+}
+.trash-pop .game-diff-wrap {
+  position: relative;
+  width: 19.2em;
+  margin-right: 1.8em;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.trash-pop .game-diff-ctrl {
+  width: 2em;
+  height: 2em;
   cursor: pointer;
 }
-.trash-pop .tmp-choose div.active {
-  border: 2px solid #fff;
+.trash-pop .game-diff {
+  width: 6em;
+  text-align: center;
+  color: #67BFF1;
+}
+.trash-pop .game-end {
+  display: none;
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+}
+.trash-pop .win-tab.active svg {
+  display: block;
+}
+.trash-pop .win-tab svg {
+  display: none;
 }
 .trash-pop .vid-initial {
   position: absolute;
@@ -863,9 +986,9 @@ body {
   align-items: center;
 }
 .trash-pop .ep-item {
-  --size:5.5em;
-  width: calc(var(--size)*2);
-  height: var(--size);
+  --size:11.025em;
+  width: var(--size);
+  height: calc(var(--size)/2);
   position: relative;
   left: -0.5em;
   pointer-events: none;
@@ -878,10 +1001,12 @@ body {
   display: block;
 }
 .trash-pop .ep-item.active span {
-  color: #fff;
   pointer-events: none;
 }
 .trash-pop .ep-item.inav svg:nth-child(1) {
+  display: none;
+}
+.trash-pop .ep-item.inav svg:nth-child(2) {
   display: none;
 }
 .trash-pop .ep-item.inav svg:nth-child(3) {
@@ -890,6 +1015,7 @@ body {
 .trash-pop .ep-item.inav span {
   opacity: 0.3;
   pointer-events: none;
+  color: #A0D7F6;
 }
 .trash-pop .ep-item svg:nth-child(n+2) {
   display: none;

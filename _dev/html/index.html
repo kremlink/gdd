@@ -101,12 +101,60 @@
                         </div>
                         <div class="trash-main">
                             <div class="trash-block game">
-                                <div class="fail-line"></div>
-                                <div class="bins"></div>
-                                <div class="tmp-choose">
-                                    <div style="background: #f00;"></div>
-                                    <div style="background: #0f0;"></div>
-                                    <div style="background: #00f;"></div>
+                                <div class="the-game">
+                                    <div class="fail-line"></div>
+                                    <div class="bins"></div>
+                                    <!--<div class="tmp-choose">
+                                        <div style="background: #f00;"></div>
+                                        <div style="background: #0f0;"></div>
+                                        <div style="background: #00f;"></div>
+                                    </div>-->
+                                </div>
+                                <div class="bottom-panel g-play">
+                                    <svg>
+                                        <use xlink:href="#icon-shared-trash-game-smallscreen"></use>
+                                    </svg>
+                                    <div class="game-sorted">Отсортированный мусор</div>
+                                    <div class="game-remaining">Осталось</div>
+                                    <div class="game-sorted-p"><div></div></div>
+                                    <div class="game-remaining-p"><div><span></span>%</div></div>
+                                </div>
+                                <div class="game-start">
+                                    <svg>
+                                        <use xlink:href="#icon-shared-trash-dif-bg-1"></use>
+                                    </svg>
+                                    <div class="game-text">Text text text</div>
+                                    <div class="game-text">
+                                        Text text text <br/>Text text text
+                                    </div>
+                                    <div class="bottom-panel g-start">
+                                        <svg>
+                                            <use xlink:href="#icon-shared-trash-dif-bg-1s"></use>
+                                        </svg>
+                                        <div class="game-diff-h">Уровень сложности</div>
+                                        <div class="game-diff-wrap">
+                                            <div class="game-diff-ctrl"></div>
+                                            <div class="game-diff"></div>
+                                            <div class="game-diff-ctrl"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="game-end">
+                                    <svg>
+                                        <use xlink:href="#icon-shared-trash-win-bg-1"></use>
+                                    </svg>
+                                    <div class="bottom-panel g-end">
+                                        <div class="win-tab active">
+                                            <svg>
+                                                <use xlink:href="#icon-shared-trash-win-small-box-1"></use>
+                                            </svg>
+                                        </div>
+                                        <div class="win-tab">
+                                            <svg>
+                                                <use xlink:href="#icon-shared-trash-win-small-box-2"></use>
+                                            </svg>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             <div class="trash-block flow">
@@ -128,12 +176,10 @@
                                 </video>
                                 <div class="vid-initial">Поток треша<br/>ожидает активацию</div>
                                 <div class="vid-overlay">
-                                    <div class="vid-name"></div>
+                                    <div class="vid-name">Эпизод такой-то (прямо в верстке)</div>
                                 </div>
                                 <div class="bottom-panel">
-                                    <div class="episodes">
-                                    
-                                    </div>
+                                
                                 </div>
                             </div>
                             <div class="trash-block map">
@@ -322,6 +368,27 @@
                 Экран слишком мал :(<br/>
                 Возможно, вам поможет поворот девайса.
             </div>
+            <!--<link rel="stylesheet" href="http://ontheworldmap.com/ol.css">
+            <script src="http://ontheworldmap.com/ol.js"></script>
+            <script type="text/javascript">
+             function GetMap() {//body onload
+              var map = new ol.Map({
+               target: 'OSMap'
+              });
+              var osmLayer = new ol.layer.Tile({
+               source: new ol.source.OSM()
+              });
+              map.addLayer(osmLayer);
+              var view = new ol.View({
+               center: ol.proj.transform([18.770919, 42.424926
+               ], "EPSG:4326", "EPSG:900913"),
+               zoom:   15
+              });
+              map.setView(view);
+             }
+            </script>
+            
+            <div id="OSMap" style="width:100%;height:100%;position: fixed;z-index:2;left: 0;right: 0;"></div>-->
 		</div>
         @@include('components/tmpls.html')
         <div class="safe-hide-svg">

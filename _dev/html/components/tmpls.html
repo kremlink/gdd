@@ -10,22 +10,24 @@
     <img src="images/trash_items/trash-<%= type %>-<%= subtype %>.png" />
 </script>
 <script type="text/template" id="episodes-template">
-    <% for(let i=1;i<amount+1;i++) { %>
-    <a class="ep-item<%= active===i?' active':'' %><%= i>avail?' inav':'' %>" href="episode<%= i %>.html">
-        <div class="ep-wrap" style="<%= i===amount?'transform:scale(-1,1);':'' %>">
-            <svg>
-                <use xlink:href="#icon-shared-potok-<%= i===1||i===amount?'start':'mid' %>"></use>
-            </svg>
-            <svg>
-                <use xlink:href="#icon-shared-potok-<%= i===1||i===amount?'start':'mid' %>-a"></use>
-            </svg>
-            <svg>
-                <use xlink:href="#icon-shared-potok-<%= i===1||i===amount?'start':'mid' %>-p"></use>
-            </svg>
-        </div>
-        <span><%= i %></span>
-    </a>
-    <% } %>
+    <div class="episodes" style="left:-<%= active>2?(active>amount-2?6*11.025-0.5:(active-2)*11.025-11.025/2):0 %>em;">
+        <% for(let i=1;i<amount+1;i++) { %>
+        <a class="ep-item<%= active===i?' active':'' %><%= i>avail?' inav':'' %>" href="index.html?episode=<%= i %>">
+            <div class="ep-wrap" style="<%= i===amount?'transform:scale(-1,1);':'' %>">
+                <svg>
+                    <use xlink:href="#icon-shared-potok-<%= i===1||i===amount?'start':'mid' %>"></use>
+                </svg>
+                <svg>
+                    <use xlink:href="#icon-shared-potok-<%= i===1||i===amount?'start':'mid' %>-a"></use>
+                </svg>
+                <svg>
+                    <use xlink:href="#icon-shared-potok-<%= i===1||i===amount?'start':'mid' %>-p"></use>
+                </svg>
+            </div>
+            <span><%= i %></span>
+        </a>
+        <% } %>
+    </div>
 </script>
 <!--#icon-shared-map-marker-<%= data[i].id %>-->
 <script type="text/template" id="map-template">
