@@ -40,6 +40,13 @@
     }
   }
   //---
+  .the-progress{
+    background: url(#{$path}trash-progress.png) center/40em 100% no-repeat;
+    height:100%;
+    width:0;
+    @include trs('width #{$anim*2} ease-in-out');
+  }
+  //---
   .uni-pop{
     color:getc(blue);
     opacity:0;

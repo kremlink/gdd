@@ -702,7 +702,7 @@ body {
   visibility: visible;
 }
 .trash-pop .trash-block.game {
-  background: url(../images/game-bg.jpg) center/cover no-repeat;
+  background: center/cover no-repeat;
 }
 .trash-pop .trash-block.game.game-play .the-game {
   display: block;
@@ -713,22 +713,37 @@ body {
 .trash-pop .trash-block.game.game-play .g-play {
   display: block;
 }
-.trash-pop .trash-block.game.game-end1 {
-  background: none;
-}
 .trash-pop .trash-block.game.game-end1 .game-start {
   display: none;
 }
 .trash-pop .trash-block.game.game-end1 .game-end {
   display: block;
 }
-.trash-pop .trash-block.game.game-end2 {
-  background: none;
+.trash-pop .trash-block.game.game-end1 .game-end-block:nth-child(1) {
+  display: block;
+}
+.trash-pop .trash-block.game.game-end1 .win-tab:nth-child(1) svg {
+  display: block;
 }
 .trash-pop .trash-block.game.game-end2 .game-start {
   display: none;
 }
 .trash-pop .trash-block.game.game-end2 .game-end {
+  display: block;
+}
+.trash-pop .trash-block.game.game-end2 .game-end-block:nth-child(2) {
+  display: block;
+}
+.trash-pop .trash-block.game.game-end2 .win-tab:nth-child(2) svg {
+  display: block;
+}
+.trash-pop .trash-block.game.game-easy .game-start-bg:nth-child(1) {
+  display: block;
+}
+.trash-pop .trash-block.game.game-normal .game-start-bg:nth-child(2) {
+  display: block;
+}
+.trash-pop .trash-block.game.game-hard .game-start-bg:nth-child(3) {
   display: block;
 }
 .trash-pop .trash-block.flow {
@@ -761,6 +776,12 @@ body {
   display: none;
   color: #A0D7F6;
   font-size: 0.7em;
+}
+.trash-pop .bottom-panel.g-end {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 1.7em;
 }
 .trash-pop .the-game {
   display: none;
@@ -851,7 +872,7 @@ body {
 .trash-pop .game-remaining {
   position: absolute;
   left: 38em;
-  top: 0.8em;
+  top: 1em;
   width: 21.2em;
 }
 .trash-pop .game-sorted-p {
@@ -863,11 +884,7 @@ body {
   height: 2.4em;
 }
 .trash-pop .game-sorted-p div {
-  background: url(../images/trash-progress.png) center/100% 100% no-repeat;
-  height: 100%;
-  width: 0;
   border-radius: 1.2em;
-  transition: width 0.6s ease-in-out;
 }
 .trash-pop .game-remaining-p {
   position: absolute;
@@ -886,12 +903,17 @@ body {
   right: 0;
   bottom: 0;
 }
+.trash-pop .game-start-bg {
+  display: none;
+}
 .trash-pop .game-text {
   position: absolute;
   left: 1.5em;
   top: 1em;
   width: 20em;
   height: 3.3em;
+  text-align: left;
+  line-height: 1;
   color: #A0D7F6;
   display: flex;
   align-items: center;
@@ -921,7 +943,6 @@ body {
 }
 .trash-pop .game-diff {
   width: 6em;
-  text-align: center;
   color: #67BFF1;
 }
 .trash-pop .game-end {
@@ -931,12 +952,67 @@ body {
   top: 0;
   right: 0;
   bottom: 0;
+  color: #A0D7F6;
 }
-.trash-pop .win-tab.active svg {
-  display: block;
+.trash-pop .game-end-block {
+  display: none;
+}
+.trash-pop .game-win-text {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 12.5em;
+}
+.trash-pop .game-win-text + .game-win-text {
+  bottom: auto;
+  top: 14.6em;
+}
+.trash-pop .game-win-text div {
+  font-size: 1.5em;
+  line-height: 1.1;
+  font-weight: 700;
+}
+.trash-pop .game-win-h {
+  position: absolute;
+  left: 0;
+  top: 0.8em;
+  right: 0;
+}
+.trash-pop .game-win-h div {
+  font-size: 2em;
+  font-weight: 700;
+}
+.trash-pop .game-win-stat {
+  position: absolute;
+  left: 0;
+  top: 6.5em;
+  right: 0;
+}
+.trash-pop .game-win-stat + .game-win-stat {
+  top: 16.4em;
+}
+.trash-pop .game-win-sorted-p, .trash-pop .game-qual-sorted-p {
+  position: absolute;
+  left: 50%;
+  top: 8.85em;
+  transform: translate(-50%, 0);
+  width: 26em;
+  height: 1.75em;
+}
+.trash-pop .game-win-sorted-p div, .trash-pop .game-qual-sorted-p div {
+  border-radius: 1em;
+}
+.trash-pop .game-qual-sorted-p {
+  top: 18.755em;
+}
+.trash-pop .win-tab {
+  width: 19.2em;
+  height: 3.4em;
+  cursor: pointer;
 }
 .trash-pop .win-tab svg {
   display: none;
+  pointer-events: none;
 }
 .trash-pop .vid-initial {
   position: absolute;
@@ -944,7 +1020,7 @@ body {
   top: 0;
   right: 0;
   bottom: 0;
-  background: url(../images/potok-bg.jpg) center/cover no-repeat;
+  background: center/cover no-repeat;
   color: #A0D7F6;
   font-size: 1.5em;
   line-height: 1.2em;
@@ -1350,15 +1426,32 @@ body {
   right: 0;
   bottom: 0;
   display: none;
-  background: #fff;
   font-size: 2em;
   line-height: 2em;
   z-index: 1;
+  text-align: center;
+  color: #fff;
   justify-content: center;
   align-items: center;
 }
 .too-small .orientation-pop {
   display: flex;
+}
+.orientation-pop .text {
+  position: relative;
+  font-size: 2em;
+}
+.orientation-pop .text svg {
+  position: static;
+  width: 4em;
+  height: 4em;
+  margin: 0 auto 1em auto;
+  display: block;
+}
+.orientation-pop svg {
+  position: absolute;
+  width: 100%;
+  height: 100%;
 }
 
 .start-pop {
@@ -1430,6 +1523,13 @@ body {
   height: 10%;
   position: absolute;
   border-radius: 0.3em;
+}
+
+.the-progress {
+  background: url(../images/trash-progress.png) center/40em 100% no-repeat;
+  height: 100%;
+  width: 0;
+  transition: width 0.6s ease-in-out;
 }
 
 .uni-pop {

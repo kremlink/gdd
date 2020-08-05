@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html data-app="index">
+<html data-app="episode2">
     <head>
 		@@include('components/head.html')
         @@include('components/scripts.html')
@@ -100,7 +100,7 @@
         
                         </div>
                         <div class="trash-main">
-                            <div class="trash-block game">
+                            <div class="trash-block game" style="background-image: url(images/game-bg.jpg);">
                                 <div class="the-game">
                                     <div class="fail-line"></div>
                                     <div class="bins"></div>
@@ -116,20 +116,32 @@
                                     </svg>
                                     <div class="game-sorted">Отсортированный мусор</div>
                                     <div class="game-remaining">Осталось</div>
-                                    <div class="game-sorted-p"><div></div></div>
+                                    <div class="game-sorted-p"><div class="the-progress"></div></div>
                                     <div class="game-remaining-p"><div><span></span>%</div></div>
                                 </div>
                                 <div class="game-start">
-                                    <svg>
+                                    <svg class="game-start-bg">
                                         <use xlink:href="#icon-shared-trash-dif-bg-1"></use>
                                     </svg>
-                                    <div class="game-text">Text text text</div>
+                                    <svg class="game-start-bg">
+                                        <use xlink:href="#icon-shared-trash-dif-bg-2"></use>
+                                    </svg>
+                                    <svg class="game-start-bg">
+                                        <use xlink:href="#icon-shared-trash-dif-bg-3"></use>
+                                    </svg>
+                                    <div class="game-text">ЖК "Человейник"</div>
                                     <div class="game-text">
-                                        Text text text <br/>Text text text
+                                        Какие-то ребята после бурной тусовки решили выбросить кучу мусора с балкона. Отличная возможность сделать первые шаги в сортировке!
                                     </div>
                                     <div class="bottom-panel g-start">
-                                        <svg>
+                                        <svg class="game-start-bg">
                                             <use xlink:href="#icon-shared-trash-dif-bg-1s"></use>
+                                        </svg>
+                                        <svg class="game-start-bg">
+                                            <use xlink:href="#icon-shared-trash-dif-bg-2s"></use>
+                                        </svg>
+                                        <svg class="game-start-bg">
+                                            <use xlink:href="#icon-shared-trash-dif-bg-3s"></use>
                                         </svg>
                                         <div class="game-diff-h">Уровень сложности</div>
                                         <div class="game-diff-wrap">
@@ -140,11 +152,25 @@
                                     </div>
                                 </div>
                                 <div class="game-end">
-                                    <svg>
-                                        <use xlink:href="#icon-shared-trash-win-bg-1"></use>
-                                    </svg>
+                                    <div class="game-end-block">
+                                        <svg>
+                                            <use xlink:href="#icon-shared-trash-win-bg-1"></use>
+                                        </svg>
+                                        <div class="game-win-text"><div>Круто вышло!<br/>Но есть над чем работать.<br/>Не подведи в следующий раз!</div></div>
+                                        <div class="game-win-text">Можешь посмотреть статистику<br/>этой сортировки и двигаться дальше</div>
+                                    </div>
+                                    <div class="game-end-block">
+                                        <svg>
+                                            <use xlink:href="#icon-shared-trash-win-bg-2"></use>
+                                        </svg>
+                                        <div class="game-win-h"><div>Статистика</div></div>
+                                        <div class="game-win-stat">Отсортированный мусор</div>
+                                        <div class="game-win-stat">Качество сортировки</div>
+                                        <div class="game-win-sorted-p"><div class="the-progress"></div></div>
+                                        <div class="game-qual-sorted-p"><div class="the-progress"></div></div>
+                                    </div>
                                     <div class="bottom-panel g-end">
-                                        <div class="win-tab active">
+                                        <div class="win-tab">
                                             <svg>
                                                 <use xlink:href="#icon-shared-trash-win-small-box-1"></use>
                                             </svg>
@@ -174,7 +200,7 @@
                                         </a>
                                     </p>
                                 </video>
-                                <div class="vid-initial">Поток треша<br/>ожидает активацию</div>
+                                <div class="vid-initial" style="background-image: url(images/potok-bg.jpg);">Поток треша<br/>ожидает активацию</div>
                                 <div class="vid-overlay">
                                     <div class="vid-name">Эпизод такой-то (прямо в верстке)</div>
                                 </div>
@@ -365,8 +391,15 @@
             </div>
             <div class="loader-pop"></div>
             <div class="orientation-pop">
-                Экран слишком мал :(<br/>
-                Возможно, вам поможет поворот девайса.
+                <svg>
+                    <use xlink:href="#icon-shared-turn-bg"></use>
+                </svg>
+                <div class="text">
+                    <svg>
+                        <use xlink:href="#icon-shared-turn-icon"></use>
+                    </svg>
+                    Поверни свое устройство
+                </div>
             </div>
             <!--<link rel="stylesheet" href="http://ontheworldmap.com/ol.css">
             <script src="http://ontheworldmap.com/ol.js"></script>

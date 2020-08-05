@@ -1,17 +1,25 @@
 export const data={
  waitWin:1000,
+ events:{
+  'winTab':'.win-tab'
+ },
  view:{
   el:'.trash-block.game',
   game:'.the-game',
   diff:'.game-diff',
   diffCh:'.game-diff-ctrl',
-  pDone:'.game-sorted-p div',
+  pDone:'.game-sorted-p div,.game-win-sorted-p div',
   pRem:'.game-remaining-p span',
+  pQual:'.game-qual-sorted-p div',
   bins:'.bins',
   shownCls:'shown',
-  gPlayCls:'game-play',
-  gEnd1Cls:'game-end1',
-  gEnd2Cls:'game-end2'
+  playCls:'game-play',
+  endCls:['game-end1','game-end2'],
+  diffCls:{
+   easy:'game-easy',
+   normal:'game-normal',
+   hard:'game-hard'
+  }
  },
  failLine:{
   el:'.fail-line',

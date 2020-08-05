@@ -11,6 +11,8 @@ export let FlowView=BaseBlockView.extend({
   }]);
 
 
-  this.$(data.view.$episodes).html(this.template($.extend({},data.epis,{active:+utils.getParam({what:'?',name:data.gParam})||1})));
+  this.$(data.view.$episodes).html(this.template($.extend({},data.epis,{active:~location.href.indexOf('index.html')?
+    (+utils.getParam({what:'?',name:data.gParam})||1):
+    location.href.match(/(\d)\.html/)[1]})));
  }
 });

@@ -12,7 +12,7 @@ let events={};
 events[`click ${data.events.start}`]='start';
 
 export function init(app,modules){
- if(!~modules.indexOf('index'))
+ if(!~modules.indexOf('episode'))
   return;
 
  new (Backbone.View.extend({
@@ -70,7 +70,8 @@ export function init(app,modules){
    //app.get('aggregator').trigger('player:play');//TODO: uncomment
   },
   playPause:function(f){
-   this.$el.addClass(data.view.vidStartedOnce);
+   if(f)
+    this.$el.addClass(data.view.vidStartedOnce);
    this.$el.toggleClass(data.view.pauseCls,!f);
   },
   loaded:function(el){

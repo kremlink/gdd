@@ -6,6 +6,9 @@ import {GameBinModel} from './bin/model.js';
 import {app} from '../../bf/base.js';
 import {BaseBlockView} from '../baseBlock/view.js';
 
+let events={};
+events[`click ${data.events.winTab}`]='winTab';
+
 export let GameView=BaseBlockView.extend({
  el:data.view.el,
  activeDiff:-1,
@@ -17,7 +20,9 @@ export let GameView=BaseBlockView.extend({
  dragging:false,
  draggingTrash:null,
  trashDone:0,
+ trashToBin:0,
  ended:false,
+ events:events,
  initialize:function(){
   BaseBlockView.prototype.initialize.apply(this,[{
    data:data
@@ -29,11 +34,13 @@ export let GameView=BaseBlockView.extend({
   this.$diffCh=this.$(data.view.diffCh);
   this.$pDone=this.$(data.view.pDone);
   this.$pRem=this.$(data.view.pRem);
+  this.$pQual=this.$(data.view.pQual);
   this.bins=new (Backbone.Collection.extend({model:GameBinModel}));
   this.listenTo(this.bins,'reset',this.addBins);
   this.listenTo(this.bins,'change:amount',this.trashPut);
   //this.bins.reset(data.data[this.diff].binData);
   this.listenTo(app.get('aggregator'),'game:trash-failed game:trash-caught',this.trashCount);
+  this.listenTo(app.get('aggregator'),'game:trash-caught',this.trashCought);
 
   this.$failLine=this.$(data.failLine.el);
 
@@ -46,23 +53,26 @@ export let GameView=BaseBlockView.extend({
   this.$diffCh.on('click',function(){
    let ind=$(this).index();
 
+   self.$el.removeClass(data.view.diffCls[self.diffs[self.diffIndex]]);
    if(ind===0&&self.diffIndex>0)
     self.diffIndex--;
    if(ind!==0&&self.diffIndex<self.diffs.length-1)
     self.diffIndex++;
    self.$diff.text(data.data[self.diffs[self.diffIndex]].text);
+   self.$el.addClass(data.view.diffCls[self.diffs[self.diffIndex]]);
   });
 
   this.$diff.text(data.data[this.diffs[this.diffIndex]].text);
+  this.$el.addClass(data.view.diffCls[this.diffs[this.diffIndex]]);
  },
  play:function(){
   if(this.ended)
   {
-   this.$el.removeClass(data.view.gEnd1Cls+' '+data.view.gEnd2Cls);
+   this.$el.removeClass(data.view.endCls[0]+' '+data.view.endCls[1]);
    this.ended=false;
   }else
   {
-   this.$el.addClass(data.view.gPlayCls);
+   this.$el.addClass(data.view.playCls);
    this.binViews=[];
    app.get('aggregator').trigger('game:progress',0);
    this.$pDone.css('width',0+'%');
@@ -79,15 +89,22 @@ export let GameView=BaseBlockView.extend({
   {
    setTimeout(()=>{
     app.get('aggregator').trigger('game:end');
-    this.$el.removeClass(data.view.gPlayCls).addClass(data.view.gEnd1Cls);
+    this.$el.removeClass(data.view.playCls).addClass(data.view.endCls[0]);
     this.trashDone=0;
     this.ended=true;
    },data.waitWin);
   }
  },
+ trashCought:function(){//TODO: make this correct
+  this.trashToBin++;
+  this.$pQual.css('width',20+'%');
+ },
+ winTab:function(e){
+  this.$el.removeClass(data.view.endCls[0]+' '+data.view.endCls[1]).addClass(data.view.endCls[$(e.currentTarget).index()]);
+ },
  toggle:function(f){
   BaseBlockView.prototype.toggle.apply(this,[f]);
-  this.$el.removeClass(data.view.gEnd1Cls+' '+data.view.gEnd2Cls);
+  this.$el.removeClass(data.view.endCls[0]+' '+data.view.endCls[1]);
   this.ended=false;
  },
  gameCtrls:function(){

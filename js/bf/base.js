@@ -41,6 +41,10 @@ class Base{
    html:$('html')
   };
   this._notifyOverride=true;
+
+  /*if(Base._instance)
+   return Base._instance;
+  Base._instance=this;*/
  }
 
  _what(st){

@@ -203,7 +203,7 @@
         visibility:visible;
       }
       &.game{
-        background: url(#{$path}game-bg.jpg) center/cover no-repeat;
+        background:center/cover no-repeat;
         &.game-play{
           .the-game{
             display:block;
@@ -216,20 +216,45 @@
           }
         }
         &.game-end1{
-          background:none;
           .game-start{
             display:none;
           }
           .game-end{
             display:block;
           }
+          .game-end-block:nth-child(1){
+            display:block;
+          }
+          .win-tab:nth-child(1) svg{
+            display:block;
+          }
         }
         &.game-end2{
-          background:none;
           .game-start{
             display:none;
           }
           .game-end{
+            display:block;
+          }
+          .game-end-block:nth-child(2){
+            display:block;
+          }
+          .win-tab:nth-child(2) svg{
+            display:block;
+          }
+        }
+        &.game-easy{
+          .game-start-bg:nth-child(1){
+            display:block;
+          }
+        }
+        &.game-normal{
+          .game-start-bg:nth-child(2){
+            display:block;
+          }
+        }
+        &.game-hard{
+          .game-start-bg:nth-child(3){
             display:block;
           }
         }
@@ -267,7 +292,10 @@
         font-size:0.7em;
       }
       &.g-end{
-
+        @include flx(display,flex);
+        @include flx(justify-content,space-between);
+        @include flx(align-items,center);
+        padding:0 1.7em;
       }
     }
     //game
@@ -335,7 +363,7 @@
       width:33.4em;
     }
     .game-remaining{
-      @include abs($t:0.8em,$l:38em);
+      @include abs($t:1em,$l:38em);
       width:21.2em;
     }
     .game-sorted-p{
@@ -343,11 +371,7 @@
       width:33em;
       height:2.4em;
       div{
-        background: url(#{$path}trash-progress.png) center/100% 100% no-repeat;
-        height:100%;
-        width:0;
         border-radius:1.2em;
-        @include trs('width #{$anim*2} ease-in-out');
       }
     }
     .game-remaining-p{
@@ -360,10 +384,15 @@
     .game-start{
       @include abs($l:0,$r:0,$t:0,$b:0);
     }
+    .game-start-bg{
+      display:none;
+    }
     .game-text{
       @include abs($l:1.5em,$t:1em);
       width:20em;
       height:3.3em;
+      text-align:left;
+      line-height:1;
       color:getc(blue);
       @include flx(display,flex);
       @include flx(align-items,center);
@@ -393,26 +422,66 @@
     }
     .game-diff{
       width:6em;
-      text-align:center;
       color:getc(dblue);
     }
     .game-end{
       display:none;
       @include abs($l:0,$r:0,$t:0,$b:0);
+      color:getc(blue);
+    }
+    .game-end-block{
+      display:none;
+    }
+    .game-win-text{
+      @include abs($b:12.5em,$l:0,$r:0);
+      &+.game-win-text{
+        bottom:auto;
+        top:14.6em;
+      }
+      div{
+        font-size:1.5em;
+        line-height:1.1;
+        font-weight:700;
+      }
+    }
+    .game-win-h{
+      @include abs($t:0.8em,$l:0,$r:0);
+      div{
+        font-size:2em;
+        font-weight:700;
+      }
+    }
+    .game-win-stat{
+      @include abs($t:6.5em,$l:0,$r:0);
+      &+.game-win-stat{
+        top:16.4em;
+      }
+    }
+    .game-win-sorted-p,.game-qual-sorted-p{
+      @include center($t:8.85em);
+      width:26em;
+      height:1.75em;
+      div{
+        border-radius:1em;
+      }
+    }
+    .game-qual-sorted-p{
+      top:18.755em;
     }
     .win-tab{
-      &.active svg{
-        display:block;
-      }
+      width:19.2em;
+      height:3.4em;
+      cursor:pointer;
       svg{
         display:none;
+        pointer-events:none;
       }
     }
     //end game
     //flow
     .vid-initial{
       @include abs($l:0,$r:0,$t:0,$b:0);
-      background: url(#{$path}potok-bg.jpg) center/cover no-repeat;
+      background:center/cover no-repeat;
       color:getc(blue);
       font-size:1.5em;
       line-height:1.2em;
@@ -789,14 +858,31 @@
   .orientation-pop{
     @include abs($l:0,$r:0,$t:0,$b:0);
     display:none;
-    background:#fff;
     font-size:2em;
     line-height:2em;
     z-index:1;
+    text-align:center;
+    color:#fff;
     @include flx(justify-content,center);
     @include flx(align-items,center);
     .too-small &{
       @include flx(display,flex);
+    }
+    .text{
+      position:relative;
+      font-size:2em;
+      svg{
+        position:static;
+        width:4em;
+        height:4em;
+        margin:0 auto 1em auto;
+        display:block;
+      }
+    }
+    svg{
+      position:absolute;
+      width:100%;
+      height:100%;
     }
   }
   .start-pop{

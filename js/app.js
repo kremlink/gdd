@@ -6,7 +6,8 @@ import * as index from './modules/index/view.js';
 import {Bar} from './bf/lib/bar.js';
 import {utils} from './bf/lib/utils.js';
 //------------------------
-const modules=app.get('helpers.html').data('app').split(',');
+const dataApp=app.get('helpers.html').data('app'),
+      modules=[dataApp.replace(/\d/,'')];
 //------------------------
 app.init({
  //plugins:[Toggle,Bar],
@@ -16,6 +17,7 @@ app.init({
 //------------------------
 app.set({dest:'objects.aggregator',object:_.extend({},Backbone.Events)});
 app.set({dest:'objects.isMobile',object:matchMedia(index.data.mobViewport).matches});
+app.set({dest:'objects.epIndex',object:dataApp.match(/\d/)[0],lib:false});
 $(()=>{
  app.set({dest:'objects.scrollDim',object:-Math.abs(utils.scrollDim())});
  index.init(app,modules);
