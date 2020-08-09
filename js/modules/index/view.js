@@ -1,7 +1,9 @@
 //import {PlayerView} from '../player/view.js';//--old
+import {app} from '../../bf/base.js';
 import {MainView} from '../main/view.js';
 import {PlayerView} from '../player/view.js';
 import {data} from './data.js';
+
 
 export {data} from './data.js';
 
@@ -25,7 +27,7 @@ export function init(app,modules){
 
    this.$el.toggleClass(data.view.tooSmallCls,mob);
 
-   //this.start();//TODO: remove
+   this.start();//TODO: remove
 
    /*this.playerView=new PlayerView;//--old
    this.listenTo(app.get('aggregator'),'player:ready',this.addTrash);*/
@@ -67,7 +69,12 @@ export function init(app,modules){
   },
   start:function(){
    this.$el.addClass(data.view.startCls);
-   //app.get('aggregator').trigger('player:play');//TODO: uncomment
+   if(app.get('isMobile'))
+   {
+    if(!document.fullscreenElement)
+     document.documentElement.requestFullscreen();
+   }
+   //app.get('aggregator').trigger('player:play');
   },
   playPause:function(f){
    if(f)

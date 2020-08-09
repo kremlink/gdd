@@ -1,6 +1,6 @@
 export const data={
  events:{
-  'start':'.start-pop svg',
+  'start':'.loader-pop .btn',
  },
  view:{
   el:'#wrap',

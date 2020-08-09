@@ -5,6 +5,8 @@ export const data={
   el:'.trash-block.flow',
   template:'#episodes-template',
   $episodes:'.bottom-panel',
+  $drag:'.episodes',
+  ignore:'.ep-item',
   shownCls:'shown',
   onceCls:'vidStartedOnce'
  }

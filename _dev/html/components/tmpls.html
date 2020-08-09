@@ -10,7 +10,8 @@
     <img src="images/trash_items/trash-<%= type %>-<%= subtype %>.png" />
 </script>
 <script type="text/template" id="episodes-template">
-    <div class="episodes" style="left:-<%= active>2?(active>amount-2?6*11.025-0.5:(active-2)*11.025-11.025/2):0 %>em;">
+    <!--<div class="episodes" style="left:-<%= active>2?(active>amount-2?6*11.025-0.5:(active-2)*11.025-11.025/2):0 %>em;">-->
+    <div class="episodes">
         <% for(let i=1;i<amount+1;i++) { %>
         <a class="ep-item<%= active===i?' active':'' %><%= i>avail?' inav':'' %>" href="index.html?episode=<%= i %>">
             <div class="ep-wrap" style="<%= i===amount?'transform:scale(-1,1);':'' %>">

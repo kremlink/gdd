@@ -265,6 +265,7 @@
         @include flx(flex-flow,'row wrap');
         .bottom-panel{
           overflow:hidden;
+          cursor:move;
         }
       }
       &.map{
@@ -844,29 +845,118 @@
     //end chat
   }
   //other
+  @include kfs(start-logo){
+    100%{
+      @include trf(rotate(360deg));
+    }
+  };
+  @include kfs(start-dots){
+    50%{
+      opacity:0;
+    }
+  };
+
   .loader-pop{
     @include abs($l:0,$r:0,$t:0,$b:0);
     @include trs('opacity #{$anim} ease-in-out');
-    @extend %loader;
     z-index:1;
-    background-color:#eee;
+    color:getc(blue);
+    white-space:nowrap;
+    background:#000;
     .loaded &{
+      .text-e{
+        display:block;
+      }
+      .logo-rotate,.dots{
+        display:none;
+      }
+      .btn{
+        pointer-events:auto;
+        svg{
+          &:nth-child(-n+2){
+            display:none;
+          }
+          &:nth-child(3){
+            display:block;
+          }
+        }
+      }
+    }
+    .start &{
       opacity:0;
       pointer-events:none;
+      .btn{
+        pointer-events:none;
+      }
+    }
+    svg,img{
+      position:absolute;
+      width:100%;
+      height:100%;
+    }
+    .content{
+      @include center();
+      width:21em;
+      height:28em;
+    }
+    .logo{
+      width:8em;
+      height:8em;
+      @include center($t:1.5em);
+    }
+    .logo-rotate{
+      animation:start-logo 5s linear infinite;
+      position:absolute;
+      width:100%;
+      height:100%;
+    }
+    .text{
+      text-transform:uppercase;
+      @include center($t:12.6em);
+      text-align:center;
+    }
+    .text-e{
+      display:none;
+    }
+    .dots{
+      span{
+        animation:start-dots 2s linear infinite;
+        &:nth-child(2){
+          animation-delay:.5s;
+        }
+        &:nth-child(3){
+          animation-delay:1s;
+        }
+      }
+    }
+    .btn{
+      @include center($b:1.6em);
+      width:8em*1.4;
+      height:8em;
+      pointer-events:none;
+      cursor:pointer;
+      &:hover{
+        svg:nth-child(2){
+          display:block;
+        }
+      }
+      svg:nth-child(n+2){
+        display:none;
+      }
     }
   }
   .orientation-pop{
-    @include abs($l:0,$r:0,$t:0,$b:0);
+    @include abs($l:0, $r:0, $t:0, $b:0);
     display:none;
     font-size:2em;
     line-height:2em;
     z-index:1;
     text-align:center;
     color:#fff;
-    @include flx(justify-content,center);
-    @include flx(align-items,center);
+    @include flx(justify-content, center);
+    @include flx(align-items, center);
     .too-small &{
-      @include flx(display,flex);
+      @include flx(display, flex);
     }
     .text{
       position:relative;
@@ -879,26 +969,10 @@
         display:block;
       }
     }
-    svg{
+    svg,img{
       position:absolute;
       width:100%;
       height:100%;
-    }
-  }
-  .start-pop{
-    @include abs($l:0,$r:0,$t:0,$b:0);
-    @include flx(display,flex);
-    background:#eee;
-    @include trs('opacity #{$anim} ease-in-out');
-    .start &{
-      opacity:0;
-      pointer-events:none;
-    }
-    svg{
-      margin:auto;
-      width:5%;
-      height:15%;
-      cursor:pointer;
     }
   }
 }
