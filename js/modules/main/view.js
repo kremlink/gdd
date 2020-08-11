@@ -1,13 +1,11 @@
 import {app} from '../../bf/base.js';
-//import {data as dat} from './data.js';
 import {data} from './data.js';
 import {GameView} from '../game/view.js';
 import {FlowView} from '../flow/view.js';
 import {MapView} from '../map/view.js';
 import {BibleView} from '../bible/view.js';
 import {ChatView} from '../chat/view.js';
-
-//let data=app.configure({trash:dat}).trash;
+import {LoadSaveView} from '../loadsave/view.js';
 
 let events={};
 //events[`click ${data.events.return}`]='toVideo';
@@ -17,6 +15,7 @@ events[`click ${data.events.flow}`]='episodes';
 events[`click ${data.events.map}`]='map';
 events[`click ${data.events.bible}`]='bible';
 events[`click ${data.events.chat}`]='chat';
+events[`click ${data.events.loadsave}`]='loadsave';
 
 export let MainView=Backbone.View.extend({
  events:events,
@@ -36,9 +35,11 @@ export let MainView=Backbone.View.extend({
   this.mapView=new MapView;
   this.bibleView=new BibleView;
   this.chatView=new ChatView;
+  this.loadSaveView=new LoadSaveView;
 
   //this.gameStart();
-  this.episodes();
+  //this.episodes();
+  this.loadsave();
   //this.chat();//TODO:remove
 
   //app.get('aggregator').trigger('trash:toggle',true);//--old TODO:remove
@@ -95,5 +96,9 @@ export let MainView=Backbone.View.extend({
  chat:function(){
   this.switchTab(this.chatView);
   this.chatView.toggle(true);
+ },
+ loadsave:function(){
+  this.switchTab(this.loadSaveView);
+  this.loadSaveView.toggle(true);
  }
 });

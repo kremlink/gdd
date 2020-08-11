@@ -53,6 +53,12 @@
     visibility:hidden;
     @include trs('opacity #{$anim} ease-in-out');
     @include abs($l:0,$t:0,$r:0,$b:0);
+    .map &{
+      //position:fixed;
+      //z-index:1;
+      //font-size:1.45em;
+      //@extend %scaler;
+    }
     .shown.popShown &{
       opacity:1;
       visibility:visible;
@@ -60,7 +66,7 @@
   }
   .uni-pop-close{
     width:2.3em;
-    height:2.3em;
+    height:2.4em;
     cursor:pointer;
     z-index:1;
     @include abs($r:1%,$t:1%);
@@ -80,7 +86,7 @@
     }
     .t-scroll-bar{
       top:2em;
-      bottom:-4em;
+      bottom:-3em;
     }
   }
 }

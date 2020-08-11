@@ -5,7 +5,8 @@ export const data={
   'flow':'.videos-btn',
   'map':'.map-btn',
   'bible':'.book-btn',
-  'chat':'.chat-btn'
+  'chat':'.chat-btn',
+  'loadsave':'.load-save-btn'
  },
  view:{
   el:'.trash-pop',

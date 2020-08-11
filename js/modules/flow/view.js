@@ -1,4 +1,3 @@
-import {app} from '../../bf/base.js';
 import {data} from './data.js';
 import {utils} from '../../bf/lib/utils.js';
 import {BaseBlockView} from '../baseBlock/view.js';
@@ -8,9 +7,9 @@ export let FlowView=BaseBlockView.extend({
  template:_.template($(data.view.template).html()),
  shift:0,
  maxShift:0,
+ mult:0,
  initialize:function(){
-  let active=~location.href.indexOf('index.html')?(+utils.getParam({what:'?',name:data.gParam})||1):location.href.match(/(\d)\.html/)[1],
-      fz;
+  let active=~location.href.indexOf('index.html')?(+utils.getParam({what:'?',name:data.gParam})||1):location.href.match(/(\d)\.html/)[1];
 
   BaseBlockView.prototype.initialize.apply(this,[{
    data:data
@@ -18,11 +17,10 @@ export let FlowView=BaseBlockView.extend({
 
   this.$episodes=this.$(data.view.$episodes).html(this.template($.extend({},data.epis,{active:active})));
   this.$drag=this.$(data.view.$drag);
-  fz=parseInt(this.$drag.css('fontSize'));
-  //fz=1;
-  this.maxShift=((data.epis.amount-4)*11.025+0.5)*fz;
-  this.shift=-(active>2?(active>data.epis.amount-2?(data.epis.amount-4)*11.025-0.5:(active-2)*11.025-11.025/2-0.5/2):0)*fz;
-  this.$drag.css('left',this.shift+'px');
+  this.mult=parseInt(this.$drag.css('fontSize'));
+  this.maxShift=(data.epis.amount-4)*11.025-0.5;
+  this.shift=-(active>2?(active>data.epis.amount-2?this.maxShift:(active-2)*11.025-11.025/2-0.5/2):0);
+  this.$drag.css('left',this.shift+'em');
   this.drag();
  },
  checkBoundaries:function(delta,s=false){
@@ -36,7 +34,7 @@ export let FlowView=BaseBlockView.extend({
   if(s)
    this.shift=v;
 
-  return v;
+  return v+'em';
  },
  drag:function(){
   let start,
@@ -61,7 +59,7 @@ export let FlowView=BaseBlockView.extend({
    dragCallback:(opts)=>{
     if(!nope)
     {
-     delta=opts.e[0].pageX-start;
+     delta=(opts.e[0].pageX-start)/this.mult;
      this.$drag.css('left',this.checkBoundaries(delta));
     }
    }

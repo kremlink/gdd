@@ -1,6 +1,6 @@
 export const data={
- url:'game/map',
- data:[{id:1,left:10,top:10,alert:11,like:7,fire:2,h:'Заголовок1',text:'Text text <br/><br/> text text text<br/>textText text <br/><br/> text text text<br/>textText text <br/><br/> text text text<br/>textText text <br/><br/> text text text<br/>textText text <br/><br/> text text text<br/>text'},
+ url:'rest/map',
+ data:[{id:1,left:10,top:10,react:'like',alert:11,like:7,fire:2,h:'Заголовок1',text:'Text text <br/><br/> text text text<br/> text text<br/> text<br/> text text text<br/>textText text <br/><br/> text text text<br/>textText text <br/><br/> text text text<br/>textText text <br/><br/> text text text<br/>textText text <br/><br/> text text text<br/>text'},
   {id:2,left:20,top:20,alert:3,like:4,fire:5,h:'Заголовок2',text:'Text text <br/><br/> text text text<br/>text'},
   {id:3,left:70,top:45,alert:0,like:0,fire:2,h:'Заголовок3',text:'Text3'},
   {id:4,left:60,top:30,alert:5,like:5,fire:5,h:'Заголовок4',text:'Text4'},
@@ -10,7 +10,8 @@ export const data={
  events:{
   'marker':'.map-mark',
   'close':'.uni-pop-close',
-  'react':'.map-pop-react .map-pop-react-item'
+  'react':'.map-pop-react .map-pop-react-item',
+  'full':'.map-full'
  },
  view:{
   el:'.trash-block.map',
@@ -22,6 +23,7 @@ export const data={
   reactedCls:'reacted',
   shownCls:'shown',
   popShownCls:'popShown',
+  fullCls:'pop-full',
   dataClick:'type',
   dataId:'id'
  }

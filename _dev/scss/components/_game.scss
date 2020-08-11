@@ -270,12 +270,34 @@
       }
       &.map{
         background: url(#{$path}map-bg.jpg) center/cover no-repeat;
+        &.pop-full{
+          position:fixed;
+          border-radius:0;
+          z-index:1;
+          font-size:1.45em;
+          @extend %scaler;
+        }
       }
       &.bible{
 
       }
       &.chat{
         color:#000;
+      }
+      &.loadsave{
+        color:getc(blue);
+        text-align:left;
+        @for $x from 1 through 3
+        {
+          &.ls-tab#{$x}{
+            .ls-block:nth-child(#{$x}){
+              display:block;
+            }
+            .ls-tab:nth-child(#{$x}) svg{
+              display:block;
+            }
+          }
+        }
       }
     }
     //---
@@ -293,6 +315,12 @@
         font-size:0.7em;
       }
       &.g-end{
+        @include flx(display,flex);
+        @include flx(justify-content,space-between);
+        @include flx(align-items,center);
+        padding:0 1.7em;
+      }
+      &.ls-tabs{
         @include flx(display,flex);
         @include flx(justify-content,space-between);
         @include flx(align-items,center);
@@ -578,6 +606,14 @@
     }
     //end flow
     //map
+    .map-full{
+      @include abs($l:2em,$t:2em);
+      width:2em;
+      height:2em;
+      background:#f00;
+      cursor:pointer;
+      border-radius:50%;
+    }
     .map-mark{
       position:absolute;
       width:2em;
@@ -825,10 +861,11 @@
       opacity:0;
       height:50%;
       margin:0 0.7em;
+      text-align:center;
       @include flx(display,flex);
       @include flx(align-items,center);
       @include flx(justify-content,center);
-      @include flx(flex,'1 0 auto');
+      @include flx(flex,'1 0 100px');
       @include trs('opacity #{$anim} ease-in-out');
       &:hover .chat-choose-h{
         opacity:1;
@@ -843,6 +880,73 @@
       @include trs('opacity #{$anim} ease-in-out');
     }
     //end chat
+    //loadsave
+    .ls-block{
+      @include abs($l:0,$r:0,$t:0,$b:0);
+      display:none;
+    }
+    .ls-h{
+      @include abs($l:1em,$t:.6em);
+      font-size:2em;
+      text-transform:uppercase;
+    }
+    .ls-descr{
+      @include abs($l:2em,$t:7em);
+      b{
+        display:block;
+        margin-bottom:1.5em;
+      }
+    }
+    .ls-top-bd{
+      top:5em;
+      height:2px;
+    }
+    .ls-bot-bd{
+      top:20em;
+      height:2px;
+    }
+    .ls-form{
+      @include abs($l:2em,$t:14em,$r:4em);
+      @include flx(display,flex);
+      @include flx(align-items,center);
+      @include flx(justify-content,space-between);
+      input{
+        border:.04em solid getc(dblue);
+        width:11em;
+        height:1.8em;
+        font-size:2em;
+        font-weight:700;
+        border-radius:0.9em;
+        background:none;
+        text-align:center;
+        pointer-events:none;
+        color:getc(blue);
+        @extend %bxz;
+      }
+    }
+    .ls-btn{
+      position:relative;
+      width:15em;
+      height:5em;
+      cursor:pointer;
+    }
+    .ls-bottom{
+      @include abs($l:2em,$t:21.8em);
+    }
+    .ls-err{
+      @include abs($l:2em,$t:21.8em);
+      display:none;
+    }
+    .ls-tab{
+      width:12.8em;
+      height:3.4em;
+      cursor:pointer;
+      svg{
+        display:none;
+        pointer-events:none;
+      }
+    }
+    //end loadsave
   }
   //other
   @include kfs(start-logo){

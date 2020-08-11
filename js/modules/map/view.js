@@ -14,10 +14,12 @@ let events={};
 events[`click ${data.events.marker}`]='pop';
 events[`click ${data.events.close}`]='unpop';
 events[`click ${data.events.react}`]='react';
+events[`click ${data.events.full}`]='full';
 
 export let MapView=BaseBlockView.extend({
  el:data.view.el,
  events:events,
+ isFull:false,
  template:_.template($(data.view.template).html()),
  popTemplate:_.template($(data.view.popTemplate).html()),
  reactedTemplate:_.template($(data.view.reactedTemplate).html()),
@@ -26,7 +28,7 @@ export let MapView=BaseBlockView.extend({
    data:data
   }]);
 
-  this.$el.html(this.template({data:data.data}));
+  this.$el.prepend(this.template({data:data.data}));
   this.$pop=this.$(data.view.$pop);
   this.marks=new (Backbone.Collection.extend({model:MapMarkerModel}));
   this.marks.reset(data.data);
@@ -34,6 +36,10 @@ export let MapView=BaseBlockView.extend({
   this.current=null;
   this.$popContent=null;
   this.$reacted=null;
+ },
+ full:function(){
+  //this.isFull=!this.isFull;
+  this.$el.toggleClass(data.view.fullCls);
  },
  renderReacted:function(){
   this.$reacted.html(this.reactedTemplate(this.current.toJSON()));
