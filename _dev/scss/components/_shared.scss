@@ -89,4 +89,29 @@
       bottom:-3em;
     }
   }
+  //---
+  .tab-block{
+    @include abs($l:0,$r:0,$t:0,$b:0);
+    display:none;
+  }
+  .big-h{
+    @include abs($l:1em,$t:.6em);
+    font-size:2em;
+    text-transform:uppercase;
+  }
+  .tab-tabs{
+    @include flx(display,flex);
+    @include flx(justify-content,space-between);
+    @include flx(align-items,center);
+    padding:0 1.7em;
+  }
+  .tab-tab{
+    width:12.8em;
+    height:3.4em;
+    cursor:pointer;
+    svg{
+      display:none;
+      pointer-events:none;
+    }
+  }
 }

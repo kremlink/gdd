@@ -6,7 +6,7 @@ import {data as dat} from './data.js';
 let data=app.configure({loadsave:dat}).loadsave;
 
 let events={};
-events[`click ${data.events.lsTab}`]='lsTab';
+events[`click .${data.view.tabCls}`]='lsTab';
 events[`click ${data.events.copy}`]='copy';
 events[`click ${data.events.load}`]='load';
 events[`focus ${data.events.focus}`]='focus';
@@ -21,7 +21,7 @@ export let LoadSaveView=BaseBlockView.extend({
    data:data
   }]);
 
-  this.$el.addClass(data.view.tabCls[this.tabIndex]);
+  this.$el.addClass(data.view.tabCls+this.tabIndex);
   this.$copyFrom=this.$(data.view.copyFrom);
   this.$loadFrom=this.$(data.events.focus);
   this.model=new LoadSaveModel({id:data.uid});
@@ -45,13 +45,13 @@ export let LoadSaveView=BaseBlockView.extend({
   });
  },
  lsTab:function(e){
-  this.$el.removeClass(data.view.tabCls[this.tabIndex]);
+  this.$el.removeClass(data.view.tabCls+this.tabIndex);
   this.tabIndex=$(e.currentTarget).index();
-  this.$el.addClass(data.view.tabCls[this.tabIndex]);
+  this.$el.addClass(data.view.tabCls+this.tabIndex);
  },
  toggle:function(f){
   BaseBlockView.prototype.toggle.apply(this,[f]);
-  this.$el.removeClass(data.view.tabCls[this.tabIndex]+' '+data.view.endSaveCls).addClass(data.view.tabCls[0]);
+  this.$el.removeClass((data.view.tabCls+this.tabIndex)+' '+data.view.endSaveCls).addClass(data.view.tabCls+'0');
   this.tabIndex=0;
  },
  copy:function(){

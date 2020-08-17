@@ -4,18 +4,16 @@ export const data={
  copy:'',
  saveReloadTime:2000,
  events:{
-  'lsTab':'.ls-tab',
   'copy':'.ls-copy-btn',
   'load':'.ls-load-btn',
   'focus':'.ls-load-from',
   'clr':'.ls-clr-btn'
  },
  view:{
+  tabCls:'tab-tab',
   el:'.trash-block.loadsave',
-  tabCls:['ls-tab1','ls-tab2','ls-tab3'],
   reload:'.reload',
   copyFrom:'.ls-copy-from',
-  param:'load',
   shownCls:'shown',
   endSaveCls:'ls-load-end',
   errCls:'ls-load-err'

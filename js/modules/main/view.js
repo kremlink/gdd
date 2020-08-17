@@ -6,6 +6,7 @@ import {MapView} from '../map/view.js';
 import {BibleView} from '../bible/view.js';
 import {ChatView} from '../chat/view.js';
 import {LoadSaveView} from '../loadsave/view.js';
+import {MenuView} from '../menu/view.js';
 
 let events={};
 //events[`click ${data.events.return}`]='toVideo';
@@ -16,6 +17,7 @@ events[`click ${data.events.map}`]='map';
 events[`click ${data.events.bible}`]='bible';
 events[`click ${data.events.chat}`]='chat';
 events[`click ${data.events.loadsave}`]='loadsave';
+events[`click ${data.events.menu}`]='menu';
 
 export let MainView=Backbone.View.extend({
  events:events,
@@ -36,10 +38,11 @@ export let MainView=Backbone.View.extend({
   this.bibleView=new BibleView;
   this.chatView=new ChatView;
   this.loadSaveView=new LoadSaveView;
+  this.menuView=new MenuView;
 
   //this.gameStart();
   //this.episodes();
-  this.loadsave();
+  this.menu();
   //this.chat();//TODO:remove
 
   //app.get('aggregator').trigger('trash:toggle',true);//--old TODO:remove
@@ -100,5 +103,9 @@ export let MainView=Backbone.View.extend({
  loadsave:function(){
   this.switchTab(this.loadSaveView);
   this.loadSaveView.toggle(true);
+ },
+ menu:function(){
+  this.switchTab(this.menuView);
+  this.menuView.toggle(true);
  }
 });

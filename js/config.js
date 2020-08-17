@@ -4,6 +4,9 @@ export let config={
   uid:'f123',
   copy:'SFWS@!D#H&DG'
  },
+ menu:{
+  url:'rest/menu'
+ },
  flow:{
   epis:{amount:10,active:4,avail:6}
  },
