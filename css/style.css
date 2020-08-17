@@ -789,6 +789,31 @@ body {
 .trash-pop .trash-block.loadsave.ls-tab3 .ls-tab:nth-child(3) svg {
   display: block;
 }
+.trash-pop .trash-block.loadsave.ls-load-end .ls-load {
+  display: none;
+}
+.trash-pop .trash-block.loadsave.ls-load-end .ls-load:nth-child(2) {
+  display: block;
+}
+.trash-pop .trash-block.loadsave.ls-load-end .ls-form, .trash-pop .trash-block.loadsave.ls-load-end .ls-bottom {
+  display: none;
+}
+.trash-pop .trash-block.loadsave.ls-load-end .ls-bot-bd {
+  top: 13em;
+}
+.trash-pop .trash-block.loadsave.ls-load-end .ls-ok {
+  display: block;
+}
+.trash-pop .trash-block.loadsave.ls-load-err .ls-bottom {
+  display: none;
+}
+.trash-pop .trash-block.loadsave.ls-load-err .ls-load-from {
+  border-color: #f00;
+  color: #f00;
+}
+.trash-pop .trash-block.loadsave.ls-load-err .ls-err {
+  display: block;
+}
 .trash-pop .bottom-panel {
   position: absolute;
   left: 0;
@@ -1468,6 +1493,7 @@ body {
   position: absolute;
   left: 2em;
   top: 7em;
+  right: 2em;
 }
 .trash-pop .ls-descr b {
   display: block;
@@ -1480,6 +1506,9 @@ body {
 .trash-pop .ls-bot-bd {
   top: 20em;
   height: 2px;
+}
+.trash-pop .ls-load:nth-child(2) {
+  display: none;
 }
 .trash-pop .ls-form {
   position: absolute;
@@ -1499,14 +1528,19 @@ body {
   border-radius: 0.9em;
   background: none;
   text-align: center;
-  pointer-events: none;
   color: #A0D7F6;
+}
+.trash-pop .ls-copy-from {
+  pointer-events: none;
 }
 .trash-pop .ls-btn {
   position: relative;
   width: 15em;
   height: 5em;
   cursor: pointer;
+}
+.trash-pop .ls-btn.ls-clr-btn {
+  margin: -0.1em 0 0 -1em;
 }
 .trash-pop .ls-bottom {
   position: absolute;
@@ -1518,6 +1552,15 @@ body {
   left: 2em;
   top: 21.8em;
   display: none;
+  color: #f00;
+}
+.trash-pop .ls-ok {
+  display: none;
+  top: 13.7em;
+  left: 50%;
+  margin-left: -5em;
+  width: 11em;
+  height: 10em;
 }
 .trash-pop .ls-tab {
   width: 12.8em;

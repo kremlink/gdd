@@ -298,6 +298,35 @@
             }
           }
         }
+        &.ls-load-end{
+          .ls-load{
+            display:none;
+            &:nth-child(2){
+              display:block;
+            }
+          }
+          .ls-form,.ls-bottom{
+            display:none;
+          }
+          .ls-bot-bd{
+            top:13em;
+          }
+          .ls-ok{
+            display:block;
+          }
+        }
+        &.ls-load-err{
+          .ls-bottom{
+            display:none;
+          }
+          .ls-load-from{
+            border-color:getc(err);
+            color:getc(err);
+          }
+          .ls-err{
+            display:block;
+          }
+        }
       }
     }
     //---
@@ -891,7 +920,7 @@
       text-transform:uppercase;
     }
     .ls-descr{
-      @include abs($l:2em,$t:7em);
+      @include abs($l:2em,$r:2em,$t:7em);
       b{
         display:block;
         margin-bottom:1.5em;
@@ -904,6 +933,11 @@
     .ls-bot-bd{
       top:20em;
       height:2px;
+    }
+    .ls-load{
+      &:nth-child(2){
+        display:none;
+      }
     }
     .ls-form{
       @include abs($l:2em,$t:14em,$r:4em);
@@ -919,16 +953,21 @@
         border-radius:0.9em;
         background:none;
         text-align:center;
-        pointer-events:none;
         color:getc(blue);
         @extend %bxz;
       }
+    }
+    .ls-copy-from{
+      pointer-events:none;
     }
     .ls-btn{
       position:relative;
       width:15em;
       height:5em;
       cursor:pointer;
+      &.ls-clr-btn{
+        margin:-0.1em 0 0 -1em;
+      }
     }
     .ls-bottom{
       @include abs($l:2em,$t:21.8em);
@@ -936,6 +975,15 @@
     .ls-err{
       @include abs($l:2em,$t:21.8em);
       display:none;
+      color:getc(err);
+    }
+    .ls-ok{
+      display:none;
+      top:13.7em;
+      left:50%;
+      margin-left:-5em;
+      width:11em;
+      height:10em;
     }
     .ls-tab{
       width:12.8em;

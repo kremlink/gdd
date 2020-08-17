@@ -1,6 +1,11 @@
 export let config={
  loadsave:{
-  url:'rest/loadsave'
+  url:'rest/loadsave',
+  uid:'f123',
+  copy:'SFWS@!D#H&DG'
+ },
+ flow:{
+  epis:{amount:10,active:4,avail:6}
  },
  chat:{
   data:{

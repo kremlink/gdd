@@ -1,16 +1,23 @@
 export const data={
  url:'',
- omit:['left','top','text','h'],
+ uid:'',
+ copy:'',
+ saveReloadTime:2000,
  events:{
   'lsTab':'.ls-tab',
-  'copy':'.copy'
+  'copy':'.ls-copy-btn',
+  'load':'.ls-load-btn',
+  'focus':'.ls-load-from',
+  'clr':'.ls-clr-btn'
  },
  view:{
   el:'.trash-block.loadsave',
   tabCls:['ls-tab1','ls-tab2','ls-tab3'],
   reload:'.reload',
-  copyFrom:'.copy-from',
+  copyFrom:'.ls-copy-from',
   param:'load',
-  shownCls:'shown'
+  shownCls:'shown',
+  endSaveCls:'ls-load-end',
+  errCls:'ls-load-err'
  }
 };

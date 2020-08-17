@@ -18,6 +18,8 @@ app.init({
 app.set({dest:'objects.aggregator',object:_.extend({},Backbone.Events)});
 app.set({dest:'objects.isMobile',object:matchMedia(index.data.mobViewport).matches});
 app.set({dest:'objects.epIndex',object:dataApp.match(/\d/)[0],lib:false});
+app.configure({_dev:true});//TODO:remove
+
 $(()=>{
  app.set({dest:'objects.scrollDim',object:-Math.abs(utils.scrollDim())});
  index.init(app,modules);

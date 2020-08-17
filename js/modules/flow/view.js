@@ -1,6 +1,9 @@
-import {data} from './data.js';
 import {utils} from '../../bf/lib/utils.js';
 import {BaseBlockView} from '../baseBlock/view.js';
+import {app} from '../../bf/base.js';
+import {data as dat} from './data.js';
+
+let data=app.configure({flow:dat}).flow;
 
 export let FlowView=BaseBlockView.extend({
  el:data.view.el,

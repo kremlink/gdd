@@ -1,6 +1,6 @@
 export const data={
  gParam:'episode',
- epis:{amount:10,active:4,avail:6},
+ epis:{},
  view:{
   el:'.trash-block.flow',
   template:'#episodes-template',

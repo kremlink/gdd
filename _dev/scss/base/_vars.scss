@@ -9,7 +9,8 @@ $anim:.3s;
 
 $colors:(
         blue:#A0D7F6,
-        dblue:#67BFF1
+        dblue:#67BFF1,
+        err:#f00
 );
 
 @function getc($arg,$c:$colors){
