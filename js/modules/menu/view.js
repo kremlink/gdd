@@ -13,12 +13,17 @@ let scroll=Scroll();
 let events={};
 events[`click ${data.events.tab}`]='tab';
 events[`click ${data.events.subTab}`]='subTab';
+events[`click ${data.events.callbTab}`]='callbTab';
+events[`click ${data.events.callbSend}`]='callbSend';
+events[`click ${data.events.callbOk}`]='callbOk';
+events[`click ${data.events.sharCopy}`]='sharCopy';
 
 export let MenuView=BaseBlockView.extend({
  el:data.view.el,
  events:events,
  tabIndex:0,
  subTabIndex:0,
+ callbTabIndex:0,
  subTabsOnce:[],
  initialize:function(){
   BaseBlockView.prototype.initialize.apply(this,[{
@@ -27,10 +32,19 @@ export let MenuView=BaseBlockView.extend({
 
   this.$el.addClass((data.view.tabClsBase+this.tabIndex)+' '+(data.view.tabClsBase+'-'+this.subTabIndex));
   this.$menuSubBlock=this.$(data.view.menuSubBlock);
+  this.$copyFrom=this.$(data.view.copyFrom);
+  this.$callb={
+   tab:this.$(data.events.callbTab),
+   tabInput:this.$(data.view.callb.tabInput),
+   init:this.$(data.view.callb.init),
+   sent:this.$(data.view.callb.sent)
+  };
+  this.callbTab();
   this.tab();
   this.subTab();
+  this.authors();
   this.model=new MenuModel({id:data.uid});
-  this.model.urlRoot=data.url;
+  this.model.urlRoot=data.formUrl;
   this.listenTo(this.model,'invalid',()=>{
    this.$el.addClass(data.view.errCls);
   });
@@ -44,10 +58,48 @@ export let MenuView=BaseBlockView.extend({
    }
   });
  },
+ sharCopy:function(){
+  this.$copyFrom[0].select();
+  document.execCommand('copy');
+  this.$el.addClass(data.view.refCopyCls);
+ },
+ authors:function(){
+  let $authors=this.$(data.view.authors);
+
+  app.set({
+   object:'Bar',
+   on:scroll.events,
+   add:$.extend(true,{},scrollData,{
+    holder:$authors.find(scrollData.holder),
+    bar:$authors.find(scrollData.bar),
+    options:{helpers:{drag:utils.drag}},
+    extra:{
+     $wrap:$authors.find(scrollData.extra.$wrap).css('margin-right',app.get('scrollDim')+'px'),
+     $block:$authors.find(scrollData.extra.$block)
+    }
+   }),
+   set:false
+  });
+ },
+ callbSend:function(){
+  this.$callb.init.addClass(data.view.callb.hiddenCls);
+  this.$callb.sent.addClass(data.view.callb.shownCls);
+ },
+ callbOk:function(){
+  this.$callb.init.removeClass(data.view.callb.hiddenCls);
+  this.$callb.sent.removeClass(data.view.callb.shownCls);
+ },
+ callbTab:function(e=0){
+  this.$callb.tab.removeClass(data.view.callb.activeCls);
+  this.callbTabIndex=!e?e:$(e.currentTarget).index();
+  this.$callb.tab.eq(this.callbTabIndex).addClass(data.view.callb.activeCls);
+  this.$callb.tabInput.val(this.callbTabIndex);
+ },
  tab:function(e=0){
   this.$el.removeClass(data.view.tabClsBase+this.tabIndex);
   this.tabIndex=!e?e:$(e.currentTarget).index();
   this.$el.addClass(data.view.tabClsBase+this.tabIndex);
+  this.$el.removeClass(data.view.refCopyCls);
  },
  subTab:function(e=0){
   this.$el.removeClass(data.view.tabClsBase+'-'+this.subTabIndex);

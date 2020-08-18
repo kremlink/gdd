@@ -91,12 +91,7 @@
   //---
   .tab-block{
     @include abs($l:0,$r:0,$t:0,$b:0);
-    display:none;
-  }
-  .big-h{
-    @include abs($l:0,$t:.6em);
-    font-size:2em;
-    text-transform:uppercase;
+    visibility:hidden;
   }
   .tab-tabs{
     @include flx(display,flex);

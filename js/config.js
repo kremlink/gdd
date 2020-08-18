@@ -5,7 +5,7 @@ export let config={
   copy:'SFWS@!D#H&DG'
  },
  menu:{
-  url:'rest/menu'
+  formUrl:'rest/callb'
  },
  flow:{
   epis:{amount:10,active:4,avail:6}

@@ -2,7 +2,7 @@
 /*@path:core\_base.scss*/
 /*@path:core\_mixins.scss*/
 /*@path:core\_exts.scss*/
-.trash-pop .ls-form input, .trash-pop .menu-subtabs {
+.trash-pop .ls-form input, .trash-pop .callb-ch, .trash-pop .callb-form input, .trash-pop .callb-form textarea, .trash-pop .menu-subtabs {
   box-sizing: border-box;
 }
 
@@ -796,14 +796,34 @@ body {
   display: block;
 }
 .trash-pop .trash-block.loadsave .big-h {
+  position: absolute;
   left: 1em;
+  top: 0.6em;
+  font-size: 2em;
+  text-transform: uppercase;
 }
 .trash-pop .trash-block.menu {
   color: #A0D7F6;
   text-align: left;
 }
-.trash-pop .trash-block.tab-tab0 .tab-block:nth-child(1) {
+.trash-pop .trash-block.menu.menu-ref-copied .shar-block .notif-ok {
   display: block;
+}
+.trash-pop .trash-block.menu .tab-block {
+  left: 1em;
+  right: 1em;
+}
+.trash-pop .trash-block.menu .big-h {
+  font-size: 1.2em;
+  text-transform: uppercase;
+  position: absolute;
+  top: 1.2em;
+}
+.trash-pop .trash-block.menu .tab-top-bd {
+  top: 4em;
+}
+.trash-pop .trash-block.tab-tab0 .tab-block:nth-child(1) {
+  visibility: visible;
 }
 .trash-pop .trash-block.tab-tab0 .bottom-panel .tab-tab:nth-child(1) svg {
   display: block;
@@ -815,7 +835,7 @@ body {
   display: block;
 }
 .trash-pop .trash-block.tab-tab1 .tab-block:nth-child(2) {
-  display: block;
+  visibility: visible;
 }
 .trash-pop .trash-block.tab-tab1 .bottom-panel .tab-tab:nth-child(2) svg {
   display: block;
@@ -827,7 +847,7 @@ body {
   display: block;
 }
 .trash-pop .trash-block.tab-tab2 .tab-block:nth-child(3) {
-  display: block;
+  visibility: visible;
 }
 .trash-pop .trash-block.tab-tab2 .bottom-panel .tab-tab:nth-child(3) svg {
   display: block;
@@ -836,6 +856,18 @@ body {
   display: block;
 }
 .trash-pop .trash-block.tab-tab-2 .menu-subtabs .tab-tab:nth-child(3) svg {
+  display: block;
+}
+.trash-pop .trash-block.tab-tab3 .tab-block:nth-child(4) {
+  visibility: visible;
+}
+.trash-pop .trash-block.tab-tab3 .bottom-panel .tab-tab:nth-child(4) svg {
+  display: block;
+}
+.trash-pop .trash-block.tab-tab-3 .subtab-block:nth-child(4) {
+  display: block;
+}
+.trash-pop .trash-block.tab-tab-3 .menu-subtabs .tab-tab:nth-child(4) svg {
   display: block;
 }
 .trash-pop .bottom-panel {
@@ -864,20 +896,20 @@ body {
 .trash-pop .menu-subtabs {
   position: absolute;
   top: 0.5em;
-  right: 0.5em;
-  width: 10.68em;
-  height: 4em;
+  right: -0.5em;
+  width: 8em;
+  height: 3em;
   padding: 0 0.7em;
 }
 .trash-pop .subtab-block {
   display: none;
   overflow: hidden;
-  margin: 0 1em;
   position: relative;
 }
 .trash-pop .subtab-block .t-scroll-wrap {
-  margin-top: 6.5em;
-  height: 17.7em;
+  margin-top: 5.2em;
+  height: 18.7em;
+  padding-right: 1.5em;
 }
 .trash-pop .subtab-block .t-scroll-inner {
   padding-bottom: 0.5em;
@@ -885,6 +917,179 @@ body {
 .trash-pop .subtab-block .t-scroll-bar {
   top: 6em;
   bottom: 1em;
+}
+.trash-pop .subtab-block .sub-h {
+  font-weight: 700;
+}
+.trash-pop .subtab-block .sub-img {
+  margin: 0.8em 0;
+  width: 3em;
+  height: 3em;
+  position: relative;
+}
+.trash-pop .subtab-art:nth-child(n+2) {
+  margin-top: 0.8em;
+  padding-top: 0.8em;
+  border-top: 1px solid #A0D7F6;
+}
+.trash-pop .callb-form {
+  margin-top: 5.2em;
+}
+.trash-pop .callb-form input, .trash-pop .callb-form textarea {
+  margin-top: 1em;
+  padding-left: 1em;
+  border: 0.04em solid #67BFF1;
+  width: 48%;
+  height: 2.2em;
+  border-radius: 0.3em;
+  background: none;
+  color: #A0D7F6;
+}
+.trash-pop .callb-form input::-webkit-input-placeholder, .trash-pop .callb-form textarea::-webkit-input-placeholder {
+  color: #A0D7F6;
+}
+.trash-pop .callb-form input::-moz-placeholder, .trash-pop .callb-form textarea::-moz-placeholder {
+  color: #A0D7F6;
+  opacity: 1;
+}
+.trash-pop .callb-form input:-ms-input-placeholder, .trash-pop .callb-form textarea:-ms-input-placeholder {
+  color: #A0D7F6;
+}
+.trash-pop .callb-form textarea {
+  width: 100%;
+  height: 5.5em;
+  padding-top: 0.5em;
+}
+.trash-pop .callb-init {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+}
+.trash-pop .callb-init.hidden {
+  display: none;
+}
+.trash-pop .callb-where {
+  display: flex;
+  line-height: 2em;
+  width: 100%;
+  height: 2em;
+}
+.trash-pop .callb-where div {
+  border-radius: 0.4em;
+  margin-right: 1em;
+  padding: 0 1em;
+  border: 0.04em solid #67BFF1;
+  cursor: pointer;
+}
+.trash-pop .callb-where div.active {
+  background: #67BFF1;
+  color: #000;
+}
+.trash-pop .callb-ch {
+  margin-top: 0.8em;
+  position: relative;
+  padding-left: 2em;
+  cursor: pointer;
+  width: 100%;
+}
+.trash-pop .callb-ch input {
+  opacity: 0;
+  position: absolute;
+  pointer-events: none;
+}
+.trash-pop .callb-ch input:checked + .callb-c:before {
+  content: "";
+  position: absolute;
+  left: 0.35em;
+  top: 0.15em;
+  transform: rotate(45deg);
+  width: 0.3em;
+  height: 0.5em;
+  border-right: 0.04em solid #67BFF1;
+  border-bottom: 0.04em solid #67BFF1;
+}
+.trash-pop .callb-c {
+  width: 1em;
+  height: 1em;
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translate(0, -50%);
+  border-radius: 0.2em;
+  border: 0.04em solid #67BFF1;
+}
+.trash-pop .menu-b-btn {
+  position: absolute;
+  left: -0.8em;
+  right: -0.8em;
+  bottom: 0.2em;
+  height: 5em;
+  cursor: pointer;
+}
+.trash-pop .menu-b-btn span {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+.trash-pop .callb-sent {
+  display: none;
+  padding-top: 0.5em;
+}
+.trash-pop .callb-sent.shown {
+  display: block;
+}
+.trash-pop .notif-ok {
+  padding-left: 3.5em;
+  position: relative;
+  height: 3em;
+  font-weight: 700;
+}
+.trash-pop .notif-ok svg {
+  width: 3em;
+  top: -1em;
+}
+.trash-pop .auth-block {
+  overflow: hidden;
+  position: relative;
+}
+.trash-pop .auth-block .t-scroll-wrap {
+  margin-top: 5.2em;
+  height: 18.7em;
+  padding-right: 1.5em;
+}
+.trash-pop .auth-block .t-scroll-inner {
+  padding-bottom: 0.5em;
+}
+.trash-pop .auth-block .t-scroll-bar {
+  top: 6em;
+  bottom: 1em;
+}
+.trash-pop .auth-item {
+  margin-top: 0;
+  display: flex;
+}
+.trash-pop .auth-item:nth-child(n+2) {
+  margin-top: 0.2em;
+  padding-top: 0.2em;
+  border-top: 0.04em solid #67BFF1;
+}
+.trash-pop .auth-item div {
+  width: 14em;
+}
+.trash-pop .auth-item div:nth-child(2) {
+  font-weight: 700;
+}
+.trash-pop .shar-block {
+  margin-top: 5.2em;
+}
+.trash-pop .shar-block .notif-ok {
+  display: none;
+  margin-top: 1em;
+}
+.trash-pop .shar-block input {
+  opacity: 0;
+  pointer-events: none;
 }
 .trash-pop .the-game {
   display: none;
@@ -1843,15 +2048,7 @@ body {
   top: 0;
   right: 0;
   bottom: 0;
-  display: none;
-}
-
-.big-h {
-  position: absolute;
-  left: 0;
-  top: 0.6em;
-  font-size: 2em;
-  text-transform: uppercase;
+  visibility: hidden;
 }
 
 .tab-tabs {
