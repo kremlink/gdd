@@ -39,7 +39,7 @@ export function init(app,modules){
    this.listenTo(app.get('aggregator'),'player:playPause',this.playPause);
    this.listenTo(app.get('aggregator'),'player:ready',this.loaded);
    document.addEventListener('contextmenu',e=>e.preventDefault());
-   this.prepare();
+   document.fonts.ready.then(()=>this.prepare());
   },
   prepare:function(){//inconsistent loadeddata event with multiple videos
    /*let imgs=[],

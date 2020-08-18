@@ -2,8 +2,7 @@
 /*@path:core\_base.scss*/
 /*@path:core\_mixins.scss*/
 /*@path:core\_exts.scss*/
-@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@500;700&display=swap");
-.trash-pop .ls-form input {
+.trash-pop .ls-form input, .trash-pop .menu-subtabs {
   box-sizing: border-box;
 }
 
@@ -796,6 +795,9 @@ body {
 .trash-pop .trash-block.loadsave.ls-load-err .ls-err {
   display: block;
 }
+.trash-pop .trash-block.loadsave .big-h {
+  left: 1em;
+}
 .trash-pop .trash-block.menu {
   color: #A0D7F6;
   text-align: left;
@@ -803,19 +805,37 @@ body {
 .trash-pop .trash-block.tab-tab0 .tab-block:nth-child(1) {
   display: block;
 }
-.trash-pop .trash-block.tab-tab0 .tab-tab:nth-child(1) svg {
+.trash-pop .trash-block.tab-tab0 .bottom-panel .tab-tab:nth-child(1) svg {
+  display: block;
+}
+.trash-pop .trash-block.tab-tab-0 .subtab-block:nth-child(1) {
+  display: block;
+}
+.trash-pop .trash-block.tab-tab-0 .menu-subtabs .tab-tab:nth-child(1) svg {
   display: block;
 }
 .trash-pop .trash-block.tab-tab1 .tab-block:nth-child(2) {
   display: block;
 }
-.trash-pop .trash-block.tab-tab1 .tab-tab:nth-child(2) svg {
+.trash-pop .trash-block.tab-tab1 .bottom-panel .tab-tab:nth-child(2) svg {
+  display: block;
+}
+.trash-pop .trash-block.tab-tab-1 .subtab-block:nth-child(2) {
+  display: block;
+}
+.trash-pop .trash-block.tab-tab-1 .menu-subtabs .tab-tab:nth-child(2) svg {
   display: block;
 }
 .trash-pop .trash-block.tab-tab2 .tab-block:nth-child(3) {
   display: block;
 }
-.trash-pop .trash-block.tab-tab2 .tab-tab:nth-child(3) svg {
+.trash-pop .trash-block.tab-tab2 .bottom-panel .tab-tab:nth-child(3) svg {
+  display: block;
+}
+.trash-pop .trash-block.tab-tab-2 .subtab-block:nth-child(3) {
+  display: block;
+}
+.trash-pop .trash-block.tab-tab-2 .menu-subtabs .tab-tab:nth-child(3) svg {
   display: block;
 }
 .trash-pop .bottom-panel {
@@ -840,6 +860,31 @@ body {
   justify-content: space-between;
   align-items: center;
   padding: 0 1.7em;
+}
+.trash-pop .menu-subtabs {
+  position: absolute;
+  top: 0.5em;
+  right: 0.5em;
+  width: 10.68em;
+  height: 4em;
+  padding: 0 0.7em;
+}
+.trash-pop .subtab-block {
+  display: none;
+  overflow: hidden;
+  margin: 0 1em;
+  position: relative;
+}
+.trash-pop .subtab-block .t-scroll-wrap {
+  margin-top: 6.5em;
+  height: 17.7em;
+}
+.trash-pop .subtab-block .t-scroll-inner {
+  padding-bottom: 0.5em;
+}
+.trash-pop .subtab-block .t-scroll-bar {
+  top: 6em;
+  bottom: 1em;
 }
 .trash-pop .the-game {
   display: none;
@@ -1706,9 +1751,6 @@ body {
   overflow: auto;
   padding-right: 0.75em;
 }
-.t-scroll-wrap.hidden {
-  padding: 0;
-}
 .t-scroll-wrap.hidden .bible-item {
   width: 10.9em;
   height: 12em;
@@ -1806,7 +1848,7 @@ body {
 
 .big-h {
   position: absolute;
-  left: 1em;
+  left: 0;
   top: 0.6em;
   font-size: 2em;
   text-transform: uppercase;

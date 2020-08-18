@@ -9,7 +9,6 @@
     overflow:auto;
     padding-right:0.75em;
     &.hidden{
-      padding:0;
       .bible-item{
         width:10.9em;
         height:12em;
@@ -95,7 +94,7 @@
     display:none;
   }
   .big-h{
-    @include abs($l:1em,$t:.6em);
+    @include abs($l:0,$t:.6em);
     font-size:2em;
     text-transform:uppercase;
   }

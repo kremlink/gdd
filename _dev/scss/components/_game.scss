@@ -316,6 +316,9 @@
             display:block;
           }
         }
+        .big-h{
+          left:1em;
+        }
       }
       &.menu{
         color:getc(blue);
@@ -328,7 +331,15 @@
           .tab-block:nth-child(#{$x}){
             display:block;
           }
-          .tab-tab:nth-child(#{$x}) svg{
+          .bottom-panel .tab-tab:nth-child(#{$x}) svg{
+            display:block;
+          }
+        }
+        &.tab-tab-#{$x - 1}{
+          .subtab-block:nth-child(#{$x}){
+            display:block;
+          }
+          .menu-subtabs .tab-tab:nth-child(#{$x}) svg{
             display:block;
           }
         }
@@ -355,6 +366,32 @@
         padding:0 1.7em;
       }
     }
+    //menu
+    .menu-subtabs{
+      @include abs($r:.5em,$t:.5em);
+      width:10.68em;
+      height:4em;
+      padding:0 0.7em;
+      @extend %bxz;
+    }
+    .subtab-block{
+      display:none;
+      overflow:hidden;
+      margin:0 1em;
+      position:relative;
+      .t-scroll-wrap{
+        margin-top:6.5em;
+        height:17.7em;
+      }
+      .t-scroll-inner{
+        padding-bottom:.5em;
+      }
+      .t-scroll-bar{
+        top:6em;
+        bottom:1em;
+      }
+    }
+    //end menu
     //game
     .the-game{
       display:none;
