@@ -12,11 +12,13 @@ export let FlowView=BaseBlockView.extend({
  maxShift:0,
  mult:0,
  initialize:function(){
-  let active=~location.href.indexOf('index.html')?(+utils.getParam({what:'?',name:data.gParam})||1):location.href.match(/(\d)\.html/)[1];
+  let active=app.get('epIndex');
 
   BaseBlockView.prototype.initialize.apply(this,[{
    data:data
   }]);
+
+  app.get('aggregator').trigger('episodes:progress',active/data.epis.amount*100);
 
   this.$episodes=this.$(data.view.$episodes).html(this.template($.extend({},data.epis,{active:active})));
   this.$drag=this.$(data.view.$drag);

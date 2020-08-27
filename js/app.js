@@ -7,7 +7,7 @@ import {Bar} from './bf/lib/bar.js';
 import {utils} from './bf/lib/utils.js';
 //------------------------
 const dataApp=app.get('helpers.html').data('app'),
-      modules=[dataApp.replace(/\d/,'')];
+ modules=dataApp.modules;
 //------------------------
 app.init({
  //plugins:[Toggle,Bar],
@@ -17,7 +17,7 @@ app.init({
 //------------------------
 app.set({dest:'objects.aggregator',object:_.extend({},Backbone.Events)});
 app.set({dest:'objects.isMobile',object:matchMedia(index.data.mobViewport).matches});
-app.set({dest:'objects.epIndex',object:dataApp.match(/\d/)[0],lib:false});
+app.set({dest:'objects.epIndex',object:dataApp.index});
 app.configure({_dev:true});//TODO:remove
 
 $(()=>{

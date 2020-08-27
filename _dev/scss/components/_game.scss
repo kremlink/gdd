@@ -113,30 +113,35 @@
       height:18.9%;
       @extend %svg-click;
     }
+    .prog{
+      @include abs($t:36.8%,$r:4%);
+      width:6em;
+    }
     .prog1,.prog2,.prog3{
-      @include abs($r:4%);
-      width:9.5%;
-      height:4.2%;
-      svg+svg{
-        clip-path:polygon(0 0,0 0,0 100%,0 100%);
-      }
+      margin-top:.5em;
+      height:1.5em;
+      position:relative;
+      @include trs('width #{$anim} ease-in-out');
       &.disabled{
         .prog-inac{
-          clip-path:polygon(0 0,100% 0,100% 100%,0 100%);
+          width:100%;
         }
       }
-    }
-    .prog1{
-      top:38.2%;
-    }
-    .prog2{
-      top:43.7%;
-    }
-    .prog3{
-      top:49.2%;
+      div{
+        position:absolute;
+        overflow:hidden;
+        width:100%;
+        height:100%;
+        &:nth-child(n+2){
+          width:0;
+        }
+      }
+      svg{
+        width:6em;
+      }
     }
     .prog-ini{
-
+      display:block;
     }
     .prog-u{
       @include abs($r:4.5%,$t:56.7%);
@@ -346,7 +351,8 @@
       {
         &.tab-tab#{$x - 1}{
           .tab-block:nth-child(#{$x}){
-            visibility:visible;
+            top:0;
+            bottom:0;
           }
           .bottom-panel .tab-tab:nth-child(#{$x}) svg{
             display:block;
@@ -585,8 +591,12 @@
       height:20%;
       position:relative;
       img{
+        @include abs($l:0);
         width:100%;
         height:100%;
+        &+img{
+          z-index:1;
+        }
       }
     }
     .b-drop{
@@ -921,10 +931,11 @@
       @include flx(flex-flow,'row wrap');
     }
     .bible-item{
-      /*width:9.75em;
-      height:12em;*///always .hidden for now and set in shared
+      width:9.75em;
+      height:12em;//always .hidden for now and set in shared
       position:relative;
       cursor:pointer;
+      margin-left:.9em;
       &.no{
         pointer-events:none;
       }

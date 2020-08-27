@@ -14,7 +14,7 @@ let events={};
 events[`click ${data.events.start}`]='start';
 
 export function init(app,modules){
- if(!~modules.indexOf('episode'))
+ if(!~modules.indexOf('index'))
   return;
 
  new (Backbone.View.extend({
@@ -27,7 +27,7 @@ export function init(app,modules){
 
    this.$el.toggleClass(data.view.tooSmallCls,mob);
 
-   this.start();//TODO: remove
+   this.start();//TODO: remove (dev)
 
    /*this.playerView=new PlayerView;//--old
    this.listenTo(app.get('aggregator'),'player:ready',this.addTrash);*/
@@ -83,7 +83,8 @@ export function init(app,modules){
   },
   loaded:function(el){
    this.$el.addClass(data.view.loadedCls);
-   $(el).find('video').after($(data.view.$overlay));
+   //$(el).find('video').after($(data.view.$overlay));
+   $(el).find('video').after($(data.view.$overlay))[0].play().then(()=>$(el).find('video')[0].pause());//TODO: remove and uncomment prev string (dev)
   }
   /*,
   addTrash:function(){//--old

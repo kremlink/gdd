@@ -69,7 +69,7 @@ export let BibleView=BaseBlockView.extend({
     data:data.data[id].items
    }));
    this.$name.text(data.data[id].name);
-   this.setScroll('tabScroll',this.$itemsWrap);
+   //this.setScroll('tabScroll',this.$itemsWrap);//TODO: make scroll work!
   }
  },
  pop:function(e){

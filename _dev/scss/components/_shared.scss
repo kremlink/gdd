@@ -10,8 +10,8 @@
     padding-right:0.75em;
     &.hidden{
       .bible-item{
-        width:10.9em;
-        height:12em;
+        //width:10.9em;
+        //height:12em;
       }
     }
   }
@@ -27,6 +27,9 @@
     width:0.6em;
     background:#d6d6d6;
     border-radius:0.3em;
+    .bible-items &{
+      display:none;//TODO: fix this
+    }
     &.hidden{
       display:none;
     }
@@ -90,8 +93,7 @@
   }
   //---
   .tab-block{
-    @include abs($l:0,$r:0,$t:0,$b:0);
-    visibility:hidden;
+    @include abs($l:0,$r:0,$t:-5000px);
   }
   .tab-tabs{
     @include flx(display,flex);

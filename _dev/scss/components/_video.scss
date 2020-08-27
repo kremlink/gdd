@@ -1,12 +1,101 @@
 @include exports("@path:components\_video.scss"){/*@path:components\_video.scss*/
   .video-js{
+    $bg-c:rgba(#fff,0.5);
     width:100%;
     height:100%;
     overflow:hidden;
     border-radius:0.73125%/1.3%;
+    &.vjs-fullscreen .vjs-fullscreen-control .vjs-icon-placeholder:before{
+      content:'\0044';
+    }
     .vjs-tech{
       outline:none;
       height:101%;
+    }
+    .vjs-control-bar{
+      background:none;
+      left:2em;
+      right:2em;
+      bottom:.5em;
+      width:auto;
+    }
+    .vjs-play-control{
+      background:$bg-c;
+      border-radius:.3em;
+      &.vjs-playing .vjs-icon-placeholder:before{
+        content:'\0042';
+      }
+      .vjs-icon-placeholder:before{
+        content:'\0041';
+        font-family:pdt-player;
+      }
+    }
+    .vjs-progress-control{
+      margin-left:1em;
+      padding-left:.5em;
+      background:$bg-c;
+      border-radius:.3em 0 0 .3em;
+      &:hover{
+        .vjs-progress-holder{
+          font-size:1em;
+        }
+        .vjs-time-tooltip{
+          font-size:1em;
+        }
+      }
+      .vjs-progress-holder{
+        height:.8em;
+        &:before{
+          content:'';
+          @include abs($l:-.3em,$r:-.3em,$t:-.3em,$b:-.3em);
+          border:1px solid rgba(#fff,0.5);
+        }
+      }
+    }
+    .vjs-load-progress div{
+      background:rgba(getc(blue),0.5);
+    }
+    .vjs-time-tooltip{
+      font-size:1.6em;
+    }
+    .vjs-play-progress{
+      background:getc(blue);
+      &:before{
+        display:none;
+      }
+      div{
+
+      }
+    }
+    .vjs-slider{
+      background:none;
+    }
+    .vjs-mute-control{
+      background:$bg-c;
+      &.vjs-vol-0 .vjs-icon-placeholder:before{
+        content:'\0046';
+      }
+      &.vjs-vol-1 .vjs-icon-placeholder:before{
+        content:'\0045';
+      }
+      &.vjs-vol-2 .vjs-icon-placeholder:before{
+        content:'\0045';
+      }
+      .vjs-icon-placeholder:before{
+        content:'\0045';
+        font-family:pdt-player;
+      }
+    }
+    .vjs-volume-vertical{
+      background:$bg-c;
+    }
+    .vjs-fullscreen-control{
+      background:$bg-c;
+      border-radius:0 .3em .3em 0;
+      .vjs-icon-placeholder:before{
+        content:'\0043';
+        font-family:pdt-player;
+      }
     }
     .vjs-big-play-button{
       display:none;//
@@ -14,9 +103,6 @@
     }
     .vjs-error .vjs-error-display .vjs-modal-dialog-content{
       color:#000;
-    }
-    .vjs-fullscreen-control{
-      display:none;
     }
   }
 }

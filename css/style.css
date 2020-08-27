@@ -402,6 +402,10 @@ table {
 
 /*@path:base\_mixins.scss*/
 /*@path:base\_rules.scss*/
+@font-face {
+  font-family: pdt-player;
+  src: url("../fonts/pdt-player.woff") format("woff");
+}
 .safe-hide-svg {
   position: absolute;
   left: 0;
@@ -612,26 +616,35 @@ body {
   width: 9.7%;
   height: 18.9%;
 }
-.trash-pop .prog1, .trash-pop .prog2, .trash-pop .prog3 {
+.trash-pop .prog {
   position: absolute;
+  top: 36.8%;
   right: 4%;
-  width: 9.5%;
-  height: 4.2%;
+  width: 6em;
 }
-.trash-pop .prog1 svg + svg, .trash-pop .prog2 svg + svg, .trash-pop .prog3 svg + svg {
-  clip-path: polygon(0 0, 0 0, 0 100%, 0 100%);
+.trash-pop .prog1, .trash-pop .prog2, .trash-pop .prog3 {
+  margin-top: 0.5em;
+  height: 1.5em;
+  position: relative;
+  transition: width 0.3s ease-in-out;
 }
 .trash-pop .prog1.disabled .prog-inac, .trash-pop .prog2.disabled .prog-inac, .trash-pop .prog3.disabled .prog-inac {
-  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+  width: 100%;
 }
-.trash-pop .prog1 {
-  top: 38.2%;
+.trash-pop .prog1 div, .trash-pop .prog2 div, .trash-pop .prog3 div {
+  position: absolute;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
 }
-.trash-pop .prog2 {
-  top: 43.7%;
+.trash-pop .prog1 div:nth-child(n+2), .trash-pop .prog2 div:nth-child(n+2), .trash-pop .prog3 div:nth-child(n+2) {
+  width: 0;
 }
-.trash-pop .prog3 {
-  top: 49.2%;
+.trash-pop .prog1 svg, .trash-pop .prog2 svg, .trash-pop .prog3 svg {
+  width: 6em;
+}
+.trash-pop .prog-ini {
+  display: block;
 }
 .trash-pop .prog-u {
   position: absolute;
@@ -823,7 +836,8 @@ body {
   top: 4em;
 }
 .trash-pop .trash-block.tab-tab0 .tab-block:nth-child(1) {
-  visibility: visible;
+  top: 0;
+  bottom: 0;
 }
 .trash-pop .trash-block.tab-tab0 .bottom-panel .tab-tab:nth-child(1) svg {
   display: block;
@@ -835,7 +849,8 @@ body {
   display: block;
 }
 .trash-pop .trash-block.tab-tab1 .tab-block:nth-child(2) {
-  visibility: visible;
+  top: 0;
+  bottom: 0;
 }
 .trash-pop .trash-block.tab-tab1 .bottom-panel .tab-tab:nth-child(2) svg {
   display: block;
@@ -847,7 +862,8 @@ body {
   display: block;
 }
 .trash-pop .trash-block.tab-tab2 .tab-block:nth-child(3) {
-  visibility: visible;
+  top: 0;
+  bottom: 0;
 }
 .trash-pop .trash-block.tab-tab2 .bottom-panel .tab-tab:nth-child(3) svg {
   display: block;
@@ -859,7 +875,8 @@ body {
   display: block;
 }
 .trash-pop .trash-block.tab-tab3 .tab-block:nth-child(4) {
-  visibility: visible;
+  top: 0;
+  bottom: 0;
 }
 .trash-pop .trash-block.tab-tab3 .bottom-panel .tab-tab:nth-child(4) svg {
   display: block;
@@ -1116,8 +1133,13 @@ body {
   position: relative;
 }
 .trash-pop .bin img {
+  position: absolute;
+  left: 0;
   width: 100%;
   height: 100%;
+}
+.trash-pop .bin img + img {
+  z-index: 1;
 }
 .trash-pop .b-drop {
   width: 100%;
@@ -1508,10 +1530,11 @@ body {
   flex-flow: row wrap;
 }
 .trash-pop .bible-item {
-  /*width:9.75em;
-  height:12em;*/
+  width: 9.75em;
+  height: 12em;
   position: relative;
   cursor: pointer;
+  margin-left: 0.9em;
 }
 .trash-pop .bible-item.no {
   pointer-events: none;
@@ -1956,11 +1979,6 @@ body {
   overflow: auto;
   padding-right: 0.75em;
 }
-.t-scroll-wrap.hidden .bible-item {
-  width: 10.9em;
-  height: 12em;
-}
-
 .t-hdr {
   font-size: 1.5em;
   margin: 0 1.5em 1em 0;
@@ -1974,6 +1992,9 @@ body {
   width: 0.6em;
   background: #d6d6d6;
   border-radius: 0.3em;
+}
+.bible-items .t-scroll-bar {
+  display: none;
 }
 .t-scroll-bar.hidden {
   display: none;
@@ -2045,10 +2066,8 @@ body {
 .tab-block {
   position: absolute;
   left: 0;
-  top: 0;
+  top: -5000px;
   right: 0;
-  bottom: 0;
-  visibility: hidden;
 }
 
 .tab-tabs {
@@ -2075,9 +2094,96 @@ body {
   overflow: hidden;
   border-radius: 0.73125%/1.3%;
 }
+.video-js.vjs-fullscreen .vjs-fullscreen-control .vjs-icon-placeholder:before {
+  content: "D";
+}
 .video-js .vjs-tech {
   outline: none;
   height: 101%;
+}
+.video-js .vjs-control-bar {
+  background: none;
+  left: 2em;
+  right: 2em;
+  bottom: 0.5em;
+  width: auto;
+}
+.video-js .vjs-play-control {
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: 0.3em;
+}
+.video-js .vjs-play-control.vjs-playing .vjs-icon-placeholder:before {
+  content: "B";
+}
+.video-js .vjs-play-control .vjs-icon-placeholder:before {
+  content: "A";
+  font-family: pdt-player;
+}
+.video-js .vjs-progress-control {
+  margin-left: 1em;
+  padding-left: 0.5em;
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: 0.3em 0 0 0.3em;
+}
+.video-js .vjs-progress-control:hover .vjs-progress-holder {
+  font-size: 1em;
+}
+.video-js .vjs-progress-control:hover .vjs-time-tooltip {
+  font-size: 1em;
+}
+.video-js .vjs-progress-control .vjs-progress-holder {
+  height: 0.8em;
+}
+.video-js .vjs-progress-control .vjs-progress-holder:before {
+  content: "";
+  position: absolute;
+  left: -0.3em;
+  top: -0.3em;
+  right: -0.3em;
+  bottom: -0.3em;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+}
+.video-js .vjs-load-progress div {
+  background: rgba(160, 215, 246, 0.5);
+}
+.video-js .vjs-time-tooltip {
+  font-size: 1.6em;
+}
+.video-js .vjs-play-progress {
+  background: #A0D7F6;
+}
+.video-js .vjs-play-progress:before {
+  display: none;
+}
+.video-js .vjs-slider {
+  background: none;
+}
+.video-js .vjs-mute-control {
+  background: rgba(255, 255, 255, 0.5);
+}
+.video-js .vjs-mute-control.vjs-vol-0 .vjs-icon-placeholder:before {
+  content: "F";
+}
+.video-js .vjs-mute-control.vjs-vol-1 .vjs-icon-placeholder:before {
+  content: "E";
+}
+.video-js .vjs-mute-control.vjs-vol-2 .vjs-icon-placeholder:before {
+  content: "E";
+}
+.video-js .vjs-mute-control .vjs-icon-placeholder:before {
+  content: "E";
+  font-family: pdt-player;
+}
+.video-js .vjs-volume-vertical {
+  background: rgba(255, 255, 255, 0.5);
+}
+.video-js .vjs-fullscreen-control {
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: 0 0.3em 0.3em 0;
+}
+.video-js .vjs-fullscreen-control .vjs-icon-placeholder:before {
+  content: "C";
+  font-family: pdt-player;
 }
 .video-js .vjs-big-play-button {
   display: none;
@@ -2088,9 +2194,6 @@ body {
 }
 .video-js .vjs-error .vjs-error-display .vjs-modal-dialog-content {
   color: #000;
-}
-.video-js .vjs-fullscreen-control {
-  display: none;
 }
 
 /*@path:partials\_index.scss*/

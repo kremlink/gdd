@@ -17,6 +17,9 @@ export const data={
   mfsCls:'mfs',
   gamePlayingCls:'game-playing'
  },
+ epProgress:{
+  el:'.prog1 .prog-ac'
+ },
  gameProgress:{
   el:'.prog2 .prog-ac'
  }

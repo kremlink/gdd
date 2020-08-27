@@ -27,6 +27,7 @@ export let MainView=Backbone.View.extend({
   this.listenTo(app.get('aggregator'),'trash:fs',this.fs);
   this.listenTo(app.get('aggregator'),'game:end',this.gameEnd);
   this.listenTo(app.get('aggregator'),'game:progress',this.gameProgress);
+  this.listenTo(app.get('aggregator'),'episodes:progress',this.epProgress);
 
   this.$gameProgress=this.$(data.gameProgress.el);
   this.ready();
@@ -41,11 +42,15 @@ export let MainView=Backbone.View.extend({
   this.menuView=new MenuView;
 
   //this.gameStart();
-  //this.episodes();
-  this.menu();
+  this.episodes();
+  //this.menu();
   //this.chat();//TODO:remove
 
   //app.get('aggregator').trigger('trash:toggle',true);//--old TODO:remove
+ },
+ epProgress:function(p){
+  this.$epProgress=this.$(data.epProgress.el);
+  this.$epProgress.css('width',`${p}%`);
  },
  /*toggle:function(f){//--old
   this.$el.toggleClass(data.view.shownCls,f);
@@ -75,14 +80,14 @@ export let MainView=Backbone.View.extend({
   this.switchTab(this.gameView);
   //this.$el.addClass(data.view.gameActiveCls);
   this.gameView.toggle(true);
-  this.$gameProgress.css('clip-path',`polygon(0 0,0 0,0 100%,0 100%)`);
+  this.$gameProgress.css('width','0px');
  },
  gameEnd:function(){
   this.$el.removeClass(data.view.gamePlayingCls);
  },
  gameProgress:function(p){
   this.$el.addClass(data.view.gamePlayingCls);
-  this.$gameProgress.css('clip-path',`polygon(0 0,${p}% 0,${p}% 100%,0 100%)`);
+  this.$gameProgress.css('width',`${p}%`);
  },
  episodes:function(){
   this.switchTab(this.flowView);

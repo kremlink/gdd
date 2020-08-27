@@ -4,7 +4,19 @@ import {data} from './data.js';
 export let PlayerView=Backbone.View.extend({
  el:data.view.el,
  initialize:function(){
-  this.player=videojs(this.el,{},()=>{
+  this.player=videojs(this.el,{
+   controlBar:{
+    children:{
+     playToggle:{},
+     progressControl:{},
+     volumePanel:{inline:false},
+     fullscreenToggle:{}
+    }
+   },
+   plugins:{
+
+   }
+  },()=>{
    this.prepare();
   });
   //this.listenTo(app.get('aggregator'),'player:play',this.play);//--old
@@ -12,6 +24,7 @@ export let PlayerView=Backbone.View.extend({
  },
  prepare:function(){
   let touched={};
+
   //this.setElement(data.view.el);//--old
   app.get('aggregator').trigger('player:ready',this.player.el());
   this.player.on('pause',()=>{
@@ -36,7 +49,7 @@ export let PlayerView=Backbone.View.extend({
     app.get('aggregator').trigger('trash:fs',true);
    }else
    {
-    this.player.requestFullscreen();
+    //this.player.requestFullscreen();//TODO:remove (dev)
    }
   });
   if(app.get('isMobile'))

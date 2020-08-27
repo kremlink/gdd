@@ -1,6 +1,11 @@
 @include exports("@path:base\_rules.scss"){/*@path:base\_rules.scss*/
   //@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@500;700&display=swap');
 
+  @font-face{
+    font-family:pdt-player;
+    src:url("../fonts/pdt-player.woff") format("woff");
+  }
+
   .safe-hide-svg{
     @include abs($l:0,$t:-100px);
     width:1px;

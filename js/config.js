@@ -8,7 +8,7 @@ export let config={
   formUrl:'rest/callb'
  },
  flow:{
-  epis:{amount:10,active:4,avail:6}
+  epis:{amount:10,avail:6}
  },
  chat:{
   data:{
