@@ -42,7 +42,7 @@ export let MainView=Backbone.View.extend({
   this.menuView=new MenuView;
 
   //this.gameStart();
-  this.episodes();
+  this.map();
   //this.menu();
   //this.chat();//TODO:remove
 

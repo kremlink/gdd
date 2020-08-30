@@ -82,13 +82,19 @@
   }
   .uni-pop-text{
     @include abs($l:22em,$r:1.5em,$t:1em);
-    height:18em;
+    height:21em;
+    .map &{
+      height:16em;
+    }
     .t-scroll-wrap{
       padding-right:2em;
     }
     .t-scroll-bar{
       top:2em;
-      bottom:-3em;
+      bottom:-1em;
+      .map &{
+        bottom:-3em;
+      }
     }
   }
   //---

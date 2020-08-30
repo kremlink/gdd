@@ -83,8 +83,8 @@ export function init(app,modules){
   },
   loaded:function(el){
    this.$el.addClass(data.view.loadedCls);
-   //$(el).find('video').after($(data.view.$overlay));
-   $(el).find('video').after($(data.view.$overlay))[0].play().then(()=>$(el).find('video')[0].pause());//TODO: remove and uncomment prev string (dev)
+   $(el).find('video').after($(data.view.$overlay));
+   //$(el).find('video').after($(data.view.$overlay))[0].play().then(()=>$(el).find('video')[0].pause());//TODO: remove and uncomment prev string (dev)
   }
   /*,
   addTrash:function(){//--old

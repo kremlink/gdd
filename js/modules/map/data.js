@@ -10,16 +10,15 @@ export const data={
  events:{
   'marker':'.map-mark',
   'close':'.uni-pop-close',
-  'react':'.map-pop-react .map-pop-react-item',
-  'full':'.map-full'
+  //'react':'.map-pop-react .map-pop-react-item',
+  'full':'.map-full',
+  'react':'.tab-tab'
  },
  view:{
   el:'.trash-block.map',
   template:'#map-template',
   popTemplate:'#map-pop-template',
-  reactedTemplate:'#map-pop-reacted-template',
   $pop:'.uni-pop',
-  $reacted:'.map-pop-react',
   reactedCls:'reacted',
   shownCls:'shown',
   popShownCls:'popShown',

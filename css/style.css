@@ -776,6 +776,46 @@ body {
   z-index: 1;
   font-size: 1.45em;
 }
+.trash-pop .trash-block.map.popShown .bottom-panel {
+  display: flex;
+}
+.trash-pop .trash-block.map .uni-pop.reacted ~ .bottom-panel {
+  pointer-events: none;
+}
+.trash-pop .trash-block.map .uni-pop.reacted ~ .bottom-panel svg + svg {
+  width: 50%;
+}
+.trash-pop .trash-block.map .uni-pop.reacted ~ .bottom-panel .map-b-p-perc {
+  display: block;
+}
+.trash-pop .trash-block.map .bottom-panel {
+  display: none;
+}
+.trash-pop .trash-block.map .tab-tab {
+  width: 9em;
+  color: #67BFF1;
+  margin-top: -1.3em;
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+}
+.trash-pop .trash-block.map .tab-tab.shown svg {
+  display: block;
+}
+.trash-pop .trash-block.map .tab-tab svg + svg {
+  position: relative;
+  display: block;
+}
+.trash-pop .trash-block.map .map-b-p-h {
+  display: block;
+  width: 100%;
+}
+.trash-pop .trash-block.map .map-b-p-perc {
+  display: none;
+  width: 50%;
+  position: relative;
+  left: -0.5em;
+}
 .trash-pop .trash-block.chat {
   color: #000;
 }
@@ -1462,60 +1502,15 @@ body {
   left: 9%;
   top: 12%;
   width: 30%;
-  height: 40%;
-}
-.trash-pop .map-pop-react {
-  position: absolute;
-  left: 8%;
-  bottom: 4.5%;
-  width: 14em;
-  height: 6.48em;
-}
-.trash-pop .map-pop-react.reacted {
-  pointer-events: none;
-}
-.trash-pop .map-pop-react.reacted > svg {
-  display: none;
-}
-.trash-pop .map-pop-react.alert .map-pop-react-item[data-type=alert] svg {
-  display: block;
-}
-.trash-pop .map-pop-react.like .map-pop-react-item[data-type=like] svg {
-  display: block;
-}
-.trash-pop .map-pop-react.fire .map-pop-react-item[data-type=fire] svg {
-  display: block;
-}
-.trash-pop .map-pop-react .map-pop-react-item {
-  cursor: pointer;
-}
-.trash-pop .map-pop-react-wrap {
-  display: flex;
-  justify-content: space-around;
-  position: absolute;
-  left: 0;
-  top: 0;
-  right: 0;
-  bottom: 0;
-}
-.trash-pop .map-pop-react-item {
-  margin-top: 1em;
-  width: 4em;
-  height: 3em;
-}
-.trash-pop .map-pop-react-item svg {
-  display: none;
-}
-.trash-pop .map-pop-done-count {
-  display: block;
-  position: relative;
-  top: 3.5em;
-  pointer-events: none;
+  height: 66%;
 }
 .trash-pop .map-pop-forget {
   position: absolute;
-  right: 6%;
-  bottom: 6%;
+  right: 17.5%;
+  bottom: 4%;
+}
+.trash-pop .map-b-p-bg {
+  pointer-events: none;
 }
 .trash-pop .bible-items {
   position: absolute;
@@ -2053,13 +2048,19 @@ body {
   left: 22em;
   top: 1em;
   right: 1.5em;
-  height: 18em;
+  height: 21em;
+}
+.map .uni-pop-text {
+  height: 16em;
 }
 .uni-pop-text .t-scroll-wrap {
   padding-right: 2em;
 }
 .uni-pop-text .t-scroll-bar {
   top: 2em;
+  bottom: -1em;
+}
+.map .uni-pop-text .t-scroll-bar {
   bottom: -3em;
 }
 
@@ -2109,7 +2110,7 @@ body {
   width: auto;
 }
 .video-js .vjs-play-control {
-  background: rgba(255, 255, 255, 0.5);
+  background: rgba(0, 0, 0, 0.5);
   border-radius: 0.3em;
 }
 .video-js .vjs-play-control.vjs-playing .vjs-icon-placeholder:before {
@@ -2122,7 +2123,7 @@ body {
 .video-js .vjs-progress-control {
   margin-left: 1em;
   padding-left: 0.5em;
-  background: rgba(255, 255, 255, 0.5);
+  background: rgba(0, 0, 0, 0.5);
   border-radius: 0.3em 0 0 0.3em;
 }
 .video-js .vjs-progress-control:hover .vjs-progress-holder {
@@ -2159,7 +2160,7 @@ body {
   background: none;
 }
 .video-js .vjs-mute-control {
-  background: rgba(255, 255, 255, 0.5);
+  background: rgba(0, 0, 0, 0.5);
 }
 .video-js .vjs-mute-control.vjs-vol-0 .vjs-icon-placeholder:before {
   content: "F";
@@ -2175,10 +2176,10 @@ body {
   font-family: pdt-player;
 }
 .video-js .vjs-volume-vertical {
-  background: rgba(255, 255, 255, 0.5);
+  background: rgba(0, 0, 0, 0.5);
 }
 .video-js .vjs-fullscreen-control {
-  background: rgba(255, 255, 255, 0.5);
+  background: rgba(0, 0, 0, 0.5);
   border-radius: 0 0.3em 0.3em 0;
 }
 .video-js .vjs-fullscreen-control .vjs-icon-placeholder:before {

@@ -282,6 +282,48 @@
           font-size:1.45em;
           @extend %scaler;
         }
+        &.popShown .bottom-panel{
+          @include flx(display,flex);
+        }
+        .uni-pop.reacted~.bottom-panel{
+          pointer-events:none;
+          svg+svg{
+            width:50%;
+          }
+          .map-b-p-perc{
+            display:block;
+          }
+        }
+        .bottom-panel{
+          display:none;
+        }
+        .tab-tab{
+          width:9em;
+          color:getc(dblue);
+          margin-top:-1.3em;
+          @include flx(display,flex);
+          @include flx(flex-flow,'row wrap');
+          @include flx(align-items,center);
+          &.shown{
+            svg{
+              display:block;
+            }
+          }
+          svg+svg{
+            position:relative;
+            display:block;
+          }
+        }
+        .map-b-p-h{
+          display:block;
+          width:100%;
+        }
+        .map-b-p-perc{
+          display:none;
+          width:50%;
+          position:relative;
+          left:-.5em;
+        }
       }
       &.bible{
 
@@ -874,51 +916,13 @@
     .map-pop-big{
       @include abs($l:9%,$t:12%);
       width:30%;
-      height:40%;
-    }
-    .map-pop-react{
-      @include abs($b:4.5%,$l:8%);
-      width:14em;
-      height:6.48em;
-      &.reacted{
-        pointer-events:none;
-        >svg{
-          display:none;
-        }
-      }
-      @each $x in alert,like,fire
-      {
-        &.#{$x} .map-pop-react-item[data-type=#{$x}]{
-          svg{
-            display:block;
-          }
-        }
-      }
-      .map-pop-react-item{
-        cursor:pointer;
-      }
-    }
-    .map-pop-react-wrap{
-      @include flx(display,flex);
-      @include flx(justify-content,space-around);
-      @include abs($l:0,$r:0,$t:0,$b:0);
-    }
-    .map-pop-react-item{
-      margin-top:1em;
-      width:4em;
-      height:3em;
-      svg{
-        display:none;
-      }
-    }
-    .map-pop-done-count{
-      display:block;
-      position:relative;
-      top:3.5em;
-      pointer-events:none;
+      height:66%;
     }
     .map-pop-forget{
-      @include abs($b:6%,$r:6%);
+      @include abs($b:4%,$r:17.5%);
+    }
+    .map-b-p-bg{
+      pointer-events:none;
     }
     //end map
     //bible
