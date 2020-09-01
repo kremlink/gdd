@@ -27,7 +27,8 @@ export function init(app,modules){
 
    this.$el.toggleClass(data.view.tooSmallCls,mob);
 
-   this.start();//TODO: remove (dev)
+   if(app.get('_dev'))
+    this.start();//TODO: remove (dev)
 
    /*this.playerView=new PlayerView;//--old
    this.listenTo(app.get('aggregator'),'player:ready',this.addTrash);*/
@@ -74,7 +75,8 @@ export function init(app,modules){
     if(!document.fullscreenElement)
      document.documentElement.requestFullscreen();
    }
-   //app.get('aggregator').trigger('player:play');
+   if(!app.get('_dev')&&app.get('epIndex')>0)
+    app.get('aggregator').trigger('player:playPause',true);
   },
   playPause:function(f){
    if(f)

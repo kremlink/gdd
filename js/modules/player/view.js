@@ -4,23 +4,29 @@ import {data} from './data.js';
 export let PlayerView=Backbone.View.extend({
  el:data.view.el,
  initialize:function(){
-  this.player=videojs(this.el,{
-   controlBar:{
-    children:{
-     playToggle:{},
-     progressControl:{},
-     volumePanel:{inline:false},
-     fullscreenToggle:{}
-    }
-   },
-   plugins:{
+  if(this.el)
+  {
+   this.player=videojs(this.el,{
+    controlBar:{
+     children:{
+      playToggle:{},
+      progressControl:{},
+      volumePanel:{inline:false},
+      fullscreenToggle:{}
+     }
+    },
+    plugins:{
 
-   }
-  },()=>{
-   this.prepare();
-  });
-  //this.listenTo(app.get('aggregator'),'player:play',this.play);//--old
-  this.listenTo(app.get('aggregator'),'player:playPause',this.playPause);
+    }
+   },()=>{
+    this.prepare();
+   });
+   //this.listenTo(app.get('aggregator'),'player:play',this.play);//--old
+   this.listenTo(app.get('aggregator'),'player:playPause',this.playPause);
+  }else
+  {
+   app.get('aggregator').trigger('player:ready',null);
+  }
  },
  prepare:function(){
   let touched={};
@@ -49,7 +55,8 @@ export let PlayerView=Backbone.View.extend({
     app.get('aggregator').trigger('trash:fs',true);
    }else
    {
-    //this.player.requestFullscreen();//TODO:remove (dev)
+    if(!app.get('_dev'))
+     this.player.requestFullscreen();
    }
   });
   if(app.get('isMobile'))

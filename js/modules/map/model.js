@@ -1,7 +1,6 @@
 import {data} from './data.js';
 
 export let MapMarkerModel=Backbone.Model.extend({
- url:data.url,
  omit:data.omit,
  defaults:{
   alert:0,

@@ -47,7 +47,6 @@ export const data={
   $name:'.bible-tab-name',
   shownCls:'shown',
   activeTabCls:'active',
-  popShownCls:'popShown',
   dataClick:'type',
   dataId:'id'
  }

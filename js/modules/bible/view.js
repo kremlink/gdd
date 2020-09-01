@@ -77,14 +77,13 @@ export let BibleView=BaseBlockView.extend({
   tid=this.$currentTab.data(data.view.dataClick);
 
   this.$popContent=$(this.popTemplate(_.extend({margin:this.scrollDim,tid:tid},data.data[this.$currentTab.data(data.view.dataClick)].items.filter(o=>o.id.toString()===id.toString())[0])));
-  this.$pop.append(this.$popContent);
-  this.$el.addClass(data.view.popShownCls);
+  this.$pop.append(this.$popContent).addClass(data.view.shownCls);
 
   this.setScroll('popScroll',this.$pop);
  },
  unpop:function(){
   this.popScroll.destroy();
   this.$popContent.remove();
-  this.$el.removeClass(data.view.popShownCls);
+  this.$pop.removeClass(data.view.shownCls);
  }
 });

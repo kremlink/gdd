@@ -61,7 +61,7 @@
       //font-size:1.45em;
       //@extend %scaler;
     }
-    .shown.popShown &{
+    &.shown{
       opacity:1;
       visibility:visible;
     }
@@ -72,11 +72,11 @@
     cursor:pointer;
     z-index:1;
     @include abs($r:1%,$t:1%);
-    &:hover~.uni-pop-bg:nth-child(4){
+    &:hover~.hover{
       opacity:1;
     }
   }
-  .uni-pop-bg:nth-child(4){
+  .uni-pop-bg.hover{
     @include trs('opacity #{$anim} ease-in-out');
     opacity:0;
   }

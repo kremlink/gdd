@@ -3,45 +3,93 @@ import {utils} from '../../bf/lib/utils.js';
 import {app} from '../../bf/base.js';
 import {Scroll} from '../scroll/scroll.js';
 import {data as scrollData} from '../scroll/data.js';
-import {data} from './data.js';
+import {data as dat} from './data.js';
 import {BaseBlockView} from '../baseBlock/view.js';
 
-app.configure({scroll:data.scroll});
+let scroll,
+ data=app.configure({map:dat}).map,
+ active;
 
-let scroll=Scroll();
+app.configure({scroll:data.scroll});
+scroll=Scroll();
 
 let events={};
 events[`click ${data.events.marker}`]='pop';
 events[`click ${data.events.close}`]='unpop';
 events[`click ${data.events.react}`]='react';
 events[`click ${data.events.full}`]='full';
+events[`click ${data.events.zoomIn}`]='zoomIn';
+events[`click ${data.events.zoomOut}`]='zoomOut';
 
 export let MapView=BaseBlockView.extend({
  el:data.view.el,
  events:events,
- isFull:false,
  currTab:null,
+ dragging:false,
+ mult:0,
+ shift:{x:0,y:0},
+ zoomed:false,
+ dragBounds:{h:0,v:0},
+ reactedTab:{},
  template:_.template($(data.view.template).html()),
  popTemplate:_.template($(data.view.popTemplate).html()),
  initialize:function(){
+  active=app.get('epIndex');
+
   BaseBlockView.prototype.initialize.apply(this,[{
    data:data
   }]);
 
-  this.$el.prepend(this.template({data:data.data}));
+  this.$el.prepend(this.template({data:data.data[active]}));
   this.$pop=this.$(data.view.$pop);
-  this.marks=new (Backbone.Collection.extend({model:MapMarkerModel}));
-  this.marks.reset(data.data);
-  this.$marks=this.$(data.events.marker);
+  this.$map=this.$(data.view.$map);
+  this.$tabs=this.$(data.events.react);
+  this.$percents=this.$(data.view.$reactP);
+  this.$progress=this.$(data.view.$progress);
+  this.marks=new (Backbone.Collection.extend({model:MapMarkerModel,url:data.url}));
+  this.marks.reset(data.data[active]);
+  this.progress();
   this.current=null;
   this.$popContent=null;
+  this.$drag=this.$(data.view.$drag).css({'--w':data.view.dragW+'em','--p':data.view.dragP});
+  this.dragBounds.h=data.view.dragW/4;
+  this.dragBounds.v=data.view.dragW*data.view.dragP/4;
+  this.mult=parseInt(this.$drag.css('fontSize'));
+  this.drag();
  },
- full:function(){
-  //this.isFull=!this.isFull;
-  this.$el.toggleClass(data.view.fullCls);
+ progress:function(){
+  this.$progress.css('width',Math.floor(this.marks.filter(o=>o.get('react')).length/data.data[active].length*100)+'%');
+ },
+ zoomIn:function(){
+  this.zoomed=true;
+  this.$el.addClass(data.view.zoomCls);
+ },
+ zoomOut:function(){
+  this.$el.removeClass(data.view.zoomCls);
+  this.zoomed=false;
+  this.setMapPos({ini:true});
+  this.shift={x:0,y:0};
+ },
+ getPerc:function(i){
+  let r=this.current.get('reacts');
+
+  return Math.floor(r[i]*100/r.reduce((a,b)=>a+b));
  },
  renderReacted:function(){
-  //this.$reacted.html(this.reactedTemplate(this.current.toJSON()));
+  let id=this.current.get('id'),
+   tab=this.$tabs.filter(i=>this.current.get('react')===this.$tabs.eq(i).data(data.view.dataClick));
+
+  if(tab.length)
+   this.reactedTab[id]=tab;
+
+  if(this.reactedTab[id])
+  {
+   this.$pop.addClass(data.view.reactedCls);
+   this.reactedTab[id].addClass(data.view.shownCls);
+   this.$percents.each(i=>{
+    this.$percents.eq(i).text(this.getPerc(i));
+   });
+  }
  },
  pop:function(e){
   let id=$(e.currentTarget).data(data.view.dataId);
@@ -49,7 +97,7 @@ export let MapView=BaseBlockView.extend({
   this.current=this.marks.where({id:id})[0];
   this.$popContent=$(this.popTemplate(_.extend({margin:app.get('scrollDim')},this.current.toJSON({all:true}))));
   this.$pop.append(this.$popContent);
-  this.$el.addClass(data.view.popShownCls);
+  this.$el.addClass(data.view.poppedCls);
   this.renderReacted();
 
   this.popScroll=app.set({
@@ -65,21 +113,89 @@ export let MapView=BaseBlockView.extend({
   });
  },
  unpop:function(){
+  let id=this.current.get('id');
+
   this.popScroll.destroy();
   this.$popContent.remove();
-  this.$el.removeClass(data.view.popShownCls);
+  this.$pop.removeClass(data.view.reactedCls);
+  this.$el.removeClass(data.view.poppedCls);
+  if(this.reactedTab[id])
+   this.reactedTab[id].removeClass(data.view.shownCls);
  },
  react:function(e){
   let type,
-   count;
+  ind=this.$tabs.index($(e.currentTarget));
 
-  this.currTab=$(e.currentTarget);
+  this.currTab=this.$tabs.eq(ind);
   type=this.currTab.data(data.view.dataClick);
-  count=this.current.get(type);
+  this.reactedTab[this.current.get('id')]=this.currTab;
 
-  this.current.save({react:type,[type]:count+1});
-  this.currTab.addClass(data.view.shownCls);
-  this.$pop.addClass(data.view.reactedCls);
+  this.current.get('reacts')[ind]=this.current.get('reacts')[ind]+1;
+  this.current.save({react:type});
+  this.progress();
   this.renderReacted();
+ },
+ checkBoundaries:function(delta={},s=false){
+  let v={x:this.shift.x+delta.x,y:this.shift.y+delta.y};
+
+  if(v.x>this.dragBounds.h)
+   v.x=this.dragBounds.h;
+  if(v.x<-this.dragBounds.h)
+   v.x=-this.dragBounds.h;
+  if(v.y>this.dragBounds.v)
+   v.y=this.dragBounds.v;
+  if(v.y<-this.dragBounds.v)
+   v.y=-this.dragBounds.v;
+  if(s)
+  {
+   this.shift.x=v.x;
+   this.shift.y=v.y;
+  }
+
+  return {x:v.x+'em',y:v.y+'em'};
+ },
+ setMapPos:function({delta,end=false,ini=false}){
+  let pos=this.checkBoundaries(delta,end);
+
+  this.$drag.css('transform',`translate(${ini?'0em,0em':pos.x+','+pos.y})`);
+ },
+ drag:function(){
+  let start={x:0,y:0},
+   delta,
+   nope=false;
+
+  new utils.drag({
+   both:true,
+   mouse:true,
+   container:this.$map,
+   threshold:0,
+   downCallback:(opts)=>{
+    if(!this.zoomed||$(opts.e[0].target).closest(data.events.marker).length)
+     nope=true;
+    if(!nope)
+    {
+     start.x=opts.e[0].pageX;
+     start.y=opts.e[0].pageY;
+     this.dragging=true;
+     delta={x:0,y:0};
+    }
+   },
+   dragCallback:(opts)=>{
+    if(!nope)
+    {
+     delta.x=(opts.e[0].pageX-start.x)/this.mult;
+     delta.y=(opts.e[0].pageY-start.y)/this.mult;
+     this.setMapPos({delta:delta});
+    }
+   }
+  });
+  $(document).on('mouseup touchend',()=>{// touchend
+   nope=false;
+   if(this.dragging)
+   {
+    this.dragging=false;
+    this.setMapPos({delta:delta,end:true});
+   }
+  });
  }
 });

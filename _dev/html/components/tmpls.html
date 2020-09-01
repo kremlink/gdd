@@ -33,13 +33,20 @@
 </script>
 <!--#icon-shared-map-marker-<%= data[i].id %>-->
 <script type="text/template" id="map-template">
-    <% for(let i=0;i<data.length;i++) { %>
-    <div data-id="<%= data[i].id %>" class="map-mark" style="left:<%= data[i].left %>%;top:<%= data[i].top %>%;">
-        <svg>
-            <use xlink:href="#icon-shared-map-marker"></use>
+    <div class="map-block">
+        <div class="map-inner" style="background-image: url(images/map-bg.jpg);">
+            <% for(let i=0;i<data.length;i++) { %>
+            <div data-id="<%= data[i].id %>" class="map-mark" style="left:<%= data[i].left %>%;top:<%= data[i].top %>%;">
+                <svg>
+                    <use xlink:href="#icon-shared-map-marker"></use>
+                </svg>
+            </div>
+            <% } %>
+        </div>
+        <svg class="brows">
+            <use xlink:href="#icon-shared-map-brows"></use>
         </svg>
     </div>
-    <% } %>
     <div class="uni-pop">
         <div class="uni-pop-close"></div>
         <svg class="uni-pop-bg">
@@ -48,7 +55,7 @@
         <svg class="uni-pop-bg">
             <use xlink:href="#icon-shared-map-pop-close"></use>
         </svg>
-        <svg class="uni-pop-bg">
+        <svg class="uni-pop-bg hover">
             <use xlink:href="#icon-shared-map-pop-close-h"></use>
         </svg>
     </div>
@@ -135,7 +142,7 @@
         <svg class="uni-pop-bg">
             <use xlink:href="#icon-shared-map-pop-close"></use>
         </svg>
-        <svg class="uni-pop-bg">
+        <svg class="uni-pop-bg hover">
             <use xlink:href="#icon-shared-map-pop-close-h"></use>
         </svg>
     </div>

@@ -455,7 +455,7 @@ body {
 }
 
 /*@path:base\_exts.scss*/
-.trash-pop .trash-block.map.pop-full, #wrap-wrap {
+#wrap-wrap {
   height: 56.25vw;
   max-height: 100vh;
   max-width: 177.7777vh;
@@ -767,16 +767,25 @@ body {
   overflow: hidden;
   cursor: move;
 }
-.trash-pop .trash-block.map {
-  background: url(../images/map-bg.jpg) center/cover no-repeat;
+.trash-pop .trash-block.map.map-zoom .map-inner {
+  --w:0;
+  --p:0;
+  width: var(--w);
+  height: calc(var(--w)*var(--p));
+  left: calc(var(--w)*-1/4);
+  top: calc(var(--w)*var(--p)/-4);
 }
-.trash-pop .trash-block.map.pop-full {
-  position: fixed;
-  border-radius: 0;
-  z-index: 1;
-  font-size: 1.45em;
+.trash-pop .trash-block.map.map-popped .map-block {
+  display: none;
 }
-.trash-pop .trash-block.map.popShown .bottom-panel {
+.trash-pop .trash-block.map.map-popped .uni-pop {
+  visibility: visible;
+  opacity: 1;
+}
+.trash-pop .trash-block.map.map-popped .map-ctrls {
+  display: none;
+}
+.trash-pop .trash-block.map.map-popped .tab-tabs {
   display: flex;
 }
 .trash-pop .trash-block.map .uni-pop.reacted ~ .bottom-panel {
@@ -788,8 +797,9 @@ body {
 .trash-pop .trash-block.map .uni-pop.reacted ~ .bottom-panel .map-b-p-perc {
   display: block;
 }
-.trash-pop .trash-block.map .bottom-panel {
+.trash-pop .trash-block.map .tab-tabs {
   display: none;
+  height: 100%;
 }
 .trash-pop .trash-block.map .tab-tab {
   width: 9em;
@@ -1481,15 +1491,24 @@ body {
 .trash-pop .ep-wrap {
   height: 100%;
 }
-.trash-pop .map-full {
+.trash-pop .map-block {
   position: absolute;
-  left: 2em;
-  top: 2em;
-  width: 2em;
-  height: 2em;
-  background: #f00;
-  cursor: pointer;
-  border-radius: 50%;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  overflow: hidden;
+}
+.trash-pop .map-block .brows {
+  pointer-events: none;
+}
+.trash-pop .map-inner {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: center/cover no-repeat;
 }
 .trash-pop .map-mark {
   position: absolute;
@@ -1511,6 +1530,42 @@ body {
 }
 .trash-pop .map-b-p-bg {
   pointer-events: none;
+}
+.trash-pop .map-ctrls {
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+.trash-pop .map-ctrls .h {
+  position: absolute;
+  left: 9.05em;
+  top: 0.4em;
+  color: #67BFF1;
+}
+.trash-pop .map-ctrls .zoom-in, .trash-pop .map-ctrls .zoom-out {
+  width: 4.3em;
+  height: 3.5em;
+  cursor: pointer;
+}
+.trash-pop .map-ctrls .zoom-in svg, .trash-pop .map-ctrls .zoom-out svg {
+  pointer-events: none;
+}
+.trash-pop .map-ctrls .zoom-in {
+  margin-left: 28em;
+}
+.trash-pop .map-ctrls .zoom-out {
+  margin-left: 4em;
+}
+.trash-pop .map-ctrls .prog {
+  position: absolute;
+  left: 1.15em;
+  top: 50%;
+  transform: translate(0, -50%);
+  width: 23.65em;
+  height: 1.75em;
+}
+.trash-pop .map-ctrls .prog div {
+  border-radius: 1.2em;
 }
 .trash-pop .bible-items {
   position: absolute;
@@ -2020,7 +2075,7 @@ body {
   right: 0;
   bottom: 0;
 }
-.shown.popShown .uni-pop {
+.uni-pop.shown {
   opacity: 1;
   visibility: visible;
 }
@@ -2034,11 +2089,11 @@ body {
   top: 1%;
   right: 1%;
 }
-.uni-pop-close:hover ~ .uni-pop-bg:nth-child(4) {
+.uni-pop-close:hover ~ .hover {
   opacity: 1;
 }
 
-.uni-pop-bg:nth-child(4) {
+.uni-pop-bg.hover {
   transition: opacity 0.3s ease-in-out;
   opacity: 0;
 }

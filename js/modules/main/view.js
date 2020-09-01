@@ -41,10 +41,10 @@ export let MainView=Backbone.View.extend({
   this.loadSaveView=new LoadSaveView;
   this.menuView=new MenuView;
 
-  //this.gameStart();
-  this.map();
-  //this.menu();
-  //this.chat();//TODO:remove
+  if(app.get('epIndex')>0)
+   this.episodes();else
+   this.chat();
+  //this.map();
 
   //app.get('aggregator').trigger('trash:toggle',true);//--old TODO:remove
  },

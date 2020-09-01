@@ -274,28 +274,45 @@
         }
       }
       &.map{
-        background: url(#{$path}map-bg.jpg) center/cover no-repeat;
-        &.pop-full{
-          position:fixed;
-          border-radius:0;
-          z-index:1;
-          font-size:1.45em;
-          @extend %scaler;
-        }
-        &.popShown .bottom-panel{
-          @include flx(display,flex);
-        }
-        .uni-pop.reacted~.bottom-panel{
-          pointer-events:none;
-          svg+svg{
-            width:50%;
-          }
-          .map-b-p-perc{
-            display:block;
+        &.map-zoom{
+          .map-inner{
+            --w:0;//set in js
+            --p:0;//set in js
+            width:var(--w);
+            height:calc(var(--w)*var(--p));
+            left:calc(var(--w)*-1/4);
+            top:calc(var(--w)*var(--p)/-4);
           }
         }
-        .bottom-panel{
+        &.map-popped{
+          .map-block{
+            display:none;
+          }
+          .uni-pop{
+            visibility:visible;
+            opacity:1;
+          }
+          .map-ctrls{
+            display:none;
+          }
+          .tab-tabs{
+            @include flx(display,flex);
+          }
+        }
+        .uni-pop{
+          &.reacted~.bottom-panel{
+            pointer-events:none;
+            svg+svg{
+              width:50%;
+            }
+            .map-b-p-perc{
+              display:block;
+            }
+          }
+        }
+        .tab-tabs{
           display:none;
+          height:100%;
         }
         .tab-tab{
           width:9em;
@@ -899,13 +916,18 @@
     }
     //end flow
     //map
-    .map-full{
-      @include abs($l:2em,$t:2em);
-      width:2em;
-      height:2em;
-      background:#f00;
-      cursor:pointer;
-      border-radius:50%;
+    .map-block{
+      @include abs($l:0,$t:0,$r:0,$b:0);
+      overflow:hidden;
+      .brows{
+        pointer-events:none;
+      }
+    }
+    .map-inner{
+      @include abs($l:0,$t:0);
+      width:100%;
+      height:100%;
+      background:center/cover no-repeat;
     }
     .map-mark{
       position:absolute;
@@ -923,6 +945,37 @@
     }
     .map-b-p-bg{
       pointer-events:none;
+    }
+    .map-ctrls{
+      height:100%;
+      @include flx(display,flex);
+      @include flx(align-items,center);
+      .h{
+        @include abs($l:9.05em,$t:.4em);
+        color:getc(dblue);
+      }
+      .zoom-in,.zoom-out{
+        width:4.3em;
+        height:3.5em;
+        cursor:pointer;
+        svg{
+          pointer-events:none;
+        }
+      }
+      .zoom-in{
+        margin-left:28em;
+      }
+      .zoom-out{
+        margin-left:4em;
+      }
+      .prog{
+        @include center($l:1.15em);
+        width:23.65em;
+        height:1.75em;
+        div{
+          border-radius:1.2em;
+        }
+      }
     }
     //end map
     //bible

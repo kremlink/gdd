@@ -11,6 +11,7 @@ export let FlowView=BaseBlockView.extend({
  shift:0,
  maxShift:0,
  mult:0,
+ dragging:false,
  initialize:function(){
   let active=app.get('epIndex');
 

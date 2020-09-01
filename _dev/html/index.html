@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html data-app='{"modules":["index"],"index":2}'>
+<html data-app='{"modules":["index"],"index":0}'>
     <head>
 		@@include('components/head.html')
         @@include('components/scripts.html')
@@ -209,51 +209,69 @@
                                 </div>
                             </section>
                             <section class="trash-block map">
-                                <div class="map-full"></div>
-                                <footer class="bottom-panel tab-tabs">
-                                    <div class="tab-tab" data-type="react1">
-                                        <svg>
-                                            <use xlink:href="#icon-shared-map-smallscreen-select-1"></use>
+                                <footer class="bottom-panel">
+                                    <div class="map-ctrls">
+                                        <svg class="map-b-p-bg">
+                                            <use xlink:href="#icon-shared-map-smallscreen-progress+zoom"></use>
                                         </svg>
-                                        <svg>
-                                            <use xlink:href="#icon-shared-map-smallscree-icon-1"></use>
-                                        </svg>
-                                        <div class="map-b-p-perc"><span>20</span>%</div>
-                                        <span class="map-b-p-h">переработать</span>
+                                        <div class="prog"><div class="the-progress"></div></div>
+                                        <div class="h">Изученные очаги</div>
+                                        <div class="zoom-in">
+                                            <svg>
+                                                <use xlink:href="#icon-shared-menu-icn-ok"></use>
+                                            </svg>
+                                        </div>
+                                        <div class="zoom-out">
+                                            <svg>
+                                                <use xlink:href="#icon-shared-menu-icn-ok"></use>
+                                            </svg>
+                                        </div>
                                     </div>
-                                    <div class="tab-tab" data-type="react2">
-                                        <svg>
-                                            <use xlink:href="#icon-shared-map-smallscreen-select-2"></use>
+                                    <div class="tab-tabs">
+                                        <div class="tab-tab" data-type="react1">
+                                            <svg>
+                                                <use xlink:href="#icon-shared-map-smallscreen-select-1"></use>
+                                            </svg>
+                                            <svg>
+                                                <use xlink:href="#icon-shared-map-smallscree-icon-1"></use>
+                                            </svg>
+                                            <div class="map-b-p-perc"><span></span>%</div>
+                                            <span class="map-b-p-h">переработать</span>
+                                        </div>
+                                        <div class="tab-tab" data-type="react2">
+                                            <svg>
+                                                <use xlink:href="#icon-shared-map-smallscreen-select-2"></use>
+                                            </svg>
+                                            <svg>
+                                                <use xlink:href="#icon-shared-map-smallscree-icon-2"></use>
+                                            </svg>
+                                            <div class="map-b-p-perc"><span></span>%</div>
+                                            <span class="map-b-p-h">закопать</span>
+                                        </div>
+                                        <div class="tab-tab" data-type="react3">
+                                            <svg>
+                                                <use xlink:href="#icon-shared-map-smallscreen-select-3"></use>
+                                            </svg>
+                                            <svg>
+                                                <use xlink:href="#icon-shared-map-smallscree-icon-3"></use>
+                                            </svg>
+                                            <div class="map-b-p-perc"><span></span>%</div>
+                                            <span class="map-b-p-h">сжечь</span>
+                                        </div>
+                                        <div class="tab-tab" data-type="react4">
+                                            <svg>
+                                                <use xlink:href="#icon-shared-map-smallscreen-select-4"></use>
+                                            </svg>
+                                            <svg>
+                                                <use xlink:href="#icon-shared-map-smallscree-icon-4"></use>
+                                            </svg>
+                                            <div class="map-b-p-perc"><span></span>%</div>
+                                            <span class="map-b-p-h">забить болт</span>
+                                        </div>
+                                        <svg class="map-b-p-bg">
+                                            <use xlink:href="#icon-shared-map-smallscreen-base"></use>
                                         </svg>
-                                        <svg>
-                                            <use xlink:href="#icon-shared-map-smallscree-icon-1"></use>
-                                        </svg>
-                                        <div class="map-b-p-perc"><span>20</span>%</div>
-                                        <span class="map-b-p-h">закопать</span>
                                     </div>
-                                    <div class="tab-tab" data-type="react3">
-                                        <svg>
-                                            <use xlink:href="#icon-shared-mmap-smallscreen-select-3"></use>
-                                        </svg>
-                                        <svg>
-                                            <use xlink:href="#icon-shared-map-smallscree-icon-1"></use>
-                                        </svg>
-                                        <div class="map-b-p-perc"><span>20</span>%</div>
-                                        <span class="map-b-p-h">сжечь</span>
-                                    </div>
-                                    <div class="tab-tab" data-type="react4">
-                                        <svg>
-                                            <use xlink:href="#icon-shared-map-smallscreen-select-4"></use>
-                                        </svg>
-                                        <svg>
-                                            <use xlink:href="#icon-shared-map-smallscree-icon-1"></use>
-                                        </svg>
-                                        <div class="map-b-p-perc"><span>20</span>%</div>
-                                        <span class="map-b-p-h">забить болт</span>
-                                    </div>
-                                    <svg class="map-b-p-bg">
-                                        <use xlink:href="#icon-shared-map-smallscreen-base"></use>
-                                    </svg>
                                 </footer>
                             </section>
                             <section class="trash-block bible">
