@@ -1450,6 +1450,9 @@ body {
   pointer-events: none;
   flex: 0 0 auto;
 }
+.trash-pop .ep-item:not(.active):not(.inav):hover svg:nth-child(4) {
+  display: block;
+}
 .trash-pop .ep-item.active svg:nth-child(1) {
   display: none;
 }
@@ -1547,8 +1550,12 @@ body {
   height: 3.5em;
   cursor: pointer;
 }
+.trash-pop .map-ctrls .zoom-in:hover svg, .trash-pop .map-ctrls .zoom-out:hover svg {
+  display: block;
+}
 .trash-pop .map-ctrls .zoom-in svg, .trash-pop .map-ctrls .zoom-out svg {
   pointer-events: none;
+  display: none;
 }
 .trash-pop .map-ctrls .zoom-in {
   margin-left: 28em;

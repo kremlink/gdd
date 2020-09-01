@@ -865,6 +865,9 @@
       left:-.5em;
       pointer-events:none;
       @include flx(flex,'0 0 auto');
+      &:not(.active):not(.inav):hover svg:nth-child(4){
+        display:block;
+      }
       &.active{
         svg{
           &:nth-child(1){
@@ -958,8 +961,12 @@
         width:4.3em;
         height:3.5em;
         cursor:pointer;
+        &:hover svg{
+          display:block;
+        }
         svg{
           pointer-events:none;
+          display:none;
         }
       }
       .zoom-in{
