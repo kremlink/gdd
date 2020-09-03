@@ -111,6 +111,7 @@
       @include abs($r:4.1%,$t:11.1%);
       width:9.7%;
       height:18.9%;
+      cursor:pointer;
       @extend %svg-click;
     }
     .prog{
@@ -144,21 +145,13 @@
       display:block;
     }
     .prog-u{
-      @include abs($r:4.5%,$t:56.7%);
-      width:9%;
-      height:3%;
+      @include abs($r:3.9%,$t:55.7%);
+      width:10%;
+      height:4%;
       @include flx(display,flex);
       @include flx(justify-content,space-between);
-      div{
-        position:relative;
-        width:14%;
-      }
       svg{
-        @include abs($l:-25%,$t:0);
-        width:150%;
-        &+svg{
-          opacity:0.5;
-        }
+
       }
     }
     /*.t-f-under{
@@ -969,10 +962,10 @@
           display:none;
         }
       }
-      .zoom-in{
+      .zoom-out{
         margin-left:28em;
       }
-      .zoom-out{
+      .zoom-in{
         margin-left:4em;
       }
       .prog{

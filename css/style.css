@@ -615,6 +615,7 @@ body {
   right: 4.1%;
   width: 9.7%;
   height: 18.9%;
+  cursor: pointer;
 }
 .trash-pop .prog {
   position: absolute;
@@ -648,25 +649,12 @@ body {
 }
 .trash-pop .prog-u {
   position: absolute;
-  top: 56.7%;
-  right: 4.5%;
-  width: 9%;
-  height: 3%;
+  top: 55.7%;
+  right: 3.9%;
+  width: 10%;
+  height: 4%;
   display: flex;
   justify-content: space-between;
-}
-.trash-pop .prog-u div {
-  position: relative;
-  width: 14%;
-}
-.trash-pop .prog-u svg {
-  position: absolute;
-  left: -25%;
-  top: 0;
-  width: 150%;
-}
-.trash-pop .prog-u svg + svg {
-  opacity: 0.5;
 }
 .trash-pop .trash-footer {
   position: absolute;
@@ -1557,10 +1545,10 @@ body {
   pointer-events: none;
   display: none;
 }
-.trash-pop .map-ctrls .zoom-in {
+.trash-pop .map-ctrls .zoom-out {
   margin-left: 28em;
 }
-.trash-pop .map-ctrls .zoom-out {
+.trash-pop .map-ctrls .zoom-in {
   margin-left: 4em;
 }
 .trash-pop .map-ctrls .prog {

@@ -7,7 +7,8 @@ export const data={
   'bible':'.book-btn',
   'chat':'.chat-btn',
   'loadsave':'.load-save-btn',
-  'menu':'.menu-btn'
+  'menu':'.menu-btn',
+  'null':'.null-btn'
  },
  view:{
   el:'.trash-pop',

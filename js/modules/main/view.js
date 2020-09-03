@@ -7,6 +7,7 @@ import {BibleView} from '../bible/view.js';
 import {ChatView} from '../chat/view.js';
 import {LoadSaveView} from '../loadsave/view.js';
 import {MenuView} from '../menu/view.js';
+import {NullView} from '../null/view.js';
 
 let events={};
 //events[`click ${data.events.return}`]='toVideo';
@@ -18,6 +19,7 @@ events[`click ${data.events.bible}`]='bible';
 events[`click ${data.events.chat}`]='chat';
 events[`click ${data.events.loadsave}`]='loadsave';
 events[`click ${data.events.menu}`]='menu';
+events[`click ${data.events.null}`]='obnul';
 
 export let MainView=Backbone.View.extend({
  events:events,
@@ -40,13 +42,18 @@ export let MainView=Backbone.View.extend({
   this.chatView=new ChatView;
   this.loadSaveView=new LoadSaveView;
   this.menuView=new MenuView;
+  this.nullView=new NullView;
 
-  if(app.get('epIndex')>0)
+  /*if(app.get('epIndex')>0)
    this.episodes();else
-   this.chat();
-  //this.map();
+   this.chat();*/
+  this.obnul();
 
   //app.get('aggregator').trigger('trash:toggle',true);//--old TODO:remove
+ },
+ obnul:function(){
+  this.switchTab(this.nullView);
+  this.nullView.toggle(true);
  },
  epProgress:function(p){
   this.$epProgress=this.$(data.epProgress.el);
