@@ -16,12 +16,20 @@ export const data={
   //shownCls:'shown',
   fsCls:'fs',
   mfsCls:'mfs',
-  gamePlayingCls:'game-playing'
+  gamePlayingCls:'game-playing',
+  obnul:{
+   //cls:'null',
+   dur:'3.3s',
+   start:{ep:'9.37s',game:'10.33s',smth:'10.66s'}
+  }
  },
  epProgress:{
   el:'.prog1 .prog-ac'
  },
  gameProgress:{
   el:'.prog2 .prog-ac'
+ },
+ smthProgress:{
+  el:'.prog3 .prog-ac'
  }
 };

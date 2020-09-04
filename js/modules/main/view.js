@@ -30,8 +30,11 @@ export let MainView=Backbone.View.extend({
   this.listenTo(app.get('aggregator'),'game:end',this.gameEnd);
   this.listenTo(app.get('aggregator'),'game:progress',this.gameProgress);
   this.listenTo(app.get('aggregator'),'episodes:progress',this.epProgress);
+  this.listenTo(app.get('aggregator'),'trash:obnulEnded',this.obnulEnded);
 
   this.$gameProgress=this.$(data.gameProgress.el);
+  this.$epProgress=this.$(data.epProgress.el);
+  this.$smthProgress=this.$(data.smthProgress.el);
   this.ready();
  },
  ready:function(){
@@ -44,19 +47,25 @@ export let MainView=Backbone.View.extend({
   this.menuView=new MenuView;
   this.nullView=new NullView;
 
-  /*if(app.get('epIndex')>0)
+  if(app.get('epIndex')>0)
    this.episodes();else
-   this.chat();*/
-  this.obnul();
+   this.chat();
+  //this.obnul();
 
   //app.get('aggregator').trigger('trash:toggle',true);//--old TODO:remove
  },
  obnul:function(){
   this.switchTab(this.nullView);
   this.nullView.toggle(true);
+  this.$el.addClass(data.view.obnul.cls);
+  this.$epProgress.css({transitionDuration:data.view.obnul.dur,transitionDelay:data.view.obnul.start.ep,width:0});
+  this.$gameProgress.css({transitionDuration:data.view.obnul.dur,transitionDelay:data.view.obnul.start.game,width:0});
+  this.$smthProgress.css({transitionDuration:data.view.obnul.dur,transitionDelay:data.view.obnul.start.smth,width:0});
+ },
+ obnulEnded:function(){
+
  },
  epProgress:function(p){
-  this.$epProgress=this.$(data.epProgress.el);
   this.$epProgress.css('width',`${p}%`);
  },
  /*toggle:function(f){//--old
