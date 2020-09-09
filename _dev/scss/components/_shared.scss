@@ -61,7 +61,7 @@
       //font-size:1.45em;
       //@extend %scaler;
     }
-    &.shown{
+    .shown &.shown{
       opacity:1;
       visibility:visible;
     }

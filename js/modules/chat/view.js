@@ -8,6 +8,7 @@ let data=app.configure({chat:dat}).chat,
 
 let events={};
 events[`click ${data.events.choose}`]='choose';
+events[`mouseenter ${data.events.choose}`]='hover';
 
 export let ChatView=BaseBlockView.extend({
  el:data.view.el,
@@ -26,12 +27,15 @@ export let ChatView=BaseBlockView.extend({
 
   this.$msgInto=this.$(data.view.msgInto);
   this.$chInto=this.$(data.view.chInto);
-  this.next();
+  this.next(false);
   //TODO:remove
   $('.chat-wrap').css('margin-right',app.get('scrollDim'));
   //TODO:end-remove
  },
- next:function(){
+ hover:function(){
+  app.get('aggregator').trigger('sound','h-h');
+ },
+ next:function(snd=true){
   let msg,
       ch;
 
@@ -40,6 +44,8 @@ export let ChatView=BaseBlockView.extend({
    msg=$(this.msgTemplate({text:data.data[epIndex][this.ctr][this.chosen].bot,isBot:true}));
    this.$msgInto.append(msg);
    this.canChoose=false;
+   if(snd)
+    app.get('aggregator').trigger('sound','chat-r');
    if(data.data[epIndex][this.ctr][this.chosen].user)
    {
     ch=$(this.chTemplate(data.data[epIndex][this.ctr][this.chosen]));
@@ -68,13 +74,19 @@ export let ChatView=BaseBlockView.extend({
 
   if(this.canChoose&&this.chosen)
   {
+   app.get('aggregator').trigger('sound','chat-s');
    msg=$(this.msgTemplate({text:data.data[epIndex][this.ctr-1][this.chosen].user[index].msg,isBot:false}));
    this.$msgInto.append(msg);
    this.chosen=data.data[epIndex][this.ctr-1][this.chosen].user[index].what;
+   //TODO:remove
+   $('.chat-wrap').animate({scrollTop:$('.chat-wrap')[0].scrollHeight},600);
+   //TODO:end-remove
    setTimeout(()=>{
     msg.addClass(data.view.shownCls);
    },0);
-   this.next();
+   setTimeout(()=>{
+    this.next();
+   },data.soundWait);
   }
  }
 });

@@ -1,4 +1,5 @@
 export const data={
+ soundWait:600,
  dataStart:'choose0',
  data:{},
  /*data:[

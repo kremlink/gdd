@@ -1,4 +1,24 @@
 @include exports("@path:components\_game.scss"){/*@path:components\_game.scss*/
+  @include kfs(null-end){
+    25%{
+      opacity:1;
+    }
+    40%{
+      opacity:0;
+    }
+    75%{
+      opacity:1;
+    }
+    99%{
+      opacity:1;
+      background:#fff url(#{$path}fin.jpg) center/contain no-repeat;
+    }
+    100%{
+      opacity:1;
+      background:url(#{$path}fin.jpg) center/contain no-repeat;
+    }
+  };
+
   .trash-pop{
     @include abs($l:0,$r:0,$t:0,$b:0);
     //@include abs($l:-1px,$r:-1px,$t:0,$b:0);//--old
@@ -43,6 +63,37 @@
       .p-off{
         display:none;
       }
+      .prog-u{
+        z-index:2;
+      }
+    }
+    &.null-end{
+      pointer-events:auto;
+      &:before{
+        animation:null-end .2s ease-in-out forwards;
+        pointer-events:auto;
+      }
+      .video-js{
+        @include abs($l:0,$t:0,$p:fixed);
+        z-index:2;
+        border-radius:0;
+      }
+      .vid-overlay{
+        opacity:0;
+      }
+    }
+    &.null-after{
+      .prog-u{
+        z-index:0;
+      }
+    }
+    &:before{
+      content:'';
+      pointer-events:none;
+      background:#fff center/contain;
+      @include abs($l:0,$r:0,$t:0,$b:0,$p:fixed);
+      opacity:0;
+      z-index:1;
     }
     svg{
       @include abs($l:0,$t:0);
@@ -311,6 +362,9 @@
             }
           }
         }
+        .t-scroll{
+          margin-right:1.5em;
+        }
         .tab-tabs{
           display:none;
           height:100%;
@@ -481,6 +535,9 @@
         width:3em;
         height:3em;
         position:relative;
+      }
+      a{
+        color:inherit;
       }
     }
     .subtab-art:nth-child(n+2){
@@ -1021,10 +1078,11 @@
       }
     }
     .bible-item-h{
-      @include center($b:0.9em);
+      @include center($b:1.9em);
       width:100%;
       text-align:center;
       color:getc(blue);
+      font-size:.6em;
     }
     .bible-tab-name{
       @include center($l:5%);
@@ -1045,6 +1103,9 @@
       cursor:pointer;
       position:relative;
       top:1.7em;
+      &:not(.active):hover img:nth-child(3){
+        opacity:1;
+      }
       &.active{
         opacity:1;
         img{
@@ -1059,14 +1120,14 @@
       img{
         @include abs($l:0);
         width:100%;
-        &:nth-child(2){
+        &:nth-child(n+2){
           opacity:0;
         }
       }
     }
     .bible-pop-big{
-      @include abs($l:13%,$t:16%,$b:16%);
-      width:23%;
+      @include abs($l:8%,$t:12%,$b:11%);
+      width:33%;
       img{
         object-fit:contain;
         width:100%;
@@ -1109,9 +1170,6 @@
       @include trs('opacity #{$anim} ease-in-out');
       &.bot{
         text-align:left;
-        &.shown{
-          transition-delay:$anim*2;
-        }
         .chat-msg-text{
           div{
             border-color:getc(blue);

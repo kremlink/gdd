@@ -5,7 +5,13 @@ import {data as dat} from './data.js';
 
 let data=app.configure({flow:dat}).flow;
 
+let events={},
+ epIndex;
+
+events[`mouseenter ${data.view.ignore}`]='hover';
+
 export let FlowView=BaseBlockView.extend({
+ events:events,
  el:data.view.el,
  template:_.template($(data.view.template).html()),
  shift:0,
@@ -13,21 +19,24 @@ export let FlowView=BaseBlockView.extend({
  mult:0,
  dragging:false,
  initialize:function(){
-  let active=app.get('epIndex');
+  epIndex=app.get('epIndex');
 
   BaseBlockView.prototype.initialize.apply(this,[{
    data:data
   }]);
 
-  app.get('aggregator').trigger('episodes:progress',active/data.epis.amount*100);
-
-  this.$episodes=this.$(data.view.$episodes).html(this.template($.extend({},data.epis,{active:active})));
+  app.get('aggregator').trigger('episodes:progress',epIndex/data.epis.amount*100);
+  
+  this.$episodes=this.$(data.view.$episodes).html(this.template($.extend({},data.epis,{active:epIndex})));
   this.$drag=this.$(data.view.$drag);
   this.mult=parseInt(this.$drag.css('fontSize'));
   this.maxShift=(data.epis.amount-4)*11.025-0.5;
-  this.shift=-(active>2?(active>data.epis.amount-2?this.maxShift:(active-2)*11.025-11.025/2-0.5/2):0);
+  this.shift=-(epIndex>2?(epIndex>data.epis.amount-2?this.maxShift:(epIndex-2)*11.025-11.025/2-0.5/2):0);
   this.$drag.css('left',this.shift+'em');
   this.drag();
+ },
+ hover:function(){
+  app.get('aggregator').trigger('sound','h-h');
  },
  checkBoundaries:function(delta,s=false){
   let v=this.shift+delta;

@@ -11,6 +11,7 @@ events[`click ${data.events.copy}`]='copy';
 events[`click ${data.events.load}`]='load';
 events[`focus ${data.events.focus}`]='focus';
 events[`click ${data.events.clr}`]='clr';
+events[`mouseenter .${data.view.tabCls}`]='hover';
 
 export let LoadSaveView=BaseBlockView.extend({
  el:data.view.el,
@@ -44,7 +45,11 @@ export let LoadSaveView=BaseBlockView.extend({
    }
   });
  },
+ hover:function(){
+  app.get('aggregator').trigger('sound','h-h');
+ },
  lsTab:function(e){
+  app.get('aggregator').trigger('sound','h-c');
   this.$el.removeClass(data.view.tabCls+this.tabIndex);
   this.tabIndex=$(e.currentTarget).index();
   this.$el.addClass(data.view.tabCls+this.tabIndex);

@@ -17,6 +17,8 @@ events[`click ${data.events.callbTab}`]='callbTab';
 events[`click ${data.events.callbSend}`]='callbSend';
 events[`click ${data.events.callbOk}`]='callbOk';
 events[`click ${data.events.sharCopy}`]='sharCopy';
+events[`mouseenter ${data.events.tab},${data.events.subTab}`]='hover';
+
 
 export let MenuView=BaseBlockView.extend({
  el:data.view.el,
@@ -57,6 +59,9 @@ export let MenuView=BaseBlockView.extend({
 
    }
   });
+ },
+ hover:function(){
+  app.get('aggregator').trigger('sound','h-h');
  },
  sharCopy:function(){
   this.$copyFrom[0].select();
@@ -100,8 +105,12 @@ export let MenuView=BaseBlockView.extend({
   this.tabIndex=!e?e:$(e.currentTarget).index();
   this.$el.addClass(data.view.tabClsBase+this.tabIndex);
   this.$el.removeClass(data.view.refCopyCls);
+  if(e)
+   app.get('aggregator').trigger('sound','h-c');
  },
  subTab:function(e=0){
+  if(e)
+   app.get('aggregator').trigger('sound','h-c');
   this.$el.removeClass(data.view.tabClsBase+'-'+this.subTabIndex);
   this.subTabIndex=!e?e:$(e.currentTarget).index();
   this.$el.addClass(data.view.tabClsBase+'-'+this.subTabIndex);

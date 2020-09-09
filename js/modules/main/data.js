@@ -13,14 +13,20 @@ export const data={
  view:{
   el:'.trash-pop',
   template:'#trash-template',
+  activeBtnCls:'active',
   //shownCls:'shown',
   fsCls:'fs',
   mfsCls:'mfs',
   gamePlayingCls:'game-playing',
   obnul:{
-   //cls:'null',
+   cls:'null',
+   endCls:'null-end',
+   afterCls:'null-after',
    dur:'3.3s',
-   start:{ep:'9.37s',game:'10.33s',smth:'10.66s'}
+   start:{ep:'9.37s',game:'10.33s',smth:'10.66s'},
+   waitVid:2000,
+   src:'../test.mp4',
+   href:'somewhere.html'
   }
  },
  epProgress:{

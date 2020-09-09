@@ -76,12 +76,12 @@ export function init(app,modules){
      document.documentElement.requestFullscreen();
    }
    if(!app.get('_dev')&&app.get('epIndex')>0)
-    app.get('aggregator').trigger('player:playPause',true);
+    app.get('aggregator').trigger('player:playPause',{play:true});
   },
-  playPause:function(f){
-   if(f)
+  playPause:function(opts){
+   if(opts.play)
     this.$el.addClass(data.view.vidStartedOnce);
-   this.$el.toggleClass(data.view.pauseCls,!f);
+   this.$el.toggleClass(data.view.pauseCls,!opts.play);
   },
   loaded:function(el){
    this.$el.addClass(data.view.loadedCls);

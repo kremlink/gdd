@@ -3,8 +3,7 @@ import {app} from '../../bf/base.js';
 import {BaseBlockView} from '../baseBlock/view.js';
 
 import {data as dat} from './data.js';
-let data=app.configure({obnul:dat}).obnul,
-    epIndex;
+let data=app.configure({obnul:dat}).obnul;
 
 export let NullView=BaseBlockView.extend({
  el:data.view.el,
@@ -14,15 +13,13 @@ export let NullView=BaseBlockView.extend({
    data:data
   }]);
 
-  epIndex=app.get('epIndex');
-
   this.$top=this.$(data.view.$top);
   this.$bottom=this.$(data.view.$bottom);
   this.$bulbs=$(data.view.$bulbs);
-
-  this.lottie();
  },
  lottie:function(){
+  app.get('aggregator').trigger('sound','obnul');
+
   this.topAnim=lottie.loadAnimation({
    container:this.$top[0],
    renderer:'svg',
@@ -43,5 +40,6 @@ export let NullView=BaseBlockView.extend({
   });
 
   this.topAnim.addEventListener('complete',()=>app.get('aggregator').trigger('trash:obnulEnded'));
+  //setTimeout(()=>app.get('aggregator').trigger('trash:obnulEnded'),1000)
  }
 });

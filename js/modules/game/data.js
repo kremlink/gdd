@@ -1,5 +1,6 @@
 export const data={
  waitWin:1000,
+ last:3,
  events:{
   'winTab':'.win-tab'
  },

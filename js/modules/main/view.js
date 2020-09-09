@@ -8,8 +8,10 @@ import {ChatView} from '../chat/view.js';
 import {LoadSaveView} from '../loadsave/view.js';
 import {MenuView} from '../menu/view.js';
 import {NullView} from '../null/view.js';
+import {SoundMgr} from '../soundMgr/view.js';
 
-let events={};
+let events={},
+ epIndex;
 //events[`click ${data.events.return}`]='toVideo';
 events[`click ${data.events.play}`]='topBtn';
 events[`click ${data.events.game}`]='gameStart';
@@ -25,6 +27,7 @@ export let MainView=Backbone.View.extend({
  events:events,
  el:data.view.el,
  initialize:function(){
+  epIndex=app.get('epIndex');
   //this.listenTo(app.get('aggregator'),'trash:toggle',this.toggle);//--old
   this.listenTo(app.get('aggregator'),'trash:fs',this.fs);
   this.listenTo(app.get('aggregator'),'game:end',this.gameEnd);
@@ -38,6 +41,9 @@ export let MainView=Backbone.View.extend({
   this.ready();
  },
  ready:function(){
+  new SoundMgr;
+  //setTimeout(()=>app.get('aggregator').trigger('sound','btn'),2000);//TODO:remove
+
   this.gameView=new GameView;
   this.flowView=new FlowView;
   this.mapView=new MapView;
@@ -47,23 +53,20 @@ export let MainView=Backbone.View.extend({
   this.menuView=new MenuView;
   this.nullView=new NullView;
 
-  if(app.get('epIndex')>0)
+  if(epIndex>0)
    this.episodes();else
-   this.chat();
+   this.chat({currentTarget:this.$(data.events.chat)});
   //this.obnul();
 
   //app.get('aggregator').trigger('trash:toggle',true);//--old TODO:remove
  },
- obnul:function(){
-  this.switchTab(this.nullView);
-  this.nullView.toggle(true);
-  this.$el.addClass(data.view.obnul.cls);
-  this.$epProgress.css({transitionDuration:data.view.obnul.dur,transitionDelay:data.view.obnul.start.ep,width:0});
-  this.$gameProgress.css({transitionDuration:data.view.obnul.dur,transitionDelay:data.view.obnul.start.game,width:0});
-  this.$smthProgress.css({transitionDuration:data.view.obnul.dur,transitionDelay:data.view.obnul.start.smth,width:0});
- },
  obnulEnded:function(){
-
+  this.$el.addClass(data.view.obnul.endCls);
+  /*setTimeout(()=>{
+   this.$el.addClass(data.view.obnul.afterCls);
+   this.episodes();
+   app.get('aggregator').trigger('player:playPause',{play:true,end:{src:data.view.obnul.src,href:data.view.obnul.href}});
+  },data.view.obnul.waitVid);*/
  },
  epProgress:function(p){
   this.$epProgress.css('width',`${p}%`);
@@ -82,21 +85,18 @@ export let MainView=Backbone.View.extend({
    this.activeTab.toggle(false);
   this.activeTab=tab;
 
-  app.get('aggregator').trigger('player:playPause',false);
+  app.get('aggregator').trigger('player:playPause',{play:false});
  },
- topBtn:function(){
-  //this.switchTab(this.playerView);
-  //this.playerView.toggle(true);
-  if(this.activeTab===this.flowView)
-   app.get('aggregator').trigger('player:playPause',true);
-  if(this.activeTab===this.gameView)
-   this.gameView.play();
- },
- gameStart:function(){
-  this.switchTab(this.gameView);
-  //this.$el.addClass(data.view.gameActiveCls);
-  this.gameView.toggle(true);
-  this.$gameProgress.css('width','0px');
+ clickBtn:function(e,what){
+  if($(e.currentTarget).hasClass(data.view.activeBtnCls))
+  {
+   this.switchTab(what);
+   what.toggle(true);
+   app.get('aggregator').trigger('sound','btn');
+  }else
+  {
+   app.get('aggregator').trigger('sound','btn-inac');
+  }
  },
  gameEnd:function(){
   this.$el.removeClass(data.view.gamePlayingCls);
@@ -105,28 +105,58 @@ export let MainView=Backbone.View.extend({
   this.$el.addClass(data.view.gamePlayingCls);
   this.$gameProgress.css('width',`${p}%`);
  },
- episodes:function(){
+ //====btns====
+ obnul:function(){
+  if(epIndex===10)
+  {
+   app.get('aggregator').trigger('sound','obnul-c');
+   this.switchTab(this.nullView);
+   this.nullView.toggle(true);
+   this.nullView.lottie();
+   this.$el.addClass(data.view.obnul.cls);
+   this.$epProgress.css({transitionDuration:data.view.obnul.dur,transitionDelay:data.view.obnul.start.ep,width:0});
+   this.$gameProgress.css({transitionDuration:data.view.obnul.dur,transitionDelay:data.view.obnul.start.game,width:0});
+   this.$smthProgress.css({transitionDuration:data.view.obnul.dur,transitionDelay:data.view.obnul.start.smth,width:0});
+  }else
+  {
+   app.get('aggregator').trigger('sound','btn-inac');
+  }
+ },
+ topBtn:function(){
+  //this.switchTab(this.playerView);
+  //this.playerView.toggle(true);
+  if(this.activeTab===this.flowView)
+   app.get('aggregator').trigger('player:playPause',{play:true});
+  if(this.activeTab===this.gameView)
+   this.gameView.play();
+  app.get('aggregator').trigger('sound','play');
+ },
+ gameStart:function(){
+  this.switchTab(this.gameView);
+  //this.$el.addClass(data.view.gameActiveCls);
+  this.gameView.toggle(true);
+  this.$gameProgress.css('width','0px');
+  app.get('aggregator').trigger('sound','btn');
+ },
+ episodes:function(e){
   this.switchTab(this.flowView);
   this.flowView.toggle(true);
+  if(e)
+   app.get('aggregator').trigger('sound','btn');
  },
- map:function(){
-  this.switchTab(this.mapView);
-  this.mapView.toggle(true);
+ map:function(e){
+  this.clickBtn(e,this.mapView);
  },
- bible:function(){
-  this.switchTab(this.bibleView);
-  this.bibleView.toggle(true);
+ bible:function(e){
+  this.clickBtn(e,this.bibleView);
  },
- chat:function(){
-  this.switchTab(this.chatView);
-  this.chatView.toggle(true);
+ chat:function(e){
+  this.clickBtn(e,this.chatView);
  },
- loadsave:function(){
-  this.switchTab(this.loadSaveView);
-  this.loadSaveView.toggle(true);
+ loadsave:function(e){
+  this.clickBtn(e,this.loadSaveView);
  },
- menu:function(){
-  this.switchTab(this.menuView);
-  this.menuView.toggle(true);
+ menu:function(e){
+  this.clickBtn(e,this.menuView);
  }
 });

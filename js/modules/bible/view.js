@@ -1,18 +1,21 @@
 import {utils} from '../../bf/lib/utils.js';
 import {app} from '../../bf/base.js';
-import {data} from './data.js';
+//import {data} from './data.js';
+import {data as dat} from './data.js';
 import {Scroll} from '../scroll/scroll.js';
 import {data as scrollData} from '../scroll/data.js';
 import {BaseBlockView} from '../baseBlock/view.js';
 
-app.configure({scroll:data.scroll});
+let data=app.configure({bible:dat}).bible;
 
-let scroll=Scroll();
+let scroll=Scroll(),
+    epIndex;
 
 let events={};
 events[`click ${data.events.tab}`]='tab';
 events[`click ${data.events.item}`]='pop';
 events[`click ${data.events.close}`]='unpop';
+events[`mouseenter ${data.events.close},${data.events.tab}`]='hover';
 
 export let BibleView=BaseBlockView.extend({
  el:data.view.el,
@@ -21,12 +24,14 @@ export let BibleView=BaseBlockView.extend({
  tabTemplate:_.template($(data.view.tabTemplate).html()),
  popTemplate:_.template($(data.view.popTemplate).html()),
  initialize:function(){
+  epIndex=app.get('epIndex');
+
   BaseBlockView.prototype.initialize.apply(this,[{
    data:data
   }]);
 
   this.scrollDim=app.get('scrollDim');
-  this.$el.html(this.template({margin:this.scrollDim,data:data.data}));
+  this.$el.html(this.template({margin:this.scrollDim,data:data.data[epIndex]}));
   this.$itemsContainer=this.$(data.view.$itemsContainer);
   this.$itemsWrap=this.$(data.view.$itemsWrap);
   this.$pop=this.$(data.view.$pop);
@@ -37,6 +42,9 @@ export let BibleView=BaseBlockView.extend({
   this.popScroll=null;
   this.tabScroll=null;
   this.tab(null);
+ },
+ hover:function(){
+  app.get('aggregator').trigger('sound','h-h');
  },
  setScroll:function(what,container){
   this[what]=app.set({
@@ -66,9 +74,9 @@ export let BibleView=BaseBlockView.extend({
     this.tabScroll.destroy();
    this.$itemsContainer.html(this.tabTemplate({
     id:id,
-    data:data.data[id].items
+    data:data.data[epIndex][id].items
    }));
-   this.$name.text(data.data[id].name);
+   this.$name.text(data.data[epIndex][id].name);
    //this.setScroll('tabScroll',this.$itemsWrap);//TODO: make scroll work!
   }
  },
@@ -76,12 +84,14 @@ export let BibleView=BaseBlockView.extend({
   let id=$(e.currentTarget).data(data.view.dataId),
   tid=this.$currentTab.data(data.view.dataClick);
 
-  this.$popContent=$(this.popTemplate(_.extend({margin:this.scrollDim,tid:tid},data.data[this.$currentTab.data(data.view.dataClick)].items.filter(o=>o.id.toString()===id.toString())[0])));
+  this.$popContent=$(this.popTemplate(_.extend({margin:this.scrollDim,tid:tid},data.data[epIndex][this.$currentTab.data(data.view.dataClick)].items.filter(o=>o.id.toString()===id.toString())[0])));
   this.$pop.append(this.$popContent).addClass(data.view.shownCls);
 
   this.setScroll('popScroll',this.$pop);
+  app.get('aggregator').trigger('sound','pop');
  },
  unpop:function(){
+  app.get('aggregator').trigger('sound','close');
   this.popScroll.destroy();
   this.$popContent.remove();
   this.$pop.removeClass(data.view.shownCls);

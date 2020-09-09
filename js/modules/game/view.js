@@ -8,6 +8,7 @@ import {BaseBlockView} from '../baseBlock/view.js';
 
 let events={};
 events[`click ${data.events.winTab}`]='winTab';
+events[`mouseenter ${data.events.winTab}`]='hover';
 
 export let GameView=BaseBlockView.extend({
  el:data.view.el,
@@ -39,7 +40,7 @@ export let GameView=BaseBlockView.extend({
   this.listenTo(this.bins,'reset',this.addBins);
   this.listenTo(this.bins,'change:amount',this.trashPut);
   //this.bins.reset(data.data[this.diff].binData);
-  this.listenTo(app.get('aggregator'),'game:trash-failed game:trash-caught',this.trashCount);
+  this.listenTo(app.get('aggregator'),'game:trash-failed',()=>this.trashCount(true));
   this.listenTo(app.get('aggregator'),'game:trash-caught',this.trashCought);
 
   this.$failLine=this.$(data.failLine.el);
@@ -47,12 +48,16 @@ export let GameView=BaseBlockView.extend({
   this.setDiff();
   this.gameCtrls();
  },
+ hover:function(){
+  app.get('aggregator').trigger('sound','h-h');
+ },
  setDiff:function(){
   let self=this;
 
   this.$diffCh.on('click',function(){
    let ind=$(this).index();
 
+   app.get('aggregator').trigger('sound','g-diff');
    self.$el.removeClass(data.view.diffCls[self.diffs[self.diffIndex]]);
    if(ind===0&&self.diffIndex>0)
     self.diffIndex--;
@@ -82,11 +87,16 @@ export let GameView=BaseBlockView.extend({
    this.generateTrash();
   }
  },
- trashCount:function(){
+ trashCount:function(failed){
   this.trashDone++;
   this.$pRem.text(100-Math.round(100*this.trashDone/data.data[this.diffs[this.diffIndex]].trashData.length));
+  if(this.trashDone===data.data[this.diffs[this.diffIndex]].trashData.length-data.last)
+   app.get('aggregator').trigger('sound','g-rem-l');
+  if(failed)
+   app.get('aggregator').trigger('sound','g-fail');
   if(this.trashDone===data.data[this.diffs[this.diffIndex]].trashData.length)
   {
+   app.get('aggregator').trigger('sound','g-end');
    setTimeout(()=>{
     app.get('aggregator').trigger('game:end');
     this.$el.removeClass(data.view.playCls).addClass(data.view.endCls[0]);
@@ -98,8 +108,10 @@ export let GameView=BaseBlockView.extend({
  trashCought:function(){//TODO: make this correct
   this.trashToBin++;
   this.$pQual.css('width',20+'%');
+  this.trashCount(false);
  },
  winTab:function(e){
+  app.get('aggregator').trigger('sound','h-c');
   this.$el.removeClass(data.view.endCls[0]+' '+data.view.endCls[1]).addClass(data.view.endCls[$(e.currentTarget).index()]);
  },
  toggle:function(f){
@@ -171,10 +183,15 @@ export let GameView=BaseBlockView.extend({
 
   if(v>m.previousAttributes().amount)
   {
+   app.get('aggregator').trigger('sound','g-put');
+   app.get('aggregator').trigger('sound','g-put-p');
    this.progress++;
    p=Math.round(100*this.progress/data.data[this.diffs[this.diffIndex]].trashData.length);
    this.$pDone.css('width',p+'%');
    app.get('aggregator').trigger('game:progress',p);//Math.ceil((n+1)/10)*10
+  }else
+  {
+   app.get('aggregator').trigger('sound','g-fail');
   }
  },
  addBins:function(){

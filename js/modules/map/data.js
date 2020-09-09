@@ -1,7 +1,7 @@
 export const data={
  url:'',
  data:[],
- omit:['left','top','text','h','reacts'],
+ omit:['left','top','text','h','reacted'],
  events:{
   'marker':'.map-mark',
   'close':'.uni-pop-close',
@@ -15,7 +15,9 @@ export const data={
   el:'.trash-block.map',
   template:'#map-template',
   popTemplate:'#map-pop-template',
+  popTextTemplate:'#map-pop-text-template',
   $pop:'.uni-pop',
+  $popText:'.uni-pop-text',
   $map:'.map-block',
   $drag:'.map-inner',
   $progress:'.the-progress',

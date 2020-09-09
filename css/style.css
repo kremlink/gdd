@@ -2,6 +2,7 @@
 /*@path:core\_base.scss*/
 /*@path:core\_mixins.scss*/
 /*@path:core\_exts.scss*/
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@500;700&display=swap");
 .trash-pop .ls-form input, .trash-pop .callb-ch, .trash-pop .callb-form input, .trash-pop .callb-form textarea, .trash-pop .menu-subtabs {
   box-sizing: border-box;
 }
@@ -486,6 +487,25 @@ body {
 
 /*@path:components\_footer.scss*/
 /*@path:components\_game.scss*/
+@keyframes null-end {
+  25% {
+    opacity: 1;
+  }
+  40% {
+    opacity: 0;
+  }
+  75% {
+    opacity: 1;
+  }
+  99% {
+    opacity: 1;
+    background: #fff url(../images/fin.jpg) center/contain no-repeat;
+  }
+  100% {
+    opacity: 1;
+    background: url(../images/fin.jpg) center/contain no-repeat;
+  }
+}
 .trash-pop {
   position: absolute;
   left: 0;
@@ -538,6 +558,41 @@ body {
 }
 .trash-pop.null .p-off {
   display: none;
+}
+.trash-pop.null .prog-u {
+  z-index: 2;
+}
+.trash-pop.null-end {
+  pointer-events: auto;
+}
+.trash-pop.null-end:before {
+  animation: null-end 0.2s ease-in-out forwards;
+  pointer-events: auto;
+}
+.trash-pop.null-end .video-js {
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 2;
+  border-radius: 0;
+}
+.trash-pop.null-end .vid-overlay {
+  opacity: 0;
+}
+.trash-pop.null-after .prog-u {
+  z-index: 0;
+}
+.trash-pop:before {
+  content: "";
+  pointer-events: none;
+  background: #fff center/contain;
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  opacity: 0;
+  z-index: 1;
 }
 .trash-pop svg {
   position: absolute;
@@ -796,6 +851,9 @@ body {
 .trash-pop .trash-block.map .uni-pop.reacted ~ .bottom-panel .map-b-p-perc {
   display: block;
 }
+.trash-pop .trash-block.map .t-scroll {
+  margin-right: 1.5em;
+}
 .trash-pop .trash-block.map .tab-tabs {
   display: none;
   height: 100%;
@@ -992,6 +1050,9 @@ body {
   width: 3em;
   height: 3em;
   position: relative;
+}
+.trash-pop .subtab-block a {
+  color: inherit;
 }
 .trash-pop .subtab-art:nth-child(n+2) {
   margin-top: 0.8em;
@@ -1613,11 +1674,12 @@ body {
 .trash-pop .bible-item-h {
   position: absolute;
   left: 50%;
-  bottom: 0.9em;
+  bottom: 1.9em;
   transform: translate(-50%, 0);
   width: 100%;
   text-align: center;
   color: #A0D7F6;
+  font-size: 0.6em;
 }
 .trash-pop .bible-tab-name {
   position: absolute;
@@ -1645,6 +1707,9 @@ body {
   position: relative;
   top: 1.7em;
 }
+.trash-pop .bible-tab:not(.active):hover img:nth-child(3) {
+  opacity: 1;
+}
 .trash-pop .bible-tab.active {
   opacity: 1;
 }
@@ -1659,15 +1724,15 @@ body {
   left: 0;
   width: 100%;
 }
-.trash-pop .bible-tab img:nth-child(2) {
+.trash-pop .bible-tab img:nth-child(n+2) {
   opacity: 0;
 }
 .trash-pop .bible-pop-big {
   position: absolute;
-  left: 13%;
-  top: 16%;
-  bottom: 16%;
-  width: 23%;
+  left: 8%;
+  top: 12%;
+  bottom: 11%;
+  width: 33%;
 }
 .trash-pop .bible-pop-big img {
   object-fit: contain;
@@ -1721,9 +1786,6 @@ body {
 }
 .trash-pop .chat-msg.bot {
   text-align: left;
-}
-.trash-pop .chat-msg.bot.shown {
-  transition-delay: 0.6s;
 }
 .trash-pop .chat-msg.bot .chat-msg-text div {
   border-color: #A0D7F6;
@@ -2081,7 +2143,7 @@ body {
   right: 0;
   bottom: 0;
 }
-.uni-pop.shown {
+.shown .uni-pop.shown {
   opacity: 1;
   visibility: visible;
 }

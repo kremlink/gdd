@@ -3,6 +3,7 @@ import {data} from './data.js';
 
 export let PlayerView=Backbone.View.extend({
  el:data.view.el,
+ end:false,
  initialize:function(){
   if(this.el)
   {
@@ -34,7 +35,7 @@ export let PlayerView=Backbone.View.extend({
   //this.setElement(data.view.el);//--old
   app.get('aggregator').trigger('player:ready',this.player.el());
   this.player.on('pause',()=>{
-   app.get('aggregator').trigger('player:playPause',false);
+   app.get('aggregator').trigger('player:playPause',{play:false,self:true});
    if(app.get('isMobile'))
    {
     app.get('aggregator').trigger('trash:fs',false);
@@ -46,17 +47,20 @@ export let PlayerView=Backbone.View.extend({
    //app.get('aggregator').trigger('trash:toggle',true);//--old
   });
   this.player.on('play',()=>{
-   app.get('aggregator').trigger('player:playPause',true);
+   app.get('aggregator').trigger('player:playPause',{play:true,self:true});
    //app.get('aggregator').trigger('trash:toggle',false);//--old
-   if(app.get('isMobile'))
+   if(!this.end)
    {
-    if(!document.fullscreenElement)
-     document.documentElement.requestFullscreen();
-    app.get('aggregator').trigger('trash:fs',true);
-   }else
-   {
-    if(!app.get('_dev'))
-     this.player.requestFullscreen();
+    if(app.get('isMobile'))
+    {
+     if(!document.fullscreenElement)
+      document.documentElement.requestFullscreen();
+     app.get('aggregator').trigger('trash:fs',true);
+    }else
+    {
+     if(!app.get('_dev'))
+      this.player.requestFullscreen();
+    }
    }
   });
   if(app.get('isMobile'))
@@ -93,7 +97,19 @@ export let PlayerView=Backbone.View.extend({
 
   return this;
  },*/
- playPause:function(f){
-  this.player[f?'play':'pause']();
+ playPause:function(opts){
+  if(!opts.self)
+  {
+   if(opts.end)
+   {
+    this.end=true;
+    this.player.src({
+     src:opts.end.src,
+     type:'video/mp4'
+    });
+    this.player.on('ended',()=>location.href=opts.end.href);
+   }
+   this.player[opts.play?'play':'pause']();
+  }
  }
 });
