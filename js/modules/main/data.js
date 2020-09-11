@@ -23,7 +23,7 @@ export const data={
    endCls:'null-end',
    afterCls:'null-after',
    dur:'3.3s',
-   start:{ep:'9.37s',game:'10.33s',smth:'10.66s'},
+   start:{ep:'9.37s',game:'10.33s',react:'10.66s'},
    waitVid:0,
    srcGood:'',
    srcBad:'',
@@ -36,7 +36,7 @@ export const data={
  gameProgress:{
   el:'.prog2 .prog-ac'
  },
- smthProgress:{
+ reactProgress:{
   el:'.prog3 .prog-ac'
  }
 };

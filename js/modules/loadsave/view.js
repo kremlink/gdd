@@ -31,19 +31,14 @@ export let LoadSaveView=BaseBlockView.extend({
   this.listenTo(this.model,'invalid',()=>{
    this.$el.addClass(data.view.errCls);
   });
-  this.listenTo(this.model,'sync',(m,r)=>{
-   if(r.error)
-   {
-    this.model.trigger('invalid');
-   }else
-   {
-    if(r.type==='load')
-     this.$el.addClass(data.view.endSaveCls);
-    setTimeout(()=>{
-     location.reload();
-    },r.type==='load'?data.saveReloadTime:0);
-   }
-  });
+  this.listenTo(this.model,'change:type',this.changeType);
+ },
+ changeType:function(m,v){
+  if(v==='load')
+   this.$el.addClass(data.view.endSaveCls);
+  setTimeout(()=>{
+   location.reload();
+  },v==='load'?data.saveReloadTime:0);
  },
  hover:function(){
   app.get('aggregator').trigger('sound','h-h');
@@ -63,9 +58,9 @@ export let LoadSaveView=BaseBlockView.extend({
   this.$copyFrom[0].select();
   document.execCommand('copy');
  },
- isValid:function(v){
+ /*isValid:function(v){
   return $.trim(v)==='1';
- },
+ },*/
  load:function(){
   this.model.save({type:'load',value:this.$loadFrom.val()});
  },

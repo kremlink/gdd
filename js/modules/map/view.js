@@ -24,6 +24,7 @@ events[`mouseenter ${data.events.zoomIn},${data.events.zoomOut},${data.events.cl
 export let MapView=BaseBlockView.extend({
  el:data.view.el,
  events:events,
+ marksCount:0,
  currTab:null,
  dragging:false,
  mult:0,
@@ -31,6 +32,7 @@ export let MapView=BaseBlockView.extend({
  zoomed:false,
  dragBounds:{h:0,v:0},
  reactedTab:{},
+ reactedCtr:0,
  template:_.template($(data.view.template).html()),
  popTemplate:_.template($(data.view.popTemplate).html()),
  popTextTemplate:_.template($(data.view.popTextTemplate).html()),
@@ -57,6 +59,22 @@ export let MapView=BaseBlockView.extend({
   this.dragBounds.v=data.view.dragW*data.view.dragP/4;
   this.mult=parseInt(this.$drag.css('fontSize'));
   this.drag();
+
+  this.marksCount=(()=>{
+   let i=0;
+
+   for(let x of Object.values(data.data))
+   {
+    i+=x.length;
+    x.forEach(o=>{
+     if(o.react)
+      this.reactedCtr++;
+    });
+   }
+
+   return i;
+  })();
+  app.get('aggregator').trigger('react:progress',this.reactedCtr/this.marksCount*100);
  },
  hover:function(){
   app.get('aggregator').trigger('sound','h-h');
@@ -152,6 +170,8 @@ export let MapView=BaseBlockView.extend({
   this.progress();
   this.renderReacted();
   this.renderPopText(true);
+  this.reactedCtr++;
+  app.get('aggregator').trigger('react:progress',this.reactedCtr/this.marksCount*100);
  },
  checkBoundaries:function(delta={},s=false){
   let v={x:this.shift.x+delta.x,y:this.shift.y+delta.y};

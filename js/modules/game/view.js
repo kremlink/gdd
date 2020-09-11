@@ -98,6 +98,11 @@ export let GameView=BaseBlockView.extend({
   {
    app.get('aggregator').trigger('sound','g-end');
    setTimeout(()=>{
+    let p=Math.round(100*this.progress/data.data[this.diffs[this.diffIndex]].trashData.length);
+    //TODO: make p correct
+    app.get('aggregator').trigger('game:progress',p);//Math.ceil((n+1)/10)*10
+    this.$pQual.css('width',p+'%');
+
     app.get('aggregator').trigger('game:end');
     this.$el.removeClass(data.view.playCls).addClass(data.view.endCls[0]);
     this.trashDone=0;
@@ -105,9 +110,8 @@ export let GameView=BaseBlockView.extend({
    },data.waitWin);
   }
  },
- trashCought:function(){//TODO: make this correct
+ trashCought:function(){
   this.trashToBin++;
-  this.$pQual.css('width',20+'%');
   this.trashCount(false);
  },
  winTab:function(e){
@@ -188,7 +192,7 @@ export let GameView=BaseBlockView.extend({
    this.progress++;
    p=Math.round(100*this.progress/data.data[this.diffs[this.diffIndex]].trashData.length);
    this.$pDone.css('width',p+'%');
-   app.get('aggregator').trigger('game:progress',p);//Math.ceil((n+1)/10)*10
+   //app.get('aggregator').trigger('game:progress',p);//Math.ceil((n+1)/10)*10
   }else
   {
    app.get('aggregator').trigger('sound','g-fail');

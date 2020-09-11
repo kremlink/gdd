@@ -1,6 +1,5 @@
 export const data={
  url:'',
- uid:'',
  copy:'',
  saveReloadTime:2000,
  events:{

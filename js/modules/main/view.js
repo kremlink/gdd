@@ -35,11 +35,12 @@ export let MainView=Backbone.View.extend({
   this.listenTo(app.get('aggregator'),'game:end',this.gameEnd);
   this.listenTo(app.get('aggregator'),'game:progress',this.gameProgress);
   this.listenTo(app.get('aggregator'),'episodes:progress',this.epProgress);
+  this.listenTo(app.get('aggregator'),'react:progress',this.reactProgress);
   this.listenTo(app.get('aggregator'),'trash:obnulEnded',this.obnulEnded);
 
   this.$gameProgress=this.$(data.gameProgress.el);
   this.$epProgress=this.$(data.epProgress.el);
-  this.$smthProgress=this.$(data.smthProgress.el);
+  this.$reactProgress=this.$(data.reactProgress.el);
   this.ready();
  },
  ready:function(){
@@ -107,6 +108,9 @@ export let MainView=Backbone.View.extend({
   this.$el.addClass(data.view.gamePlayingCls);
   this.$gameProgress.css('width',`${p}%`);
  },
+ reactProgress:function(p){
+  this.$reactProgress.css('width',`${p}%`);
+ },
  //====btns====
  obnul:function(){
   if(epIndex===10)
@@ -118,7 +122,7 @@ export let MainView=Backbone.View.extend({
    this.$el.addClass(data.view.obnul.cls);
    this.$epProgress.css({transitionDuration:data.view.obnul.dur,transitionDelay:data.view.obnul.start.ep,width:0});
    this.$gameProgress.css({transitionDuration:data.view.obnul.dur,transitionDelay:data.view.obnul.start.game,width:0});
-   this.$smthProgress.css({transitionDuration:data.view.obnul.dur,transitionDelay:data.view.obnul.start.smth,width:0});
+   this.$reactProgress.css({transitionDuration:data.view.obnul.dur,transitionDelay:data.view.obnul.start.react,width:0});
   }else
   {
    app.get('aggregator').trigger('sound','btn-inac');

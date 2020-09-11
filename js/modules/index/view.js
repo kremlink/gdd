@@ -44,7 +44,7 @@ export function init(app,modules){
    document.fonts.ready.then(()=>this.prepare(),()=>this.prepare());
   },
   prepare:function(){//inconsistent loadeddata event with multiple videos
-   let imgs=[],
+   /*let imgs=[],
     wait=[];
 
    for(let [x,y] of Object.entries(data.preload))
@@ -62,8 +62,8 @@ export function init(app,modules){
     }
     wait.push(app.get('lib.utils.imgsReady')({src:imgs}));
    }
-   $.when(wait).then(()=>new PlayerView);
-   //$.when(1).then(()=>new PlayerView);
+   $.when(wait).then(()=>new PlayerView);*/
+   $.when(1).then(()=>new PlayerView);
   },
   start:function(){
    this.$el.addClass(data.view.startCls);
