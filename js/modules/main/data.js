@@ -24,9 +24,10 @@ export const data={
    afterCls:'null-after',
    dur:'3.3s',
    start:{ep:'9.37s',game:'10.33s',smth:'10.66s'},
-   waitVid:2000,
-   src:'../test.mp4',
-   href:'somewhere.html'
+   waitVid:0,
+   srcGood:'',
+   srcBad:'',
+   href:''
   }
  },
  epProgress:{

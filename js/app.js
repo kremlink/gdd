@@ -11,7 +11,7 @@ const dataApp=app.get('helpers.html').data('app'),
 //------------------------
 app.init({
  //plugins:[Toggle,Bar],
- plugins:[Bar],
+ plugins:[Bar,{object:utils,name:'utils'}],
  settings:{}//app specific like impPath
 });
 //------------------------

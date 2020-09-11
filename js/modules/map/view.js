@@ -2,7 +2,7 @@ import {MapMarkerModel} from './model.js';
 import {utils} from '../../bf/lib/utils.js';
 import {app} from '../../bf/base.js';
 //import {Scroll} from '../scroll/scroll.js';
-import {data as scrollData} from '../scroll/data.js';
+//import {data as scrollData} from '../scroll/data.js';
 import {data as dat} from './data.js';
 import {BaseBlockView} from '../baseBlock/view.js';
 

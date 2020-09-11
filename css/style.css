@@ -551,7 +551,6 @@ body {
 }
 .trash-pop.game-playing .return-btn, .trash-pop.game-playing .game-btn, .trash-pop.game-playing .videos-btn, .trash-pop.game-playing .map-btn, .trash-pop.game-playing .book-btn, .trash-pop.game-playing .chat-btn, .trash-pop.game-playing .null-btn, .trash-pop.game-playing .menu-btn, .trash-pop.game-playing .load-save-btn {
   pointer-events: none;
-  opacity: 0.2;
 }
 .trash-pop.null {
   pointer-events: none;
@@ -866,10 +865,13 @@ body {
   flex-flow: row wrap;
   align-items: center;
 }
-.trash-pop .trash-block.map .tab-tab.shown svg {
+.trash-pop .trash-block.map .tab-tab:not(.shown):hover svg:nth-child(2) {
   display: block;
 }
-.trash-pop .trash-block.map .tab-tab svg + svg {
+.trash-pop .trash-block.map .tab-tab.shown svg:nth-child(1) {
+  display: block;
+}
+.trash-pop .trash-block.map .tab-tab svg:nth-child(3) {
   position: relative;
   display: block;
 }
@@ -1197,8 +1199,8 @@ body {
   display: flex;
 }
 .trash-pop .auth-item:nth-child(n+2) {
-  margin-top: 0.2em;
-  padding-top: 0.2em;
+  margin-top: 0.5em;
+  padding-top: 0.5em;
   border-top: 0.04em solid #67BFF1;
 }
 .trash-pop .auth-item div {
@@ -1396,6 +1398,9 @@ body {
 }
 .trash-pop .game-end-block {
   display: none;
+}
+.trash-pop .game-end-block svg {
+  background: #111419;
 }
 .trash-pop .game-win-text {
   position: absolute;
@@ -1833,7 +1838,7 @@ body {
   padding: 0 1em;
   text-align: left;
   color: #67BFF1;
-  text-shadow: 0 0 11px rgba(103, 191, 241, 0.66), 0 0 20px rgba(103, 191, 241, 0.5);
+  text-shadow: 0 0 11px rgba(103, 191, 241, 0.33), 0 0 20px rgba(103, 191, 241, 0.25);
   display: flex;
   align-items: center;
 }
@@ -1903,6 +1908,10 @@ body {
 .trash-pop .ls-copy-from {
   pointer-events: none;
 }
+.trash-pop .ls-copy-from::selection {
+  color: #000;
+  background: #A0D7F6;
+}
 .trash-pop .ls-btn {
   position: relative;
   width: 15em;
@@ -1910,7 +1919,8 @@ body {
   cursor: pointer;
 }
 .trash-pop .ls-btn.ls-clr-btn {
-  margin: -0.1em 0 0 -1em;
+  margin: 0.1em 0 0 -1.25em;
+  height: 4.8em;
 }
 .trash-pop .ls-bottom {
   position: absolute;

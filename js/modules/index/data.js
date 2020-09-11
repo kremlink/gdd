@@ -1,4 +1,5 @@
 export const data={
+ preload:{},
  events:{
   'start':'.loader-pop .btn',
  },

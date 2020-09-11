@@ -1,5 +1,5 @@
 import {app} from '../../bf/base.js';
-import {data} from './data.js';
+import {data as dat} from './data.js';
 import {GameView} from '../game/view.js';
 import {FlowView} from '../flow/view.js';
 import {MapView} from '../map/view.js';
@@ -10,8 +10,10 @@ import {MenuView} from '../menu/view.js';
 import {NullView} from '../null/view.js';
 import {SoundMgr} from '../soundMgr/view.js';
 
-let events={},
+let data=app.configure({main:dat}).main,
+ events={},
  epIndex;
+
 //events[`click ${data.events.return}`]='toVideo';
 events[`click ${data.events.play}`]='topBtn';
 events[`click ${data.events.game}`]='gameStart';
@@ -62,11 +64,11 @@ export let MainView=Backbone.View.extend({
  },
  obnulEnded:function(){
   this.$el.addClass(data.view.obnul.endCls);
-  /*setTimeout(()=>{
+  setTimeout(()=>{
    this.$el.addClass(data.view.obnul.afterCls);
    this.episodes();
-   app.get('aggregator').trigger('player:playPause',{play:true,end:{src:data.view.obnul.src,href:data.view.obnul.href}});
-  },data.view.obnul.waitVid);*/
+   app.get('aggregator').trigger('player:playPause',{play:true,end:{src:data.view.obnul[1?'badSrc':'goodSrc'],href:data.view.obnul.href}});
+  },data.view.obnul.waitVid);
  },
  epProgress:function(p){
   this.$epProgress.css('width',`${p}%`);

@@ -2,15 +2,14 @@
 import {app} from '../../bf/base.js';
 import {MainView} from '../main/view.js';
 import {PlayerView} from '../player/view.js';
-import {data} from './data.js';
 
-
+import {data as dat} from './data.js';
 export {data} from './data.js';
+let data=app.configure({index:dat}).index;
 
-//import {data as dat} from './data.js';
-//let data=app.configure({index:dat}).index;
+let events={},
+    epIndex;
 
-let events={};
 events[`click ${data.events.start}`]='start';
 
 export function init(app,modules){
@@ -22,6 +21,8 @@ export function init(app,modules){
   el:data.view.el,
   initialize:function(){
    let mob=!matchMedia(data.minViewport).matches;
+
+   epIndex=app.get('epIndex');
 
    new MainView;
 
@@ -40,10 +41,10 @@ export function init(app,modules){
    this.listenTo(app.get('aggregator'),'player:playPause',this.playPause);
    this.listenTo(app.get('aggregator'),'player:ready',this.loaded);
    document.addEventListener('contextmenu',e=>e.preventDefault());
-   document.fonts.ready.then(()=>this.prepare());
+   document.fonts.ready.then(()=>this.prepare(),()=>this.prepare());
   },
   prepare:function(){//inconsistent loadeddata event with multiple videos
-   /*let imgs=[],
+   let imgs=[],
     wait=[];
 
    for(let [x,y] of Object.entries(data.preload))
@@ -51,22 +52,18 @@ export function init(app,modules){
     if(y.imgs){
      imgs=y.imgs.map(t=>x+t);
     }
-    if(y.i)
+    if(y.j)
     {
      imgs=[];
-     for(let i=1;i<=y.i;i++)
-     {
+     for(let i=1;i<=y.j.length;i++)
       for(let j=1;j<=y.j[i-1];j++)
-      {
-       imgs.push(x+y.tmpl1.replace('[i]',i).replace('[j]',j));
-       imgs.push(x+y.tmpl2.replace('[i]',i).replace('[j]',j));
-      }
-     }
+       for(let k=0;k<y.tmpl.length;k++)
+        imgs.push(x+y.tmpl[k].replace('[i]',i).replace('[j]',j));
     }
     wait.push(app.get('lib.utils.imgsReady')({src:imgs}));
    }
-   $.when(wait).then(()=>this.playerView=new PlayerView({timecodes:data.timecodes}));*/
-   $.when(1).then(()=>new PlayerView);
+   $.when(wait).then(()=>new PlayerView);
+   //$.when(1).then(()=>new PlayerView);
   },
   start:function(){
    this.$el.addClass(data.view.startCls);
@@ -75,7 +72,7 @@ export function init(app,modules){
     if(!document.fullscreenElement)
      document.documentElement.requestFullscreen();
    }
-   if(!app.get('_dev')&&app.get('epIndex')>0)
+   if(!app.get('_dev')&&epIndex>0)
     app.get('aggregator').trigger('player:playPause',{play:true});
   },
   playPause:function(opts){

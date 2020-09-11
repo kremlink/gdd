@@ -1,4 +1,24 @@
 export let config={
+ index:{
+  preload:{
+   'images/':{imgs:['fin.jpg','flow-pause.png','game-bg.jpg','map-bg.jpg','potok-bg.jpg','trash-progress.png','turn-bg.svg']},
+   'images/trash_tanks_up/':{j:[7],tmpl:['trashcan-[j]-up.png']},
+   'images/trash_tanks/':{j:[7],tmpl:['trashcan-[j].png']},
+   'images/trash_items/':{j:[20,18,20,40,20,20,19],tmpl:['trash-[i]-[j].png']},
+   'images/bible_under_items/':{j:[4],tmpl:['bible-[j].svg','bible-[j]-a.svg','bible-[j]-h.png']},
+   'images/bible_items/':{j:[10,18,15],tmpl:['bible-[i]-[j].png','bible-big-[i]-[j].png']}
+  }
+ },
+ main:{
+  view:{
+   obnul:{
+    waitVid:2000,
+    goodSrc:'../mp4/good_end.mp4',
+    badSrc:'../mp4/bad_end.mp4',
+    href:'../thanks.html'
+   }
+  }
+ },
  loadsave:{
   url:'rest/loadsave',
   uid:'f123',

@@ -55,7 +55,7 @@
     &.game-playing{
       .return-btn,.game-btn,.videos-btn,.map-btn,.book-btn,.chat-btn,.null-btn,.menu-btn,.load-save-btn{
         pointer-events:none;
-        opacity:0.2;
+        //opacity:0.2;
       }
     }
     &.null{
@@ -376,14 +376,19 @@
           @include flx(display,flex);
           @include flx(flex-flow,'row wrap');
           @include flx(align-items,center);
+          &:not(.shown):hover svg:nth-child(2){
+            display:block;
+          }
           &.shown{
-            svg{
+            svg:nth-child(1){
               display:block;
             }
           }
-          svg+svg{
+          svg{
+            &:nth-child(3){
             position:relative;
             display:block;
+          }
           }
         }
         .map-b-p-h{
@@ -668,8 +673,8 @@
       margin-top:0;
       @include flx(display,flex);
       &:nth-child(n+2){
-        margin-top:.2em;
-        padding-top:.2em;
+        margin-top:.5em;
+        padding-top:.5em;
         border-top:.04em solid getc(dblue);
       }
       div{
@@ -828,6 +833,9 @@
     }
     .game-end-block{
       display:none;
+      svg{
+        background:#111419;
+      }
     }
     .game-win-text{
       @include abs($b:12.5em,$l:0,$r:0);
@@ -1224,7 +1232,7 @@
       padding:0 1em;
       text-align:left;
       color:getc(dblue);
-      text-shadow:0 0 11px rgba(103,191,241,0.66),0 0 20px rgba(103,191,241,0.5);
+      text-shadow:0 0 11px rgba(103,191,241,0.33),0 0 20px rgba(103,191,241,0.25);
       @include flx(display,flex);
       @include flx(align-items,center);
     }
@@ -1292,6 +1300,10 @@
     }
     .ls-copy-from{
       pointer-events:none;
+      &::selection{
+        color:#000;
+        background:getc(blue);
+      }
     }
     .ls-btn{
       position:relative;
@@ -1299,7 +1311,8 @@
       height:5em;
       cursor:pointer;
       &.ls-clr-btn{
-        margin:-0.1em 0 0 -1em;
+        margin:0.1em 0 0 -1.25em;
+        height:4.8em;
       }
     }
     .ls-bottom{
