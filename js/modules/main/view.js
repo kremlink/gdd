@@ -31,6 +31,7 @@ export let MainView=Backbone.View.extend({
  initialize:function(){
   epIndex=app.get('epIndex');
   //this.listenTo(app.get('aggregator'),'trash:toggle',this.toggle);//--old
+  this.listenTo(app.get('aggregator'),'data:ready',this.isReady);
   this.listenTo(app.get('aggregator'),'trash:fs',this.fs);
   this.listenTo(app.get('aggregator'),'game:end',this.gameEnd);
   this.listenTo(app.get('aggregator'),'game:progress',this.gameProgress);
@@ -41,18 +42,18 @@ export let MainView=Backbone.View.extend({
   this.$gameProgress=this.$(data.gameProgress.el);
   this.$epProgress=this.$(data.epProgress.el);
   this.$reactProgress=this.$(data.reactProgress.el);
-  this.ready();
+
+  this.loadSaveView=new LoadSaveView;
+  //app.get('aggregator').trigger('trash:toggle',true);//--old TODO:remove
  },
- ready:function(){
+ isReady:function(m){
   new SoundMgr;
-  //setTimeout(()=>app.get('aggregator').trigger('sound','btn'),2000);//TODO:remove
 
   this.gameView=new GameView;
   this.flowView=new FlowView;
   this.mapView=new MapView;
   this.bibleView=new BibleView;
   this.chatView=new ChatView;
-  this.loadSaveView=new LoadSaveView;
   this.menuView=new MenuView;
   this.nullView=new NullView;
 
@@ -61,14 +62,21 @@ export let MainView=Backbone.View.extend({
    this.chat({currentTarget:this.$(data.events.chat)});
   //this.obnul();
 
-  //app.get('aggregator').trigger('trash:toggle',true);//--old TODO:remove
+  if(m.get('ep')<epIndex)
+   app.get('aggregator').trigger('player:block');
  },
  obnulEnded:function(){
+  let d={
+   ep:this.loadSaveView.model.get('ep'),
+   game:this.loadSaveView.model.get('game'),
+   react:this.loadSaveView.model.get('react')
+  };
+
   this.$el.addClass(data.view.obnul.endCls);
   setTimeout(()=>{
    this.$el.addClass(data.view.obnul.afterCls);
    this.episodes();
-   app.get('aggregator').trigger('player:playPause',{play:true,end:{src:data.view.obnul[1?'badSrc':'goodSrc'],href:data.view.obnul.href}});
+   app.get('aggregator').trigger('player:playPause',{play:true,end:{src:data.view.obnul[d.ep*10+d.game+d.react<data.fail?'badSrc':'goodSrc'],href:data.view.obnul.href}});
   },data.view.obnul.waitVid);
  },
  epProgress:function(p){
@@ -104,12 +112,15 @@ export let MainView=Backbone.View.extend({
  gameEnd:function(){
   this.$el.removeClass(data.view.gamePlayingCls);
  },
- gameProgress:function(p){
-  this.$el.addClass(data.view.gamePlayingCls);
-  this.$gameProgress.css('width',`${p}%`);
+ gameProgress:function(opts){
+  if(opts.ini)
+   this.$el.addClass(data.view.gamePlayingCls);
+  this.$gameProgress.css('width',`${opts.p}%`);
+  app.get('aggregator').trigger('data:set',{game:opts.p});
  },
- reactProgress:function(p){
-  this.$reactProgress.css('width',`${p}%`);
+ reactProgress:function(opts){
+  this.$reactProgress.css('width',`${opts.p>100?100:opts.p}%`);
+  app.get('aggregator').trigger('data:set',{react:opts.ctr});
  },
  //====btns====
  obnul:function(){

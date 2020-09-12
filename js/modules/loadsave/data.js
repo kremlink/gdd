@@ -1,5 +1,7 @@
 export const data={
+ omit:['type','value'],
  url:'',
+ uid:'uid',
  copy:'',
  saveReloadTime:2000,
  events:{

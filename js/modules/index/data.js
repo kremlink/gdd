@@ -10,6 +10,7 @@ export const data={
   $overlay:'.vid-overlay',
   startCls:'start',
   pauseCls:'paused',
+  blockCls:'blocked',
   vidStartedOnce:'vidStartedOnce'
  },
  minViewport:'(min-width:500px)',

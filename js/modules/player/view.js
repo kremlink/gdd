@@ -63,6 +63,10 @@ export let PlayerView=Backbone.View.extend({
     }
    }
   });
+  this.player.on('ended',()=>{
+   app.get('aggregator').trigger('data:set',{name:'ep'});
+  });
+
   if(app.get('isMobile'))
   {
    document.addEventListener('fullscreenchange',()=>{
@@ -92,6 +96,12 @@ export let PlayerView=Backbone.View.extend({
    }
   });
  },
+ block:function(){
+  this.player.src({
+   src:'',
+   type:'video/mp4'
+  });
+ },
  /*addTrash:function(el){//--old
   this.$el.append(el);
 
@@ -107,6 +117,7 @@ export let PlayerView=Backbone.View.extend({
      src:opts.end.src,
      type:'video/mp4'
     });
+    this.player.off('ended');
     this.player.on('ended',()=>location.href=opts.end.href);
    }
    this.player[opts.play?'play':'pause']();

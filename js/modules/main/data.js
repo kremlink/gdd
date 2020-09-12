@@ -1,4 +1,5 @@
 export const data={
+ fail:0,
  events:{
   'play':'.return-btn',
   'game':'.game-btn',

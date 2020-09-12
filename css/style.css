@@ -441,6 +441,9 @@ body {
   min-width: 360px;
   background: #d6d6d6;
 }
+#wrap.blocked {
+  pointer-events: none;
+}
 
 #wrap-wrap {
   position: absolute;
@@ -1495,10 +1498,31 @@ body {
 .paused .trash-pop .vid-overlay {
   display: block;
 }
+.blocked .trash-pop .vid-overlay {
+  display: block;
+}
+.blocked .trash-pop .vid-overlay .vid-name {
+  display: none;
+}
+.blocked .trash-pop .vid-overlay .vid-block {
+  display: flex;
+}
 .trash-pop .vid-name {
   text-align: center;
   margin-top: 1em;
   text-transform: uppercase;
+}
+.trash-pop .vid-block {
+  display: none;
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 3;
+  background: rgba(0, 0, 0, 0.4);
+  justify-content: center;
+  align-items: center;
 }
 .trash-pop .episodes {
   position: relative;
@@ -2328,6 +2352,9 @@ body {
 }
 .video-js .vjs-error .vjs-error-display .vjs-modal-dialog-content {
   color: #000;
+}
+.video-js .vjs-error-display {
+  display: none;
 }
 
 /*@path:partials\_index.scss*/

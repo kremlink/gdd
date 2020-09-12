@@ -49,7 +49,7 @@ export let MapView=BaseBlockView.extend({
   this.$tabs=this.$(data.events.react);
   this.$percents=this.$(data.view.$reactP);
   this.$progress=this.$(data.view.$progress);
-  this.marks=new (Backbone.Collection.extend({model:MapMarkerModel,url:data.url}));
+  this.marks=new (Backbone.Collection.extend({model:MapMarkerModel/*,url:data.url*/}));
   this.marks.reset(data.data[epIndex]);
   this.progress();
   this.current=null;
@@ -66,15 +66,16 @@ export let MapView=BaseBlockView.extend({
    for(let x of Object.values(data.data))
    {
     i+=x.length;
-    x.forEach(o=>{
+    /*x.forEach(o=>{
      if(o.react)
       this.reactedCtr++;
-    });
+    });*/
    }
 
    return i;
   })();
-  app.get('aggregator').trigger('react:progress',this.reactedCtr/this.marksCount*100);
+  this.reactedCtr=app.get('ls').get('react');
+  app.get('aggregator').trigger('react:progress',{p:this.reactedCtr/this.marksCount*100,ctr:this.reactedCtr});
  },
  hover:function(){
   app.get('aggregator').trigger('sound','h-h');
@@ -166,12 +167,13 @@ export let MapView=BaseBlockView.extend({
   this.reactedTab[this.current.get('id')]=this.currTab;
 
   this.current.get('reacts')[ind]=this.current.get('reacts')[ind]+1;
-  this.current.save({react:type});
+  //this.current.save({react:type});
+  this.current.set({react:type});
   this.progress();
   this.renderReacted();
   this.renderPopText(true);
   this.reactedCtr++;
-  app.get('aggregator').trigger('react:progress',this.reactedCtr/this.marksCount*100);
+  app.get('aggregator').trigger('react:progress',{p:this.reactedCtr/this.marksCount*100,ctr:this.reactedCtr});
  },
  checkBoundaries:function(delta={},s=false){
   let v={x:this.shift.x+delta.x,y:this.shift.y+delta.y};

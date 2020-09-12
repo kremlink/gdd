@@ -5,7 +5,9 @@ import {data as dat} from './data.js';
 
 let data=app.configure({loadsave:dat}).loadsave;
 
-let events={};
+let events={},
+ epIndex;
+
 events[`click .${data.view.tabCls}`]='lsTab';
 events[`click ${data.events.copy}`]='copy';
 events[`click ${data.events.load}`]='load';
@@ -18,6 +20,8 @@ export let LoadSaveView=BaseBlockView.extend({
  events:events,
  tabIndex:0,
  initialize:function(){
+  epIndex=app.get('epIndex');
+
   BaseBlockView.prototype.initialize.apply(this,[{
    data:data
   }]);
@@ -26,12 +30,40 @@ export let LoadSaveView=BaseBlockView.extend({
   this.$copyFrom=this.$(data.view.copyFrom);
   this.$loadFrom=this.$(data.events.focus);
   this.model=new LoadSaveModel({id:data.uid});
+  app.set({dest:'objects.ls',object:this.model});
   this.model.urlRoot=data.url;
   this.$copyFrom.val(data.copy);
+  this.listenTo(app.get('aggregator'),'data:set',this.setData);
   this.listenTo(this.model,'invalid',()=>{
    this.$el.addClass(data.view.errCls);
   });
   this.listenTo(this.model,'change:type',this.changeType);
+
+  this.model.fetch({
+   success:()=>{
+    app.get('aggregator').trigger('data:ready',this.model);
+   },
+   error:()=>{
+    this.model.save();
+    app.get('aggregator').trigger('data:ready',this.model);
+   }
+  });
+ },
+ setData:function(d){
+  let ep;
+
+  if(d.name==='ep')
+  {
+   ep=this.model.get(d.name);
+   if(ep===epIndex)
+   {
+    this.model.save({[d.name]:epIndex+1});
+    app.get('aggregator').trigger('flow:inc',epIndex+1);
+   }
+  }else
+  {
+   this.model.save(d);
+  }
  },
  changeType:function(m,v){
   if(v==='load')

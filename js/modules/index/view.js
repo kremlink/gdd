@@ -24,8 +24,6 @@ export function init(app,modules){
 
    epIndex=app.get('epIndex');
 
-   new MainView;
-
    this.$el.toggleClass(data.view.tooSmallCls,mob);
 
    if(app.get('_dev'))
@@ -40,6 +38,7 @@ export function init(app,modules){
    },200));
    this.listenTo(app.get('aggregator'),'player:playPause',this.playPause);
    this.listenTo(app.get('aggregator'),'player:ready',this.loaded);
+   this.listenTo(app.get('aggregator'),'player:block',this.block);
    document.addEventListener('contextmenu',e=>e.preventDefault());
    document.fonts.ready.then(()=>this.prepare(),()=>this.prepare());
   },
@@ -63,7 +62,7 @@ export function init(app,modules){
     wait.push(app.get('lib.utils.imgsReady')({src:imgs}));
    }
    $.when(wait).then(()=>new PlayerView);*/
-   $.when(1).then(()=>new PlayerView);
+   $.when(1).then(()=>this.player=new PlayerView);
   },
   start:function(){
    this.$el.addClass(data.view.startCls);
@@ -80,7 +79,13 @@ export function init(app,modules){
     this.$el.addClass(data.view.vidStartedOnce);
    this.$el.toggleClass(data.view.pauseCls,!opts.play);
   },
+  block:function(){
+   this.$el.addClass(data.view.blockCls);
+   this.player.block();
+  },
   loaded:function(el){
+   new MainView;
+
    this.$el.addClass(data.view.loadedCls);
    $(el).find('video').after($(data.view.$overlay));
    //$(el).find('video').after($(data.view.$overlay))[0].play().then(()=>$(el).find('video')[0].pause());//TODO: remove and uncomment prev string (dev)

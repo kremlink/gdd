@@ -911,11 +911,28 @@
       .paused &{
         display:block;
       }
+      .blocked &{
+        display:block;
+        .vid-name{
+          display:none;
+        }
+        .vid-block{
+          @include flx(display,flex);
+        }
+      }
     }
     .vid-name{
       text-align:center;
       margin-top:1em;
       text-transform:uppercase;
+    }
+    .vid-block{
+      display:none;
+      @include abs($l:0,$r:0,$t:0,$b:0,$p:fixed);
+      z-index:3;
+      background:rgba(#000,0.4);
+      @include flx(justify-content,center);
+      @include flx(align-items,center);
     }
     .episodes{
       position:relative;

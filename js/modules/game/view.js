@@ -47,6 +47,8 @@ export let GameView=BaseBlockView.extend({
 
   this.setDiff();
   this.gameCtrls();
+
+  app.get('aggregator').trigger('game:progress',{p:app.get('ls').get('game')});
  },
  hover:function(){
   app.get('aggregator').trigger('sound','h-h');
@@ -79,7 +81,7 @@ export let GameView=BaseBlockView.extend({
   {
    this.$el.addClass(data.view.playCls);
    this.binViews=[];
-   app.get('aggregator').trigger('game:progress',0);
+   app.get('aggregator').trigger('game:progress',{p:0});
    this.$pDone.css('width',0+'%');
    this.$pRem.text(100);
    _.invoke(this.bins.toArray(),'destroy');
@@ -100,10 +102,9 @@ export let GameView=BaseBlockView.extend({
    setTimeout(()=>{
     let p=Math.round(100*this.progress/data.data[this.diffs[this.diffIndex]].trashData.length);
     //TODO: make p correct
-    app.get('aggregator').trigger('game:progress',p);//Math.ceil((n+1)/10)*10
+    app.get('aggregator').trigger('game:progress',{p:p});//Math.ceil((n+1)/10)*10
     this.$pQual.css('width',p+'%');
 
-    app.get('aggregator').trigger('game:end');
     this.$el.removeClass(data.view.playCls).addClass(data.view.endCls[0]);
     this.trashDone=0;
     this.ended=true;

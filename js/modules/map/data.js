@@ -1,5 +1,5 @@
 export const data={
- url:'',
+ //url:'',
  data:[],
  omit:['left','top','text','h','reacted'],
  events:{

@@ -8,7 +8,7 @@ let data=app.configure({flow:dat}).flow;
 let events={},
  epIndex;
 
-events[`mouseenter ${data.view.ignore}`]='hover';
+events[`mouseenter ${data.view.ignor}`]='hover';
 
 export let FlowView=BaseBlockView.extend({
  events:events,
@@ -19,21 +19,30 @@ export let FlowView=BaseBlockView.extend({
  mult:0,
  dragging:false,
  initialize:function(){
+  let ep=app.get('ls').get('ep');
+
   epIndex=app.get('epIndex');
 
   BaseBlockView.prototype.initialize.apply(this,[{
    data:data
   }]);
 
-  app.get('aggregator').trigger('episodes:progress',epIndex/data.epis.amount*100);
+  this.listenTo(app.get('aggregator'),'flow:inc',this.inc);
   
-  this.$episodes=this.$(data.view.$episodes).html(this.template($.extend({},data.epis,{active:epIndex})));
+  this.$episodes=this.$(data.view.$episodes).html(this.template($.extend({},{amount:data.episAmt,avail:ep,active:epIndex})));
+  this.$epItems=this.$(data.view.ignore);
+  this.inc(ep);
   this.$drag=this.$(data.view.$drag);
   this.mult=parseInt(this.$drag.css('fontSize'));
-  this.maxShift=(data.epis.amount-4)*11.025-0.5;
-  this.shift=-(epIndex>2?(epIndex>data.epis.amount-2?this.maxShift:(epIndex-2)*11.025-11.025/2-0.5/2):0);
+  this.maxShift=(data.episAmt-4)*11.025-0.5;
+  this.shift=-(epIndex>2?(epIndex>data.episAmt-2?this.maxShift:(epIndex-2)*11.025-11.025/2-0.5/2):0);
   this.$drag.css('left',this.shift+'em');
   this.drag();
+ },
+ inc:function(ep){
+  app.get('aggregator').trigger('episodes:progress',ep/data.episAmt*100);
+  for(let i=0;i<ep;i++)
+   this.$epItems.eq(i).removeClass(data.view.inavCls);
  },
  hover:function(){
   app.get('aggregator').trigger('sound','h-h');

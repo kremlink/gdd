@@ -15,6 +15,6 @@ export let SoundMgr=Backbone.View.extend({
  },
  play:function(name){
   this.sounds[name].currentTime=0;
-  this.sounds[name]['play']();
+  //this.sounds[name]['play']();
  }
 });
