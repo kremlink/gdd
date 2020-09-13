@@ -336,7 +336,7 @@
             top:calc(var(--w)*var(--p)/-4);
           }
         }
-        &.map-popped{
+        &.shown.map-popped{
           .map-block{
             display:none;
           }

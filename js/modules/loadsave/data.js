@@ -2,7 +2,7 @@ export const data={
  omit:['type','value'],
  url:'',
  uid:'uid',
- copy:'',
+ datTmpl:'!@^P<%= ep %>D<%= game %>T<%= react %>_',
  saveReloadTime:2000,
  events:{
   'copy':'.ls-copy-btn',

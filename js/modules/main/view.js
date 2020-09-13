@@ -66,21 +66,18 @@ export let MainView=Backbone.View.extend({
    app.get('aggregator').trigger('player:block');
  },
  obnulEnded:function(){
-  let d={
-   ep:this.loadSaveView.model.get('ep'),
-   game:this.loadSaveView.model.get('game'),
-   react:this.loadSaveView.model.get('react')
-  };
+  let d=this.loadSaveView.model.toJSON();
 
   this.$el.addClass(data.view.obnul.endCls);
   setTimeout(()=>{
    this.$el.addClass(data.view.obnul.afterCls);
    this.episodes();
-   app.get('aggregator').trigger('player:playPause',{play:true,end:{src:data.view.obnul[d.ep*10+d.game+d.react<data.fail?'badSrc':'goodSrc'],href:data.view.obnul.href}});
+   //values->100: ep 0 to 100%, game result 0 to 100%, reacts max 40; and divide by 3
+   app.get('aggregator').trigger('player:playPause',{play:true,end:{src:data.view.obnul[(d.ep+d.game+d.react*2.5)/3<data.fail?'badSrc':'goodSrc'],href:data.view.obnul.href}});
   },data.view.obnul.waitVid);
  },
- epProgress:function(p){
-  this.$epProgress.css('width',`${p}%`);
+ epProgress:function(opts){
+  this.$epProgress.css('width',`${opts.p}%`);
  },
  /*toggle:function(f){//--old
   this.$el.toggleClass(data.view.shownCls,f);

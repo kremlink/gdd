@@ -40,7 +40,7 @@ export let FlowView=BaseBlockView.extend({
   this.drag();
  },
  inc:function(ep){
-  app.get('aggregator').trigger('episodes:progress',ep/data.episAmt*100);
+  app.get('aggregator').trigger('episodes:progress',{p:ep/data.episAmt*100});
   for(let i=0;i<ep;i++)
    this.$epItems.eq(i).removeClass(data.view.inavCls);
  },

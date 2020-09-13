@@ -21,8 +21,7 @@ export let config={
   }
  },
  loadsave:{
-  url:'loadsave',
-  copy:'SFWS@!D#H&DG'
+  url:'loadsave'
  },
  menu:{
   formUrl:'rest/callb'

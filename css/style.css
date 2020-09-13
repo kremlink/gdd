@@ -831,17 +831,17 @@ body {
   left: calc(var(--w)*-1/4);
   top: calc(var(--w)*var(--p)/-4);
 }
-.trash-pop .trash-block.map.map-popped .map-block {
+.trash-pop .trash-block.map.shown.map-popped .map-block {
   display: none;
 }
-.trash-pop .trash-block.map.map-popped .uni-pop {
+.trash-pop .trash-block.map.shown.map-popped .uni-pop {
   visibility: visible;
   opacity: 1;
 }
-.trash-pop .trash-block.map.map-popped .map-ctrls {
+.trash-pop .trash-block.map.shown.map-popped .map-ctrls {
   display: none;
 }
-.trash-pop .trash-block.map.map-popped .tab-tabs {
+.trash-pop .trash-block.map.shown.map-popped .tab-tabs {
   display: flex;
 }
 .trash-pop .trash-block.map .uni-pop.reacted ~ .bottom-panel {

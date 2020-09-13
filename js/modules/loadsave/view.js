@@ -19,6 +19,7 @@ export let LoadSaveView=BaseBlockView.extend({
  el:data.view.el,
  events:events,
  tabIndex:0,
+ datTmpl:_.template(data.datTmpl),
  initialize:function(){
   epIndex=app.get('epIndex');
 
@@ -32,22 +33,29 @@ export let LoadSaveView=BaseBlockView.extend({
   this.model=new LoadSaveModel({id:data.uid});
   app.set({dest:'objects.ls',object:this.model});
   this.model.urlRoot=data.url;
-  this.$copyFrom.val(data.copy);
   this.listenTo(app.get('aggregator'),'data:set',this.setData);
-  this.listenTo(this.model,'invalid',()=>{
-   this.$el.addClass(data.view.errCls);
-  });
+  this.listenTo(this.model,'invalid',this.invalid);
   this.listenTo(this.model,'change:type',this.changeType);
+
+  this.listenTo(app.get('aggregator'),'episodes:progress',({p})=>this.setVal('ep',p/10));
+  this.listenTo(app.get('aggregator'),'game:progress',({p})=>this.setVal('game',p));
+  this.listenTo(app.get('aggregator'),'react:progress',({ctr})=>this.setVal('react',ctr));
 
   this.model.fetch({
    success:()=>{
     app.get('aggregator').trigger('data:ready',this.model);
+    this.$copyFrom.val(this.datTmpl(this.model.toJSON()));
    },
    error:()=>{
     this.model.save();
     app.get('aggregator').trigger('data:ready',this.model);
+    this.$copyFrom.val(this.datTmpl(this.model.toJSON()));
    }
   });
+ },
+ setVal:function(t,v){
+  this.model.save({[t]:v});
+  this.$copyFrom.val(this.datTmpl(this.model.toJSON()));
  },
  setData:function(d){
   let ep;
@@ -67,10 +75,19 @@ export let LoadSaveView=BaseBlockView.extend({
  },
  changeType:function(m,v){
   if(v==='load')
+  {
    this.$el.addClass(data.view.endSaveCls);
-  setTimeout(()=>{
-   location.reload();
-  },v==='load'?data.saveReloadTime:0);
+   setTimeout(()=>{
+    this.model.setLoaded();
+    location.reload();
+   },data.saveReloadTime);
+  }
+  if(v==='clr'){
+   setTimeout(()=>{
+    this.model.clr();
+    location.reload();
+   },100);
+  }
  },
  hover:function(){
   app.get('aggregator').trigger('sound','h-h');
@@ -90,9 +107,9 @@ export let LoadSaveView=BaseBlockView.extend({
   this.$copyFrom[0].select();
   document.execCommand('copy');
  },
- /*isValid:function(v){
-  return $.trim(v)==='1';
- },*/
+ invalid:function(){
+  this.$el.addClass(data.view.errCls);
+ },
  load:function(){
   this.model.save({type:'load',value:this.$loadFrom.val()});
  },
