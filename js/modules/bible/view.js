@@ -8,7 +8,7 @@ import {BaseBlockView} from '../baseBlock/view.js';
 
 let data=app.configure({bible:dat}).bible;
 
-let scroll=Scroll(),
+let scroll=Scroll,
     epIndex;
 
 let events={};
@@ -47,14 +47,17 @@ export let BibleView=BaseBlockView.extend({
   app.get('aggregator').trigger('sound','h-h');
  },
  setScroll:function(what,container){
+  let $wrap=container.find(scrollData.extra.$wrap).scrollTop(0),
+      $block=container.find(scrollData.extra.$block);
+
   this[what]=app.set({
    object:'Bar',
-   on:scroll.events,
+   on:scroll.events($wrap,$block),
    add:$.extend(true,{},scrollData,{
     holder:container.find(scrollData.holder),
     bar:container.find(scrollData.bar),
     options:{helpers:{drag:utils.drag}},
-    extra:{$wrap:container.find(scrollData.extra.$wrap),$block:container.find(scrollData.extra.$block)}
+    extra:{$wrap:$wrap,$block:$block}
    }),
    set:false
   });
@@ -77,7 +80,7 @@ export let BibleView=BaseBlockView.extend({
     data:data.data[epIndex][id].items
    }));
    this.$name.text(data.data[epIndex][id].name);
-   //this.setScroll('tabScroll',this.$itemsWrap);//TODO: make scroll work!
+   this.setScroll('tabScroll',this.$itemsWrap);
   }
  },
  pop:function(e){

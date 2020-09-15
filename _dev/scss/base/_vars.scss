@@ -10,7 +10,8 @@ $anim:.3s;
 $colors:(
         blue:#A0D7F6,
         dblue:#67BFF1,
-        err:#f00
+        err:#f00,
+        popPatch:#111419
 );
 
 @function getc($arg,$c:$colors){

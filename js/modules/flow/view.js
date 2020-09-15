@@ -8,7 +8,7 @@ let data=app.configure({flow:dat}).flow;
 let events={},
  epIndex;
 
-events[`mouseenter ${data.view.ignor}`]='hover';
+events[`mouseenter ${data.view.ignore}`]='hover';
 
 export let FlowView=BaseBlockView.extend({
  events:events,
@@ -31,6 +31,7 @@ export let FlowView=BaseBlockView.extend({
   
   this.$episodes=this.$(data.view.$episodes).html(this.template($.extend({},{amount:data.episAmt,avail:ep,active:epIndex})));
   this.$epItems=this.$(data.view.ignore);
+  this.$epItems.eq(0).removeClass(data.view.inavCls);
   this.inc(ep);
   this.$drag=this.$(data.view.$drag);
   this.mult=parseInt(this.$drag.css('fontSize'));

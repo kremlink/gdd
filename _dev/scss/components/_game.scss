@@ -78,6 +78,9 @@
         z-index:2;
         border-radius:0;
       }
+      .vjs-control-bar{
+        display:none;
+      }
       .vid-overlay{
         opacity:0;
       }
@@ -388,18 +391,22 @@
             &:nth-child(3){
             position:relative;
             display:block;
+              top:10%;
+              height:80%;
           }
           }
         }
         .map-b-p-h{
           display:block;
           width:100%;
+          margin-top:.5em;
         }
         .map-b-p-perc{
           display:none;
           width:50%;
           position:relative;
           left:-.5em;
+          top:10%;
         }
       }
       &.bible{
@@ -834,7 +841,7 @@
     .game-end-block{
       display:none;
       svg{
-        background:#111419;
+        background:getc(popPatch);
       }
     }
     .game-win-text{
@@ -913,11 +920,11 @@
       }
       .blocked &{
         display:block;
+        position:fixed;
+        z-index:3;
+        background:url(#{$path}block-bg-text.svg) center/contain no-repeat, url(#{$path}block-bg.svg) center/cover no-repeat;
         .vid-name{
           display:none;
-        }
-        .vid-block{
-          @include flx(display,flex);
         }
       }
     }
@@ -925,14 +932,6 @@
       text-align:center;
       margin-top:1em;
       text-transform:uppercase;
-    }
-    .vid-block{
-      display:none;
-      @include abs($l:0,$r:0,$t:0,$b:0,$p:fixed);
-      z-index:3;
-      background:rgba(#000,0.4);
-      @include flx(justify-content,center);
-      @include flx(align-items,center);
     }
     .episodes{
       position:relative;
@@ -1020,6 +1019,17 @@
       width:2em;
       height:2em;
       cursor:pointer;
+      &.shown{
+        svg{
+          display:none;
+          &+svg{
+            display:block;
+          }
+        }
+      }
+      svg+svg{
+        display:none;
+      }
     }
     .map-pop-big{
       @include abs($l:9%,$t:12%);
@@ -1027,7 +1037,7 @@
       height:66%;
     }
     .map-pop-forget{
-      @include abs($b:4%,$r:17.5%);
+      @include abs($b:4%,$r:16.3%);
     }
     .map-b-p-bg{
       pointer-events:none;
@@ -1192,9 +1202,10 @@
     .chat-msg{
       margin:1.2em 1.7em 0 1.68em;
       opacity:0;
-      @include trs('opacity #{$anim} ease-in-out');
+      @include trs('opacity #{$anim*2} ease-in-out');
       &.bot{
         text-align:left;
+        transition-delay:$anim*2;
         .chat-msg-text{
           div{
             border-color:getc(blue);

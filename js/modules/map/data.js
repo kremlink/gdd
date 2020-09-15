@@ -1,7 +1,7 @@
 export const data={
- //url:'',
+ url:'',
  data:[],
- omit:['left','top','text','h','reacted'],
+ omit:['left','top','text','h','reacted','reacts'],
  events:{
   'marker':'.map-mark',
   'close':'.uni-pop-close',

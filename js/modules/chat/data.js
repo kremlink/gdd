@@ -31,6 +31,7 @@ export const data={
  },
  view:{
   el:'.trash-block.chat',
+  msgBlock:'.chat-wrap',
   msgInto:'.chat-inner',
   chInto:'.chat-ctrls',
   msgTemplate:'#chat-msg-template',

@@ -41,6 +41,9 @@
             <% for(let i=0;i<data.length;i++) { %>
             <div data-id="<%= data[i].id %>" class="map-mark" style="left:<%= data[i].left %>%;top:<%= data[i].top %>%;">
                 <svg>
+                    <use xlink:href="#icon-shared-map-marker-n"></use>
+                </svg>
+                <svg>
                     <use xlink:href="#icon-shared-map-marker"></use>
                 </svg>
             </div>
@@ -72,13 +75,7 @@
     <div class="uni-pop-text">
     
     </div>
-    <div class="map-pop-forget">Решение этой проблемы в твои руках - просто сделай выбор</div>
-    <!--<div class="map-pop-react done"> do
-    
-    </div>-->
-    <div class="map-pop-react <%= react?react+' reacted':'' %>">
-    
-    </div>
+    <div class="map-pop-forget">Решение этой проблемы в твои руках &mdash; просто сделай выбор</div>
 </script>
 <script type="text/template" id="map-pop-text-template">
     <div class="t-hdr"><%= h %></div>

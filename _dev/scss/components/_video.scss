@@ -25,6 +25,9 @@
       &.vjs-playing .vjs-icon-placeholder:before{
         content:'\0042';
       }
+      &.vjs-ended .vjs-icon-placeholder:before{
+        content:'\0048';
+      }
       .vjs-icon-placeholder:before{
         content:'\0041';
         font-family:pdt-player;

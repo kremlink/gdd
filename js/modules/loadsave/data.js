@@ -4,6 +4,7 @@ export const data={
  uid:'uid',
  datTmpl:'!@^P<%= ep %>D<%= game %>T<%= react %>_',
  saveReloadTime:2000,
+ clrHref:'',
  events:{
   'copy':'.ls-copy-btn',
   'load':'.ls-load-btn',

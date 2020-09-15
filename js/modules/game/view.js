@@ -211,7 +211,7 @@ export let GameView=BaseBlockView.extend({
   if(!this.trash.length)
   {
    data.data[this.diffs[this.diffIndex]].trashData.forEach(t=>{
-    let trash=new GameTrashView(_.extend(t,{failLine:{$el:this.$failLine,bottom:data.failLine.bottom}}));
+    let trash=new GameTrashView(_.extend({},t,{subtype:Math.floor(Math.random()*t.subtype+1),failLine:{$el:this.$failLine,bottom:data.failLine.bottom}}));
 
     this.$game.append(trash.el);
     this.trash.push(trash);

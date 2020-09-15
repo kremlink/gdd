@@ -15,6 +15,7 @@ export let ChatView=BaseBlockView.extend({
  events:events,
  chosen:data.dataStart,
  ctr:0,
+ botSoundDelay:0,
  canChoose:false,
  msgTemplate:_.template($(data.view.msgTemplate).html()),
  chTemplate:_.template($(data.view.chTemplate).html()),
@@ -25,12 +26,11 @@ export let ChatView=BaseBlockView.extend({
 
   epIndex=app.get('epIndex');
 
+  this.$msgBlock=this.$(data.view.msgBlock);
   this.$msgInto=this.$(data.view.msgInto);
   this.$chInto=this.$(data.view.chInto);
   this.next(false);
-  //TODO:remove
-  $('.chat-wrap').css('margin-right',app.get('scrollDim'));
-  //TODO:end-remove
+  this.$msgBlock.css('margin-right',app.get('scrollDim'));
  },
  hover:function(){
   app.get('aggregator').trigger('sound','h-h');
@@ -43,9 +43,11 @@ export let ChatView=BaseBlockView.extend({
   {
    msg=$(this.msgTemplate({text:data.data[epIndex][this.ctr][this.chosen].bot,isBot:true}));
    this.$msgInto.append(msg);
+   if(!this.botSoundDelay)
+    this.botSoundDelay=parseFloat(msg.css('transitionDelay'))*1000;
    this.canChoose=false;
    if(snd)
-    app.get('aggregator').trigger('sound','chat-r');
+    setTimeout(()=>app.get('aggregator').trigger('sound','chat-r'),this.botSoundDelay);
    if(data.data[epIndex][this.ctr][this.chosen].user)
    {
     ch=$(this.chTemplate(data.data[epIndex][this.ctr][this.chosen]));
@@ -64,9 +66,7 @@ export let ChatView=BaseBlockView.extend({
    this.ctr++;
   }
 
-  //TODO:remove
-  $('.chat-wrap').animate({scrollTop:$('.chat-wrap')[0].scrollHeight},600);
-  //TODO:end-remove
+  this.$msgBlock.animate({scrollTop:$('.chat-wrap')[0].scrollHeight},600);
  },
  choose:function(e){
   let index=$(e.currentTarget).index(),
@@ -78,15 +78,17 @@ export let ChatView=BaseBlockView.extend({
    msg=$(this.msgTemplate({text:data.data[epIndex][this.ctr-1][this.chosen].user[index].msg,isBot:false}));
    this.$msgInto.append(msg);
    this.chosen=data.data[epIndex][this.ctr-1][this.chosen].user[index].what;
-   //TODO:remove
-   $('.chat-wrap').animate({scrollTop:$('.chat-wrap')[0].scrollHeight},600);
-   //TODO:end-remove
+   this.$msgBlock.animate({scrollTop:$('.chat-wrap')[0].scrollHeight},600);
    setTimeout(()=>{
     msg.addClass(data.view.shownCls);
    },0);
-   setTimeout(()=>{
+   if(this.chosen)
+   {
     this.next();
-   },data.soundWait);
+   }else
+   {
+    this.$chInto.html('');
+   }
   }
  }
 });

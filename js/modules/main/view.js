@@ -47,6 +47,8 @@ export let MainView=Backbone.View.extend({
   //app.get('aggregator').trigger('trash:toggle',true);//--old TODO:remove
  },
  isReady:function(m){
+  let ep=m.get('ep');
+
   new SoundMgr;
 
   this.gameView=new GameView;
@@ -62,7 +64,13 @@ export let MainView=Backbone.View.extend({
    this.chat({currentTarget:this.$(data.events.chat)});
   //this.obnul();
 
-  if(m.get('ep')<epIndex)
+  if(ep===0&&epIndex===1)
+  {
+   m.save({ep:1});
+   ep++;
+   app.get('aggregator').trigger('flow:inc',ep);
+  }
+  if(ep<epIndex)
    app.get('aggregator').trigger('player:block');
  },
  obnulEnded:function(){

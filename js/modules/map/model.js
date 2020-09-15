@@ -3,7 +3,6 @@ import {data} from './data.js';
 export let MapMarkerModel=Backbone.Model.extend({
  omit:data.omit,
  defaults:{
-  reacts:[],
   react:''
  },
  toJSON:function(options){

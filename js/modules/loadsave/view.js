@@ -85,7 +85,7 @@ export let LoadSaveView=BaseBlockView.extend({
   if(v==='clr'){
    setTimeout(()=>{
     this.model.clr();
-    location.reload();
+    location.href=data.clrHref;
    },100);
   }
  },

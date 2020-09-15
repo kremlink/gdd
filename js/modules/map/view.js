@@ -33,6 +33,9 @@ export let MapView=BaseBlockView.extend({
  dragBounds:{h:0,v:0},
  reactedTab:{},
  reactedCtr:0,
+ current:null,
+ marker:null,
+ marks:null,
  template:_.template($(data.view.template).html()),
  popTemplate:_.template($(data.view.popTemplate).html()),
  popTextTemplate:_.template($(data.view.popTextTemplate).html()),
@@ -49,10 +52,9 @@ export let MapView=BaseBlockView.extend({
   this.$tabs=this.$(data.events.react);
   this.$percents=this.$(data.view.$reactP);
   this.$progress=this.$(data.view.$progress);
-  this.marks=new (Backbone.Collection.extend({model:MapMarkerModel/*,url:data.url*/}));
+  this.marks=new (Backbone.Collection.extend({model:MapMarkerModel,url:data.url}));
   this.marks.reset(data.data[epIndex]);
   this.progress();
-  this.current=null;
   this.$popContent=null;
   this.$drag=this.$(data.view.$drag).css({'--w':data.view.dragW+'em','--p':data.view.dragP});
   this.dragBounds.h=data.view.dragW/4;
@@ -123,9 +125,8 @@ export let MapView=BaseBlockView.extend({
   this.$(data.view.$popText).html(this.popTextTemplate(reacted?data.data[epIndex][index].reacted:data.data[epIndex][index]));
  },
  pop:function(e){
-  let id=$(e.currentTarget).data(data.view.dataId);
-
-  this.current=this.marks.where({id:id})[0];
+  this.marker=$(e.currentTarget);
+  this.current=this.marks.where({id:this.marker.data(data.view.dataId)})[0];
   this.$popContent=$(this.popTemplate(_.extend({margin:app.get('scrollDim')},this.current.toJSON({all:true}))));
   this.$pop.append(this.$popContent);
   this.renderPopText();
@@ -162,13 +163,13 @@ export let MapView=BaseBlockView.extend({
 
   app.get('aggregator').trigger('sound','h-c');
 
+  this.marker.addClass(data.view.shownCls);
   this.currTab=this.$tabs.eq(ind);
   type=this.currTab.data(data.view.dataClick);
   this.reactedTab[this.current.get('id')]=this.currTab;
 
   this.current.get('reacts')[ind]=this.current.get('reacts')[ind]+1;
-  //this.current.save({react:type});
-  this.current.set({react:type});
+  this.current.save({react:type});
   this.progress();
   this.renderReacted();
   this.renderPopText(true);

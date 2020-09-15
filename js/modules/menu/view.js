@@ -8,7 +8,7 @@ import {utils} from '../../bf/lib/utils.js';
 
 let data=app.configure({menu:dat}).menu;
 
-let scroll=Scroll();
+let scroll=Scroll;
 
 let events={};
 events[`click ${data.events.tab}`]='tab';
@@ -69,18 +69,20 @@ export let MenuView=BaseBlockView.extend({
   this.$el.addClass(data.view.refCopyCls);
  },
  authors:function(){
-  let $authors=this.$(data.view.authors);
+  let $authors=this.$(data.view.authors),
+   $wrap=$authors.find(scrollData.extra.$wrap).css('margin-right',app.get('scrollDim')+'px').scrollTop(0),
+   $block=$authors.find(scrollData.extra.$block);
 
   app.set({
    object:'Bar',
-   on:scroll.events,
+   on:scroll.events($wrap,$block),
    add:$.extend(true,{},scrollData,{
     holder:$authors.find(scrollData.holder),
     bar:$authors.find(scrollData.bar),
     options:{helpers:{drag:utils.drag}},
     extra:{
-     $wrap:$authors.find(scrollData.extra.$wrap).css('margin-right',app.get('scrollDim')+'px'),
-     $block:$authors.find(scrollData.extra.$block)
+     $wrap:$wrap,
+     $block:$block
     }
    }),
    set:false
@@ -109,6 +111,9 @@ export let MenuView=BaseBlockView.extend({
    app.get('aggregator').trigger('sound','h-c');
  },
  subTab:function(e=0){
+  let $wrap,
+   $block;
+
   if(e)
    app.get('aggregator').trigger('sound','h-c');
   this.$el.removeClass(data.view.tabClsBase+'-'+this.subTabIndex);
@@ -116,17 +121,19 @@ export let MenuView=BaseBlockView.extend({
   this.$el.addClass(data.view.tabClsBase+'-'+this.subTabIndex);
   if(!this.subTabsOnce[this.subTabIndex])
   {
+   $wrap=this.$menuSubBlock.eq(this.subTabIndex).find(scrollData.extra.$wrap).scrollTop(0).css('margin-right',app.get('scrollDim')+'px');
+   $block=this.$menuSubBlock.eq(this.subTabIndex).find(scrollData.extra.$block);
    this.subTabsOnce[this.subTabIndex]=true;
    app.set({
     object:'Bar',
-    on:scroll.events,
+    on:scroll.events($wrap,$block),
     add:$.extend(true,{},scrollData,{
      holder:this.$menuSubBlock.eq(this.subTabIndex).find(scrollData.holder),
      bar:this.$menuSubBlock.eq(this.subTabIndex).find(scrollData.bar),
      options:{helpers:{drag:utils.drag}},
      extra:{
-      $wrap:this.$menuSubBlock.eq(this.subTabIndex).find(scrollData.extra.$wrap).css('margin-right',app.get('scrollDim')+'px'),
-      $block:this.$menuSubBlock.eq(this.subTabIndex).find(scrollData.extra.$block)
+      $wrap:$wrap,
+      $block:$block
      }
     }),
     set:false
