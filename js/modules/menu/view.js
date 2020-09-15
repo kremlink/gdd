@@ -16,6 +16,7 @@ events[`click ${data.events.subTab}`]='subTab';
 events[`click ${data.events.callbTab}`]='callbTab';
 events[`click ${data.events.callbSend}`]='callbSend';
 events[`click ${data.events.callbOk}`]='callbOk';
+events[`click ${data.events.callbFocus}`]='focus';
 events[`click ${data.events.sharCopy}`]='sharCopy';
 events[`mouseenter ${data.events.tab},${data.events.subTab}`]='hover';
 
@@ -33,35 +34,31 @@ export let MenuView=BaseBlockView.extend({
   }]);
 
   this.$el.addClass((data.view.tabClsBase+this.tabIndex)+' '+(data.view.tabClsBase+'-'+this.subTabIndex));
+  this.$tabs=this.$(data.events.tab);
+  this.$subTabs=this.$(data.events.subTab);
   this.$menuSubBlock=this.$(data.view.menuSubBlock);
   this.$copyFrom=this.$(data.view.copyFrom);
   this.$callb={
    tab:this.$(data.events.callbTab),
    tabInput:this.$(data.view.callb.tabInput),
    init:this.$(data.view.callb.init),
-   sent:this.$(data.view.callb.sent)
+   sent:this.$(data.view.callb.sent),
+   data:null
   };
+  this.$callb.data=this.$callb.init.find(':input');
   this.callbTab();
   this.tab();
   this.subTab();
   this.authors();
   this.model=new MenuModel({id:data.uid});
   this.model.urlRoot=data.formUrl;
-  this.listenTo(this.model,'invalid',()=>{
-   this.$el.addClass(data.view.errCls);
-  });
-  this.listenTo(this.model,'sync',(m,r)=>{
-   if(r.error)
-   {
-    this.model.trigger('invalid');
-   }else
-   {
-
-   }
-  });
+  this.listenTo(this.model,'invalid',this.callbInvalid);
  },
  hover:function(){
   app.get('aggregator').trigger('sound','h-h');
+ },
+ focus:function(e){
+  $(e.currentTarget).removeClass(data.view.callb.errCls);
  },
  sharCopy:function(){
   this.$copyFrom[0].select();
@@ -88,9 +85,30 @@ export let MenuView=BaseBlockView.extend({
    set:false
   });
  },
+ callbInvalid:function(m,err){
+  err.forEach(o=>{
+   this.$callb.data.filter(`[name=${o}]`).addClass(data.view.callb.errCls);
+  });
+ },
  callbSend:function(){
-  this.$callb.init.addClass(data.view.callb.hiddenCls);
-  this.$callb.sent.addClass(data.view.callb.shownCls);
+  let d={};
+
+  this.$callb.data.each((i)=>{
+   let obj=this.$callb.data.eq(i);
+
+   d[obj.attr('name')]={value:obj.is('input:checkbox')?(obj.is(':checked')?1:''):obj.val(),reg:obj.data(data.view.callb.vData)};
+  });
+
+  this.model.save(d,{
+   dataType:'text',
+   success:()=>{
+    this.$callb.init.addClass(data.view.callb.hiddenCls);
+    this.$callb.sent.addClass(data.view.callb.shownCls);
+   },
+   error:()=>{
+    alert('Что-то пошло не так. Попробуйте еще раз');
+   }
+  });
  },
  callbOk:function(){
   this.$callb.init.removeClass(data.view.callb.hiddenCls);
@@ -104,7 +122,9 @@ export let MenuView=BaseBlockView.extend({
  },
  tab:function(e=0){
   this.$el.removeClass(data.view.tabClsBase+this.tabIndex);
+  this.$tabs.eq(this.tabIndex).removeClass(data.view.shownCls);
   this.tabIndex=!e?e:$(e.currentTarget).index();
+  this.$tabs.eq(this.tabIndex).addClass(data.view.shownCls);
   this.$el.addClass(data.view.tabClsBase+this.tabIndex);
   this.$el.removeClass(data.view.refCopyCls);
   if(e)
@@ -117,8 +137,10 @@ export let MenuView=BaseBlockView.extend({
   if(e)
    app.get('aggregator').trigger('sound','h-c');
   this.$el.removeClass(data.view.tabClsBase+'-'+this.subTabIndex);
+  this.$subTabs.eq(this.subTabIndex).removeClass(data.view.shownCls);
   this.subTabIndex=!e?e:$(e.currentTarget).index();
   this.$el.addClass(data.view.tabClsBase+'-'+this.subTabIndex);
+  this.$subTabs.eq(this.subTabIndex).addClass(data.view.shownCls);
   if(!this.subTabsOnce[this.subTabIndex])
   {
    $wrap=this.$menuSubBlock.eq(this.subTabIndex).find(scrollData.extra.$wrap).scrollTop(0).css('margin-right',app.get('scrollDim')+'px');

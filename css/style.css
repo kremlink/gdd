@@ -934,6 +934,9 @@ body {
   font-size: 2em;
   text-transform: uppercase;
 }
+.trash-pop .trash-block.loadsave .tab-tab:not(.shown):hover svg:nth-child(2) {
+  display: block;
+}
 .trash-pop .trash-block.menu {
   color: #A0D7F6;
   text-align: left;
@@ -954,56 +957,59 @@ body {
 .trash-pop .trash-block.menu .tab-top-bd {
   top: 4em;
 }
+.trash-pop .trash-block.menu .tab-tab:not(.shown):hover svg:nth-child(2) {
+  display: block;
+}
 .trash-pop .trash-block.tab-tab0 .tab-block:nth-child(1) {
   top: 0;
   bottom: 0;
 }
-.trash-pop .trash-block.tab-tab0 .bottom-panel .tab-tab:nth-child(1) svg {
+.trash-pop .trash-block.tab-tab0 .bottom-panel .tab-tab:nth-child(1) svg:nth-child(1) {
   display: block;
 }
 .trash-pop .trash-block.tab-tab-0 .subtab-block:nth-child(1) {
   display: block;
 }
-.trash-pop .trash-block.tab-tab-0 .menu-subtabs .tab-tab:nth-child(1) svg {
+.trash-pop .trash-block.tab-tab-0 .menu-subtabs .tab-tab:nth-child(1) svg:nth-child(1) {
   display: block;
 }
 .trash-pop .trash-block.tab-tab1 .tab-block:nth-child(2) {
   top: 0;
   bottom: 0;
 }
-.trash-pop .trash-block.tab-tab1 .bottom-panel .tab-tab:nth-child(2) svg {
+.trash-pop .trash-block.tab-tab1 .bottom-panel .tab-tab:nth-child(2) svg:nth-child(1) {
   display: block;
 }
 .trash-pop .trash-block.tab-tab-1 .subtab-block:nth-child(2) {
   display: block;
 }
-.trash-pop .trash-block.tab-tab-1 .menu-subtabs .tab-tab:nth-child(2) svg {
+.trash-pop .trash-block.tab-tab-1 .menu-subtabs .tab-tab:nth-child(2) svg:nth-child(1) {
   display: block;
 }
 .trash-pop .trash-block.tab-tab2 .tab-block:nth-child(3) {
   top: 0;
   bottom: 0;
 }
-.trash-pop .trash-block.tab-tab2 .bottom-panel .tab-tab:nth-child(3) svg {
+.trash-pop .trash-block.tab-tab2 .bottom-panel .tab-tab:nth-child(3) svg:nth-child(1) {
   display: block;
 }
 .trash-pop .trash-block.tab-tab-2 .subtab-block:nth-child(3) {
   display: block;
 }
-.trash-pop .trash-block.tab-tab-2 .menu-subtabs .tab-tab:nth-child(3) svg {
+.trash-pop .trash-block.tab-tab-2 .menu-subtabs .tab-tab:nth-child(3) svg:nth-child(1) {
   display: block;
 }
 .trash-pop .trash-block.tab-tab3 .tab-block:nth-child(4) {
   top: 0;
   bottom: 0;
 }
-.trash-pop .trash-block.tab-tab3 .bottom-panel .tab-tab:nth-child(4) svg {
+.trash-pop .trash-block.tab-tab3 .bottom-panel .tab-tab:nth-child(4) svg:nth-child(1) {
   display: block;
 }
 .trash-pop .trash-block.tab-tab-3 .subtab-block:nth-child(4) {
   display: block;
 }
-.trash-pop .trash-block.tab-tab-3 .menu-subtabs .tab-tab:nth-child(4) svg {
+.trash-pop .trash-block.tab-tab-3 .menu-subtabs .tab-tab:nth-child(4) svg:nth-child(1) {
   display: block;
 }
 .trash-pop .bottom-panel {
@@ -1093,6 +1099,12 @@ body {
 }
 .trash-pop .callb-form input:-ms-input-placeholder, .trash-pop .callb-form textarea:-ms-input-placeholder {
   color: #A0D7F6;
+}
+.trash-pop .callb-form input.error, .trash-pop .callb-form textarea.error {
+  border-color: #f00;
+}
+.trash-pop .callb-form input.error + .callb-c, .trash-pop .callb-form textarea.error + .callb-c {
+  border-color: #f00;
 }
 .trash-pop .callb-form textarea {
   width: 100%;
@@ -1762,10 +1774,10 @@ body {
 }
 .trash-pop .bible-pop-big {
   position: absolute;
-  left: 8%;
-  top: 12%;
-  bottom: 11%;
-  width: 33%;
+  left: 4%;
+  top: 2%;
+  bottom: 3%;
+  width: 40%;
 }
 .trash-pop .bible-pop-big img {
   object-fit: contain;

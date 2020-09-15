@@ -27,6 +27,7 @@ export let LoadSaveView=BaseBlockView.extend({
    data:data
   }]);
 
+  this.$tabs=this.$('.'+data.view.tabCls);
   this.$el.addClass(data.view.tabCls+this.tabIndex);
   this.$copyFrom=this.$(data.view.copyFrom);
   this.$loadFrom=this.$(data.events.focus);
@@ -40,6 +41,8 @@ export let LoadSaveView=BaseBlockView.extend({
   this.listenTo(app.get('aggregator'),'episodes:progress',({p})=>this.setVal('ep',p/10));
   this.listenTo(app.get('aggregator'),'game:progress',({p})=>this.setVal('game',p));
   this.listenTo(app.get('aggregator'),'react:progress',({ctr})=>this.setVal('react',ctr));
+
+  this.lsTab();
 
   this.model.fetch({
    success:()=>{
@@ -92,10 +95,12 @@ export let LoadSaveView=BaseBlockView.extend({
  hover:function(){
   app.get('aggregator').trigger('sound','h-h');
  },
- lsTab:function(e){
+ lsTab:function(e=0){
   app.get('aggregator').trigger('sound','h-c');
   this.$el.removeClass(data.view.tabCls+this.tabIndex);
-  this.tabIndex=$(e.currentTarget).index();
+  this.$tabs.eq(this.tabIndex).removeClass(data.view.shownCls);
+  this.tabIndex=!e?e:$(e.currentTarget).index();
+  this.$tabs.eq(this.tabIndex).addClass(data.view.shownCls);
   this.$el.addClass(data.view.tabCls+this.tabIndex);
  },
  toggle:function(f){

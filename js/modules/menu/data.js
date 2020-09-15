@@ -6,7 +6,8 @@ export const data={
   'callbTab':'.callb-where div',
   'callbSend':'.menu-b-btn.callb-send',
   'callbOk':'.menu-b-btn:not(.callb-send)',
-  'sharCopy':'.shar-block .menu-b-btn'
+  'sharCopy':'.shar-block .menu-b-btn',
+  'callbFocus':'.callb-init input,.callb-init textarea'
  },
  view:{
   tabClsBase:'tab-tab',
@@ -15,15 +16,16 @@ export const data={
   menuSubBlock:'.subtab-block',
   authors:'.auth-block',
   shownCls:'shown',
-  errCls:'ls-load-err',
   refCopyCls:'menu-ref-copied',
   callb:{
    tabInput:'.callb-where input',
    init:'.callb-init',
    sent:'.callb-sent',
+   errCls:'error',
    activeCls:'active',
    shownCls:'shown',
-   hiddenCls:'hidden'
+   hiddenCls:'hidden',
+   vData:'valid'
   }
  }
 };

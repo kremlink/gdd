@@ -389,11 +389,11 @@
           }
           svg{
             &:nth-child(3){
-            position:relative;
-            display:block;
+              position:relative;
+              display:block;
               top:10%;
               height:80%;
-          }
+            }
           }
         }
         .map-b-p-h{
@@ -452,6 +452,11 @@
           font-size:2em;
           text-transform:uppercase;
         }
+        .tab-tab{
+          &:not(.shown):hover svg:nth-child(2){
+            display:block;
+          }
+        }
       }
       &.menu{
         color:getc(blue);
@@ -471,6 +476,11 @@
         .tab-top-bd{
           top:4em;
         }
+        .tab-tab{
+          &:not(.shown):hover svg:nth-child(2){
+            display:block;
+          }
+        }
       }
 
       @for $x from 1 through 4
@@ -480,7 +490,7 @@
             top:0;
             bottom:0;
           }
-          .bottom-panel .tab-tab:nth-child(#{$x}) svg{
+          .bottom-panel .tab-tab:nth-child(#{$x}) svg:nth-child(1){
             display:block;
           }
         }
@@ -488,7 +498,7 @@
           .subtab-block:nth-child(#{$x}){
             display:block;
           }
-          .menu-subtabs .tab-tab:nth-child(#{$x}) svg{
+          .menu-subtabs .tab-tab:nth-child(#{$x}) svg:nth-child(1){
             display:block;
           }
         }
@@ -573,6 +583,12 @@
         @include plh(){
           color:getc(blue);
         };
+        &.error{
+          border-color:#f00;
+          &+.callb-c{
+            border-color:#f00;
+          }
+        }
       }
       textarea{
         width:100%;
@@ -1161,8 +1177,8 @@
       }
     }
     .bible-pop-big{
-      @include abs($l:8%,$t:12%,$b:11%);
-      width:33%;
+      @include abs($l:4%,$t:2%,$b:3%);
+      width:40%;
       img{
         object-fit:contain;
         width:100%;

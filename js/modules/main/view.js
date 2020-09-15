@@ -33,7 +33,6 @@ export let MainView=Backbone.View.extend({
   //this.listenTo(app.get('aggregator'),'trash:toggle',this.toggle);//--old
   this.listenTo(app.get('aggregator'),'data:ready',this.isReady);
   this.listenTo(app.get('aggregator'),'trash:fs',this.fs);
-  this.listenTo(app.get('aggregator'),'game:end',this.gameEnd);
   this.listenTo(app.get('aggregator'),'game:progress',this.gameProgress);
   this.listenTo(app.get('aggregator'),'episodes:progress',this.epProgress);
   this.listenTo(app.get('aggregator'),'react:progress',this.reactProgress);
@@ -60,9 +59,9 @@ export let MainView=Backbone.View.extend({
   this.nullView=new NullView;
 
   if(epIndex>0)
+  /*{this.menu({currentTarget:this.$(data.events.menu)});this.menuView.tab({currentTarget:this.$('.bottom-panel .tab-tab').eq(1)})}*/
    this.episodes();else
    this.chat({currentTarget:this.$(data.events.chat)});
-  //this.obnul();
 
   if(ep===0&&epIndex===1)
   {
@@ -114,12 +113,11 @@ export let MainView=Backbone.View.extend({
    app.get('aggregator').trigger('sound','btn-inac');
   }
  },
- gameEnd:function(){
-  this.$el.removeClass(data.view.gamePlayingCls);
- },
  gameProgress:function(opts){
   if(opts.ini)
    this.$el.addClass(data.view.gamePlayingCls);
+  if(opts.end)
+   this.$el.removeClass(data.view.gamePlayingCls);
   this.$gameProgress.css('width',`${opts.p}%`);
   app.get('aggregator').trigger('data:set',{game:opts.p});
  },
