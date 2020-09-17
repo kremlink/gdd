@@ -28,6 +28,7 @@ events[`click ${data.events.null}`]='obnul';
 export let MainView=Backbone.View.extend({
  events:events,
  el:data.view.el,
+ epBlocked:false,
  initialize:function(){
   epIndex=app.get('epIndex');
   //this.listenTo(app.get('aggregator'),'trash:toggle',this.toggle);//--old
@@ -41,6 +42,8 @@ export let MainView=Backbone.View.extend({
   this.$gameProgress=this.$(data.gameProgress.el);
   this.$epProgress=this.$(data.epProgress.el);
   this.$reactProgress=this.$(data.reactProgress.el);
+
+  this.$playBtn=this.$(data.events.play);
 
   this.loadSaveView=new LoadSaveView;
   //app.get('aggregator').trigger('trash:toggle',true);//--old TODO:remove
@@ -69,8 +72,11 @@ export let MainView=Backbone.View.extend({
    ep++;
    app.get('aggregator').trigger('flow:inc',ep);
   }
+
   if(ep<epIndex)
-   app.get('aggregator').trigger('player:block');
+   this.block();
+
+  app.get('aggregator').trigger('player:check-block',ep<epIndex);
  },
  obnulEnded:function(){
   let d=this.loadSaveView.model.toJSON();
@@ -103,6 +109,7 @@ export let MainView=Backbone.View.extend({
   app.get('aggregator').trigger('player:playPause',{play:false});
  },
  clickBtn:function(e,what){
+  this.$playBtn.removeClass(data.view.playBtnCls);
   if($(e.currentTarget).hasClass(data.view.activeBtnCls))
   {
    this.switchTab(what);
@@ -124,6 +131,9 @@ export let MainView=Backbone.View.extend({
  reactProgress:function(opts){
   this.$reactProgress.css('width',`${opts.p>100?100:opts.p}%`);
   app.get('aggregator').trigger('data:set',{react:opts.ctr});
+ },
+ block:function(){
+  this.epBlocked=true;
  },
  //====btns====
  obnul:function(){
@@ -153,12 +163,13 @@ export let MainView=Backbone.View.extend({
  },
  gameStart:function(){
   this.switchTab(this.gameView);
-  //this.$el.addClass(data.view.gameActiveCls);
+  this.$playBtn.addClass(data.view.playBtnCls);
   this.gameView.toggle(true);
   this.$gameProgress.css('width','0px');
   app.get('aggregator').trigger('sound','btn');
  },
  episodes:function(e){
+  this.$playBtn.addClass(data.view.playBtnCls);
   this.switchTab(this.flowView);
   this.flowView.toggle(true);
   if(e)

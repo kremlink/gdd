@@ -15,6 +15,7 @@ export const data={
   el:'.trash-pop',
   template:'#trash-template',
   activeBtnCls:'active',
+  playBtnCls:'play',
   //shownCls:'shown',
   fsCls:'fs',
   mfsCls:'mfs',

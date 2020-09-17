@@ -19,6 +19,7 @@ export function init(app,modules){
  new (Backbone.View.extend({
   events:events,
   el:data.view.el,
+  mainView:null,
   initialize:function(){
    let mob=!matchMedia(data.minViewport).matches;
 
@@ -27,7 +28,7 @@ export function init(app,modules){
    this.$el.toggleClass(data.view.tooSmallCls,mob);
 
    if(app.get('_dev'))
-    this.start();//TODO: remove (dev)
+    this.start();
 
    /*this.playerView=new PlayerView;//--old
    this.listenTo(app.get('aggregator'),'player:ready',this.addTrash);*/
@@ -38,7 +39,7 @@ export function init(app,modules){
    },200));
    this.listenTo(app.get('aggregator'),'player:playPause',this.playPause);
    this.listenTo(app.get('aggregator'),'player:ready',this.loaded);
-   this.listenTo(app.get('aggregator'),'player:block',this.block);
+   this.listenTo(app.get('aggregator'),'player:check-block',this.block);
    document.addEventListener('contextmenu',e=>e.preventDefault());
    //document.fonts.ready.then(()=>this.prepare(),()=>this.prepare());
    this.prepare();
@@ -72,7 +73,7 @@ export function init(app,modules){
     if(!document.fullscreenElement)
      document.documentElement.requestFullscreen();
    }
-   if(!app.get('_dev')&&epIndex>0)
+   if(!app.get('_dev')&&epIndex>0&&!this.mainView.epBlocked)
     app.get('aggregator').trigger('player:playPause',{play:true});
   },
   playPause:function(opts){
@@ -80,15 +81,20 @@ export function init(app,modules){
     this.$el.addClass(data.view.vidStartedOnce);
    this.$el.toggleClass(data.view.pauseCls,!opts.play);
   },
-  block:function(){
-   this.$el.addClass(data.view.blockCls);
-   this.player.block();
+  block:function(f){
+   if(f)
+   {
+    this.$el.addClass(data.view.blockCls);
+   }else
+   {
+    this.$el.addClass(data.view.loadedCls);
+    this.player.setSrc();
+   }
   },
-  loaded:function(el){
-   new MainView;
+  loaded:function(){
+   this.mainView=new MainView;
 
-   this.$el.addClass(data.view.loadedCls);
-   $(el).find('video').after($(data.view.$overlay));
+   $(this.player.player.el()).find('video').after($(data.view.$overlay));
    //$(el).find('video').after($(data.view.$overlay))[0].play().then(()=>$(el).find('video')[0].pause());//TODO: remove and uncomment prev string (dev)
   }
   /*,

@@ -1,10 +1,13 @@
-import {data} from './data.js';
+import {data as dat} from './data.js';
+
 import {utils} from '../../bf/lib/utils.js';
 import {GameTrashView} from './trash/view.js';
 import {GameBinView} from './bin/view.js';
 import {GameBinModel} from './bin/model.js';
 import {app} from '../../bf/base.js';
 import {BaseBlockView} from '../baseBlock/view.js';
+
+let data=app.configure({game:dat}).game;
 
 let events={};
 events[`click ${data.events.winTab}`]='winTab';

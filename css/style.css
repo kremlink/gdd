@@ -654,6 +654,27 @@ body {
   top: 4.2%;
   height: 16.4%;
 }
+.trash-pop .return-btn.play:active svg:nth-child(3) {
+  opacity: 0;
+}
+.trash-pop .return-btn.play:active svg:nth-child(4) {
+  opacity: 1;
+}
+.trash-pop .return-btn.play svg:nth-child(3) {
+  opacity: 1;
+}
+.trash-pop .return-btn:not(.play):active svg:nth-child(1) {
+  opacity: 0;
+}
+.trash-pop .return-btn:not(.play):active svg:nth-child(2) {
+  opacity: 1;
+}
+.trash-pop .return-btn:not(.play) svg:nth-child(1) {
+  opacity: 1;
+}
+.trash-pop .return-btn svg {
+  opacity: 0;
+}
 .trash-pop .videos-btn {
   top: 22.2%;
   width: 8.9%;
@@ -793,7 +814,7 @@ body {
 .trash-pop .trash-block.game.game-end1 .game-end-block:nth-child(1) {
   display: block;
 }
-.trash-pop .trash-block.game.game-end1 .win-tab:nth-child(1) svg {
+.trash-pop .trash-block.game.game-end1 .win-tab:nth-child(1) svg:nth-child(1) {
   display: block;
 }
 .trash-pop .trash-block.game.game-end2 .game-start {
@@ -805,7 +826,7 @@ body {
 .trash-pop .trash-block.game.game-end2 .game-end-block:nth-child(2) {
   display: block;
 }
-.trash-pop .trash-block.game.game-end2 .win-tab:nth-child(2) svg {
+.trash-pop .trash-block.game.game-end2 .win-tab:nth-child(2) svg:nth-child(1) {
   display: block;
 }
 .trash-pop .trash-block.game.game-easy .game-start-bg:nth-child(1) {
@@ -1299,6 +1320,7 @@ body {
 .trash-pop .trash {
   width: 7%;
   height: 14%;
+  z-index: 1;
   position: absolute;
   bottom: 100%;
 }
@@ -1314,6 +1336,7 @@ body {
 }
 .trash-pop .trash.up {
   pointer-events: none;
+  z-index: auto;
 }
 .trash-pop .trash img {
   width: 100%;
@@ -1477,6 +1500,9 @@ body {
   height: 3.4em;
   cursor: pointer;
 }
+.trash-pop .win-tab:hover svg:nth-child(2) {
+  display: block;
+}
 .trash-pop .win-tab svg {
   display: none;
   pointer-events: none;
@@ -1611,8 +1637,8 @@ body {
 }
 .trash-pop .map-mark {
   position: absolute;
-  width: 2em;
-  height: 2em;
+  width: 3em;
+  height: 3em;
   cursor: pointer;
 }
 .trash-pop .map-mark.shown svg {
@@ -2370,7 +2396,6 @@ body {
 }
 .video-js .vjs-fullscreen-control {
   background: rgba(0, 0, 0, 0.5);
-  border-radius: 0 0.3em 0.3em 0;
 }
 .video-js .vjs-fullscreen-control .vjs-icon-placeholder:before {
   content: "C";
@@ -2388,6 +2413,24 @@ body {
 }
 .video-js .vjs-error-display {
   display: none;
+}
+.video-js .vjs-quality-selector {
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 0 0.3em 0.3em 0;
+}
+.video-js .vjs-quality-selector .vjs-menu-button {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+}
+.video-js .vjs-quality-selector .vjs-icon-placeholder {
+  font-weight: normal;
+  font-style: normal;
+}
+.video-js .vjs-quality-selector .vjs-icon-placeholder:before {
+  content: "G";
+  font-family: pdt-player;
 }
 
 /*@path:partials\_index.scss*/

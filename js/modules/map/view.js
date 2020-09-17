@@ -169,7 +169,7 @@ export let MapView=BaseBlockView.extend({
   this.reactedTab[this.current.get('id')]=this.currTab;
 
   this.current.get('reacts')[ind]=this.current.get('reacts')[ind]+1;
-  this.current.save({react:type});
+  this.current.save({react:type,episode:epIndex});
   this.progress();
   this.renderReacted();
   this.renderPopText(true);

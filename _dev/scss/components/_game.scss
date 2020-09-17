@@ -145,6 +145,35 @@
     .return-btn{
       top:4.2%;
       height:16.4%;
+      &.play{
+        &:active svg{
+          &:nth-child(3){
+            opacity:0;
+          }
+          &:nth-child(4){
+            opacity:1;
+          }
+        }
+        svg:nth-child(3){
+          opacity:1;
+        }
+      }
+      &:not(.play){
+        &:active svg{
+          &:nth-child(1){
+            opacity:0;
+          }
+          &:nth-child(2){
+            opacity:1;
+          }
+        }
+        svg:nth-child(1){
+          opacity:1;
+        }
+      }
+      svg{
+        opacity:0;
+      }
     }
     .videos-btn{
       top:22.2%;
@@ -285,7 +314,7 @@
           .game-end-block:nth-child(1){
             display:block;
           }
-          .win-tab:nth-child(1) svg{
+          .win-tab:nth-child(1) svg:nth-child(1){
             display:block;
           }
         }
@@ -299,7 +328,7 @@
           .game-end-block:nth-child(2){
             display:block;
           }
-          .win-tab:nth-child(2) svg{
+          .win-tab:nth-child(2) svg:nth-child(1){
             display:block;
           }
         }
@@ -759,6 +788,7 @@
     .trash{
       width:7%;
       height:14%;
+      z-index:1;
       @include abs($b:100%);
       &.fail{
         @include trs('opacity #{$anim} ease-in-out');
@@ -772,6 +802,7 @@
       }
       &.up{
         pointer-events:none;
+        z-index:auto;
       }
       img{
         width:100%;
@@ -900,6 +931,9 @@
       width:19.2em;
       height:3.4em;
       cursor:pointer;
+      &:hover svg:nth-child(2){
+        display:block;
+      }
       svg{
         display:none;
         pointer-events:none;
@@ -1032,8 +1066,8 @@
     }
     .map-mark{
       position:absolute;
-      width:2em;
-      height:2em;
+      width:3em;
+      height:3em;
       cursor:pointer;
       &.shown{
         svg{

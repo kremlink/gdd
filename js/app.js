@@ -19,7 +19,7 @@ app.set({dest:'objects.aggregator',object:_.extend({},Backbone.Events)});
 app.set({dest:'objects.isMobile',object:matchMedia(index.data.mobViewport).matches});
 app.set({dest:'objects.epIndex',object:dataApp.index});
 
-//app.set({dest:'objects._dev',object:true});//TODO:remove
+app.set({dest:'objects._dev',object:true});//TODO:remove
 
 let _sync=Backbone.sync;
 Backbone.sync=function(method,model,options){

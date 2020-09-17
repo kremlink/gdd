@@ -1,10 +1,15 @@
 import {app} from '../../bf/base.js';
-import {data} from './data.js';
+import {data as dat} from './data.js';
+
+let data=app.configure({player:dat}).player,
+ epIndex;
 
 export let PlayerView=Backbone.View.extend({
  el:data.view.el,
  end:false,
  initialize:function(){
+  epIndex=app.get('epIndex');
+
   if(this.el)
   {
    this.player=videojs(this.el,{
@@ -33,7 +38,7 @@ export let PlayerView=Backbone.View.extend({
   let touched={};
 
   //this.setElement(data.view.el);//--old
-  app.get('aggregator').trigger('player:ready',this.player.el());
+  app.get('aggregator').trigger('player:ready');
   this.player.on('pause',()=>{
    app.get('aggregator').trigger('player:playPause',{play:false,self:true});
    if(app.get('isMobile'))
@@ -88,19 +93,39 @@ export let PlayerView=Backbone.View.extend({
    if(Math.sqrt((touched.x-e.changedTouches[0].pageX)*(touched.x-e.changedTouches[0].pageX)+(touched.y-e.changedTouches[0].pageY)*(touched.y-e.changedTouches[0].pageY))<data.touchPlayRadius)
    {
     if(e.target.nodeName==='VIDEO')
-    {
-     if(this.player.paused())
-      this.player.play();else
-      this.player.pause();
-    }
+     app.get('aggregator').trigger('player:playPause',{play:this.player.paused()});
    }
   });
  },
- block:function(){
-  this.player.src({
-   src:'',
-   type:'video/mp4'
-  });
+ setSrc:function(){
+  let time=Date.now(),
+   xhr,br,size;
+
+  if(epIndex>0)
+  {
+   /*this.player.src({
+    src:data.quality[epIndex][0].src,
+    type: 'video/mp4'
+   });*/
+   xhr=new XMLHttpRequest();
+   xhr.open('GET',data.testSpeedFile+'?'+time,true);
+   xhr.responseType='blob';
+   xhr.onload=()=>{
+    let index;
+    size=xhr.response.size/1024/1024*8;
+    time=(Date.now()-time)/1000;
+    br=size/time;
+    index=data.quality[epIndex].findIndex((o)=>o.speed[0]<br&&o.speed[1]>=br);
+    //console.log(br,index);
+
+    data.quality[epIndex].unshift({selected:true,label:'auto',src:data.quality[epIndex][index].src+'?'+Date.now()});
+    this.player.controlBar.addChild('QualitySelector');
+    this.player.src(data.quality[epIndex]);
+
+    //app.get('aggregator').trigger('player:ready');
+   };
+   xhr.send();
+  }
  },
  /*addTrash:function(el){//--old
   this.$el.append(el);

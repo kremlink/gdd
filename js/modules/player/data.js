@@ -1,4 +1,6 @@
 export const data={
+ testSpeedFile:'images/dl-speed.jpg',
+ quality:{},
  touchPlayRadius:20,
  view:{
   //el:'.trash-block.video',

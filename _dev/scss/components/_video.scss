@@ -94,7 +94,6 @@
     }
     .vjs-fullscreen-control{
       background:$bg-c;
-      border-radius:0 .3em .3em 0;
       .vjs-icon-placeholder:before{
         content:'\0043';
         font-family:pdt-player;
@@ -110,6 +109,25 @@
 
     .vjs-error-display{
       display:none;
+    }
+
+    .vjs-quality-selector {
+      background:$bg-c;
+      border-radius:0 .3em .3em 0;
+      .vjs-menu-button {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        width: 100%;
+      }
+      .vjs-icon-placeholder {
+        font-weight: normal;
+        font-style: normal;
+        &:before {
+          content:'\0047';
+          font-family:pdt-player;
+        }
+      }
     }
   }
 }
