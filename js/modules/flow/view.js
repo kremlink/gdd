@@ -39,6 +39,8 @@ export let FlowView=BaseBlockView.extend({
   this.shift=-(epIndex>2?(epIndex>data.episAmt-2?this.maxShift:(epIndex-2)*11.025-11.025/2-0.5/2):0);
   this.$drag.css('left',this.shift+'em');
   this.drag();
+
+  app.get('aggregator').trigger('data:set',{maxEp:data.episAmt});
  },
  inc:function(ep){
   app.get('aggregator').trigger('episodes:progress',{p:ep/data.episAmt*100});

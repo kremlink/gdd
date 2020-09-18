@@ -3,7 +3,7 @@
 /*@path:core\_mixins.scss*/
 /*@path:core\_exts.scss*/
 @import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@500;700&display=swap");
-.trash-pop .ls-form input, .trash-pop .callb-ch, .trash-pop .callb-form input, .trash-pop .callb-form textarea, .trash-pop .menu-subtabs {
+.trash-pop .ls-btn, .trash-pop .ls-form input, .trash-pop .menu-b-btn, .trash-pop .callb-ch, .trash-pop .callb-form input, .trash-pop .callb-form textarea, .trash-pop .menu-subtabs {
   box-sizing: border-box;
 }
 
@@ -1153,6 +1153,9 @@ body {
   border: 0.04em solid #67BFF1;
   cursor: pointer;
 }
+.trash-pop .callb-where div:not(.active):hover {
+  color: #67BFF1;
+}
 .trash-pop .callb-where div.active {
   background: #67BFF1;
   color: #000;
@@ -1192,11 +1195,19 @@ body {
 }
 .trash-pop .menu-b-btn {
   position: absolute;
-  left: -0.8em;
-  right: -0.8em;
-  bottom: 0.2em;
-  height: 5em;
+  left: 0;
+  right: 0;
+  bottom: 0.8em;
   cursor: pointer;
+  border: 0.08em solid #67BFF1;
+  height: 3.6em;
+  border-radius: 1.8em;
+}
+.trash-pop .menu-b-btn:hover svg:nth-child(2) {
+  display: block;
+}
+.trash-pop .menu-b-btn svg:nth-child(2) {
+  display: none;
 }
 .trash-pop .menu-b-btn span {
   position: absolute;
@@ -1451,16 +1462,16 @@ body {
   position: absolute;
   left: 0;
   right: 0;
-  bottom: 12.5em;
-}
-.trash-pop .game-win-text + .game-win-text {
-  bottom: auto;
-  top: 14.6em;
-}
-.trash-pop .game-win-text div {
+  bottom: 8.33em;
   font-size: 1.5em;
   line-height: 1.1;
   font-weight: 700;
+}
+.trash-pop .game-win-info {
+  position: absolute;
+  left: 0;
+  top: 14.6em;
+  right: 0;
 }
 .trash-pop .game-win-h {
   position: absolute;
@@ -1500,7 +1511,7 @@ body {
   height: 3.4em;
   cursor: pointer;
 }
-.trash-pop .win-tab:hover svg:nth-child(2) {
+.trash-pop .win-tab:not(.shown):hover svg:nth-child(2) {
   display: block;
 }
 .trash-pop .win-tab svg {
@@ -1656,6 +1667,10 @@ body {
   top: 12%;
   width: 30%;
   height: 66%;
+}
+.trash-pop .map-pop-big img {
+  width: 100%;
+  height: 100%;
 }
 .trash-pop .map-pop-forget {
   position: absolute;
@@ -1981,13 +1996,22 @@ body {
 }
 .trash-pop .ls-btn {
   position: relative;
-  width: 15em;
-  height: 5em;
+  width: 13em;
   cursor: pointer;
+  border: 0.08em solid #67BFF1;
+  height: 3.6em;
+  border-radius: 1.8em;
 }
-.trash-pop .ls-btn.ls-clr-btn {
-  margin: 0.1em 0 0 -1.25em;
-  height: 4.8em;
+.trash-pop .ls-btn:hover svg:nth-child(2) {
+  display: block;
+}
+.trash-pop .ls-btn svg:nth-child(2) {
+  display: none;
+  pointer-events: none;
+  left: -25%;
+  width: 150%;
+  top: -15%;
+  height: 130%;
 }
 .trash-pop .ls-bottom {
   position: absolute;

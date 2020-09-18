@@ -126,7 +126,6 @@ export let MainView=Backbone.View.extend({
   if(opts.end)
    this.$el.removeClass(data.view.gamePlayingCls);
   this.$gameProgress.css('width',`${opts.p}%`);
-  app.get('aggregator').trigger('data:set',{game:opts.p});
  },
  reactProgress:function(opts){
   this.$reactProgress.css('width',`${opts.p>100?100:opts.p}%`);

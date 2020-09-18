@@ -69,7 +69,7 @@ export let PlayerView=Backbone.View.extend({
    }
   });
   this.player.on('ended',()=>{
-   app.get('aggregator').trigger('data:set',{name:'ep'});
+   app.get('aggregator').trigger('data:set',{ep:true});
   });
 
   if(app.get('isMobile'))

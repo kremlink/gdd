@@ -26,6 +26,7 @@ export let GameView=BaseBlockView.extend({
  trashDone:0,
  trashToBin:0,
  ended:false,
+ tabIndex:0,
  events:events,
  initialize:function(){
   BaseBlockView.prototype.initialize.apply(this,[{
@@ -36,9 +37,11 @@ export let GameView=BaseBlockView.extend({
   this.$game=this.$(data.view.game);
   this.$diff=this.$(data.view.diff);
   this.$diffCh=this.$(data.view.diffCh);
-  this.$pDone=this.$(data.view.pDone);
+  this.$pSorted=this.$(data.view.pSorted);
   this.$pRem=this.$(data.view.pRem);
   this.$pQual=this.$(data.view.pQual);
+  this.$winText=this.$(data.view.winText);
+  this.$tabs=this.$(data.events.winTab);
   this.bins=new (Backbone.Collection.extend({model:GameBinModel}));
   this.listenTo(this.bins,'reset',this.addBins);
   this.listenTo(this.bins,'change:amount',this.trashPut);
@@ -50,6 +53,7 @@ export let GameView=BaseBlockView.extend({
 
   this.setDiff();
   this.gameCtrls();
+  this.winTab();
 
   app.get('aggregator').trigger('game:progress',{p:app.get('ls').get('game')});
  },
@@ -85,7 +89,7 @@ export let GameView=BaseBlockView.extend({
    this.$el.addClass(data.view.playCls);
    this.binViews=[];
    app.get('aggregator').trigger('game:progress',{p:0,ini:true});
-   this.$pDone.css('width',0+'%');
+   this.$pSorted.css('width',0+'%');
    this.$pRem.text(100);
    _.invoke(this.bins.toArray(),'destroy');
    this.bins.reset(data.data[this.diffs[this.diffIndex]].binData);
@@ -105,8 +109,13 @@ export let GameView=BaseBlockView.extend({
    setTimeout(()=>{
     let p=Math.round(100*this.progress/data.data[this.diffs[this.diffIndex]].trashData.length);
     //TODO: make p correct
-    app.get('aggregator').trigger('game:progress',{p:p,end:true});//Math.ceil((n+1)/10)*10
+    app.get('aggregator').trigger('data:set',{game:p});
     this.$pQual.css('width',p+'%');
+
+    data.winText.forEach(o=>{
+     if(p>=o.p)
+      this.$winText.html(o.text[Math.floor(Math.random()*3)]);
+    });
 
     this.$el.removeClass(data.view.playCls).addClass(data.view.endCls[0]);
     this.trashDone=0;
@@ -118,8 +127,12 @@ export let GameView=BaseBlockView.extend({
   this.trashToBin++;
   this.trashCount(false);
  },
- winTab:function(e){
-  app.get('aggregator').trigger('sound','h-c');
+ winTab:function(e=0){
+  this.$tabs.eq(this.tabIndex).removeClass(data.view.shownCls);
+  this.tabIndex=!e?e:$(e.currentTarget).index();
+  this.$tabs.eq(this.tabIndex).addClass(data.view.shownCls);
+  if(e)
+   app.get('aggregator').trigger('sound','h-c');
   this.$el.removeClass(data.view.endCls[0]+' '+data.view.endCls[1]).addClass(data.view.endCls[$(e.currentTarget).index()]);
  },
  toggle:function(f){
@@ -195,7 +208,7 @@ export let GameView=BaseBlockView.extend({
    app.get('aggregator').trigger('sound','g-put-p');
    this.progress++;
    p=Math.round(100*this.progress/data.data[this.diffs[this.diffIndex]].trashData.length);
-   this.$pDone.css('width',p+'%');
+   this.$pSorted.css('width',p+'%');
    //app.get('aggregator').trigger('game:progress',p);//Math.ceil((n+1)/10)*10
   }else
   {

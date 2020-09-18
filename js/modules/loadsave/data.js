@@ -2,7 +2,7 @@ export const data={
  omit:['type','value'],
  url:'',
  uid:'uid',
- datTmpl:'!@^P<%= ep %>D<%= game %>T<%= react %>_',
+ datTmpl:'!@^P<%= ep %>D<%= sum %>T<%= react %>_',
  saveReloadTime:2000,
  clrHref:'',
  events:{

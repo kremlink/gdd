@@ -644,6 +644,9 @@
         padding:0 1em;
         border:.04em solid getc(dblue);
         cursor:pointer;
+        &:not(.active):hover{
+          color:getc(dblue);
+        }
         &.active{
           background:getc(dblue);
           color:#000;
@@ -680,9 +683,20 @@
       border:.04em solid getc(dblue);
     }
     .menu-b-btn{
-      @include abs($l:-.8em,$r:-.8em,$b:.2em);
-      height:5em;
+      @include abs($l:0,$r:0,$b:0.8em);
       cursor:pointer;
+      border:0.08em solid #67BFF1;
+      height:3.6em;
+      border-radius:1.8em;
+      @extend %bxz;
+      &:hover{
+        svg:nth-child(2){
+          display:block;
+        }
+      }
+      svg:nth-child(2){
+        display:none;
+      }
       span{
         @include center();
       }
@@ -892,16 +906,13 @@
       }
     }
     .game-win-text{
-      @include abs($b:12.5em,$l:0,$r:0);
-      &+.game-win-text{
-        bottom:auto;
-        top:14.6em;
-      }
-      div{
-        font-size:1.5em;
-        line-height:1.1;
-        font-weight:700;
-      }
+      @include abs($b:8.33em,$l:0,$r:0);
+      font-size:1.5em;
+      line-height:1.1;
+      font-weight:700;
+    }
+    .game-win-info{
+      @include abs($t:14.6em,$l:0,$r:0);
     }
     .game-win-h{
       @include abs($t:0.8em,$l:0,$r:0);
@@ -931,7 +942,7 @@
       width:19.2em;
       height:3.4em;
       cursor:pointer;
-      &:hover svg:nth-child(2){
+      &:not(.shown):hover svg:nth-child(2){
         display:block;
       }
       svg{
@@ -1085,6 +1096,10 @@
       @include abs($l:9%,$t:12%);
       width:30%;
       height:66%;
+      img{
+        width:100%;
+        height:100%;
+      }
     }
     .map-pop-forget{
       @include abs($b:4%,$r:16.3%);
@@ -1385,12 +1400,24 @@
     }
     .ls-btn{
       position:relative;
-      width:15em;
-      height:5em;
+      width:13em;
       cursor:pointer;
-      &.ls-clr-btn{
-        margin:0.1em 0 0 -1.25em;
-        height:4.8em;
+      border:0.08em solid #67BFF1;
+      height:3.6em;
+      border-radius:1.8em;
+      @extend %bxz;
+      &:hover{
+       svg:nth-child(2){
+         display:block;
+       }
+      }
+      svg:nth-child(2){
+        display:none;
+        pointer-events:none;
+        left:-25%;
+        width:150%;
+        top:-15%;
+        height:130%;
       }
     }
     .ls-bottom{

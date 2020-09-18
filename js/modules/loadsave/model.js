@@ -7,8 +7,10 @@ export let LoadSaveModel=Backbone.Model.extend({
   id:data.uid,
   type:'',
   value:'',
+  maxEp:0,
+  sum:0,
+  epis:[],
   ep:0,//max reached
-  game:0,
   react:0
  },
  loadReg:new RegExp(data.datTmpl.replace(/<%= [a-z]+ %>/g,'(\\d+)').replace('^','\\^')),
@@ -23,12 +25,31 @@ export let LoadSaveModel=Backbone.Model.extend({
  toJSON:function(options){
   return options&&options.all?_.clone(this.attributes):_.omit(_.clone(this.attributes),this.omit);
  },
+ sum:function(save=false){
+  let epis=this.get('epis'),
+  s=0;
+
+  epis.forEach((o)=>s+=o);
+
+  this[save?'save':'set']('sum',s);
+
+  return s;
+ },
  clr:function(){
-  this.save({ep:0,game:0,react:0});
+  this.save({ep:0,epis:[],react:0});
  },
  setLoaded:function(){
-  let match=this.get('value').match(this.loadReg);
+  let match=this.get('value').match(this.loadReg),
+   game=+match[2],
+   maxEp=this.get('maxEp'),
+   gameFull=Math.floor(game/(100/maxEp)),
+   ep=this.get('ep'),
+   epis=[0];
 
-  this.save({ep:match[1],game:match[2],react:match[3]});
+  for(let i=0;i<ep;i++)
+   epis.push(gameFull>i?100/maxEp:game-gameFull*100/maxEp);
+
+  this.save({ep:match[1],epis:epis,react:match[3]});
+  this.sum(true);
  }
 });

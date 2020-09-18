@@ -11,9 +11,9 @@ let events={},
 events[`click .${data.view.tabCls}`]='lsTab';
 events[`click ${data.events.copy}`]='copy';
 events[`click ${data.events.load}`]='load';
-events[`focus ${data.events.focus}`]='focus';
 events[`click ${data.events.clr}`]='clr';
-events[`mouseenter .${data.view.tabCls}`]='hover';
+events[`focus ${data.events.focus}`]='focus';
+events[`mouseenter .${data.view.tabCls},${data.events.copy},${data.events.load},${data.events.clr}`]='hover';
 
 export let LoadSaveView=BaseBlockView.extend({
  el:data.view.el,
@@ -38,9 +38,9 @@ export let LoadSaveView=BaseBlockView.extend({
   this.listenTo(this.model,'invalid',this.invalid);
   this.listenTo(this.model,'change:type',this.changeType);
 
-  this.listenTo(app.get('aggregator'),'episodes:progress',({p})=>this.setVal('ep',p/10));
-  this.listenTo(app.get('aggregator'),'game:progress',({p})=>this.setVal('game',p));
-  this.listenTo(app.get('aggregator'),'react:progress',({ctr})=>this.setVal('react',ctr));
+  //this.listenTo(app.get('aggregator'),'episodes:progress',({p})=>this.setVal('ep',p/10));
+  //this.listenTo(app.get('aggregator'),'game:progress',({p})=>this.setVal('game',p));
+  //this.listenTo(app.get('aggregator'),'react:progress',({ctr})=>this.setVal('react',ctr));
 
   this.lsTab();
 
@@ -49,31 +49,51 @@ export let LoadSaveView=BaseBlockView.extend({
     app.get('aggregator').trigger('data:ready',this.model);
     this.$copyFrom.val(this.datTmpl(this.model.toJSON()));
    },
-   error:()=>{
-    this.model.save();
-    app.get('aggregator').trigger('data:ready',this.model);
-    this.$copyFrom.val(this.datTmpl(this.model.toJSON()));
+   error:()=>{//is empty
+    this.model.save({epis:[0,0],sum:0},{//create localstorage record
+     success:()=>{
+      app.get('aggregator').trigger('data:ready',this.model);
+      this.$copyFrom.val(this.datTmpl(this.model.toJSON()));
+     }
+    });
    }
   });
  },
- setVal:function(t,v){
+ /*setVal:function(t,v){
   this.model.save({[t]:v});
   this.$copyFrom.val(this.datTmpl(this.model.toJSON()));
- },
+ },*/
  setData:function(d){
-  let ep;
+  let ep,
+   maxEp;
 
-  if(d.name==='ep')
+  if(d.ep)//triggered from video "end" event
   {
-   ep=this.model.get(d.name);
+   ep=+this.model.get('ep');
    if(ep===epIndex)
    {
-    this.model.save({[d.name]:epIndex+1});
+    this.model.save({ep:epIndex+1});
     app.get('aggregator').trigger('flow:inc',epIndex+1);
    }
   }else
   {
-   this.model.save(d);
+   if(d.game)
+   {
+    d.epis=this.model.get('epis');
+    maxEp=this.model.get('maxEp');
+
+    d.epis[epIndex]=epIndex===0?0:Math.floor(d.game/=maxEp);
+    delete d.game;
+   }
+
+   this.model.save(d,{
+    success:()=>{
+     let s=this.model.sum();
+
+     this.$copyFrom.val(this.datTmpl(this.model.toJSON()));
+     app.get('aggregator').trigger('game:progress',{p:s,end:true});//Math.ceil((n+1)/10)*10
+    }
+   });
   }
  },
  changeType:function(m,v){
@@ -111,17 +131,20 @@ export let LoadSaveView=BaseBlockView.extend({
  copy:function(){
   this.$copyFrom[0].select();
   document.execCommand('copy');
+  app.get('aggregator').trigger('sound','h-c');
  },
  invalid:function(){
   this.$el.addClass(data.view.errCls);
  },
  load:function(){
   this.model.save({type:'load',value:this.$loadFrom.val()});
+  app.get('aggregator').trigger('sound','h-c');
  },
  focus:function(){
   this.$el.removeClass(data.view.errCls);
  },
  clr:function(){
   this.model.save({type:'clr'});
+  app.get('aggregator').trigger('sound','h-c');
  }
 });

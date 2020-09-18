@@ -18,7 +18,7 @@ events[`click ${data.events.callbSend}`]='callbSend';
 events[`click ${data.events.callbOk}`]='callbOk';
 events[`click ${data.events.callbFocus}`]='focus';
 events[`click ${data.events.sharCopy}`]='sharCopy';
-events[`mouseenter ${data.events.tab},${data.events.subTab}`]='hover';
+events[`mouseenter ${data.events.tab},${data.events.subTab},${data.events.callbTab},${data.events.callbSend},${data.events.callbOk},${data.events.sharCopy}`]='hover';
 
 
 export let MenuView=BaseBlockView.extend({
@@ -64,6 +64,7 @@ export let MenuView=BaseBlockView.extend({
   this.$copyFrom[0].select();
   document.execCommand('copy');
   this.$el.addClass(data.view.refCopyCls);
+  app.get('aggregator').trigger('sound','h-c');
  },
  authors:function(){
   let $authors=this.$(data.view.authors),
@@ -93,6 +94,7 @@ export let MenuView=BaseBlockView.extend({
  callbSend:function(){
   let d={};
 
+  app.get('aggregator').trigger('sound','h-c');
   this.$callb.data.each((i)=>{
    let obj=this.$callb.data.eq(i);
 
@@ -113,12 +115,15 @@ export let MenuView=BaseBlockView.extend({
  callbOk:function(){
   this.$callb.init.removeClass(data.view.callb.hiddenCls);
   this.$callb.sent.removeClass(data.view.callb.shownCls);
+  app.get('aggregator').trigger('sound','h-c');
  },
  callbTab:function(e=0){
   this.$callb.tab.removeClass(data.view.callb.activeCls);
   this.callbTabIndex=!e?e:$(e.currentTarget).index();
   this.$callb.tab.eq(this.callbTabIndex).addClass(data.view.callb.activeCls);
   this.$callb.tabInput.val(this.callbTabIndex);
+  if(e)
+   app.get('aggregator').trigger('sound','h-c');
  },
  tab:function(e=0){
   this.$el.removeClass(data.view.tabClsBase+this.tabIndex);
