@@ -32,7 +32,7 @@ export let FlowView=BaseBlockView.extend({
   this.$episodes=this.$(data.view.$episodes).html(this.template($.extend({},{amount:data.episAmt,avail:ep,active:epIndex})));
   this.$epItems=this.$(data.view.ignore);
   this.$epItems.eq(0).removeClass(data.view.inavCls);
-  this.inc(ep);
+  this.inc({ep:ep});
   this.$drag=this.$(data.view.$drag);
   this.mult=parseInt(this.$drag.css('fontSize'));
   this.maxShift=(data.episAmt-4)*11.025-0.5;
@@ -42,10 +42,12 @@ export let FlowView=BaseBlockView.extend({
 
   app.get('aggregator').trigger('data:set',{maxEp:data.episAmt});
  },
- inc:function(ep){
-  app.get('aggregator').trigger('episodes:progress',{p:ep/data.episAmt*100});
-  for(let i=0;i<ep;i++)
+ inc:function(opts){
+  app.get('aggregator').trigger('episodes:progress',{p:(!opts.end?opts.ep-1:opts.ep)/data.episAmt*100});
+  for(let i=0;i<opts.ep;i++)
    this.$epItems.eq(i).removeClass(data.view.inavCls);
+  if(opts.end)
+   this.$epItems.eq(opts.ep).removeClass(data.view.inavCls);
  },
  hover:function(){
   app.get('aggregator').trigger('sound','h-h');

@@ -18,7 +18,8 @@ export let GameView=BaseBlockView.extend({
  activeDiff:-1,
  diffs:(()=>Object.keys(data.data))(),
  diffIndex:0,
- progress:0,
+ correctlyPut:0,
+ justPut:0,
  trash:[],
  coords:{x:0,y:0},
  dragging:false,
@@ -88,7 +89,7 @@ export let GameView=BaseBlockView.extend({
   {
    this.$el.addClass(data.view.playCls);
    this.binViews=[];
-   app.get('aggregator').trigger('game:progress',{p:0,ini:true});
+   app.get('aggregator').trigger('game:progress',{ini:true});
    this.$pSorted.css('width',0+'%');
    this.$pRem.text(100);
    _.invoke(this.bins.toArray(),'destroy');
@@ -107,10 +108,10 @@ export let GameView=BaseBlockView.extend({
   {
    app.get('aggregator').trigger('sound','g-end');
    setTimeout(()=>{
-    let p=Math.round(100*this.progress/data.data[this.diffs[this.diffIndex]].trashData.length);
+    let p=Math.round(100*this.correctlyPut/data.data[this.diffs[this.diffIndex]].trashData.length);
     //TODO: make p correct
     app.get('aggregator').trigger('data:set',{game:p});
-    this.$pQual.css('width',p+'%');
+    this.$pQual.css('width',this.correctlyPut/this.justPut*100+'%');
 
     data.winText.forEach(o=>{
      if(p>=o.p)
@@ -200,15 +201,14 @@ export let GameView=BaseBlockView.extend({
   });
  },
  trashPut:function(m,v){
-  let p;
+  this.justPut++;
+  this.$pSorted.css('width',Math.round(100*this.justPut/data.data[this.diffs[this.diffIndex]].trashData.length)+'%');
 
   if(v>m.previousAttributes().amount)
   {
    app.get('aggregator').trigger('sound','g-put');
    app.get('aggregator').trigger('sound','g-put-p');
-   this.progress++;
-   p=Math.round(100*this.progress/data.data[this.diffs[this.diffIndex]].trashData.length);
-   this.$pSorted.css('width',p+'%');
+   this.correctlyPut++;
    //app.get('aggregator').trigger('game:progress',p);//Math.ceil((n+1)/10)*10
   }else
   {
@@ -236,7 +236,8 @@ export let GameView=BaseBlockView.extend({
   {
    _.invoke(this.trash,'remove');
    this.trash=[];
-   this.progress=0;
+   this.correctlyPut=0;
+   this.justPut=0;
    this.generateTrash();
   }
  }

@@ -125,7 +125,8 @@ export let MainView=Backbone.View.extend({
    this.$el.addClass(data.view.gamePlayingCls);
   if(opts.end)
    this.$el.removeClass(data.view.gamePlayingCls);
-  this.$gameProgress.css('width',`${opts.p}%`);
+  if(!opts.ini)
+   this.$gameProgress.css('width',`${opts.p}%`);
  },
  reactProgress:function(opts){
   this.$reactProgress.css('width',`${opts.p>100?100:opts.p}%`);
@@ -164,7 +165,6 @@ export let MainView=Backbone.View.extend({
   this.switchTab(this.gameView);
   this.$playBtn.addClass(data.view.playBtnCls);
   this.gameView.toggle(true);
-  this.$gameProgress.css('width','0px');
   app.get('aggregator').trigger('sound','btn');
  },
  episodes:function(e){

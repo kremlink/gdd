@@ -72,8 +72,12 @@ export let LoadSaveView=BaseBlockView.extend({
    ep=+this.model.get('ep');
    if(ep===epIndex)
    {
-    this.model.save({ep:epIndex+1});
-    app.get('aggregator').trigger('flow:inc',epIndex+1);
+    this.model.save({ep:epIndex+1},{
+     success:()=>{
+      this.$copyFrom.val(this.datTmpl(this.model.toJSON()));
+     }
+    });
+    app.get('aggregator').trigger('flow:inc',{ep:epIndex,end:true});
    }
   }else
   {
