@@ -38,10 +38,6 @@ export let LoadSaveView=BaseBlockView.extend({
   this.listenTo(this.model,'invalid',this.invalid);
   this.listenTo(this.model,'change:type',this.changeType);
 
-  //this.listenTo(app.get('aggregator'),'episodes:progress',({p})=>this.setVal('ep',p/10));
-  //this.listenTo(app.get('aggregator'),'game:progress',({p})=>this.setVal('game',p));
-  //this.listenTo(app.get('aggregator'),'react:progress',({ctr})=>this.setVal('react',ctr));
-
   this.lsTab();
 
   this.model.fetch({
@@ -69,10 +65,11 @@ export let LoadSaveView=BaseBlockView.extend({
 
   if(d.ep)//triggered from video "end" event
   {
+   maxEp=this.model.get('maxEp');
    ep=+this.model.get('ep');
    if(ep===epIndex)
    {
-    this.model.save({ep:epIndex+1},{
+    this.model.save({ep:epIndex<maxEp?epIndex+1:maxEp},{
      success:()=>{
       this.$copyFrom.val(this.datTmpl(this.model.toJSON()));
      }

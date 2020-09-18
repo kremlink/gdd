@@ -41,15 +41,16 @@ export let LoadSaveModel=Backbone.Model.extend({
  setLoaded:function(){
   let match=this.get('value').match(this.loadReg),
    game=+match[2],
+   react=+match[3],
    maxEp=this.get('maxEp'),
    gameFull=Math.floor(game/(100/maxEp)),
    ep=this.get('ep'),
    epis=[0];
 
   for(let i=0;i<ep;i++)
-   epis.push(gameFull>i?100/maxEp:game-gameFull*100/maxEp);
+   epis.push(gameFull>i?100/maxEp:(gameFull===i?game-gameFull*100/maxEp:0));
 
-  this.save({ep:match[1],epis:epis,react:match[3]});
+  this.save({ep:match[1],epis:epis,react:react>ep*4?ep*4:react});
   this.sum(true);
  }
 });

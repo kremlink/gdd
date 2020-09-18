@@ -64,7 +64,7 @@ export let MainView=Backbone.View.extend({
   if(epIndex>0)
   /*{this.menu({currentTarget:this.$(data.events.menu)});this.menuView.tab({currentTarget:this.$('.bottom-panel .tab-tab').eq(1)})}*/
    this.episodes();else
-   this.chat({currentTarget:this.$(data.events.chat)});
+   this.chat({muted:true,currentTarget:this.$(data.events.chat)});
 
   if(ep===0&&epIndex===1)
   {
@@ -86,7 +86,8 @@ export let MainView=Backbone.View.extend({
    this.$el.addClass(data.view.obnul.afterCls);
    this.episodes();
    //values->100: ep 0 to 100%, game result 0 to 100%, reacts max 40; and divide by 3
-   app.get('aggregator').trigger('player:playPause',{play:true,end:{src:data.view.obnul[(d.ep+d.game+d.react*2.5)/3<data.fail?'badSrc':'goodSrc'],href:data.view.obnul.href}});
+   app.get('aggregator').trigger('player:playPause',//hardcoded value 2.5=100/d.epis.length/4 (4 - reactions amount in every episode)
+    {play:true,end:{src:data.view.obnul[(d.ep+d.sum+d.react*2.5)/3<data.fail?'badSrc':'goodSrc'],href:data.view.obnul.href}});
   },data.view.obnul.waitVid);
  },
  epProgress:function(opts){
@@ -114,10 +115,12 @@ export let MainView=Backbone.View.extend({
   {
    this.switchTab(what);
    what.toggle(true);
-   app.get('aggregator').trigger('sound','btn');
+   if(!e.muted)
+    app.get('aggregator').trigger('sound','btn');
   }else
   {
-   app.get('aggregator').trigger('sound','btn-inac');
+   if(!e.muted)
+    app.get('aggregator').trigger('sound','btn-inac');
   }
  },
  gameProgress:function(opts){

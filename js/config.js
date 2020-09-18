@@ -21,183 +21,183 @@ export let config={
   }
  },
  player:{
-  quality:{
-   '1':[
-    {
-     speed:[4,1000],
-     src:'../oceans.mp4',
-     label:'720P'
-    },
-    {
-     speed:[3,4],
-     src:'../oceans1.mp4',
-     label:'480P'
-    },
-    {
-     speed:[0,3],
-     src:'../oceans.mp4',
-     label:'360P'
-    }
-   ],
-   '2':[
-    {
-     speed:[4,1000],
-     src:'../oceans.mp4',
-     label:'720P'
-    },
-    {
-     speed:[3,4],
-     src:'../oceans1.mp4',
-     label:'480P'
-    },
-    {
-     speed:[0,3],
-     src:'../oceans.mp4',
-     label:'360P'
-    }
-   ],
-   '3':[
-    {
-     speed:[4,1000],
-     src:'../oceans.mp4',
-     label:'720P'
-    },
-    {
-     speed:[3,4],
-     src:'../oceans1.mp4',
-     label:'480P'
-    },
-    {
-     speed:[0,3],
-     src:'../oceans.mp4',
-     label:'360P'
-    }
-   ],
-   '4':[
-    {
-     speed:[4,1000],
-     src:'../oceans.mp4',
-     label:'720P'
-    },
-    {
-     speed:[3,4],
-     src:'../oceans1.mp4',
-     label:'480P'
-    },
-    {
-     speed:[0,3],
-     src:'../oceans.mp4',
-     label:'360P'
-    }
-   ],
-   '5':[
-    {
-     speed:[4,1000],
-     src:'../oceans.mp4',
-     label:'720P'
-    },
-    {
-     speed:[3,4],
-     src:'../oceans1.mp4',
-     label:'480P'
-    },
-    {
-     speed:[0,3],
-     src:'../oceans.mp4',
-     label:'360P'
-    }
-   ],
-   '6':[
-    {
-     speed:[4,1000],
-     src:'../oceans.mp4',
-     label:'720P'
-    },
-    {
-     speed:[3,4],
-     src:'../oceans1.mp4',
-     label:'480P'
-    },
-    {
-     speed:[0,3],
-     src:'../oceans.mp4',
-     label:'360P'
-    }
-   ],
-   '7':[
-    {
-     speed:[4,1000],
-     src:'../oceans.mp4',
-     label:'720P'
-    },
-    {
-     speed:[3,4],
-     src:'../oceans1.mp4',
-     label:'480P'
-    },
-    {
-     speed:[0,3],
-     src:'../oceans.mp4',
-     label:'360P'
-    }
-   ],
-   '8':[
-    {
-     speed:[4,1000],
-     src:'../oceans.mp4',
-     label:'720P'
-    },
-    {
-     speed:[3,4],
-     src:'../oceans1.mp4',
-     label:'480P'
-    },
-    {
-     speed:[0,3],
-     src:'../oceans.mp4',
-     label:'360P'
-    }
-   ],
-   '9':[
-    {
-     speed:[4,1000],
-     src:'../oceans.mp4',
-     label:'720P'
-    },
-    {
-     speed:[3,4],
-     src:'../oceans1.mp4',
-     label:'480P'
-    },
-    {
-     speed:[0,3],
-     src:'../oceans.mp4',
-     label:'360P'
-    }
-   ],
-   '10':[
-    {
-     speed:[4,1000],
-     src:'../oceans.mp4',
-     label:'720P'
-    },
-    {
-     speed:[3,4],
-     src:'../oceans1.mp4',
-     label:'480P'
-    },
-    {
-     speed:[0,3],
-     src:'../oceans.mp4',
-     label:'360P'
-    }
-   ]
-  }
-
   /*quality:{
    '1':[
     {
      speed:[4,1000],
+     src:'../oceans.mp4',
+     label:'720P'
+    },
+    {
+     speed:[3,4],
+     src:'../oceans1.mp4',
+     label:'480P'
+    },
+    {
+     speed:[0,3],
+     src:'../oceans.mp4',
+     label:'360P'
+    }
+   ],
+   '2':[
+    {
+     speed:[4,1000],
+     src:'../oceans.mp4',
+     label:'720P'
+    },
+    {
+     speed:[3,4],
+     src:'../oceans1.mp4',
+     label:'480P'
+    },
+    {
+     speed:[0,3],
+     src:'../oceans.mp4',
+     label:'360P'
+    }
+   ],
+   '3':[
+    {
+     speed:[4,1000],
+     src:'../oceans.mp4',
+     label:'720P'
+    },
+    {
+     speed:[3,4],
+     src:'../oceans1.mp4',
+     label:'480P'
+    },
+    {
+     speed:[0,3],
+     src:'../oceans.mp4',
+     label:'360P'
+    }
+   ],
+   '4':[
+    {
+     speed:[4,1000],
+     src:'../oceans.mp4',
+     label:'720P'
+    },
+    {
+     speed:[3,4],
+     src:'../oceans1.mp4',
+     label:'480P'
+    },
+    {
+     speed:[0,3],
+     src:'../oceans.mp4',
+     label:'360P'
+    }
+   ],
+   '5':[
+    {
+     speed:[4,1000],
+     src:'../oceans.mp4',
+     label:'720P'
+    },
+    {
+     speed:[3,4],
+     src:'../oceans1.mp4',
+     label:'480P'
+    },
+    {
+     speed:[0,3],
+     src:'../oceans.mp4',
+     label:'360P'
+    }
+   ],
+   '6':[
+    {
+     speed:[4,1000],
+     src:'../oceans.mp4',
+     label:'720P'
+    },
+    {
+     speed:[3,4],
+     src:'../oceans1.mp4',
+     label:'480P'
+    },
+    {
+     speed:[0,3],
+     src:'../oceans.mp4',
+     label:'360P'
+    }
+   ],
+   '7':[
+    {
+     speed:[4,1000],
+     src:'../oceans.mp4',
+     label:'720P'
+    },
+    {
+     speed:[3,4],
+     src:'../oceans1.mp4',
+     label:'480P'
+    },
+    {
+     speed:[0,3],
+     src:'../oceans.mp4',
+     label:'360P'
+    }
+   ],
+   '8':[
+    {
+     speed:[4,1000],
+     src:'../oceans.mp4',
+     label:'720P'
+    },
+    {
+     speed:[3,4],
+     src:'../oceans1.mp4',
+     label:'480P'
+    },
+    {
+     speed:[0,3],
+     src:'../oceans.mp4',
+     label:'360P'
+    }
+   ],
+   '9':[
+    {
+     speed:[4,1000],
+     src:'../oceans.mp4',
+     label:'720P'
+    },
+    {
+     speed:[3,4],
+     src:'../oceans1.mp4',
+     label:'480P'
+    },
+    {
+     speed:[0,3],
+     src:'../oceans.mp4',
+     label:'360P'
+    }
+   ],
+   '10':[
+    {
+     speed:[4,1000],
+     src:'../oceans.mp4',
+     label:'720P'
+    },
+    {
+     speed:[3,4],
+     src:'../oceans1.mp4',
+     label:'480P'
+    },
+    {
+     speed:[0,3],
+     src:'../oceans.mp4',
+     label:'360P'
+    }
+   ]
+  }*/
+
+  quality:{
+   '1':[
+    {
+     speed:[4,1000],
      src:'../mp4/2808_E1_480p.mp4',
      label:'720P'
     },
@@ -365,10 +365,26 @@ export let config={
      label:'360P'
     }
    ]
-  }*/
+  }
  },
  game:{
   waitWin:1000,
+  winText:[
+   {p:0,text:['Отлично!<br />С тобой можно быть уверенным: миру конец!',
+     'А ты точно хочешь взять судьбу мира в свои руки?<br />Не уверен, что ты ее положишь в нужный бак...',
+     'Тук-тук-тук! Что это?<br />Со дна постучали и сказали,<br />что даже там сортируют лучше,<br />чем ты. Соберись!']},
+   {p:26,text:['До перерождения у меня был кот,<br />и он разбрасывал сухой корм везде,<br />где попало. Возможно,<br />даже он сортировал лучше тебя.<br />Будь внимательней!',
+     'Если ты в плену, твои руки и глаза связаны,<br />и поэтому ты не можешь нормально сортировать -<br />дай знак. Я помогу!',
+     'Уау! Кажется, ты умеешь взаимодействовать<br />с элементами Обнугилятора.<br />Осталось понять суть сортировки!']},
+   {p:51,text:['Неплохо! Но надо быть ловчее и четче.<br />Следи за соответствием мусора баку.',
+     'Чувствую силу в твоем сознании к сортировке.<br />Научись управлять ею, и треш покорится тебе!',
+     'Молодцом! Подкрути свою скорость и четкость<br />и выйдешь на новый уровень!']},
+   {p:76,text:['Да у тебя талант к сортировке!<br />Может, это твое призвание?',
+     'Если мир кто-то и может спасти,<br />так это ты!',
+     'Я начинаю верить в успех нашего приключения!']},
+   {p:96,text:['Ученик превзошел учителя.<br />Это было потрясающе!',
+     'Ты есть сортировка.',
+     'У планеты есть шанс. И имя ему...<br />указано в твоем паспорте']}],
   data:{
    'easy':{
     text:'Легко',

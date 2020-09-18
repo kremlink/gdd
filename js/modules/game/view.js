@@ -108,10 +108,11 @@ export let GameView=BaseBlockView.extend({
   {
    app.get('aggregator').trigger('sound','g-end');
    setTimeout(()=>{
-    let p=Math.round(100*this.correctlyPut/data.data[this.diffs[this.diffIndex]].trashData.length);
-    //TODO: make p correct
+    //let p=Math.round(100*this.correctlyPut/data.data[this.diffs[this.diffIndex]].trashData.length);
+    let p=Math.round(100*(data.data[this.diffs[this.diffIndex]].trashData.length-(this.justPut-this.correctlyPut))/data.data[this.diffs[this.diffIndex]].trashData.length);
+
     app.get('aggregator').trigger('data:set',{game:p});
-    this.$pQual.css('width',this.correctlyPut/this.justPut*100+'%');
+    this.$pQual.css('width',p+'%');
 
     data.winText.forEach(o=>{
      if(p>=o.p)
