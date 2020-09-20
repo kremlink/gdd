@@ -75,8 +75,6 @@ export let MainView=Backbone.View.extend({
 
   if(ep<epIndex)
    this.block();
-
-  app.get('aggregator').trigger('player:check-block',ep<epIndex);
  },
  obnulEnded:function(){
   let d=this.loadSaveView.model.toJSON();

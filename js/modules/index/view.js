@@ -45,7 +45,7 @@ export function init(app,modules){
    this.prepare();
   },
   prepare:function(){//inconsistent loadeddata event with multiple videos
-   /*let imgs=[],
+   let imgs=[],
     wait=[];
 
    for(let [x,y] of Object.entries(data.preload))
@@ -63,8 +63,8 @@ export function init(app,modules){
     }
     wait.push(app.get('lib.utils.imgsReady')({src:imgs}));
    }
-   $.when(wait).then(()=>new PlayerView);*/
-   $.when(1).then(()=>this.player=new PlayerView);
+   $.when(wait).then(()=>this.player=new PlayerView);
+   //$.when(1).then(()=>this.player=new PlayerView);
   },
   start:function(){
    this.$el.addClass(data.view.startCls);
@@ -95,6 +95,7 @@ export function init(app,modules){
    this.mainView=new MainView;
 
    $(this.player.player.el()).find('video').after($(data.view.$overlay));
+   this.block(app.get('ls').get('ep')<epIndex);
    //$(el).find('video').after($(data.view.$overlay))[0].play().then(()=>$(el).find('video')[0].pause());//TODO: remove and uncomment prev string (dev)
   }
   /*,
