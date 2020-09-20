@@ -109,7 +109,11 @@ export let GameView=BaseBlockView.extend({
    app.get('aggregator').trigger('sound','g-end');
    setTimeout(()=>{
     //let p=Math.round(100*this.correctlyPut/data.data[this.diffs[this.diffIndex]].trashData.length);
-    let p=Math.round(100*(data.data[this.diffs[this.diffIndex]].trashData.length-(this.justPut-this.correctlyPut))/data.data[this.diffs[this.diffIndex]].trashData.length);
+    let tCnt=data.data[this.diffs[this.diffIndex]].trashData.length,
+     p=Math.round(100*(tCnt-(this.justPut-this.correctlyPut))/tCnt);
+
+    if(this.justPut===0&&this.correctlyPut===0)
+     p=0;
 
     app.get('aggregator').trigger('data:set',{game:p});
     this.$pQual.css('width',p+'%');
