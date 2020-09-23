@@ -35,41 +35,52 @@ export let PlayerView=Backbone.View.extend({
   }
  },
  prepare:function(){
-  let touched={};
+  let touched={},
+   epActivated;
 
   //this.setElement(data.view.el);//--old
   app.get('aggregator').trigger('player:ready');
   this.player.on('pause',()=>{
-   app.get('aggregator').trigger('player:playPause',{play:false,self:true});
-   if(app.get('isMobile'))
+   if(!this.player.seeking())
    {
-    app.get('aggregator').trigger('trash:fs',false);
-   }else
-   {
-    if(this.player.isFullscreen())
-     this.player.exitFullscreen();
-   }
-   //app.get('aggregator').trigger('trash:toggle',true);//--old
-  });
-  this.player.on('play',()=>{
-   app.get('aggregator').trigger('player:playPause',{play:true,self:true});
-   //app.get('aggregator').trigger('trash:toggle',false);//--old
-   if(!this.end)
-   {
+    app.get('aggregator').trigger('player:playPause',{play:false,self:true});
     if(app.get('isMobile'))
     {
-     if(!document.fullscreenElement)
-      document.documentElement.requestFullscreen();
-     app.get('aggregator').trigger('trash:fs',true);
+     app.get('aggregator').trigger('trash:fs',false);
     }else
     {
-     if(!app.get('_dev'))
-      this.player.requestFullscreen();
+     if(this.player.isFullscreen())
+      this.player.exitFullscreen();
+    }
+    //app.get('aggregator').trigger('trash:toggle',true);//--old
+   }
+  });
+  this.player.on('play',()=>{
+   if(!this.player.seeking())
+   {
+    app.get('aggregator').trigger('player:playPause',{play:true,self:true});
+    //app.get('aggregator').trigger('trash:toggle',false);//--old
+    if(!this.end)
+    {
+     if(app.get('isMobile'))
+     {
+      if(!document.fullscreenElement)
+       document.documentElement.requestFullscreen();
+      app.get('aggregator').trigger('trash:fs',true);
+     }else
+     {
+      if(!app.get('_dev'))
+       this.player.requestFullscreen();
+     }
     }
    }
   });
-  this.player.on('ended',()=>{
-   app.get('aggregator').trigger('data:set',{ep:true});
+  this.player.on('timeupdate',()=>{
+   if(this.player.currentTime()>this.player.duration()+data.epActivationTime&&!epActivated)
+   {
+    epActivated=true;
+    app.get('aggregator').trigger('data:set',{ep:true});
+   }
   });
 
   if(app.get('isMobile'))

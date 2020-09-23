@@ -2,7 +2,6 @@
 /*@path:core\_base.scss*/
 /*@path:core\_mixins.scss*/
 /*@path:core\_exts.scss*/
-@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@500;700&display=swap");
 .trash-pop .ls-btn, .trash-pop .ls-form input, .trash-pop .menu-b-btn, .trash-pop .callb-ch, .trash-pop .callb-form input, .trash-pop .callb-form textarea, .trash-pop .menu-subtabs {
   box-sizing: border-box;
 }
@@ -403,6 +402,10 @@ table {
 
 /*@path:base\_mixins.scss*/
 /*@path:base\_rules.scss*/
+/*@font-face {
+  font-family:'IBM Plex Sans';
+  src:url("../fonts/pdt-player.woff") format("woff");
+}*/
 @font-face {
   font-family: pdt-player;
   src: url("../fonts/pdt-player.woff") format("woff");
@@ -418,20 +421,20 @@ table {
 
 html {
   height: 100%;
+  font: 1.575vw/1.25 "IBM Plex Sans", sans-serif;
+}
+@media (min-aspect-ratio: 16/9) {
+  html {
+    font-size: 2.8vh;
+  }
 }
 
 body {
   height: 100%;
-  font: 500 1.575vw/1.25 "IBM Plex Sans", sans-serif;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
-}
-@media (min-aspect-ratio: 16/9) {
-  body {
-    font-size: 2.8vh;
-  }
 }
 
 #wrap {
@@ -466,8 +469,8 @@ body {
   margin: auto;
 }
 
-.trash-pop .menu-btn svg, .trash-pop .load-save-btn svg, .trash-pop .null-btn svg, .trash-pop .return-btn svg, .trash-pop .videos-btn svg, .trash-pop .map-btn svg, .trash-pop .book-btn svg, .trash-pop .chat-btn svg, .trash-pop .game-btn svg {
-  opacity: 0;
+.help .trash-pop .menu-btn:not(.chat-btn), .trash-pop .help .menu-btn:not(.chat-btn), .help .trash-pop .load-save-btn:not(.chat-btn), .trash-pop .help .load-save-btn:not(.chat-btn), .help .trash-pop .null-btn:not(.chat-btn), .trash-pop .help .null-btn:not(.chat-btn), .help .trash-pop .return-btn:not(.chat-btn), .trash-pop .help .return-btn:not(.chat-btn), .help .trash-pop .videos-btn:not(.chat-btn), .trash-pop .help .videos-btn:not(.chat-btn), .help .trash-pop .map-btn:not(.chat-btn), .trash-pop .help .map-btn:not(.chat-btn), .help .trash-pop .book-btn:not(.chat-btn), .trash-pop .help .book-btn:not(.chat-btn), .help .trash-pop .chat-btn:not(.chat-btn), .trash-pop .help .chat-btn:not(.chat-btn), .help .trash-pop .game-btn:not(.chat-btn), .trash-pop .help .game-btn:not(.chat-btn) {
+  pointer-events: none;
 }
 .trash-pop .active.menu-btn:active svg:nth-child(3), .trash-pop .active.load-save-btn:active svg:nth-child(3), .trash-pop .active.null-btn:active svg:nth-child(3), .trash-pop .active.return-btn:active svg:nth-child(3), .trash-pop .active.videos-btn:active svg:nth-child(3), .trash-pop .active.map-btn:active svg:nth-child(3), .trash-pop .active.book-btn:active svg:nth-child(3), .trash-pop .active.chat-btn:active svg:nth-child(3), .trash-pop .active.game-btn:active svg:nth-child(3) {
   opacity: 0;
@@ -486,6 +489,9 @@ body {
 }
 .trash-pop .menu-btn:not(.active) svg:nth-child(1), .trash-pop .load-save-btn:not(.active) svg:nth-child(1), .trash-pop .null-btn:not(.active) svg:nth-child(1), .trash-pop .return-btn:not(.active) svg:nth-child(1), .trash-pop .videos-btn:not(.active) svg:nth-child(1), .trash-pop .map-btn:not(.active) svg:nth-child(1), .trash-pop .book-btn:not(.active) svg:nth-child(1), .trash-pop .chat-btn:not(.active) svg:nth-child(1), .trash-pop .game-btn:not(.active) svg:nth-child(1) {
   opacity: 1;
+}
+.trash-pop .menu-btn svg, .trash-pop .load-save-btn svg, .trash-pop .null-btn svg, .trash-pop .return-btn svg, .trash-pop .videos-btn svg, .trash-pop .map-btn svg, .trash-pop .book-btn svg, .trash-pop .chat-btn svg, .trash-pop .game-btn svg {
+  opacity: 0;
 }
 
 /*@path:components\_footer.scss*/
@@ -509,6 +515,69 @@ body {
     background: url(../images/fin.jpg) center/contain no-repeat;
   }
 }
+.trash-help-ov {
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1;
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+}
+.help .trash-help-ov {
+  visibility: visible;
+  opacity: 1;
+}
+
+.trash-help {
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 2;
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+}
+.help .trash-help {
+  visibility: visible;
+  opacity: 1;
+}
+
+.trash-help-item {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+}
+.trash-help-item.active {
+  opacity: 1;
+  z-index: 1;
+}
+
+.trash-help-next {
+  position: absolute;
+  width: 11.17%;
+  height: 3.7%;
+  z-index: 1;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+.trash-help-next:hover svg:nth-child(1) {
+  display: none;
+}
+.trash-help-next:hover svg:nth-child(2) {
+  display: block;
+}
+.trash-help-next svg:nth-child(2) {
+  display: none;
+}
+
 .trash-pop {
   position: absolute;
   left: 0;
@@ -650,6 +719,9 @@ body {
   width: 8.9%;
   height: 9.7%;
 }
+.trash-pop .return-btn.up, .trash-pop .videos-btn.up, .trash-pop .map-btn.up, .trash-pop .book-btn.up, .trash-pop .chat-btn.up, .trash-pop .game-btn.up {
+  z-index: 2;
+}
 .trash-pop .return-btn {
   top: 4.2%;
   height: 16.4%;
@@ -773,6 +845,9 @@ body {
   width: 6.3%;
   height: 16.4%;
   cursor: pointer;
+}
+.trash-pop .menu-btn.up, .trash-pop .load-save-btn.up {
+  z-index: 2;
 }
 .trash-pop .load-save-btn {
   right: 1.5%;
@@ -1518,56 +1593,6 @@ body {
   display: none;
   pointer-events: none;
 }
-.trash-pop .vid-initial {
-  position: absolute;
-  left: 0;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  background: center/cover no-repeat;
-  color: #A0D7F6;
-  font-size: 1.5em;
-  line-height: 1.2em;
-  text-transform: uppercase;
-  font-weight: 700;
-  pointer-events: none;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.vidStartedOnce .trash-pop .vid-initial {
-  display: none;
-}
-.trash-pop .vid-overlay {
-  position: absolute;
-  left: 0;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  background: url(../images/flow-pause.png) center/cover no-repeat;
-  pointer-events: none;
-  color: #fff;
-  font-size: 2.5em;
-  font-weight: 700;
-  display: none;
-}
-.paused .trash-pop .vid-overlay {
-  display: block;
-}
-.blocked .trash-pop .vid-overlay {
-  display: block;
-  position: fixed;
-  z-index: 3;
-  background: url(../images/block-bg-text.svg) center/contain no-repeat, url(../images/block-bg.svg) center/cover no-repeat;
-}
-.blocked .trash-pop .vid-overlay .vid-name {
-  display: none;
-}
-.trash-pop .vid-name {
-  text-align: center;
-  margin-top: 1em;
-  text-transform: uppercase;
-}
 .trash-pop .episodes {
   position: relative;
   height: 100%;
@@ -1674,8 +1699,10 @@ body {
 }
 .trash-pop .map-pop-forget {
   position: absolute;
-  right: 16.3%;
+  left: 50%;
   bottom: 4%;
+  transform: translate(-50%, 0);
+  white-space: nowrap;
 }
 .trash-pop .map-b-p-bg {
   pointer-events: none;
@@ -2038,6 +2065,103 @@ body {
   height: 2px;
 }
 
+.vid-initial {
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background: center/cover no-repeat;
+  color: #A0D7F6;
+  font-size: 1.5em;
+  line-height: 1.2em;
+  text-transform: uppercase;
+  font-weight: 700;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.vidStartedOnce .vid-initial {
+  display: none;
+}
+
+.vid-overlay {
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background: url(../images/flow-pause.png) center/cover no-repeat;
+  pointer-events: none;
+  color: #fff;
+  font-size: 2.5em;
+  font-weight: 700;
+  display: none;
+}
+.paused .vid-overlay {
+  display: block;
+}
+.blocked .vid-overlay {
+  display: block;
+  position: fixed;
+  z-index: 3;
+  pointer-events: auto;
+}
+
+.vid-block {
+  display: none;
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background: url(../images/0-bg-bags.svg) bottom/100% no-repeat, #000;
+}
+.blocked .vid-block {
+  display: block;
+}
+.vid-block div {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 30rem;
+  height: 30rem;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+.vid-block a {
+  width: 52%;
+  height: 10%;
+}
+.vid-block a:hover img:nth-child(1) {
+  display: none;
+}
+.vid-block a:hover img:nth-child(2) {
+  display: block;
+}
+.vid-block img {
+  width: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  pointer-events: none;
+}
+.vid-block img:nth-child(2) {
+  display: none;
+}
+
+.vid-name {
+  text-align: center;
+  margin-top: 1em;
+  text-transform: uppercase;
+}
+.blocked .vid-name {
+  display: none;
+}
+
 @keyframes start-logo {
   100% {
     transform: rotate(360deg);
@@ -2287,7 +2411,7 @@ body {
   height: 21em;
 }
 .map .uni-pop-text {
-  height: 16em;
+  height: 19em;
 }
 .uni-pop-text .t-scroll-wrap {
   padding-right: 2em;

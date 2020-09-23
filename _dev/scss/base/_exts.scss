@@ -7,8 +7,8 @@
   }
   //---
   %svg-click{
-    svg{
-      opacity:0;
+    .help &:not(.chat-btn){
+      pointer-events:none;
     }
     &.active{
       &:active svg{
@@ -35,6 +35,9 @@
       svg:nth-child(1){
         opacity:1;
       }
+    }
+    svg{
+      opacity:0;
     }
   }
 }

@@ -11,6 +11,7 @@ export const data={
   startCls:'start',
   pauseCls:'paused',
   blockCls:'blocked',
+  helperCls:'help',
   vidStartedOnce:'vidStartedOnce'
  },
  minViewport:'(min-width:500px)',

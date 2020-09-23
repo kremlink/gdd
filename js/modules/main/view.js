@@ -24,11 +24,15 @@ events[`click ${data.events.chat}`]='chat';
 events[`click ${data.events.loadsave}`]='loadsave';
 events[`click ${data.events.menu}`]='menu';
 events[`click ${data.events.null}`]='obnul';
+events[`click ${data.events.helpNext}`]='helpNext';
+events[`mouseenter ${data.events.helpNext}`]='hover';
 
 export let MainView=Backbone.View.extend({
  events:events,
  el:data.view.el,
  epBlocked:false,
+ helpFlag:false,
+ helpCurr:-1,
  initialize:function(){
   epIndex=app.get('epIndex');
   //this.listenTo(app.get('aggregator'),'trash:toggle',this.toggle);//--old
@@ -62,9 +66,15 @@ export let MainView=Backbone.View.extend({
   this.nullView=new NullView;
 
   if(epIndex>0)
-  /*{this.menu({currentTarget:this.$(data.events.menu)});this.menuView.tab({currentTarget:this.$('.bottom-panel .tab-tab').eq(1)})}*/
-   this.episodes();else
+  {
+   /*{this.menu({currentTarget:this.$(data.events.menu)});this.menuView.tab({currentTarget:this.$('.bottom-panel .tab-tab').eq(1)})}*/
+   this.episodes();
+  }else
+  {
    this.chat({muted:true,currentTarget:this.$(data.events.chat)});
+   this.helpFlag=true;
+   this.help();
+  }
 
   if(ep===0&&epIndex===1)
   {
@@ -75,6 +85,87 @@ export let MainView=Backbone.View.extend({
 
   if(ep<epIndex)
    this.block();
+ },
+ help:function(){
+  this.$helpBlocks=this.$(data.view.$helpBlock);
+  this.$helpNext=this.$(data.events.helpNext);
+  this.btns={
+   $play:this.$(data.events.play),
+   $flow:this.$(data.events.flow),
+   $map:this.$(data.events.map),
+   $bible:this.$(data.events.bible),
+   $chat:this.$(data.events.chat),
+   $game:this.$(data.events.game),
+   $loadsave:this.$(data.events.loadsave),
+   $menu:this.$(data.events.menu)
+  };
+ },
+ hover:function(){
+  app.get('aggregator').trigger('sound','h-h');
+ },
+ helpNext:function(){
+  app.get('aggregator').trigger('sound','h-c');
+
+  if(~this.helpCurr)
+   this.$helpBlocks.eq(this.helpCurr).removeClass(data.view.activeCls);
+  this.helpCurr++;
+  if(this.helpCurr===data.helpNextPos.length)
+  {
+   for(let x of Object.keys(this.btns))
+    this.btns[x].addClass(data.view.activeCls);
+   this.btns.$play.removeClass(data.view.activeCls);
+   app.get('aggregator').trigger('trash:help',false);
+   this.helpFlag=false;
+  }else
+  {
+   //if(this.helpCurr===0)
+   switch(this.helpCurr)
+   {
+    case 0:
+     this.btns.$chat.addClass(data.view.helpBtnCls);
+     break;
+    case 1:
+     this.btns.$chat.removeClass(data.view.helpBtnCls);
+     this.btns.$flow.addClass(data.view.helpBtnCls);
+     break;
+    case 2:
+     this.btns.$flow.removeClass(data.view.helpBtnCls);
+     break;
+    case 3:
+     this.btns.$game.addClass(data.view.helpBtnCls);
+     break;
+    case 4:
+     this.btns.$game.removeClass(data.view.helpBtnCls);
+     this.btns.$play.addClass(data.view.helpBtnCls);
+     break;
+    case 5:
+     this.btns.$play.removeClass(data.view.helpBtnCls);
+     this.btns.$map.addClass(data.view.helpBtnCls);
+     break;
+    case 6:
+     this.btns.$map.removeClass(data.view.helpBtnCls);
+     this.btns.$bible.addClass(data.view.helpBtnCls);
+     break;
+    case 7:
+     this.btns.$bible.removeClass(data.view.helpBtnCls);
+     this.btns.$chat.addClass(data.view.helpBtnCls);
+     break;
+    case 8:
+     this.btns.$chat.removeClass(data.view.helpBtnCls);
+     this.btns.$menu.addClass(data.view.helpBtnCls);
+     break;
+    case 9:
+     this.btns.$menu.removeClass(data.view.helpBtnCls);
+     this.btns.$loadsave.addClass(data.view.helpBtnCls);
+     break;
+   }
+   this.$helpBlocks.eq(this.helpCurr).addClass(data.view.activeCls);
+   this.$helpNext.css({left:data.helpNextPos[this.helpCurr].left+'%',top:data.helpNextPos[this.helpCurr].top+'%'});
+  }
+ },
+ activateHelp:function(){
+  app.get('aggregator').trigger('trash:help',true);
+  this.helpNext();
  },
  obnulEnded:function(){
   let d=this.loadSaveView.model.toJSON();
@@ -108,17 +199,23 @@ export let MainView=Backbone.View.extend({
   app.get('aggregator').trigger('player:playPause',{play:false});
  },
  clickBtn:function(e,what){
-  this.$playBtn.removeClass(data.view.playBtnCls);
-  if($(e.currentTarget).hasClass(data.view.activeBtnCls))
+  if(this.helpFlag&&what!==this.chatView)
   {
-   this.switchTab(what);
-   what.toggle(true);
-   if(!e.muted)
-    app.get('aggregator').trigger('sound','btn');
+   this.activateHelp();
   }else
   {
-   if(!e.muted)
-    app.get('aggregator').trigger('sound','btn-inac');
+   this.$playBtn.removeClass(data.view.playBtnCls);
+   if($(e.currentTarget).hasClass(data.view.activeCls))
+   {
+    this.switchTab(what);
+    what.toggle(true);
+    if(!e.muted)
+     app.get('aggregator').trigger('sound','btn');
+   }else
+   {
+    if(!e.muted)
+     app.get('aggregator').trigger('sound','btn-inac');
+   }
   }
  },
  gameProgress:function(opts){
@@ -154,26 +251,45 @@ export let MainView=Backbone.View.extend({
   }
  },
  topBtn:function(){
-  //this.switchTab(this.playerView);
-  //this.playerView.toggle(true);
-  if(this.activeTab===this.flowView)
-   app.get('aggregator').trigger('player:playPause',{play:true});
-  if(this.activeTab===this.gameView)
-   this.gameView.play();
-  app.get('aggregator').trigger('sound','play');
+  if(this.helpFlag)
+  {
+   this.activateHelp();
+  }else
+  {
+   //this.switchTab(this.playerView);
+   //this.playerView.toggle(true);
+   if(this.activeTab===this.flowView&&epIndex>0)
+    app.get('aggregator').trigger('player:playPause',{play:true});
+   if(this.activeTab===this.gameView)
+    this.gameView.play();
+   app.get('aggregator').trigger('sound','play');
+  }
  },
  gameStart:function(){
-  this.switchTab(this.gameView);
-  this.$playBtn.addClass(data.view.playBtnCls);
-  this.gameView.toggle(true);
-  app.get('aggregator').trigger('sound','btn');
+  if(this.helpFlag)
+  {
+   this.activateHelp();
+  }else
+  {
+   this.switchTab(this.gameView);
+   this.$playBtn.addClass(data.view.playBtnCls);
+   this.gameView.toggle(true);
+   app.get('aggregator').trigger('sound','btn');
+  }
  },
  episodes:function(e){
-  this.$playBtn.addClass(data.view.playBtnCls);
-  this.switchTab(this.flowView);
-  this.flowView.toggle(true);
-  if(e)
-   app.get('aggregator').trigger('sound','btn');
+  if(this.helpFlag)
+  {
+   this.activateHelp();
+  }else
+  {
+   if(epIndex>0)
+    this.$playBtn.addClass(data.view.playBtnCls);
+   this.switchTab(this.flowView);
+   this.flowView.toggle(true);
+   if(e)
+    app.get('aggregator').trigger('sound','btn');
+  }
  },
  map:function(e){
   this.clickBtn(e,this.mapView);

@@ -40,6 +40,7 @@ export function init(app,modules){
    this.listenTo(app.get('aggregator'),'player:playPause',this.playPause);
    this.listenTo(app.get('aggregator'),'player:ready',this.loaded);
    this.listenTo(app.get('aggregator'),'player:check-block',this.block);
+   this.listenTo(app.get('aggregator'),'trash:help',this.help);
    document.addEventListener('contextmenu',e=>e.preventDefault());
    //document.fonts.ready.then(()=>this.prepare(),()=>this.prepare());
    this.prepare();
@@ -65,6 +66,9 @@ export function init(app,modules){
    }
    $.when(wait).then(()=>this.player=new PlayerView);
    //$.when(1).then(()=>this.player=new PlayerView);
+  },
+  help:function(f){
+   this.$el.toggleClass(data.view.helperCls,f);
   },
   start:function(){
    this.$el.addClass(data.view.startCls);

@@ -1,5 +1,6 @@
 export const data={
  testSpeedFile:'images/dl-speed.jpg',
+ epActivationTime:0,
  quality:{},
  touchPlayRadius:20,
  view:{

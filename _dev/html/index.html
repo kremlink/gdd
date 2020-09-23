@@ -1,7 +1,9 @@
 <!DOCTYPE html>
-<html data-app='{"modules":["index"],"index":1}'>
+<html data-app='{"modules":["index"],"index":0}'>
     <head>
 		@@include('components/head.html')
+        <link href="css/video-js.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="css/style.css" />
         @@include('components/scripts.html')
 	</head>
 	<body>
@@ -32,7 +34,7 @@
                                 <use xlink:href="#icon-shared-btn-play-on-click"></use>
                             </svg>
                         </div>
-                        <div class="videos-btn active">
+                        <div class="videos-btn">
                             <svg>
                                 <use xlink:href="#icon-shared-btn-potok-passive"></use>
                             </svg>
@@ -46,7 +48,7 @@
                                 <use xlink:href="#icon-shared-btn-potok-active-click"></use>
                             </svg>
                         </div>
-                        <div class="map-btn active">
+                        <div class="map-btn">
                             <svg>
                                 <use xlink:href="#icon-shared-btn-karta-passive"></use>
                             </svg>
@@ -60,7 +62,7 @@
                                 <use xlink:href="#icon-shared-btn-karta-active-click"></use>
                             </svg>
                         </div>
-                        <div class="book-btn active">
+                        <div class="book-btn">
                             <svg>
                                 <use xlink:href="#icon-shared-btn-biblia-passive"></use>
                             </svg>
@@ -88,7 +90,7 @@
                                 <use xlink:href="#icon-shared-btn-chat-active-click"></use>
                             </svg>
                         </div>
-                        <div class="game-btn active">
+                        <div class="game-btn">
                             <svg>
                                 <use xlink:href="#icon-shared-btn-tresh-passive"></use>
                             </svg>
@@ -214,6 +216,14 @@
                                 <div class="vid-initial" style="background-image: url(images/potok-bg.jpg);">Поток треша<br/>ожидает активацию</div>
                                 <div class="vid-overlay">
                                     <div class="vid-name">Эпизод такой-то (прямо в верстке)</div>
+                                    <div class="vid-block">
+                                        <div>
+                                            <a href="">
+                                                <img src="images/tupik.png" alt=""/>
+                                                <img src="images/tupik-hover.png" alt=""/>
+                                            </a>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="bottom-panel">
                                 
@@ -843,6 +853,27 @@
                         <svg class="trash-bg">
                             <use xlink:href="#icon-shared-bg-shadow"></use>
                         </svg>
+                        <div class="trash-help-ov"></div>
+                        <div class="trash-help">
+                            <div class="trash-help-item"><svg><use xlink:href="#icon-shared-help-1"></use></svg></div>
+                            <div class="trash-help-item"><svg><use xlink:href="#icon-shared-help-2"></use></svg></div>
+                            <div class="trash-help-item"><svg><use xlink:href="#icon-shared-help-3"></use></svg></div>
+                            <div class="trash-help-item"><svg><use xlink:href="#icon-shared-help-4"></use></svg></div>
+                            <div class="trash-help-item"><svg><use xlink:href="#icon-shared-help-5"></use></svg></div>
+                            <div class="trash-help-item"><svg><use xlink:href="#icon-shared-help-6"></use></svg></div>
+                            <div class="trash-help-item"><svg><use xlink:href="#icon-shared-help-7"></use></svg></div>
+                            <div class="trash-help-item"><svg><use xlink:href="#icon-shared-help-8"></use></svg></div>
+                            <div class="trash-help-item"><svg><use xlink:href="#icon-shared-help-9"></use></svg></div>
+                            <div class="trash-help-item"><svg><use xlink:href="#icon-shared-help-10"></use></svg></div>
+                            <div class="trash-help-next">
+                                <svg>
+                                    <use xlink:href="#icon-shared-tooltip-btn"></use>
+                                </svg>
+                                <svg>
+                                    <use xlink:href="#icon-shared-tooltip-btn-h"></use>
+                                </svg>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

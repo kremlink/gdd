@@ -19,6 +19,60 @@
     }
   };
 
+  .trash-help-ov{
+    background:rgba(#000,0.5);
+    z-index:1;
+    visibility:hidden;
+    opacity:0;
+    @include trs('opacity #{$anim} ease-in-out');
+    @include abs($l:0,$r:0,$t:0,$b:0,$p:fixed);
+    .help &{
+      visibility:visible;
+      opacity:1;
+    }
+  }
+  .trash-help{
+    @include abs($l:0,$r:0,$t:0,$b:0);
+    z-index:2;
+    visibility:hidden;
+    opacity:0;
+    @include trs('opacity #{$anim} ease-in-out');
+    .help &{
+      visibility:visible;
+      opacity:1;
+    }
+  }
+  .trash-help-item{
+    position:absolute;
+    width:100%;
+    height:100%;
+    opacity:0;
+    @include trs('opacity #{$anim} ease-in-out');
+    &.active{
+      opacity:1;
+      z-index:1;
+    }
+  }
+  .trash-help-next{
+    position:absolute;
+    width:11.17%;
+    height:3.7%;
+    z-index:1;
+    cursor:pointer;
+    @include trs('all #{$anim} ease-in-out');
+    &:hover svg{
+      &:nth-child(1){
+        display:none;
+      }
+      &:nth-child(2){
+        display:block;
+      }
+    }
+    svg:nth-child(2){
+      display:none;
+    }
+  }
+
   .trash-pop{
     @include abs($l:0,$r:0,$t:0,$b:0);
     //@include abs($l:-1px,$r:-1px,$t:0,$b:0);//--old
@@ -141,6 +195,9 @@
       width:8.9%;
       height:9.7%;
       @extend %svg-click;
+      &.up{
+        z-index:2;
+      }
     }
     .return-btn{
       top:4.2%;
@@ -275,6 +332,9 @@
       height:16.4%;
       cursor:pointer;
       @extend %svg-click;
+      &.up{
+        z-index:2;
+      }
     }
     .load-save-btn{
       right:1.5%;
@@ -952,48 +1012,6 @@
     }
     //end game
     //flow
-    .vid-initial{
-      @include abs($l:0,$r:0,$t:0,$b:0);
-      background:center/cover no-repeat;
-      color:getc(blue);
-      font-size:1.5em;
-      line-height:1.2em;
-      text-transform:uppercase;
-      font-weight:700;
-      pointer-events:none;
-      @include flx(display,flex);
-      @include flx(align-items,center);
-      @include flx(justify-content,center);
-      .vidStartedOnce &{
-        display:none;
-      }
-    }
-    .vid-overlay{
-      @include abs($l:0,$r:0,$t:0,$b:0);
-      background: url(#{$path}flow-pause.png) center/cover no-repeat;
-      pointer-events:none;
-      color:#fff;
-      font-size:2.5em;
-      font-weight:700;
-      display:none;
-      .paused &{
-        display:block;
-      }
-      .blocked &{
-        display:block;
-        position:fixed;
-        z-index:3;
-        background:url(#{$path}block-bg-text.svg) center/contain no-repeat, url(#{$path}block-bg.svg) center/cover no-repeat;
-        .vid-name{
-          display:none;
-        }
-      }
-    }
-    .vid-name{
-      text-align:center;
-      margin-top:1em;
-      text-transform:uppercase;
-    }
     .episodes{
       position:relative;
       height:100%;
@@ -1102,7 +1120,8 @@
       }
     }
     .map-pop-forget{
-      @include abs($b:4%,$r:16.3%);
+      @include center($b:4%);
+      white-space:nowrap;
     }
     .map-b-p-bg{
       pointer-events:none;
@@ -1443,6 +1462,86 @@
     }
     //end loadsave
   }
+
+  .vid-initial{
+    @include abs($l:0,$r:0,$t:0,$b:0);
+    background:center/cover no-repeat;
+    color:getc(blue);
+    font-size:1.5em;
+    line-height:1.2em;
+    text-transform:uppercase;
+    font-weight:700;
+    pointer-events:none;
+    @include flx(display,flex);
+    @include flx(align-items,center);
+    @include flx(justify-content,center);
+    .vidStartedOnce &{
+      display:none;
+    }
+  }
+  .vid-overlay{
+    @include abs($l:0,$r:0,$t:0,$b:0);
+    background: url(#{$path}flow-pause.png) center/cover no-repeat;
+    pointer-events:none;
+    color:#fff;
+    font-size:2.5em;
+    font-weight:700;
+    display:none;
+    .paused &{
+      display:block;
+    }
+    .blocked &{
+      display:block;
+      position:fixed;
+      z-index:3;
+      pointer-events:auto;
+    }
+  }
+  .vid-block{
+    display:none;
+    @include abs($l:0,$r:0,$t:0,$b:0);
+    background:url(#{$path}0-bg-bags.svg) bottom/100% no-repeat,#000;
+    .blocked &{
+      display:block;
+    }
+    div{
+      @include center();
+      width:30rem;
+      height:30rem;
+      @include flx(display,flex);
+      @include flx(align-items,flex-end);
+      @include flx(justify-content,center);
+    }
+    a{
+      width:52%;
+      height:10%;
+      &:hover img{
+        &:nth-child(1){
+          display:none;
+        }
+        &:nth-child(2){
+          display:block;
+        }
+      }
+    }
+    img{
+      width:100%;
+      @include abs($l:0,$t:0);
+      pointer-events:none;
+      &:nth-child(2){
+        display:none;
+      }
+    }
+  }
+  .vid-name{
+    text-align:center;
+    margin-top:1em;
+    text-transform:uppercase;
+    .blocked &{
+      display:none;
+    }
+  }
+
   //other
   @include kfs(start-logo){
     100%{

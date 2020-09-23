@@ -1,7 +1,7 @@
 export let config={
  index:{
   preload:{
-   'images/':{imgs:['fin.jpg','flow-pause.png','game-bg.jpg','map-bg.jpg','potok-bg.jpg','trash-progress.png','turn-bg.svg','block-bg.svg','block-bg-text.svg']},
+   'images/':{imgs:['fin.jpg','flow-pause.png','game-bg.jpg','map-bg.jpg','potok-bg.jpg','trash-progress.png','turn-bg.svg']},
    'images/trash_tanks_up/':{j:[7],tmpl:['trashcan-[j]-up.png']},
    'images/trash_tanks/':{j:[7],tmpl:['trashcan-[j].png']},
    'images/trash_items/':{j:[20,18,20,40,20,20,19],tmpl:['trash-[i]-[j].png']},
@@ -21,6 +21,7 @@ export let config={
   }
  },
  player:{
+  epActivationTime:-60,//s
   /*quality:{
    '1':[
     {
@@ -1340,7 +1341,7 @@ export let config={
     }],
    '1':[
     {
-     'choose0':{bot:'Эй! Кто-нибудь! Есть здесь кто-нибудь?! Ааааау!',user:[{what:'choose1',text:'Да-да, я здесь!',msg:'Да-да, я здесь!'}, {what:'choose2',text:'Тут никого нет',msg:'Да-да, я здесь!'}]}
+     'choose0':{bot:'Эй! Кто-нибудь! Есть здесь кто-нибудь?! Ааааау!',user:[{what:'choose1',text:'Да-да, я здесь!',msg:'Да-да, я здесь!'}, {what:'choose2',text:'Тут никого нет',msg:'Тут никого нет'}]}
     },
     {
      'choose1':{bot:'Отлично! Синхронизация прошла успешно. Даже не знаю, сколько я ждал этот момент. Пожалуй, целую вечность!',user:[{what:'choose1-1',text:'Подождешь еще!',msg:'Подождешь еще!'},{what:'choose1-2',text:'Что ты здесь делаешь?',msg:'Что ты здесь делаешь?'}]},

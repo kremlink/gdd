@@ -1,5 +1,7 @@
 export const data={
  fail:0,
+ helpNextPos:[{left:24.88,top:38.32},{left:29.76,top:6.55},{left:49.83,top:20.44},{left:24.88,top:61.41},{left:28.54,top:35.98},
+  {left:26.83,top:19.75},{left:26.54,top:24.35},{left:29.76,top:38.32},{left:50.95,top:63.98},{left:59.01,top:61.24}],
  events:{
   'play':'.return-btn',
   'game':'.game-btn',
@@ -9,17 +11,20 @@ export const data={
   'chat':'.chat-btn',
   'loadsave':'.load-save-btn',
   'menu':'.menu-btn',
-  'null':'.null-btn'
+  'null':'.null-btn',
+  'helpNext':'.trash-help-next'
  },
  view:{
   el:'.trash-pop',
   template:'#trash-template',
-  activeBtnCls:'active',
+  activeCls:'active',
   playBtnCls:'play',
+  helpBtnCls:'up',
   //shownCls:'shown',
   fsCls:'fs',
   mfsCls:'mfs',
   gamePlayingCls:'game-playing',
+  $helpBlock:'.trash-help-item',
   obnul:{
    cls:'null',
    endCls:'null-end',
