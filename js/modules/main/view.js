@@ -109,11 +109,14 @@ export let MainView=Backbone.View.extend({
   if(~this.helpCurr)
    this.$helpBlocks.eq(this.helpCurr).removeClass(data.view.activeCls);
   this.helpCurr++;
+  if(this.helpCurr===data.helpNextPos.length-1)
+   this.$helpNext.addClass(data.view.helpLastCls);
   if(this.helpCurr===data.helpNextPos.length)
   {
    for(let x of Object.keys(this.btns))
     this.btns[x].addClass(data.view.activeCls);
    this.btns.$play.removeClass(data.view.activeCls);
+   this.btns.$game.removeClass(data.view.activeCls);
    app.get('aggregator').trigger('trash:help',false);
    this.helpFlag=false;
   }else
@@ -201,7 +204,7 @@ export let MainView=Backbone.View.extend({
  clickBtn:function(e,what){
   if(this.helpFlag&&what!==this.chatView)
   {
-   this.activateHelp();
+   //this.activateHelp();
   }else
   {
    this.$playBtn.removeClass(data.view.playBtnCls);
@@ -253,7 +256,7 @@ export let MainView=Backbone.View.extend({
  topBtn:function(){
   if(this.helpFlag)
   {
-   this.activateHelp();
+   //this.activateHelp();
   }else
   {
    //this.switchTab(this.playerView);
@@ -268,19 +271,21 @@ export let MainView=Backbone.View.extend({
  gameStart:function(){
   if(this.helpFlag)
   {
-   this.activateHelp();
+   //this.activateHelp();
   }else
   {
-   this.switchTab(this.gameView);
-   this.$playBtn.addClass(data.view.playBtnCls);
-   this.gameView.toggle(true);
+   if(epIndex>0){
+    this.switchTab(this.gameView);
+    this.$playBtn.addClass(data.view.playBtnCls);
+    this.gameView.toggle(true);
+   }
    app.get('aggregator').trigger('sound','btn');
   }
  },
  episodes:function(e){
   if(this.helpFlag)
   {
-   this.activateHelp();
+   //this.activateHelp();
   }else
   {
    if(epIndex>0)

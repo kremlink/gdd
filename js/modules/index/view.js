@@ -71,6 +71,8 @@ export function init(app,modules){
    this.$el.toggleClass(data.view.helperCls,f);
   },
   start:function(){
+   if(epIndex===0)
+    this.mainView.activateHelp();
    this.$el.addClass(data.view.startCls);
    if(app.get('isMobile'))
    {

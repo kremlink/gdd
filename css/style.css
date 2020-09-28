@@ -402,10 +402,10 @@ table {
 
 /*@path:base\_mixins.scss*/
 /*@path:base\_rules.scss*/
-/*@font-face {
-  font-family:'IBM Plex Sans';
-  src:url("../fonts/pdt-player.woff") format("woff");
-}*/
+@font-face {
+  font-family: "IBM Plex Sans";
+  src: url("../fonts/IBMPlexSans-Medium.woff") format("woff");
+}
 @font-face {
   font-family: pdt-player;
   src: url("../fonts/pdt-player.woff") format("woff");
@@ -421,7 +421,7 @@ table {
 
 html {
   height: 100%;
-  font: 1.575vw/1.25 "IBM Plex Sans", sans-serif;
+  font: 1.575vw/1.25 sans-serif;
 }
 @media (min-aspect-ratio: 16/9) {
   html {
@@ -568,13 +568,25 @@ body {
   cursor: pointer;
   transition: all 0.3s ease-in-out;
 }
+.trash-help-next.last svg:nth-child(-n+2) {
+  display: none;
+}
+.trash-help-next.last svg:nth-child(3) {
+  display: block;
+}
+.trash-help-next.last:hover svg:nth-child(3) {
+  display: none;
+}
+.trash-help-next.last:hover svg:nth-child(4) {
+  display: block;
+}
 .trash-help-next:hover svg:nth-child(1) {
   display: none;
 }
 .trash-help-next:hover svg:nth-child(2) {
   display: block;
 }
-.trash-help-next svg:nth-child(2) {
+.trash-help-next svg:nth-child(n+2) {
   display: none;
 }
 
@@ -1337,6 +1349,7 @@ body {
 }
 .trash-pop .auth-item div:nth-child(2) {
   font-weight: 700;
+  width: 26em;
 }
 .trash-pop .shar-block {
   margin-top: 5.2em;
@@ -1676,6 +1689,7 @@ body {
   width: 3em;
   height: 3em;
   cursor: pointer;
+  margin: 0 0 5% -1.5em;
 }
 .trash-pop .map-mark.shown svg {
   display: none;
@@ -2073,7 +2087,7 @@ body {
   bottom: 0;
   background: center/cover no-repeat;
   color: #A0D7F6;
-  font-size: 1.5em;
+  font-size: 1.4em;
   line-height: 1.2em;
   text-transform: uppercase;
   font-weight: 700;

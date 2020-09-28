@@ -81,6 +81,8 @@ export let BibleView=BaseBlockView.extend({
    }));
    this.$name.text(data.data[epIndex][id].name);
    this.setScroll('tabScroll',this.$itemsWrap);
+   if(e&&this.popScroll)
+    this.unpop();
   }
  },
  pop:function(e){

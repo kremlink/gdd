@@ -60,6 +60,24 @@
     z-index:1;
     cursor:pointer;
     @include trs('all #{$anim} ease-in-out');
+    &.last{
+      svg{
+        &:nth-child(-n+2){
+          display:none;
+        }
+        &:nth-child(3){
+          display:block;
+        }
+      }
+      &:hover svg{
+        &:nth-child(3){
+          display:none;
+        }
+        &:nth-child(4){
+          display:block;
+        }
+      }
+    }
     &:hover svg{
       &:nth-child(1){
         display:none;
@@ -68,7 +86,7 @@
         display:block;
       }
     }
-    svg:nth-child(2){
+    svg:nth-child(n+2){
       display:none;
     }
   }
@@ -807,6 +825,7 @@
         width:14em;
         &:nth-child(2){
           font-weight:700;
+          width:26em;
         }
       }
     }
@@ -1098,6 +1117,7 @@
       width:3em;
       height:3em;
       cursor:pointer;
+      margin:0 0 5% -1.5em;
       &.shown{
         svg{
           display:none;
@@ -1467,7 +1487,7 @@
     @include abs($l:0,$r:0,$t:0,$b:0);
     background:center/cover no-repeat;
     color:getc(blue);
-    font-size:1.5em;
+    font-size:1.4em;
     line-height:1.2em;
     text-transform:uppercase;
     font-weight:700;

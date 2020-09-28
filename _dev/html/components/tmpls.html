@@ -39,7 +39,7 @@
     <div class="map-block">
         <div class="map-inner" style="background-image: url(images/map-bg.jpg);">
             <% for(let i=0;i<data.length;i++) { %>
-            <div data-id="<%= data[i].id %>" class="map-mark" style="left:<%= data[i].left %>%;top:<%= data[i].top %>%;">
+            <div data-id="<%= data[i].id %>" class="map-mark" style="left:<%= data[i].left %>%;bottom:<%= data[i].bottom %>%;">
                 <svg>
                     <use xlink:href="#icon-shared-map-marker-n"></use>
                 </svg>

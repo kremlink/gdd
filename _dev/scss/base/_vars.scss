@@ -23,7 +23,7 @@ $colors:(
 }
 
 @function font(){
-  @return 'IBM Plex Sans',sans-serif;
+  @return sans-serif;
 }
 
 @function m-prop($arg,$p:12){
